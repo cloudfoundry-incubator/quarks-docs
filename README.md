@@ -1,37 +1,29 @@
-## Welcome to GitHub Pages
+# quarks-docs
 
-You can use the [editor on GitHub](https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This repository holds the Quarks-operator docs.
 
-### Markdown
+The `master` branch holds the sources that are compiled with [Hugo](https://gohugo.io/).
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+The website content it is deployed automatically in the `gh-pages` branch by Github Actions, and no manual intevention is needed.
 
-```markdown
-Syntax highlighted code block
+## Test your changes
 
-# Header 1
-## Header 2
-### Header 3
+After cloning the repo (with submodules), just run `make website-serve` to test the website locally.
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+    $> git clone --recurse-submodule https://github.com/cloudfoundry-incubator/quarks-operator
+    $> cd quarks-operator
+    $> make website-serve
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Or just sync the submodules:
+```
+    $> git submodule update --init --recursive --depth 1
+```
 
-### Jekyll Themes
+To run the website locally in other platforms, e.g. MacOS:
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/cloudfoundry-incubator/quarks-docs/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+```
+    $> HUGO_PLATFORM=macOS-64bit make website-serve
+```
