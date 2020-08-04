@@ -1,0 +1,197 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Quarks project – Concepts</title>
+    <link>https://quarks.suse.dev/docs/concepts/</link>
+    <description>Recent content in Concepts on Quarks project</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://quarks.suse.dev/docs/concepts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: About operators</title>
+      <link>https://quarks.suse.dev/docs/concepts/about_operators/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/concepts/about_operators/</guid>
+      <description>
+        
+        
+        
+
+&lt;h1 id=&#34;about-operators&#34;&gt;About Operators&lt;/h1&gt;
+
+&lt;h2 id=&#34;framework-controller-runtime&#34;&gt;Framework: Controller Runtime&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://book.kubebuilder.io/&#34; target=&#34;_blank&#34;&gt;Kubebuilder docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://godoc.org/github.com/kubernetes-sigs/controller-runtime/pkg&#34; target=&#34;_blank&#34;&gt;controller-runtime docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;operator-pattern-features&#34;&gt;Operator Pattern &amp;amp; Features&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Operator pattern&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://admiralty.io/blog/kubernetes-custom-resource-controller-and-operator-development-tools/&#34; target=&#34;_blank&#34;&gt;Kubernetes Custom Resource Controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.slideshare.net/Jakobkaralus/the-kubernetes-operator-pattern-containerconf-nov-2017&#34; target=&#34;_blank&#34;&gt;The Kubernetes Operator Pattern&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Admission webhooks and eventing&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://book.kubebuilder.io/beyond_basics/sample_webhook.html&#34; target=&#34;_blank&#34;&gt;Sample Webhook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://schd.ws/hosted_files/kccncchina2018english/50/kubecon_Tom_Ilya_CRDs.pdf&#34; target=&#34;_blank&#34;&gt;Custom Resource Definitions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Finalizers&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#finalizers&#34; target=&#34;_blank&#34;&gt;Finalizers - Official Docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/giantswarm/operatorkit/blob/master/docs/using_finalizers.md&#34; target=&#34;_blank&#34;&gt;Using Finalizers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Watches&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://book.kubebuilder.io/beyond_basics/controller_watches.html&#34; target=&#34;_blank&#34;&gt;Controller Watches&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Generate resources&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.openshift.com/kubernetes-deep-dive-code-generation-customresources/&#34; target=&#34;_blank&#34;&gt;Code Generation for Custom Resources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Apply CRD&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/velotio-perspectives/extending-kubernetes-apis-with-custom-resource-definitions-crds-139c99ed3477&#34; target=&#34;_blank&#34;&gt;Extending Kubernetes APIs using CRDs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;operator-examples&#34;&gt;Operator Examples&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/upmc-enterprises/elasticsearch-operator&#34; target=&#34;_blank&#34;&gt;Elastic Search Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/zalando-incubator/postgres-operator&#34; target=&#34;_blank&#34;&gt;Postgres Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/kubeflow/tf-operator&#34; target=&#34;_blank&#34;&gt;Tensorflow Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/nats-io/nats-operator&#34; target=&#34;_blank&#34;&gt;NATS Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/knative/serving/blob/059bf5f8c193148e54ddac37fba337c2cf6496db/cmd/controller/main.go#L144&#34; target=&#34;_blank&#34;&gt;Knative&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/kubernetes/sample-controller&#34; target=&#34;_blank&#34;&gt;Sample controller&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;extending-kubernetes&#34;&gt;Extending Kubernetes&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://engineering.bitnami.com/articles/a-deep-dive-into-kubernetes-controllers.html&#34; target=&#34;_blank&#34;&gt;Controller pattern&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/@trstringer/create-kubernetes-controllers-for-core-and-custom-resources-62fc35ad64a3&#34; target=&#34;_blank&#34;&gt;Custom controllers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#validation&#34; target=&#34;_blank&#34;&gt;CRD openAPI validation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.de/Kubernetes-Design-Patterns-Extensions-container-cluster-ebook/dp/B07HSZHRHZ&#34; target=&#34;_blank&#34;&gt;Kubernetes primitives (ebook)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;testing&#34;&gt;Testing&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/thtanaka/kubernetes/blob/master/docs/devel/testing.md#integration-tests&#34; target=&#34;_blank&#34;&gt;Kubernetes docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://itnext.io/testing-kubernetes-go-applications-f1f87502b6ef&#34; target=&#34;_blank&#34;&gt;Kubernetes fakes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://speakerdeck.com/skmetz/magic-tricks-of-testing-railsconf&#34; target=&#34;_blank&#34;&gt;Magic tricks of testing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Cloud Foundry Operator</title>
+      <link>https://quarks.suse.dev/docs/concepts/operator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/concepts/operator/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CF-Operator is a Cloud Foundry Incubating Project.&lt;/p&gt;
+
+&lt;/div&gt;
+
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/&#34; target=&#34;_blank&#34;&gt;cf-operator&lt;/a&gt; enables the deployment of BOSH Releases, especially Cloud Foundry, to Kubernetes.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s implemented as a k8s operator, an active controller component which acts upon custom k8s resources.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/#installing&#34; target=&#34;_blank&#34;&gt;Installation notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Incubation Proposal: &lt;a href=&#34;https://docs.google.com/document/d/1_IvFf-cCR4_Hxg-L7Z_R51EKhZfBqlprrs5NgC2iO2w/edit#heading=h.lybtsdyh8res&#34; target=&#34;_blank&#34;&gt;Containerizing Cloud Foundry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Slack: #quarks-dev on &lt;a href=&#34;https://slack.cloudfoundry.org/&#34; target=&#34;_blank&#34;&gt;https://slack.cloudfoundry.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Backlog: &lt;a href=&#34;https://www.pivotaltracker.com/n/projects/2192232&#34; target=&#34;_blank&#34;&gt;Pivotal Tracker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Docker: &lt;a href=&#34;https://hub.docker.com/r/cfcontainerization/cf-operator/tags&#34; target=&#34;_blank&#34;&gt;https://hub.docker.com/r/cfcontainerization/cf-operator/tags&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Project Quarks</title>
+      <link>https://quarks.suse.dev/docs/concepts/quarks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/concepts/quarks/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;a href=&#34;https://www.cloudfoundry.org/project-quarks/&#34; target=&#34;_blank&#34;&gt;Project Quarks&lt;/a&gt; is an incubating effort within the Cloud Foundry Foundation that packages Cloud Foundry Application Runtime as containers instead of virtual machines, enabling easy deployment to Kubernetes.&lt;/p&gt;
+
+&lt;p&gt;The resulting containerized CFAR provides an identical developer experience to that of BOSH-managed Cloud Foundry installations, requires less infrastructure capacity and delivers an operational experience that is familiar to Kubernetes operators.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Naming Conventions</title>
+      <link>https://quarks.suse.dev/docs/concepts/naming/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/concepts/naming/</guid>
+      <description>
+        
+        
+        
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#naming-conventions&#34;&gt;Naming Conventions&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#kubernetes-resources&#34;&gt;Kubernetes Resources&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#kubernetes-services&#34;&gt;Kubernetes Services&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;kubernetes-resources&#34;&gt;Kubernetes Resources&lt;/h2&gt;
+
+&lt;p&gt;Kube names can only consist of lowercase alphanumeric characters, and the character &lt;code&gt;&amp;quot;-&amp;quot;&lt;/code&gt;.
+All &lt;code&gt;&amp;quot;_&amp;quot;&lt;/code&gt; characters are replaced with &lt;code&gt;&amp;quot;-&amp;quot;&lt;/code&gt;. All other non-alphanumeric characters are removed.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;name&lt;/code&gt; cannot start or end with a &lt;code&gt;&amp;quot;-&amp;quot;&lt;/code&gt;. These characters are trimmed.&lt;/p&gt;
+
+&lt;p&gt;Names are also restricted to 63 characters in length, so if a generated name exceeds 63 characters, it should be recalculated as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;name=&amp;lt;INSTANCE_GROUP_NAME&amp;gt;-&amp;lt;INDEX&amp;gt;&amp;lt;DEPLOYMENT_NAME&amp;gt;
+
+&amp;lt;name trimmed to 31 characters&amp;gt;&amp;lt;md5 hash of name&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;kubernetes-services&#34;&gt;Kubernetes Services&lt;/h3&gt;
+
+&lt;p&gt;The same check needs to apply to the entire address of a &lt;code&gt;Service&lt;/code&gt;. If an entire address is longer than 253 characters, the &lt;code&gt;servicename&lt;/code&gt; is trimmed until there&amp;rsquo;s enough room for the MD5 hash. If it&amp;rsquo;s not possible to include the hash (&lt;code&gt;KUBE_NAMESPACE&lt;/code&gt; and &lt;code&gt;KUBE_SERVICE_DOMAIN&lt;/code&gt; and the dots are 221 characters or more), an error is thrown.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

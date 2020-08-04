@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/commands/cf-operator/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/commands/cf-operator_util/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/commands/cf-operator_util_instance-group/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/commands/cf-operator_util_tail-logs/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/commands/cf-operator_util_template-render/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/commands/cf-operator_util_variable-interpolation/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/commands/cf-operator_util_wait/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/commands/cf-operator_version/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/development/development/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/core-tasks/install/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/core-tasks/building/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/development/testing/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/development/releasing/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/core-tasks/from_bosh_to_kube/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/concepts/about_operators/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/controllers/bosh_deployment/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/features/variables/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/concepts/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/controllers/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/development/labels/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/concepts/operator/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/concepts/quarks/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/controllers/quarks_restart/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/controllers/quarks_statefulset/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/controllers/statefulsetrollout/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/core-tasks/troubleshooting/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/development/tooling/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/contribution-guidelines/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/core-tasks/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/features/desired_manifests/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/development/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/features/entanglements/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/features/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/concepts/naming/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/features/process_control/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/features/rendering_templates/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/features/waiting_services/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/commands/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/controllers/readme/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/community/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/search/</loc>
+  </url>
+  
+</urlset>
