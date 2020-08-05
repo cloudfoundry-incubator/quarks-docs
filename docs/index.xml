@@ -738,13 +738,47 @@ grcat conf.zap &amp;lt; /tmp/cf-operator-tests.log
 &lt;li&gt;kubectl&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;use-this-if-you-ve-never-installed-the-operator-before&#34;&gt;Use this if you&amp;rsquo;ve never installed the operator before&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/
-helm install cf-operator quarks/cf-operator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&#34;use-this-if-the-custom-resources-have-already-been-created-by-a-previous-cf-operator-installation&#34;&gt;Use this if the custom resources have already been created by a previous CF Operator installation&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm repo update
-helm install cf-operator quarks/cf-operator --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;customResources.enableInstallation=false&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&#34;for-more-options-look-at-the-readme-for-the-chart&#34;&gt;For more options look at the README for the chart&lt;/h2&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Add the quarks repository to helm if you haven&amp;rsquo;t already:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The simplest way to install the operator, is by using the default values:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install cf-operator quarks/cf-operator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The operator will watch for BOSH deployments in separate namespaces, not the one it has been deployed to. By default, it creates a namespace &lt;code&gt;staging&lt;/code&gt; and starts watching it.&lt;/p&gt;
+
+&lt;p&gt;A complete list of the chart settings is available &lt;a href=&#34;https://hub.helm.sh/charts/quarks/cf-operator&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;multiple-namespaces&#34;&gt;Multiple namespaces&lt;/h3&gt;
+
+&lt;p&gt;The quarks-operator watches namespaces labeled with &lt;code&gt;quarks.cloudfoundry.org/monitored=ID&lt;/code&gt;. The &lt;code&gt;ID&lt;/code&gt; has to be specified with helm settings during install (&lt;code&gt;--set &amp;quot;global.monitoredID=ID&amp;quot;&lt;/code&gt;).
+The helm value setting &lt;code&gt;global.singleNamespace.name=&lt;/code&gt; allows to automatically create a namespace which is being watched by the quarks-operator.&lt;/p&gt;
+
+&lt;p&gt;For example, to watch to a different namespace with a specific ID:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install relname1 quarks/cf-operator &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --namespace namespace1
+  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;global.singleNamespace.name=staging1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;global.monitoredID=id1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;quarks-job.persistOutputClusterRole.name=clusterrole1&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;using-multiple-namespaces-with-one-operator&#34;&gt;Using multiple namespaces with one operator&lt;/h3&gt;
+
+&lt;p&gt;The cluster role can be reused between namespaces. The service account (and role binding) should be different for each namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install relname1 quarks/cf-operator &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;global.singleNamespace.create=false&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Manually create before running helm install, for each namespace:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;a namespace &amp;ldquo;staging1&amp;rdquo; with the following labels (note: &amp;ldquo;true&amp;rdquo; and &amp;ldquo;qjob-persist-output&amp;rdquo; are the defaults from values.yaml):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    quarks.cloudfoundry.org/monitored: &amp;quot;true&amp;quot;
+    quarks.cloudfoundry.org/qjob-service-account: qjob-account1
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;a service account named &amp;ldquo;qjob-account1&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;a role binding from the existing cluster role &amp;ldquo;qjob-persist-output&amp;rdquo; to &amp;ldquo;qjob-account1&amp;rdquo; in namespace &amp;ldquo;staging1&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For more options look at the README for the chart&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm show readme quarks/cf-operator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;what-next&#34;&gt;What next?&lt;/h2&gt;
 

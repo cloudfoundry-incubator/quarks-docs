@@ -25,14 +25,14 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/core-tasks/install/" />
-<meta property="article:modified_time" content="2020-08-05T11:06:00+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-05T11:52:02+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Install">
 <meta itemprop="description" content="Installation of Quarks-operator in your Kubernetes cluster with helm
 ">
 
 
-<meta itemprop="dateModified" content="2020-08-05T11:06:00&#43;02:00" />
-<meta itemprop="wordCount" content="316">
+<meta itemprop="dateModified" content="2020-08-05T11:52:02&#43;02:00" />
+<meta itemprop="wordCount" content="493">
 
 
 
@@ -110,7 +110,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.3e43c271abe10d27d9954f5d112475912e88b6b20215562b63071b1630ece6d892c73734c03808633ec57ef7757c05b0011229a87c12fc98101a7837bcd84844.json"
+  data-offline-search-index-json-src="/offline-search-index.11bd40c17b4c4c79196b86aa9886c8e174685f05573d15afd5873aed4554d57b0f55f4bb0e6ee4810b9fd9a5b3d43df20c3838ceedcdf8a438934d09ef031fbe.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -142,7 +142,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.3e43c271abe10d27d9954f5d112475912e88b6b20215562b63071b1630ece6d892c73734c03808633ec57ef7757c05b0011229a87c12fc98101a7837bcd84844.json"
+  data-offline-search-index-json-src="/offline-search-index.11bd40c17b4c4c79196b86aa9886c8e174685f05573d15afd5873aed4554d57b0f55f4bb0e6ee4810b9fd9a5b3d43df20c3838ceedcdf8a438934d09ef031fbe.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -568,9 +568,11 @@
 <li>
 <ul>
 <li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#use-this-if-you-ve-never-installed-the-operator-before">Use this if you&rsquo;ve never installed the operator before</a></li>
-<li><a href="#use-this-if-the-custom-resources-have-already-been-created-by-a-previous-cf-operator-installation">Use this if the custom resources have already been created by a previous CF Operator installation</a></li>
-<li><a href="#for-more-options-look-at-the-readme-for-the-chart">For more options look at the README for the chart</a></li>
+<li><a href="#installation">Installation</a>
+<ul>
+<li><a href="#multiple-namespaces">Multiple namespaces</a></li>
+<li><a href="#using-multiple-namespaces-with-one-operator">Using multiple namespaces with one operator</a></li>
+</ul></li>
 <li><a href="#what-next">What next?</a></li>
 <li><a href="#modifying-the-deployment">Modifying the deployment</a></li>
 </ul></li>
@@ -639,13 +641,47 @@
 <li>kubectl</li>
 </ul>
 
-<h2 id="use-this-if-you-ve-never-installed-the-operator-before">Use this if you&rsquo;ve never installed the operator before</h2>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/
-helm install cf-operator quarks/cf-operator</code></pre></div>
-<h2 id="use-this-if-the-custom-resources-have-already-been-created-by-a-previous-cf-operator-installation">Use this if the custom resources have already been created by a previous CF Operator installation</h2>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm repo update
-helm install cf-operator quarks/cf-operator --set <span style="color:#4e9a06">&#34;customResources.enableInstallation=false&#34;</span></code></pre></div>
-<h2 id="for-more-options-look-at-the-readme-for-the-chart">For more options look at the README for the chart</h2>
+<h2 id="installation">Installation</h2>
+
+<p>Add the quarks repository to helm if you haven&rsquo;t already:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/</code></pre></div>
+<p>The simplest way to install the operator, is by using the default values:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install cf-operator quarks/cf-operator</code></pre></div>
+<p>The operator will watch for BOSH deployments in separate namespaces, not the one it has been deployed to. By default, it creates a namespace <code>staging</code> and starts watching it.</p>
+
+<p>A complete list of the chart settings is available <a href="https://hub.helm.sh/charts/quarks/cf-operator" target="_blank">here</a>.</p>
+
+<h3 id="multiple-namespaces">Multiple namespaces</h3>
+
+<p>The quarks-operator watches namespaces labeled with <code>quarks.cloudfoundry.org/monitored=ID</code>. The <code>ID</code> has to be specified with helm settings during install (<code>--set &quot;global.monitoredID=ID&quot;</code>).
+The helm value setting <code>global.singleNamespace.name=</code> allows to automatically create a namespace which is being watched by the quarks-operator.</p>
+
+<p>For example, to watch to a different namespace with a specific ID:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install relname1 quarks/cf-operator <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>  --namespace namespace1
+  --set <span style="color:#4e9a06">&#34;global.singleNamespace.name=staging1&#34;</span> <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;global.monitoredID=id1&#34;</span> <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;quarks-job.persistOutputClusterRole.name=clusterrole1&#34;</span></code></pre></div>
+<h3 id="using-multiple-namespaces-with-one-operator">Using multiple namespaces with one operator</h3>
+
+<p>The cluster role can be reused between namespaces. The service account (and role binding) should be different for each namespace.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install relname1 quarks/cf-operator <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;global.singleNamespace.create=false&#34;</span></code></pre></div>
+<p>Manually create before running helm install, for each namespace:</p>
+
+<ul>
+<li><p>a namespace &ldquo;staging1&rdquo; with the following labels (note: &ldquo;true&rdquo; and &ldquo;qjob-persist-output&rdquo; are the defaults from values.yaml):</p>
+
+<pre><code>    quarks.cloudfoundry.org/monitored: &quot;true&quot;
+    quarks.cloudfoundry.org/qjob-service-account: qjob-account1
+</code></pre></li>
+
+<li><p>a service account named &ldquo;qjob-account1&rdquo;</p></li>
+
+<li><p>a role binding from the existing cluster role &ldquo;qjob-persist-output&rdquo; to &ldquo;qjob-account1&rdquo; in namespace &ldquo;staging1&rdquo;</p></li>
+</ul>
+
+<p>For more options look at the README for the chart</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm show readme quarks/cf-operator</code></pre></div>
 <h2 id="what-next">What next?</h2>
 
@@ -671,7 +707,7 @@ helm install cf-operator quarks/cf-operator --set <span style="color:#4e9a06">&#
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 5, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/36145deac72ba23e6e5f88cc145acf3eb0d74589">Disable jekyll (36145de)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 5, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/16871df3e91dfafb0dffe9a7665dc54fd124af65">Update installation instructions (16871df)</a>
 </div>
 </div>
 
