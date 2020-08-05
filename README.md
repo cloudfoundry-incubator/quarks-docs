@@ -1,7 +1,7 @@
 # quarks-docs
 
 
-This repository holds the Quarks-operator docs.
+This repository holds the Quarks components docs.
 
 The `master` branch holds the sources that are compiled with [Hugo](https://gohugo.io/).
 
@@ -12,18 +12,19 @@ The website content it is deployed automatically in the `gh-pages` branch by Git
 After cloning the repo (with submodules), just run `make website-serve` to test the website locally.
 
 ```
-    $> git clone --recurse-submodule https://github.com/cloudfoundry-incubator/quarks-operator
-    $> cd quarks-operator
-    $> make website-serve
+$> git clone --recurse-submodule https://github.com/cloudfoundry-incubator/quarks-docs
+$> cd quarks-docs
+$> make serve
 ```
 
 Or just sync the submodules:
+
 ```
-    $> git submodule update --init --recursive --depth 1
+$> git submodule update --init --recursive --depth 1
 ```
 
 To run the website locally in other platforms, e.g. MacOS:
 
 ```
-    $> HUGO_PLATFORM=macOS-64bit make website-serve
+$> HUGO_PLATFORM=macOS-64bit make serve
 ```
