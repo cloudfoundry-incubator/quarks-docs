@@ -743,7 +743,7 @@ grcat conf.zap &amp;lt; /tmp/cf-operator-tests.log
 &lt;p&gt;Add the quarks repository to helm if you haven&amp;rsquo;t already:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The simplest way to install the operator, is by using the default values:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install cf-operator quarks/cf-operator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install cf-operator quarks/cf-operator --namespace cf-operator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The operator will watch for BOSH deployments in separate namespaces, not the one it has been deployed to. By default, it creates a namespace &lt;code&gt;staging&lt;/code&gt; and starts watching it.&lt;/p&gt;
 
 &lt;p&gt;A complete list of the chart settings is available &lt;a href=&#34;https://hub.helm.sh/charts/quarks/cf-operator&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -782,11 +782,11 @@ The helm value setting &lt;code&gt;global.singleNamespace.name=&lt;/code&gt; all
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm show readme quarks/cf-operator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;what-next&#34;&gt;What next?&lt;/h2&gt;
 
-&lt;p&gt;With a running &lt;code&gt;quarks-operator&lt;/code&gt; pod, you can try one of the files (see &lt;a href=&#34;https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml&#34; target=&#34;_blank&#34;&gt;boshdeployment-with-custom-variable.yaml&lt;/a&gt; ), as follows:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl -n cf-operator apply -f https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With a running &lt;code&gt;quarks-operator&lt;/code&gt; pod, you can try one of the files (see &lt;a href=&#34;https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml&#34; target=&#34;_blank&#34;&gt;boshdeployment-with-custom-variable.yaml&lt;/a&gt; ), as follows (if you installed it with default values):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl -n staging apply -f https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The above will spawn two pods in your &lt;code&gt;cf-operator&lt;/code&gt; namespace (which needs to be created upfront), running the BOSH nats release.&lt;/p&gt;
 
-&lt;p&gt;You can access the &lt;code&gt;cf-operator&lt;/code&gt; logs by following the operator pod&amp;rsquo;s output:&lt;/p&gt;
+&lt;p&gt;You can access the &lt;code&gt;quarks-operator&lt;/code&gt; logs by following the operator pod&amp;rsquo;s output:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl logs -f -n cf-operator cf-operator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Or look at the k8s event log:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl get events -n cf-operator --watch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;

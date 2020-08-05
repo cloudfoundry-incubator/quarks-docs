@@ -25,14 +25,14 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/core-tasks/install/" />
-<meta property="article:modified_time" content="2020-08-05T11:52:02+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-05T12:19:44+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Install">
 <meta itemprop="description" content="Installation of Quarks-operator in your Kubernetes cluster with helm
 ">
 
 
-<meta itemprop="dateModified" content="2020-08-05T11:52:02&#43;02:00" />
-<meta itemprop="wordCount" content="493">
+<meta itemprop="dateModified" content="2020-08-05T12:19:44&#43;02:00" />
+<meta itemprop="wordCount" content="502">
 
 
 
@@ -110,7 +110,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.11bd40c17b4c4c79196b86aa9886c8e174685f05573d15afd5873aed4554d57b0f55f4bb0e6ee4810b9fd9a5b3d43df20c3838ceedcdf8a438934d09ef031fbe.json"
+  data-offline-search-index-json-src="/offline-search-index.e8db7486c6d1685d12cc06722a2f4eb05e7ef177db4c1316f4315f1b5dcede497a7fa89bfd0a188f8e261b599514c84ff3c2dae0750796edd56bc821140674be.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -142,7 +142,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.11bd40c17b4c4c79196b86aa9886c8e174685f05573d15afd5873aed4554d57b0f55f4bb0e6ee4810b9fd9a5b3d43df20c3838ceedcdf8a438934d09ef031fbe.json"
+  data-offline-search-index-json-src="/offline-search-index.e8db7486c6d1685d12cc06722a2f4eb05e7ef177db4c1316f4315f1b5dcede497a7fa89bfd0a188f8e261b599514c84ff3c2dae0750796edd56bc821140674be.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -646,7 +646,7 @@
 <p>Add the quarks repository to helm if you haven&rsquo;t already:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/</code></pre></div>
 <p>The simplest way to install the operator, is by using the default values:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install cf-operator quarks/cf-operator</code></pre></div>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install cf-operator quarks/cf-operator --namespace cf-operator</code></pre></div>
 <p>The operator will watch for BOSH deployments in separate namespaces, not the one it has been deployed to. By default, it creates a namespace <code>staging</code> and starts watching it.</p>
 
 <p>A complete list of the chart settings is available <a href="https://hub.helm.sh/charts/quarks/cf-operator" target="_blank">here</a>.</p>
@@ -685,11 +685,11 @@ The helm value setting <code>global.singleNamespace.name=</code> allows to autom
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm show readme quarks/cf-operator</code></pre></div>
 <h2 id="what-next">What next?</h2>
 
-<p>With a running <code>quarks-operator</code> pod, you can try one of the files (see <a href="https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml" target="_blank">boshdeployment-with-custom-variable.yaml</a> ), as follows:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl -n cf-operator apply -f https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml</code></pre></div>
+<p>With a running <code>quarks-operator</code> pod, you can try one of the files (see <a href="https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml" target="_blank">boshdeployment-with-custom-variable.yaml</a> ), as follows (if you installed it with default values):</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl -n staging apply -f https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml</code></pre></div>
 <p>The above will spawn two pods in your <code>cf-operator</code> namespace (which needs to be created upfront), running the BOSH nats release.</p>
 
-<p>You can access the <code>cf-operator</code> logs by following the operator pod&rsquo;s output:</p>
+<p>You can access the <code>quarks-operator</code> logs by following the operator pod&rsquo;s output:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl logs -f -n cf-operator cf-operator</code></pre></div>
 <p>Or look at the k8s event log:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get events -n cf-operator --watch</code></pre></div>
@@ -707,7 +707,7 @@ The helm value setting <code>global.singleNamespace.name=</code> allows to autom
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 5, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/16871df3e91dfafb0dffe9a7665dc54fd124af65">Update installation instructions (16871df)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 5, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/3c1ee5cb3a6a6d7158f1890636f1a5afb0ddc57b">Update install.md (3c1ee5c)</a>
 </div>
 </div>
 
