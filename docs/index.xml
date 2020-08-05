@@ -3488,6 +3488,146 @@ done
     </item>
     
     <item>
+      <title>Docs: Quarks Job</title>
+      <link>https://quarks.suse.dev/docs/components/quarksjob/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/components/quarksjob/</guid>
+      <description>
+        
+        
+        
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#quarksjob&#34;&gt;QuarksJob&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#description&#34;&gt;Description&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#features&#34;&gt;Features&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#errand-jobs&#34;&gt;Errand Jobs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#one-off-jobs--auto-errands&#34;&gt;One-Off Jobs / Auto-Errands&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#restarting-on-config-change&#34;&gt;Restarting on Config Change&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#persisted-output&#34;&gt;Persisted Output&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#versioned-secrets&#34;&gt;Versioned Secrets&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#quarksjob-examples&#34;&gt;&lt;code&gt;QuarksJob&lt;/code&gt; Examples&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;A &lt;code&gt;QuarksJob&lt;/code&gt; allows the developer to run jobs when something interesting happens. It also allows the developer to store the output of the job into a &lt;code&gt;Secret&lt;/code&gt;.
+The job started by an &lt;code&gt;QuarksJob&lt;/code&gt; is deleted automatically after it succeeds.&lt;/p&gt;
+
+&lt;p&gt;There are two different kinds of &lt;code&gt;QuarksJob&lt;/code&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;one-offs&lt;/strong&gt;: automatically runs once after it&amp;rsquo;s created&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;errands&lt;/strong&gt;: needs to be run manually by a user&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+
+&lt;h3 id=&#34;errand-jobs&#34;&gt;Errand Jobs&lt;/h3&gt;
+
+&lt;p&gt;Errands are run manually by the user. They are created by setting &lt;code&gt;trigger.strategy: manual&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;After the &lt;code&gt;QuarksJob&lt;/code&gt; is created, run an errand by editing and applying the
+manifest, i.e. via &lt;code&gt;kubectl edit errand1&lt;/code&gt; and change &lt;code&gt;trigger.strategy: manual&lt;/code&gt; to &lt;code&gt;trigger.strategy: now&lt;/code&gt;. A &lt;code&gt;kubectl patch&lt;/code&gt; is also a good way to trigger this type of &lt;code&gt;QuarksJob&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;After completion, this value is reset to &lt;code&gt;manual&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Look &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-job/blob/master/docs/examples/qjob_errand.yaml&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; for a full example of an errand.&lt;/p&gt;
+
+&lt;h3 id=&#34;one-off-jobs-auto-errands&#34;&gt;One-Off Jobs / Auto-Errands&lt;/h3&gt;
+
+&lt;p&gt;One-off jobs run directly when created, just like native k8s jobs.&lt;/p&gt;
+
+&lt;p&gt;They are created with &lt;code&gt;trigger.strategy: once&lt;/code&gt; and switch to &lt;code&gt;done&lt;/code&gt; when
+finished.&lt;/p&gt;
+
+&lt;p&gt;If a versioned secret is referenced in the pod spec of an qJob, the most recent
+version of that secret will be used when the batchv1.Job is created.&lt;/p&gt;
+
+&lt;h4 id=&#34;restarting-on-config-change&#34;&gt;Restarting on Config Change&lt;/h4&gt;
+
+&lt;p&gt;A &lt;strong&gt;one-off&lt;/strong&gt; &lt;code&gt;QuarksJob&lt;/code&gt; can
+automatically be restarted if its environment/mounts have changed, due to a
+&lt;code&gt;ConfigMap&lt;/code&gt; or a &lt;code&gt;Secret&lt;/code&gt; being updated. This also works for &lt;a href=&#34;#versioned-secrets&#34;&gt;Versioned Secrets&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This requires the attribute &lt;code&gt;updateOnConfigChange&lt;/code&gt; to be set to true.&lt;/p&gt;
+
+&lt;p&gt;Once &lt;code&gt;updateOnConfigChange&lt;/code&gt; is enabled, modifying the &lt;code&gt;data&lt;/code&gt; of any &lt;code&gt;ConfigMap&lt;/code&gt; or &lt;code&gt;Secret&lt;/code&gt; referenced by the &lt;code&gt;template&lt;/code&gt; section of the job will trigger the job again.&lt;/p&gt;
+
+&lt;h3 id=&#34;persisted-output&#34;&gt;Persisted Output&lt;/h3&gt;
+
+&lt;p&gt;QuarksJob can create secrets from job output, which is written to a JSON file in &lt;code&gt;/mnt/quarks&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Multiple secrets are created or overwritten per container in the pod. The output file names are mapped to the secrets&amp;rsquo; names via &lt;code&gt;OutputMap&lt;/code&gt;. This is done for every container.&lt;/p&gt;
+
+&lt;p&gt;The only supported output type currently is json with a flat structure, i.e.
+all values being string values, because &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret-manually&#34; target=&#34;_blank&#34;&gt;Kubernetes secrets store base64 encoded data&lt;/a&gt;. The string value can be a marshalled JSON document.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Output of previous runs is overwritten.&lt;/p&gt;
+
+&lt;p&gt;The behavior of storing the output is controlled by specifying the following parameters:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;outputMap&lt;/code&gt; - Mapping from output file name to the name of the secret(s) that will hold the output.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;outputType&lt;/code&gt; - Currently only &lt;code&gt;json&lt;/code&gt; is supported. (default: &lt;code&gt;json&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;secretLabels&lt;/code&gt; - An optional map of labels which will be attached to the generated secret(s)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;writeOnFailure&lt;/code&gt; - if true, output is written even though the Job failed. (default: &lt;code&gt;false&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The developer should ensure that she creates all files defined in &lt;code&gt;OutputMap&lt;/code&gt; in the /mnt/quarks volume mount at the end of the container script. An example of the command field in the quarks job spec will look like this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;command: [&amp;quot;/bin/sh&amp;quot;]
+args: [&amp;quot;-c&amp;quot;,&amp;quot;json=&#39;{\&amp;quot;foo\&amp;quot;: \&amp;quot;1\&amp;quot;, \&amp;quot;bar\&amp;quot;: \&amp;quot;baz\&amp;quot;}&#39; &amp;amp;&amp;amp; echo $json &amp;gt;&amp;gt; /mnt/quarks/output.json&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The secret is created by a side container in quarks job pod which captures the create event of /mnt/quarks/output.json file.&lt;/p&gt;
+
+&lt;p&gt;The behavior of storing the output is controlled by specifying the following parameters:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;outputType&lt;/code&gt; - Currently only &lt;code&gt;json&lt;/code&gt; is supported. (default: &lt;code&gt;json&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;secretLabels&lt;/code&gt; - An optional map of labels which will be attached to the generated secret(s)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;versioned&lt;/code&gt; - if true, the output is written in a &lt;a href=&#34;#versioned-secrets&#34;&gt;Versioned Secret&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;writeOnFailure&lt;/code&gt; - if true, output is written even though the Job failed. (default: &lt;code&gt;false&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;versioned-secrets&#34;&gt;Versioned Secrets&lt;/h4&gt;
+
+&lt;p&gt;Versioned Secrets are a set of &lt;code&gt;Secrets&lt;/code&gt;, where each of them is immutable, and contains data for one iteration. Implementation can be found in the &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-utils/tree/master/pkg/versionedsecretstore&#34; target=&#34;_blank&#34;&gt;versionedsecretstore&lt;/a&gt; package.&lt;/p&gt;
+
+&lt;p&gt;When an &lt;code&gt;QuarksJob&lt;/code&gt; is configured to save to &amp;ldquo;Versioned Secrets&amp;rdquo;, the controller looks for the &lt;code&gt;Secret&lt;/code&gt; with the largest ordinal, adds &lt;code&gt;1&lt;/code&gt; to that value, and &lt;em&gt;creates a new Secret&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Each versioned secret has the following characteristics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;its name is calculated like this: &lt;code&gt;&amp;lt;name&amp;gt;-v&amp;lt;ORDINAL&amp;gt;&lt;/code&gt; e.g. &lt;code&gt;mysecret-v2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;it has the following labels:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;quarks.cloudfoundry.org/secret-kind&lt;/code&gt; with a value of &lt;code&gt;versionedSecret&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;quarks.cloudfoundry.org/secret-version&lt;/code&gt; with a value set to the &lt;code&gt;ordinal&lt;/code&gt; of the secret&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;an annotation of &lt;code&gt;quarks.cloudfoundry.org/source-description&lt;/code&gt; that contains arbitrary information about the creator of the secret&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;quarksjob-examples&#34;&gt;&lt;code&gt;QuarksJob&lt;/code&gt; Examples&lt;/h2&gt;
+
+&lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Rendering BOSH Templates</title>
       <link>https://quarks.suse.dev/docs/features/rendering_templates/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -3778,6 +3918,58 @@ nats-5
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;path&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;/instance_groups/name=THE_INSTANCE_GROUP/update/serial&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;value&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;if the deployment cannot be modified directly.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Quarks Secret</title>
+      <link>https://quarks.suse.dev/docs/components/quarkssecret/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/components/quarkssecret/</guid>
+      <description>
+        
+        
+        
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#quarkssecret&#34;&gt;QuarksSecret&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#description&#34;&gt;Description&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#features&#34;&gt;Features&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#generate-credentials&#34;&gt;Generate credentials&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#rotate-credentials&#34;&gt;Rotate credentials&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#approve-certificates&#34;&gt;Approve Certificates&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#quarkssecret-examples&#34;&gt;&lt;code&gt;QuarksSecret&lt;/code&gt; Examples&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;A QuarksSecret allows the developers to deal with the management of credentials.&lt;/p&gt;
+
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+
+&lt;h3 id=&#34;generate-credentials&#34;&gt;Generate credentials&lt;/h3&gt;
+
+&lt;p&gt;QuarksSecret can be used to generate passwords, certificates and keys. It uses the &lt;a href=&#34;https://github.com/cloudflare/cfssl&#34; target=&#34;_blank&#34;&gt;cfssl package&lt;/a&gt; to generate these. The generated values are stored in kubernetes secrets.&lt;/p&gt;
+
+&lt;h3 id=&#34;rotate-credentials&#34;&gt;Rotate credentials&lt;/h3&gt;
+
+&lt;p&gt;The generated credentials can be rotated by specifying its quarkssecret&amp;rsquo;s name in a configmap. The configmap must have the following label:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/secret-rotation
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;approve-certificates&#34;&gt;Approve Certificates&lt;/h3&gt;
+
+&lt;p&gt;In the case, where a certificate is generated, the QuarksSecret ensures that a certificate signing request is generated and is approved by the Kubernetes API server.&lt;/p&gt;
+
+&lt;h2 id=&#34;quarkssecret-examples&#34;&gt;&lt;code&gt;QuarksSecret&lt;/code&gt; Examples&lt;/h2&gt;
+
+&lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>

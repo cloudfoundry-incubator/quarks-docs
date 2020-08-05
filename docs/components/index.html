@@ -7,6 +7,7 @@
 
 <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
+<link rel="alternate" type="application/rss&#43;xml" href="https://quarks.suse.dev/docs/components/index.xml">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -20,26 +21,19 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>BOSH Variables | Quarks project</title><meta property="og:title" content="BOSH Variables" />
-<meta property="og:description" content="How Quarks-operator interpolates BOSH variables.
+<title>Components | Quarks project</title><meta property="og:title" content="Components" />
+<meta property="og:description" content="Quarks components
 " />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://quarks.suse.dev/docs/features/variables/" />
-<meta property="article:modified_time" content="2020-08-05T14:59:35+02:00" /><meta property="og:site_name" content="Quarks project" />
-<meta itemprop="name" content="BOSH Variables">
-<meta itemprop="description" content="How Quarks-operator interpolates BOSH variables.
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://quarks.suse.dev/docs/components/" />
+<meta property="og:site_name" content="Quarks project" />
+<meta itemprop="name" content="Components">
+<meta itemprop="description" content="Quarks components
 ">
 
-
-<meta itemprop="dateModified" content="2020-08-05T14:59:35&#43;02:00" />
-<meta itemprop="wordCount" content="117">
-
-
-
-<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="BOSH Variables"/>
-<meta name="twitter:description" content="How Quarks-operator interpolates BOSH variables.
+<meta name="twitter:title" content="Components"/>
+<meta name="twitter:description" content="Quarks components
 "/>
 
 
@@ -65,7 +59,7 @@
 
 
   </head>
-  <body class="td-page">
+  <body class="td-section">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -405,17 +399,17 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/features/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Features</a>
+    <a  href="/docs/features/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Features</a>
   </li>
   <ul>
-    <li class="collapse show" id="docs-features">
+    <li class="collapse " id="docs-features">
       
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-features-variables" href="/docs/features/variables/">BOSH Variables</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-features-variables" href="/docs/features/variables/">BOSH Variables</a>
       
       
       
@@ -464,10 +458,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/components/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Components</a>
+    <a  href="/docs/components/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Components</a>
   </li>
   <ul>
-    <li class="collapse " id="docs-components">
+    <li class="collapse show" id="docs-components">
       
       
       
@@ -585,8 +579,8 @@
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/content/en/docs/Features/variables.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/quarks-docs/issues/new?title=BOSH%20Variables" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/content/en/docs/Components/_index.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-docs/issues/new?title=Components" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -595,21 +589,6 @@
 
 
 
-
-
-
-<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#implicit-variables">Implicit Variables</a></li>
-<li><a href="#explicit-variables">Explicit Variables</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
 
 
 
@@ -628,9 +607,6 @@
 
 
 
-
-
-
 <li class="breadcrumb-item" >
 	<a href="https://quarks.suse.dev/docs/">Documentation</a>
 </li>
@@ -638,15 +614,8 @@
 
 
 
-<li class="breadcrumb-item" >
-	<a href="https://quarks.suse.dev/docs/features/">Features</a>
-</li>
-
-
-
-
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://quarks.suse.dev/docs/features/variables/">BOSH Variables</a>
+	<a href="https://quarks.suse.dev/docs/components/">Components</a>
 </li>
 
 	</ol>
@@ -654,36 +623,126 @@
 
             
 <div class="td-content">
-	<h1>BOSH Variables</h1>
-    <div class="lead">How Quarks-operator interpolates BOSH variables.</div>
-	       
+	<h1>Components</h1>
+        <div class="lead">Quarks components</div>
 	
+	<p>The quarks-operator is composed by different stand-alone controllers that can be deployed separately.</p>
 
-<p>BOSH releases consume two types of variables, explicit and implicit ones.</p>
-
-<h3 id="implicit-variables">Implicit Variables</h3>
-
-<p>Implicit variables have to be created before creating a BOSH deployment resource.
-The <a href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml" target="_blank">example</a> creates a secret named <code>var-custom-password</code>. That value will be used to fill <code>((custom-password))</code> place holders in the BOSH manifest.</p>
-
-<p>The name of the secret has to follow this scheme: &lsquo;var-<variable-name>&lsquo;</p>
-
-<p>Missing implicit variables are treated as an error.</p>
-
-<h3 id="explicit-variables">Explicit Variables</h3>
-
-<p>Explicit variables are explicitly defined in the <a href="https://bosh.io/docs/manifest-v2/#variables" target="_blank">BOSH manifest</a>. They are generated automatically upon deployment and stored in secrets.</p>
-
-<p>The naming scheme is the same as for implicit variables.</p>
-
-<p>If an explicit variable secret already exists, it will not be generated. This allows users to set their own passwords, etc.</p>
+        <div class="section-index">
+    
+    
+    
+    
+    <hr class="panel-line">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/components/quarksjob/">Quarks Job</a>
+                    </h5>
+                    <p>A QuarksJob allows the developer to run jobs when something interesting happens</p>
+                </div>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/components/quarkssecret/">Quarks Secret</a>
+                    </h5>
+                    <p>A QuarksSecret allows the developers to deal with the management of credentials.</p>
+                </div>
+            
+        
+            
+        
+            
+        
+            
+        
+    
+</div>
 
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">Last modified August 5, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/3167834eb014f92cc63e6771c36837f58dbb183d">Add components section (3167834)</a>
 </div>
 </div>
-
 
           </main>
         </div>
