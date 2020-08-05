@@ -18,22 +18,60 @@ For more information about the `quarks-operator` helm chart and how to configure
 - helm
 - kubectl
 
-## Use this if you've never installed the operator before
+
+## Installation
+
+Add the quarks repository to helm if you haven't already:
 
 ```bash
 helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/
+```
+
+The simplest way to install the operator, is by using the default values:
+
+```bash
 helm install cf-operator quarks/cf-operator
 ```
 
-## Use this if the custom resources have already been created by a previous CF Operator installation
+The operator will watch for BOSH deployments in separate namespaces, not the one it has been deployed to. By default, it creates a namespace `staging` and starts watching it.
+
+A complete list of the chart settings is available [here](https://hub.helm.sh/charts/quarks/cf-operator).
+
+### Multiple namespaces
+
+The quarks-operator watches namespaces labeled with `quarks.cloudfoundry.org/monitored=ID`. The `ID` has to be specified with helm settings during install (`--set "global.monitoredID=ID"`).
+The helm value setting `global.singleNamespace.name=` allows to automatically create a namespace which is being watched by the quarks-operator.
+
+For example, to watch to a different namespace with a specific ID:
 
 ```bash
-helm repo update
-helm install cf-operator quarks/cf-operator --set "customResources.enableInstallation=false"
+helm install relname1 quarks/cf-operator \
+  --namespace namespace1
+  --set "global.singleNamespace.name=staging1" \
+  --set "global.monitoredID=id1" \
+  --set "quarks-job.persistOutputClusterRole.name=clusterrole1"
 ```
 
-## For more options look at the README for the chart
+### Using multiple namespaces with one operator
 
+The cluster role can be reused between namespaces. The service account (and role binding) should be different for each namespace.
+
+```bash
+helm install relname1 quarks/cf-operator \
+  --set "global.singleNamespace.create=false"
+```
+Manually create before running helm install, for each namespace:
+
+- a namespace "staging1" with the following labels (note: "true" and "qjob-persist-output" are the defaults from values.yaml):
+```
+        quarks.cloudfoundry.org/monitored: "true"
+        quarks.cloudfoundry.org/qjob-service-account: qjob-account1
+```
+- a service account named "qjob-account1"
+- a role binding from the existing cluster role "qjob-persist-output" to "qjob-account1" in namespace "staging1"
+
+
+For more options look at the README for the chart
 
 ```bash
 helm show readme quarks/cf-operator
