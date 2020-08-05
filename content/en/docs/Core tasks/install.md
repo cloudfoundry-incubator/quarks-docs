@@ -30,7 +30,7 @@ helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/
 The simplest way to install the operator, is by using the default values:
 
 ```bash
-helm install cf-operator quarks/cf-operator
+helm install cf-operator quarks/cf-operator --namespace cf-operator
 ```
 
 The operator will watch for BOSH deployments in separate namespaces, not the one it has been deployed to. By default, it creates a namespace `staging` and starts watching it.
@@ -79,15 +79,15 @@ helm show readme quarks/cf-operator
 
 ## What next?
 
-With a running `quarks-operator` pod, you can try one of the files (see [boshdeployment-with-custom-variable.yaml](https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml) ), as follows:
+With a running `quarks-operator` pod, you can try one of the files (see [boshdeployment-with-custom-variable.yaml](https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml) ), as follows (if you installed it with default values):
 
 ```bash
-kubectl -n cf-operator apply -f https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml
+kubectl -n staging apply -f https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml
 ```
 
 The above will spawn two pods in your `cf-operator` namespace (which needs to be created upfront), running the BOSH nats release.
 
-You can access the `cf-operator` logs by following the operator pod's output:
+You can access the `quarks-operator` logs by following the operator pod's output:
 
 ```bash
 kubectl logs -f -n cf-operator cf-operator
