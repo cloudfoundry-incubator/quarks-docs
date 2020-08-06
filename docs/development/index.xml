@@ -842,8 +842,8 @@ The assets will be copied into a &amp;lsquo;release&amp;rsquo; folder on S3.&lt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;bosh_deployment&#34; target=&#34;_blank&#34;&gt;BoshDeployment&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-job/blob/master/docs/quarksjob.md&#34; target=&#34;_blank&#34;&gt;QuarksJob&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/quarks_secret.md&#34; target=&#34;_blank&#34;&gt;QuarksSecret&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;quarksjob&#34; target=&#34;_blank&#34;&gt;QuarksJob&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;quarks_secret&#34; target=&#34;_blank&#34;&gt;QuarksSecret&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;quarks_statefulset&#34; target=&#34;_blank&#34;&gt;QuarksStatefulSet&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 

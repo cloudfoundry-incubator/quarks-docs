@@ -2744,14 +2744,16 @@ quarks.cloudfoundry.org/remote-id=nats
 
 &lt;p&gt;The &lt;strong&gt;QuarksJob&lt;/strong&gt; component is a categorization of a set of controllers, under the same group. Inside the &lt;strong&gt;QuarksJob&lt;/strong&gt; component we have a set of 2 controllers together with one separate reconciliation loop per controller.&lt;/p&gt;
 
+&lt;p&gt;&lt;img src=&#34;../quarks_deployment_flow-QuarksJob.png&#34; alt=&#34;flow-quarks-job&#34; /&gt;&lt;/p&gt;
+
 &lt;p&gt;Figure 1, illustrates the &lt;strong&gt;QuarksJob&lt;/strong&gt; component diagram and the set of controllers it uses.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;../quarks_qjobcomponent_flow.png&#34; alt=&#34;flow-quarks-job&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_ejobcomponent_flow.png&#34; alt=&#34;flow-quarks-job&#34; /&gt;
 &lt;em&gt;Fig. 1: The QuarksJob component&lt;/em&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;errand-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;Errand Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;../quarks_qjoberrandcontroller_flow.png&#34; alt=&#34;errand-controller-flow&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_ejoberrandcontroller_flow.png&#34; alt=&#34;errand-controller-flow&#34; /&gt;
 &lt;em&gt;Fig. 2: The Errand controller flow&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;This is the controller responsible for implementing &lt;strong&gt;Errands&lt;/strong&gt;, this will lead to the generation of a Kubernetes job, in order to complete a task.&lt;/p&gt;
@@ -2773,7 +2775,7 @@ quarks.cloudfoundry.org/remote-id=nats
 
 &lt;h3 id=&#34;job-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;Job Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;../quarks_qjobjobcontroller_flow.png&#34; alt=&#34;job-controller-flow&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_ejobjobcontroller_flow.png&#34; alt=&#34;job-controller-flow&#34; /&gt;
 &lt;em&gt;Fig. 3: The Job controller flow&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;This is an auxiliary controller that relies on the Errand Controller output. It will be watching for Kubernetes Jobs that have Succeeded and deletes the job. If the jobpod of the succeeded job has a label &lt;code&gt;delete=pod&lt;/code&gt;, it deletes the job pod too.&lt;/p&gt;
@@ -2792,7 +2794,7 @@ quarks.cloudfoundry.org/remote-id=nats
 
 &lt;h2 id=&#34;relationship-with-the-bdpl-component&#34;&gt;Relationship with the BDPL component&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;../quarks_bdpl_and_qjob_flow.png&#34; alt=&#34;bdpl-qjob-relationship&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_bdpl_and_ejob_flow.png&#34; alt=&#34;bdpl-qjob-relationship&#34; /&gt;
 &lt;em&gt;Fig. 4: Relationship between the BDPL controller and the QuarksJob component&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 4 illustrates the interaction of the &lt;strong&gt;BOSHDeployment&lt;/strong&gt; Controller with the &lt;strong&gt;Errand&lt;/strong&gt; Controller and how the output of this one serves as the trigger for the &lt;strong&gt;Job&lt;/strong&gt; Controller.&lt;/p&gt;
