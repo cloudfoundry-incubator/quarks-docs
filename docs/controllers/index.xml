@@ -281,6 +281,231 @@ The controller annotates the instance groups and the jobs counters and it resolv
     </item>
     
     <item>
+      <title>Docs: Quarks Secret</title>
+      <link>https://quarks.suse.dev/docs/controllers/quarks_secret/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/controllers/quarks_secret/</guid>
+      <description>
+        
+        
+        
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#quarkssecret&#34;&gt;QuarksSecret&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#description&#34;&gt;Description&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#quarkssecret-component&#34;&gt;QuarksSecret Component&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#quarkssecret-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;QuarksSecret Controller&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#watches-in-quarks-secret-controller&#34;&gt;Watches in Quarks Secret Controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#reconciliation-in-quarks-secret-controller&#34;&gt;Reconciliation in Quarks Secret Controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#highlights-in-quarks-secret-controller&#34;&gt;Highlights in Quarks Secret Controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#types&#34;&gt;Types&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#auto-approving-certificates&#34;&gt;Auto-approving Certificates&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#copies&#34;&gt;Copies&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#certificatesigningrequest-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;CertificateSigningRequest Controller&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#watches-in-csr-controller&#34;&gt;Watches in CSR Controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#reconciliation-in-csr-controller&#34;&gt;Reconciliation in CSR Controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#highlights-in-csr-controller&#34;&gt;Highlights in CSR Controller&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#secretrotation-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;SecretRotation Controller&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#watches-in-secret-rotation-controller&#34;&gt;Watches in Secret Rotation Controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#reconciliation-in-secret-rotation-controller&#34;&gt;Reconciliation in Secret Rotation Controller&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#relationship-with-the-bdpl-component&#34;&gt;Relationship With the BDPL Component&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#quarkssecret-examples&#34;&gt;&lt;code&gt;QuarksSecret&lt;/code&gt; Examples&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.&lt;/p&gt;
+
+&lt;h2 id=&#34;quarkssecret-component&#34;&gt;QuarksSecret Component&lt;/h2&gt;
+
+&lt;p&gt;The &lt;strong&gt;QuarksSecret&lt;/strong&gt; component consists of three controllers, each with a separate reconciliation loop.&lt;/p&gt;
+
+&lt;p&gt;Figure 1, illustrates the component and associated set of controllers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../quarks_eseccomponent_flow.png&#34; alt=&#34;qsec-component-flow&#34; /&gt;
+&lt;em&gt;Fig. 1: The QuarksSecret component&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;quarkssecret-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;QuarksSecret Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../quarks_eseccontroller_flow.png&#34; alt=&#34;qsec-controller-flow&#34; /&gt;
+&lt;em&gt;Fig. 2: The QuarksSecret controller&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;watches-in-quarks-secret-controller&#34;&gt;Watches in Quarks Secret Controller&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;QuarksSecret&lt;/code&gt;: Creation&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;QuarksSecret&lt;/code&gt;: Updates if &lt;code&gt;.status.generated&lt;/code&gt; is false&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;reconciliation-in-quarks-secret-controller&#34;&gt;Reconciliation in Quarks Secret Controller&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;generates Kubernetes secret of specific types(see Types under Highlights).&lt;/li&gt;
+&lt;li&gt;generate a Certificate Signing Request against the cluster API.&lt;/li&gt;
+&lt;li&gt;sets &lt;code&gt;.status.generated&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt;, to avoid re-generation and allow secret rotation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;highlights-in-quarks-secret-controller&#34;&gt;Highlights in Quarks Secret Controller&lt;/h4&gt;
+
+&lt;h5 id=&#34;types&#34;&gt;Types&lt;/h5&gt;
+
+&lt;p&gt;Depending on the &lt;code&gt;spec.type&lt;/code&gt;, &lt;code&gt;QuarksSecret&lt;/code&gt; supports generating the following:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Secret Type&lt;/th&gt;
+&lt;th&gt;spec.type&lt;/th&gt;
+&lt;th&gt;certificate.signerType&lt;/th&gt;
+&lt;th&gt;certificate.isCA&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;passwords&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;password&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;not set&lt;/td&gt;
+&lt;td&gt;not set&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;username-password pairs&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;basic-auth&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;not set&lt;/td&gt;
+&lt;td&gt;not set&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;rsa keys&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;rsa&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;not set&lt;/td&gt;
+&lt;td&gt;not set&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ssh keys&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;not set&lt;/td&gt;
+&lt;td&gt;not set&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;self-signed root certificates&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;certificate&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;local&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;self-signed certificates&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;certificate&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;local&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cluster-signed certificates&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;certificate&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cluster&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You can find more details in the &lt;a href=&#34;https://bosh.io/docs/variable-types&#34; target=&#34;_blank&#34;&gt;BOSH docs&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&#34;auto-approving-certificates&#34;&gt;Auto-approving Certificates&lt;/h5&gt;
+
+&lt;p&gt;A certificate &lt;code&gt;QuarksSecret&lt;/code&gt; can be signed by the Kubernetes API Server. The &lt;strong&gt;QuarksSecret&lt;/strong&gt; Controller is responsible for generating the certificate signing request:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;apiVersion&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;certificates.k8s.io/v1beta1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;kind&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;CertificateSigningRequest&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;metadata&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;generate-certificate&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;spec&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;request&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;((encoded-cert-signing-request))&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;usages&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;digital&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;signature&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;key&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;encipherment&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h5 id=&#34;copies&#34;&gt;Copies&lt;/h5&gt;
+
+&lt;p&gt;The &lt;code&gt;QuarksSecret&lt;/code&gt; controller can create copies of a generated secret across multiple namespaces, as long as the target secrets (that live in a namespace other than the namespace of the &lt;code&gt;QuarksSecret&lt;/code&gt;) already exist, and have an annotation of:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/generate-password-with-copies&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;as well as the usual label for generated secrets:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;quarks.cloudfoundry.org/secret-kind: generated&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This ensures that the creator of the &lt;code&gt;QuarksSecret&lt;/code&gt; must have access to the copy target namespace.&lt;/p&gt;
+
+&lt;p&gt;Copied &lt;code&gt;Secrets&lt;/code&gt; do not have an owner set, and are not cleaned up automatically when the &lt;code&gt;QuarksSecret&lt;/code&gt; is deleted.&lt;/p&gt;
+
+&lt;h3 id=&#34;certificatesigningrequest-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;CertificateSigningRequest Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../quarks_certsrcontroller_flow.png&#34; alt=&#34;certsr-controller-flow&#34; /&gt;
+&lt;em&gt;Fig. 3: The CertificateSigningRequest controller&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;watches-in-csr-controller&#34;&gt;Watches in CSR Controller&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Certificate Signing Request&lt;/code&gt;: Creation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;reconciliation-in-csr-controller&#34;&gt;Reconciliation in CSR Controller&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;once the request is approved by Kubernetes API, will generate a certificate stored in a Kubernetes secret, that is recognized by the cluster.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;highlights-in-csr-controller&#34;&gt;Highlights in CSR Controller&lt;/h4&gt;
+
+&lt;p&gt;The CertificateSigningRequest controller watches for &lt;code&gt;CertificateSigningRequest&lt;/code&gt; and approves &lt;code&gt;QuarksSecret&lt;/code&gt;-owned CSRs and persists the generated certificate.&lt;/p&gt;
+
+&lt;h3 id=&#34;secretrotation-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;SecretRotation Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;The secret rotation controller watches for a rotation config map and re-generates all the listed &lt;code&gt;QuarksSecrets&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;watches-in-secret-rotation-controller&#34;&gt;Watches in Secret Rotation Controller&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ConfigMap&lt;/code&gt;: Creation of a config map, which has the &lt;code&gt;secret-rotation&lt;/code&gt; label.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;reconciliation-in-secret-rotation-controller&#34;&gt;Reconciliation in Secret Rotation Controller&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Will read the array of &lt;code&gt;QuarksSecret&lt;/code&gt; names from the JSON under the config map key &lt;code&gt;secrets&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Skip &lt;code&gt;QuarksSecret&lt;/code&gt; where &lt;code&gt;.status.generated&lt;/code&gt; is &lt;code&gt;false&lt;/code&gt;, as these might be under control of the user.&lt;/li&gt;
+&lt;li&gt;Set &lt;code&gt;.status.generated&lt;/code&gt; for each named &lt;code&gt;QuarksSecret&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt;, to trigger re-creation of the corresponding secret.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;relationship-with-the-bdpl-component&#34;&gt;Relationship With the BDPL Component&lt;/h2&gt;
+
+&lt;p&gt;All explicit variables of a BOSH manifest will be created as &lt;code&gt;QuarksSecret&lt;/code&gt; instances, which will trigger the &lt;strong&gt;QuarksSecret&lt;/strong&gt; Controller.
+This will create corresponding secrets. If the user decides to change a secret, the &lt;code&gt;.status.generated&lt;/code&gt; field in the corresponding &lt;code&gt;QuarksSecret&lt;/code&gt; should be set to &lt;code&gt;false&lt;/code&gt;, to protect against overwriting.&lt;/p&gt;
+
+&lt;h2 id=&#34;quarkssecret-examples&#34;&gt;&lt;code&gt;QuarksSecret&lt;/code&gt; Examples&lt;/h2&gt;
+
+&lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-secret&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-secret&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Quarks StatefulSet</title>
       <link>https://quarks.suse.dev/docs/controllers/quarks_statefulset/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

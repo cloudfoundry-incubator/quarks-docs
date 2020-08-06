@@ -20,26 +20,26 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Cloud Foundry Operator | Quarks project</title><meta property="og:title" content="Cloud Foundry Operator" />
-<meta property="og:description" content="Cloud Foundry Kubernetes Operator 
+<title>Quarks Secret | Quarks project</title><meta property="og:title" content="Quarks Secret" />
+<meta property="og:description" content="A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://quarks.suse.dev/docs/concepts/operator/" />
+<meta property="og:url" content="https://quarks.suse.dev/docs/controllers/quarks_secret/" />
 <meta property="article:modified_time" content="2020-08-06T09:27:40+02:00" /><meta property="og:site_name" content="Quarks project" />
-<meta itemprop="name" content="Cloud Foundry Operator">
-<meta itemprop="description" content="Cloud Foundry Kubernetes Operator 
+<meta itemprop="name" content="Quarks Secret">
+<meta itemprop="description" content="A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.
 ">
 
 
 <meta itemprop="dateModified" content="2020-08-06T09:27:40&#43;02:00" />
-<meta itemprop="wordCount" content="52">
+<meta itemprop="wordCount" content="544">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Cloud Foundry Operator"/>
-<meta name="twitter:description" content="Cloud Foundry Kubernetes Operator 
+<meta name="twitter:title" content="Quarks Secret"/>
+<meta name="twitter:description" content="A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.
 "/>
 
 
@@ -182,10 +182,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/concepts/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Concepts</a>
+    <a  href="/docs/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
   </li>
   <ul>
-    <li class="collapse show" id="docs-concepts">
+    <li class="collapse " id="docs-concepts">
       
       
       
@@ -198,7 +198,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-concepts-operator" href="/docs/concepts/operator/">Operator</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-concepts-operator" href="/docs/concepts/operator/">Operator</a>
       
       
       
@@ -229,10 +229,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/controllers/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Controllers</a>
+    <a  href="/docs/controllers/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Controllers</a>
   </li>
   <ul>
-    <li class="collapse " id="docs-controllers">
+    <li class="collapse show" id="docs-controllers">
       
       
       
@@ -251,7 +251,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-controllers-quarks-secret" href="/docs/controllers/quarks_secret/">Quarks Secret</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-controllers-quarks-secret" href="/docs/controllers/quarks_secret/">Quarks Secret</a>
       
       
       
@@ -591,8 +591,8 @@
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/content/en/docs/Concepts/operator.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/quarks-docs/issues/new?title=Cloud%20Foundry%20Operator" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/content/en/docs/controllers/quarks_secret.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-docs/issues/new?title=Quarks%20Secret" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -601,6 +601,44 @@
 
 
 
+
+
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#description">Description</a></li>
+<li><a href="#quarkssecret-component">QuarksSecret Component</a>
+<ul>
+<li><a href="#quarkssecret-controller"><strong><em>QuarksSecret Controller</em></strong></a>
+<ul>
+<li><a href="#watches-in-quarks-secret-controller">Watches in Quarks Secret Controller</a></li>
+<li><a href="#reconciliation-in-quarks-secret-controller">Reconciliation in Quarks Secret Controller</a></li>
+<li><a href="#highlights-in-quarks-secret-controller">Highlights in Quarks Secret Controller</a>
+<ul>
+<li><a href="#types">Types</a></li>
+<li><a href="#auto-approving-certificates">Auto-approving Certificates</a></li>
+<li><a href="#copies">Copies</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#certificatesigningrequest-controller"><strong><em>CertificateSigningRequest Controller</em></strong></a>
+<ul>
+<li><a href="#watches-in-csr-controller">Watches in CSR Controller</a></li>
+<li><a href="#reconciliation-in-csr-controller">Reconciliation in CSR Controller</a></li>
+<li><a href="#highlights-in-csr-controller">Highlights in CSR Controller</a></li>
+</ul></li>
+<li><a href="#secretrotation-controller"><strong><em>SecretRotation Controller</em></strong></a>
+<ul>
+<li><a href="#watches-in-secret-rotation-controller">Watches in Secret Rotation Controller</a></li>
+<li><a href="#reconciliation-in-secret-rotation-controller">Reconciliation in Secret Rotation Controller</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#relationship-with-the-bdpl-component">Relationship With the BDPL Component</a></li>
+<li><a href="#quarkssecret-examples"><code>QuarksSecret</code> Examples</a></li>
+</ul></li>
+</ul>
+</nav>
 
 
 
@@ -630,14 +668,14 @@
 
 
 <li class="breadcrumb-item" >
-	<a href="https://quarks.suse.dev/docs/concepts/">Concepts</a>
+	<a href="https://quarks.suse.dev/docs/controllers/">Controllers</a>
 </li>
 
 
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://quarks.suse.dev/docs/concepts/operator/">Operator</a>
+	<a href="https://quarks.suse.dev/docs/controllers/quarks_secret/">Quarks Secret</a>
 </li>
 
 	</ol>
@@ -645,28 +683,221 @@
 
             
 <div class="td-content">
-	<h1>Cloud Foundry Operator</h1>
-    <div class="lead">Cloud Foundry Kubernetes Operator</div>
+	<h1>Quarks Secret</h1>
+    <div class="lead">A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.</div>
 	       
 	
 
-<div class="pageinfo pageinfo-primary">
-<p>The CF-Operator is a Cloud Foundry Incubating Project.</p>
-
-</div>
-
-
-<p><a href="https://github.com/cloudfoundry-incubator/cf-operator/" target="_blank">cf-operator</a> enables the deployment of BOSH Releases, especially Cloud Foundry, to Kubernetes.</p>
-
-<p>It&rsquo;s implemented as a k8s operator, an active controller component which acts upon custom k8s resources.</p>
+<ul>
+<li><a href="#quarkssecret">QuarksSecret</a>
 
 <ul>
-<li><a href="https://github.com/cloudfoundry-incubator/cf-operator/#installing" target="_blank">Installation notes</a></li>
-<li>Incubation Proposal: <a href="https://docs.google.com/document/d/1_IvFf-cCR4_Hxg-L7Z_R51EKhZfBqlprrs5NgC2iO2w/edit#heading=h.lybtsdyh8res" target="_blank">Containerizing Cloud Foundry</a></li>
-<li>Slack: #quarks-dev on <a href="https://slack.cloudfoundry.org/" target="_blank">https://slack.cloudfoundry.org</a></li>
-<li>Backlog: <a href="https://www.pivotaltracker.com/n/projects/2192232" target="_blank">Pivotal Tracker</a></li>
-<li>Docker: <a href="https://hub.docker.com/r/cfcontainerization/cf-operator/tags" target="_blank">https://hub.docker.com/r/cfcontainerization/cf-operator/tags</a></li>
+<li><a href="#description">Description</a></li>
+<li><a href="#quarkssecret-component">QuarksSecret Component</a></li>
+<li><a href="#quarkssecret-controller"><strong><em>QuarksSecret Controller</em></strong></a>
+
+<ul>
+<li><a href="#watches-in-quarks-secret-controller">Watches in Quarks Secret Controller</a></li>
+<li><a href="#reconciliation-in-quarks-secret-controller">Reconciliation in Quarks Secret Controller</a></li>
+<li><a href="#highlights-in-quarks-secret-controller">Highlights in Quarks Secret Controller</a></li>
+<li><a href="#types">Types</a></li>
+<li><a href="#auto-approving-certificates">Auto-approving Certificates</a></li>
+<li><a href="#copies">Copies</a></li>
+</ul></li>
+<li><a href="#certificatesigningrequest-controller"><strong><em>CertificateSigningRequest Controller</em></strong></a>
+
+<ul>
+<li><a href="#watches-in-csr-controller">Watches in CSR Controller</a></li>
+<li><a href="#reconciliation-in-csr-controller">Reconciliation in CSR Controller</a></li>
+<li><a href="#highlights-in-csr-controller">Highlights in CSR Controller</a></li>
+</ul></li>
+<li><a href="#secretrotation-controller"><strong><em>SecretRotation Controller</em></strong></a>
+
+<ul>
+<li><a href="#watches-in-secret-rotation-controller">Watches in Secret Rotation Controller</a></li>
+<li><a href="#reconciliation-in-secret-rotation-controller">Reconciliation in Secret Rotation Controller</a></li>
+</ul></li>
+<li><a href="#relationship-with-the-bdpl-component">Relationship With the BDPL Component</a></li>
+<li><a href="#quarkssecret-examples"><code>QuarksSecret</code> Examples</a></li>
+</ul></li>
 </ul>
+
+<h2 id="description">Description</h2>
+
+<p>A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.</p>
+
+<h2 id="quarkssecret-component">QuarksSecret Component</h2>
+
+<p>The <strong>QuarksSecret</strong> component consists of three controllers, each with a separate reconciliation loop.</p>
+
+<p>Figure 1, illustrates the component and associated set of controllers.</p>
+
+<p><img src="../quarks_eseccomponent_flow.png" alt="qsec-component-flow" />
+<em>Fig. 1: The QuarksSecret component</em></p>
+
+<h3 id="quarkssecret-controller"><strong><em>QuarksSecret Controller</em></strong></h3>
+
+<p><img src="../quarks_eseccontroller_flow.png" alt="qsec-controller-flow" />
+<em>Fig. 2: The QuarksSecret controller</em></p>
+
+<h4 id="watches-in-quarks-secret-controller">Watches in Quarks Secret Controller</h4>
+
+<ul>
+<li><code>QuarksSecret</code>: Creation</li>
+<li><code>QuarksSecret</code>: Updates if <code>.status.generated</code> is false</li>
+</ul>
+
+<h4 id="reconciliation-in-quarks-secret-controller">Reconciliation in Quarks Secret Controller</h4>
+
+<ul>
+<li>generates Kubernetes secret of specific types(see Types under Highlights).</li>
+<li>generate a Certificate Signing Request against the cluster API.</li>
+<li>sets <code>.status.generated</code> to <code>true</code>, to avoid re-generation and allow secret rotation.</li>
+</ul>
+
+<h4 id="highlights-in-quarks-secret-controller">Highlights in Quarks Secret Controller</h4>
+
+<h5 id="types">Types</h5>
+
+<p>Depending on the <code>spec.type</code>, <code>QuarksSecret</code> supports generating the following:</p>
+
+<table>
+<thead>
+<tr>
+<th>Secret Type</th>
+<th>spec.type</th>
+<th>certificate.signerType</th>
+<th>certificate.isCA</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>passwords</code></td>
+<td><code>password</code></td>
+<td>not set</td>
+<td>not set</td>
+</tr>
+
+<tr>
+<td><code>username-password pairs</code></td>
+<td><code>basic-auth</code></td>
+<td>not set</td>
+<td>not set</td>
+</tr>
+
+<tr>
+<td><code>rsa keys</code></td>
+<td><code>rsa</code></td>
+<td>not set</td>
+<td>not set</td>
+</tr>
+
+<tr>
+<td><code>ssh keys</code></td>
+<td><code>ssh</code></td>
+<td>not set</td>
+<td>not set</td>
+</tr>
+
+<tr>
+<td><code>self-signed root certificates</code></td>
+<td><code>certificate</code></td>
+<td><code>local</code></td>
+<td><code>true</code></td>
+</tr>
+
+<tr>
+<td><code>self-signed certificates</code></td>
+<td><code>certificate</code></td>
+<td><code>local</code></td>
+<td><code>false</code></td>
+</tr>
+
+<tr>
+<td><code>cluster-signed certificates</code></td>
+<td><code>certificate</code></td>
+<td><code>cluster</code></td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>Note:</strong></p>
+
+<p>You can find more details in the <a href="https://bosh.io/docs/variable-types" target="_blank">BOSH docs</a>.</p>
+</blockquote>
+
+<h5 id="auto-approving-certificates">Auto-approving Certificates</h5>
+
+<p>A certificate <code>QuarksSecret</code> can be signed by the Kubernetes API Server. The <strong>QuarksSecret</strong> Controller is responsible for generating the certificate signing request:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>certificates.k8s.io/v1beta1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>CertificateSigningRequest<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>generate-certificate<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>spec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>request<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>((encoded-cert-signing-request))<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>usages<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>digital<span style="color:#f8f8f8;text-decoration:underline"> </span>signature<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>key<span style="color:#f8f8f8;text-decoration:underline"> </span>encipherment</code></pre></div>
+<h5 id="copies">Copies</h5>
+
+<p>The <code>QuarksSecret</code> controller can create copies of a generated secret across multiple namespaces, as long as the target secrets (that live in a namespace other than the namespace of the <code>QuarksSecret</code>) already exist, and have an annotation of:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/generate-password-with-copies</code></pre></div>
+<p>as well as the usual label for generated secrets:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">quarks.cloudfoundry.org/secret-kind: generated</code></pre></div>
+<p>This ensures that the creator of the <code>QuarksSecret</code> must have access to the copy target namespace.</p>
+
+<p>Copied <code>Secrets</code> do not have an owner set, and are not cleaned up automatically when the <code>QuarksSecret</code> is deleted.</p>
+
+<h3 id="certificatesigningrequest-controller"><strong><em>CertificateSigningRequest Controller</em></strong></h3>
+
+<p><img src="../quarks_certsrcontroller_flow.png" alt="certsr-controller-flow" />
+<em>Fig. 3: The CertificateSigningRequest controller</em></p>
+
+<h4 id="watches-in-csr-controller">Watches in CSR Controller</h4>
+
+<ul>
+<li><code>Certificate Signing Request</code>: Creation</li>
+</ul>
+
+<h4 id="reconciliation-in-csr-controller">Reconciliation in CSR Controller</h4>
+
+<ul>
+<li>once the request is approved by Kubernetes API, will generate a certificate stored in a Kubernetes secret, that is recognized by the cluster.</li>
+</ul>
+
+<h4 id="highlights-in-csr-controller">Highlights in CSR Controller</h4>
+
+<p>The CertificateSigningRequest controller watches for <code>CertificateSigningRequest</code> and approves <code>QuarksSecret</code>-owned CSRs and persists the generated certificate.</p>
+
+<h3 id="secretrotation-controller"><strong><em>SecretRotation Controller</em></strong></h3>
+
+<p>The secret rotation controller watches for a rotation config map and re-generates all the listed <code>QuarksSecrets</code>.</p>
+
+<h4 id="watches-in-secret-rotation-controller">Watches in Secret Rotation Controller</h4>
+
+<ul>
+<li><code>ConfigMap</code>: Creation of a config map, which has the <code>secret-rotation</code> label.</li>
+</ul>
+
+<h4 id="reconciliation-in-secret-rotation-controller">Reconciliation in Secret Rotation Controller</h4>
+
+<ul>
+<li>Will read the array of <code>QuarksSecret</code> names from the JSON under the config map key <code>secrets</code>.</li>
+<li>Skip <code>QuarksSecret</code> where <code>.status.generated</code> is <code>false</code>, as these might be under control of the user.</li>
+<li>Set <code>.status.generated</code> for each named <code>QuarksSecret</code> to <code>false</code>, to trigger re-creation of the corresponding secret.</li>
+</ul>
+
+<h2 id="relationship-with-the-bdpl-component">Relationship With the BDPL Component</h2>
+
+<p>All explicit variables of a BOSH manifest will be created as <code>QuarksSecret</code> instances, which will trigger the <strong>QuarksSecret</strong> Controller.
+This will create corresponding secrets. If the user decides to change a secret, the <code>.status.generated</code> field in the corresponding <code>QuarksSecret</code> should be set to <code>false</code>, to protect against overwriting.</p>
+
+<h2 id="quarkssecret-examples"><code>QuarksSecret</code> Examples</h2>
+
+<p>See <a href="https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-secret" target="_blank">https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-secret</a></p>
 
 	
 	
