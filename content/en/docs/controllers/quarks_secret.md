@@ -149,4 +149,4 @@ This will create corresponding secrets. If the user decides to change a secret, 
 
 ## `QuarksSecret` Examples
 
-See https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-secret
+See https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples
