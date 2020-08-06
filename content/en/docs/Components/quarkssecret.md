@@ -39,3 +39,7 @@ In the case, where a certificate is generated, the QuarksSecret ensures that a c
 ## `QuarksSecret` Examples
 
 See https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples
+
+## Controller architecture
+
+See: [Quarks secret controller section](../../controllers/quarks_secret/)
