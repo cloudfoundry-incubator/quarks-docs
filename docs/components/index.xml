@@ -204,7 +204,7 @@ args: [&amp;quot;-c&amp;quot;,&amp;quot;json=&#39;{\&amp;quot;foo\&amp;quot;: \&
 
 &lt;h2 id=&#34;controller-architecture&#34;&gt;Controller architecture&lt;/h2&gt;
 
-&lt;p&gt;See: &lt;a href=&#34;../../controllers/quarks_secret/&#34;&gt;Quarks secret controller section&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;See: &lt;a href=&#34;../../development/controllers/quarks_secret/&#34;&gt;Quarks secret controller section&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>

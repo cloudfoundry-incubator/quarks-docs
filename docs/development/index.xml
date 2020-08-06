@@ -55,7 +55,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;GO111MODULE&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;on&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;custom-resource-definitions-crds&#34;&gt;Custom Resource Definitions (CRDs)&lt;/h2&gt;
 
-&lt;p&gt;Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds&#34; target=&#34;_blank&#34;&gt;CRDs&lt;/a&gt; (see &lt;a href=&#34;../../controllers&#34;&gt;Controllers&lt;/a&gt;):&lt;/p&gt;
+&lt;p&gt;Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds&#34; target=&#34;_blank&#34;&gt;CRDs&lt;/a&gt; (see &lt;a href=&#34;../controllers&#34;&gt;Controllers&lt;/a&gt;):&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;BOSHDeployment&lt;/li&gt;
@@ -823,6 +823,44 @@ The assets will be copied into a &amp;lsquo;release&amp;rsquo; folder on S3.&lt;
 &lt;/ol&gt;
 
 &lt;p&gt;Try not to push to the pipeline again, until step 4 is completed. The &amp;lsquo;release&amp;rsquo; job will always take the most recent artifacts from S3. Maybe pause the &amp;lsquo;publish&amp;rsquo; job manually to avoid accidental updates.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Kubernetes Controllers</title>
+      <link>https://quarks.suse.dev/docs/development/controllers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/development/controllers/</guid>
+      <description>
+        
+        
+        
+
+&lt;p&gt;The &lt;code&gt;quarks-operator&lt;/code&gt; watches four different types of custom resources:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;bosh_deployment&#34; target=&#34;_blank&#34;&gt;BoshDeployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-job/blob/master/docs/quarksjob.md&#34; target=&#34;_blank&#34;&gt;QuarksJob&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/quarks_secret.md&#34; target=&#34;_blank&#34;&gt;QuarksSecret&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;quarks_statefulset&#34; target=&#34;_blank&#34;&gt;QuarksStatefulSet&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;code&gt;cf-operator&lt;/code&gt; requires the according CRDs to be installed in the cluster in order to work as expected. By default, the &lt;code&gt;cf-operator&lt;/code&gt; applies CRDs in your cluster automatically.&lt;/p&gt;
+
+&lt;p&gt;To verify that the CRD´s are installed:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl get crds
+NAME                                            CREATED AT
+boshdeployments.quarks.cloudfoundry.org        &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z
+quarksjobs.quarks.cloudfoundry.org           &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z
+quarkssecrets.quarks.cloudfoundry.org        &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z
+quarksstatefulsets.quarks.cloudfoundry.org   &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;architecture-design&#34;&gt;Architecture design&lt;/h3&gt;
+
+&lt;p&gt;Draw.io with the sources for the &lt;code&gt;quarks_deployment_flow-*png&lt;/code&gt; controller charts:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://drive.google.com/file/d/1Uk2h5pOmY-gLtbfpDNO3POTcqI5UdZgj/view?usp=sharing&#34; target=&#34;_blank&#34;&gt;https://drive.google.com/file/d/1Uk2h5pOmY-gLtbfpDNO3POTcqI5UdZgj/view?usp=sharing&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>

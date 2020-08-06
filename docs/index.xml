@@ -415,7 +415,7 @@ interpolated manifest to STDOUT&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;GO111MODULE&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;on&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;custom-resource-definitions-crds&#34;&gt;Custom Resource Definitions (CRDs)&lt;/h2&gt;
 
-&lt;p&gt;Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds&#34; target=&#34;_blank&#34;&gt;CRDs&lt;/a&gt; (see &lt;a href=&#34;../../controllers&#34;&gt;Controllers&lt;/a&gt;):&lt;/p&gt;
+&lt;p&gt;Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds&#34; target=&#34;_blank&#34;&gt;CRDs&lt;/a&gt; (see &lt;a href=&#34;../controllers&#34;&gt;Controllers&lt;/a&gt;):&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;BOSHDeployment&lt;/li&gt;
@@ -1408,7 +1408,7 @@ The assets will be copied into a &amp;lsquo;release&amp;rsquo; folder on S3.&lt;
 
 &lt;h2 id=&#34;deployment-lifecycle&#34;&gt;Deployment Lifecycle&lt;/h2&gt;
 
-&lt;p&gt;Please read the &lt;a href=&#34;../../controllers/bosh_deployment&#34;&gt;documentation for the &lt;code&gt;BOSHDeployment&lt;/code&gt; controller&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Please read the &lt;a href=&#34;../../development/controllers/bosh_deployment&#34;&gt;documentation for the &lt;code&gt;BOSHDeployment&lt;/code&gt; controller&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;example-deployment-manifest-conversion-details&#34;&gt;Example Deployment Manifest Conversion Details&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -1969,11 +1969,11 @@ The &lt;code&gt;QuarksSecret&lt;/code&gt; is meant to generate the value require
 
 &lt;h3 id=&#34;dealing-with-azs&#34;&gt;Dealing with AZs&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support AZs. You can learn more about this in &lt;a href=&#34;../../controllers/quarks_statefulset#az-support&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support AZs. You can learn more about this in &lt;a href=&#34;../../development/controllers/quarks_statefulset#az-support&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;support-for-active-passive-pod-replicas&#34;&gt;Support for active/passive pod replicas&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support active/passive pod replicas. You can learn more about this in &lt;a href=&#34;../../controllers/quarks_statefulset#quarksstatefulset-active-passive-controller&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support active/passive pod replicas. You can learn more about this in &lt;a href=&#34;../../development/controllers/quarks_statefulset#quarksstatefulset-active-passive-controller&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;ephemeral-disks&#34;&gt;Ephemeral Disks&lt;/h3&gt;
 
@@ -2240,10 +2240,10 @@ nats-1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
     
     <item>
       <title>Docs: Bosh Deployment</title>
-      <link>https://quarks.suse.dev/docs/controllers/bosh_deployment/</link>
+      <link>https://quarks.suse.dev/docs/development/controllers/bosh_deployment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://quarks.suse.dev/docs/controllers/bosh_deployment/</guid>
+      <guid>https://quarks.suse.dev/docs/development/controllers/bosh_deployment/</guid>
       <description>
         
         
@@ -2704,10 +2704,10 @@ quarks.cloudfoundry.org/remote-id=nats
     
     <item>
       <title>Docs: Quarks restart</title>
-      <link>https://quarks.suse.dev/docs/controllers/quarks_restart/</link>
+      <link>https://quarks.suse.dev/docs/development/controllers/quarks_restart/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://quarks.suse.dev/docs/controllers/quarks_restart/</guid>
+      <guid>https://quarks.suse.dev/docs/development/controllers/quarks_restart/</guid>
       <description>
         
         
@@ -2740,10 +2740,10 @@ quarks.cloudfoundry.org/remote-id=nats
     
     <item>
       <title>Docs: Quarks Secret</title>
-      <link>https://quarks.suse.dev/docs/controllers/quarks_secret/</link>
+      <link>https://quarks.suse.dev/docs/development/controllers/quarks_secret/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://quarks.suse.dev/docs/controllers/quarks_secret/</guid>
+      <guid>https://quarks.suse.dev/docs/development/controllers/quarks_secret/</guid>
       <description>
         
         
@@ -2965,10 +2965,10 @@ This will create corresponding secrets. If the user decides to change a secret, 
     
     <item>
       <title>Docs: Quarks StatefulSet</title>
-      <link>https://quarks.suse.dev/docs/controllers/quarks_statefulset/</link>
+      <link>https://quarks.suse.dev/docs/development/controllers/quarks_statefulset/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://quarks.suse.dev/docs/controllers/quarks_statefulset/</guid>
+      <guid>https://quarks.suse.dev/docs/development/controllers/quarks_statefulset/</guid>
       <description>
         
         
@@ -3222,10 +3222,10 @@ The default value for &lt;code&gt;zoneNodeLabel&lt;/code&gt; is &lt;code&gt;fail
     
     <item>
       <title>Docs: StatefulSet Rollout</title>
-      <link>https://quarks.suse.dev/docs/controllers/statefulsetrollout/</link>
+      <link>https://quarks.suse.dev/docs/development/controllers/statefulsetrollout/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://quarks.suse.dev/docs/controllers/statefulsetrollout/</guid>
+      <guid>https://quarks.suse.dev/docs/development/controllers/statefulsetrollout/</guid>
       <description>
         
         
@@ -4198,17 +4198,17 @@ nats-5
 
 &lt;h2 id=&#34;controller-architecture&#34;&gt;Controller architecture&lt;/h2&gt;
 
-&lt;p&gt;See: &lt;a href=&#34;../../controllers/quarks_secret/&#34;&gt;Quarks secret controller section&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;See: &lt;a href=&#34;../../development/controllers/quarks_secret/&#34;&gt;Quarks secret controller section&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>
     
     <item>
       <title>Docs: </title>
-      <link>https://quarks.suse.dev/docs/controllers/readme/</link>
+      <link>https://quarks.suse.dev/docs/development/controllers/readme/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://quarks.suse.dev/docs/controllers/readme/</guid>
+      <guid>https://quarks.suse.dev/docs/development/controllers/readme/</guid>
       <description>
         
         

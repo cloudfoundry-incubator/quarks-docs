@@ -234,7 +234,7 @@ directly on minikube docker.&lt;/p&gt;
 
 &lt;h2 id=&#34;deployment-lifecycle&#34;&gt;Deployment Lifecycle&lt;/h2&gt;
 
-&lt;p&gt;Please read the &lt;a href=&#34;../../controllers/bosh_deployment&#34;&gt;documentation for the &lt;code&gt;BOSHDeployment&lt;/code&gt; controller&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Please read the &lt;a href=&#34;../../development/controllers/bosh_deployment&#34;&gt;documentation for the &lt;code&gt;BOSHDeployment&lt;/code&gt; controller&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;example-deployment-manifest-conversion-details&#34;&gt;Example Deployment Manifest Conversion Details&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -795,11 +795,11 @@ The &lt;code&gt;QuarksSecret&lt;/code&gt; is meant to generate the value require
 
 &lt;h3 id=&#34;dealing-with-azs&#34;&gt;Dealing with AZs&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support AZs. You can learn more about this in &lt;a href=&#34;../../controllers/quarks_statefulset#az-support&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support AZs. You can learn more about this in &lt;a href=&#34;../../development/controllers/quarks_statefulset#az-support&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;support-for-active-passive-pod-replicas&#34;&gt;Support for active/passive pod replicas&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support active/passive pod replicas. You can learn more about this in &lt;a href=&#34;../../controllers/quarks_statefulset#quarksstatefulset-active-passive-controller&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support active/passive pod replicas. You can learn more about this in &lt;a href=&#34;../../development/controllers/quarks_statefulset#quarksstatefulset-active-passive-controller&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;ephemeral-disks&#34;&gt;Ephemeral Disks&lt;/h3&gt;
 
