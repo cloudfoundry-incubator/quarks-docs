@@ -150,6 +150,10 @@ args: [&amp;quot;-c&amp;quot;,&amp;quot;json=&#39;{\&amp;quot;foo\&amp;quot;: \&
 
 &lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples&lt;/a&gt;&lt;/p&gt;
 
+&lt;h2 id=&#34;controller-architecture&#34;&gt;Controller architecture&lt;/h2&gt;
+
+&lt;p&gt;See: &lt;a href=&#34;../../development/controllers/quarksjob/&#34;&gt;Quarks Job controller section&lt;/a&gt;&lt;/p&gt;
+
       </description>
     </item>
     

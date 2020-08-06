@@ -245,6 +245,108 @@ The controller annotates the instance groups and the jobs counters and it resolv
     </item>
     
     <item>
+      <title>Docs: Quarks Job</title>
+      <link>https://quarks.suse.dev/docs/development/controllers/quarksjob/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/development/controllers/quarksjob/</guid>
+      <description>
+        
+        
+        
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#quarksjob&#34;&gt;QuarksJob&lt;/a&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#quarksjob-component&#34;&gt;QuarksJob Component&lt;/a&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#errand-controller&#34;&gt;Errand Controller&lt;/a&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#watches-in-errand-controller&#34;&gt;Watches&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#reconciliation-in-errand-controller&#34;&gt;Reconciliation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#highlights-in-errand-controller&#34;&gt;Highlights&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#job-controller&#34;&gt;Job Controller&lt;/a&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#watches-in-job-controller&#34;&gt;Watches&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#reconciliation-in-job-controller&#34;&gt;Reconciliation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#highlights-in-job-controller&#34;&gt;Highlights&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#relationship-with-the-bdpl-component&#34;&gt;Relationship with the BDPL component&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#quarksjob-examples&#34;&gt;QuarksJob Examples&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;The &lt;strong&gt;QuarksJob&lt;/strong&gt; component is a categorization of a set of controllers, under the same group. Inside the &lt;strong&gt;QuarksJob&lt;/strong&gt; component we have a set of 2 controllers together with one separate reconciliation loop per controller.&lt;/p&gt;
+
+&lt;p&gt;Figure 1, illustrates the &lt;strong&gt;QuarksJob&lt;/strong&gt; component diagram and the set of controllers it uses.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../quarks_qjobcomponent_flow.png&#34; alt=&#34;flow-quarks-job&#34; /&gt;
+&lt;em&gt;Fig. 1: The QuarksJob component&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;errand-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;Errand Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../quarks_qjoberrandcontroller_flow.png&#34; alt=&#34;errand-controller-flow&#34; /&gt;
+&lt;em&gt;Fig. 2: The Errand controller flow&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This is the controller responsible for implementing &lt;strong&gt;Errands&lt;/strong&gt;, this will lead to the generation of a Kubernetes job, in order to complete a task.&lt;/p&gt;
+
+&lt;h4 id=&#34;watches-in-errand-controller&#34;&gt;Watches in Errand controller&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;QuarksJob&lt;/code&gt; resources: Create and Update&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ConfigMaps&lt;/code&gt;: Update&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Secrets&lt;/code&gt;: Create and Update&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;reconciliation-in-errand-controller&#34;&gt;Reconciliation in Errand controller&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;When an &lt;code&gt;QuarksJob&lt;/code&gt; instance is generated, it will create an associated Kubernetes Job.&lt;/li&gt;
+&lt;li&gt;The generation of new Kubernetes Jobs also serves as the trigger for the &lt;code&gt;Job Controller&lt;/code&gt;, to start the Reconciliation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;job-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;Job Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../quarks_qjobjobcontroller_flow.png&#34; alt=&#34;job-controller-flow&#34; /&gt;
+&lt;em&gt;Fig. 3: The Job controller flow&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This is an auxiliary controller that relies on the Errand Controller output. It will be watching for Kubernetes Jobs that have Succeeded and deletes the job. If the jobpod of the succeeded job has a label &lt;code&gt;delete=pod&lt;/code&gt;, it deletes the job pod too.&lt;/p&gt;
+
+&lt;h4 id=&#34;watches-in-job-controller&#34;&gt;Watches in job controller&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Jobs&lt;/code&gt;: Succeeded&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;reconciliation-in-job-controller&#34;&gt;Reconciliation in job controller&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Deletes succeeded job and its pod.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;relationship-with-the-bdpl-component&#34;&gt;Relationship with the BDPL component&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../quarks_bdpl_and_qjob_flow.png&#34; alt=&#34;bdpl-qjob-relationship&#34; /&gt;
+&lt;em&gt;Fig. 4: Relationship between the BDPL controller and the QuarksJob component&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Figure 4 illustrates the interaction of the &lt;strong&gt;BOSHDeployment&lt;/strong&gt; Controller with the &lt;strong&gt;Errand&lt;/strong&gt; Controller and how the output of this one serves as the trigger for the &lt;strong&gt;Job&lt;/strong&gt; Controller.&lt;/p&gt;
+
+&lt;h2 id=&#34;quarksjob-examples&#34;&gt;&lt;code&gt;QuarksJob&lt;/code&gt; Examples&lt;/h2&gt;
+
+&lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Quarks restart</title>
       <link>https://quarks.suse.dev/docs/development/controllers/quarks_restart/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

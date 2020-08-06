@@ -20,26 +20,26 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Nice tools to use | Quarks project</title><meta property="og:title" content="Nice tools to use" />
-<meta property="og:description" content="Tools to simplify your development workflow
+<title>Quarks Job | Quarks project</title><meta property="og:title" content="Quarks Job" />
+<meta property="og:description" content="The **QuarksJob** component is a categorization of a set of controllers, under the same group. Inside the **QuarksJob** component we have a set of 2 controllers together with one separate reconciliation loop per controller.
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://quarks.suse.dev/docs/development/tooling/" />
+<meta property="og:url" content="https://quarks.suse.dev/docs/development/controllers/quarksjob/" />
 <meta property="article:modified_time" content="2020-08-06T12:24:05+02:00" /><meta property="og:site_name" content="Quarks project" />
-<meta itemprop="name" content="Nice tools to use">
-<meta itemprop="description" content="Tools to simplify your development workflow
+<meta itemprop="name" content="Quarks Job">
+<meta itemprop="description" content="The **QuarksJob** component is a categorization of a set of controllers, under the same group. Inside the **QuarksJob** component we have a set of 2 controllers together with one separate reconciliation loop per controller.
 ">
 
 
 <meta itemprop="dateModified" content="2020-08-06T12:24:05&#43;02:00" />
-<meta itemprop="wordCount" content="182">
+<meta itemprop="wordCount" content="272">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Nice tools to use"/>
-<meta name="twitter:description" content="Tools to simplify your development workflow
+<meta name="twitter:title" content="Quarks Job"/>
+<meta name="twitter:description" content="The **QuarksJob** component is a categorization of a set of controllers, under the same group. Inside the **QuarksJob** component we have a set of 2 controllers together with one separate reconciliation loop per controller.
 "/>
 
 
@@ -299,7 +299,7 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/development/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Development</a>
+    <a  href="/docs/development/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Development</a>
   </li>
   <ul>
     <li class="collapse show" id="docs-development">
@@ -334,10 +334,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/development/controllers/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Controllers</a>
+    <a  href="/docs/development/controllers/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Controllers</a>
   </li>
   <ul>
-    <li class="collapse " id="docs-development-controllers">
+    <li class="collapse show" id="docs-development-controllers">
       
       
       
@@ -350,7 +350,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-controllers-quarksjob" href="/docs/development/controllers/quarksjob/">Quarks Job</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-development-controllers-quarksjob" href="/docs/development/controllers/quarksjob/">Quarks Job</a>
       
       
       
@@ -398,7 +398,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-development-tooling" href="/docs/development/tooling/">Tooling</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-tooling" href="/docs/development/tooling/">Tooling</a>
       
       
     </li>
@@ -597,8 +597,8 @@
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/content/en/docs/Development/tooling.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/quarks-docs/issues/new?title=Nice%20tools%20to%20use" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/content/en/docs/Development/controllers/quarksjob.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-docs/issues/new?title=Quarks%20Job" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -614,13 +614,21 @@
 <ul>
 <li>
 <ul>
-<li>
+<li><a href="#description">Description</a>
 <ul>
-<li><a href="#k9s-https-github-com-derailed-k9s"><a href="https://github.com/derailed/k9s" target="_blank">k9s</a></a></li>
-<li><a href="#havener-https-github-com-homeport-havener"><a href="https://github.com/homeport/havener" target="_blank">havener</a></a></li>
-<li><a href="#stern-https-github-com-wercker-stern"><a href="https://github.com/wercker/stern" target="_blank">stern</a></a></li>
-<li><a href="#kube-dashboard-https-kubernetes-io-docs-tasks-access-application-cluster-web-ui-dashboard"><a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/" target="_blank">kube dashboard</a></a></li>
+<li><a href="#errand-controller"><strong><em>Errand Controller</em></strong></a>
+<ul>
+<li><a href="#watches-in-errand-controller">Watches in Errand controller</a></li>
+<li><a href="#reconciliation-in-errand-controller">Reconciliation in Errand controller</a></li>
 </ul></li>
+<li><a href="#job-controller"><strong><em>Job Controller</em></strong></a>
+<ul>
+<li><a href="#watches-in-job-controller">Watches in job controller</a></li>
+<li><a href="#reconciliation-in-job-controller">Reconciliation in job controller</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#relationship-with-the-bdpl-component">Relationship with the BDPL component</a></li>
+<li><a href="#quarksjob-examples"><code>QuarksJob</code> Examples</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -645,6 +653,9 @@
 
 
 
+
+
+
 <li class="breadcrumb-item" >
 	<a href="https://quarks.suse.dev/docs/">Documentation</a>
 </li>
@@ -659,8 +670,15 @@
 
 
 
+<li class="breadcrumb-item" >
+	<a href="https://quarks.suse.dev/docs/development/controllers/">Controllers</a>
+</li>
+
+
+
+
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://quarks.suse.dev/docs/development/tooling/">Tooling</a>
+	<a href="https://quarks.suse.dev/docs/development/controllers/quarksjob/">Quarks Job</a>
 </li>
 
 	</ol>
@@ -668,54 +686,98 @@
 
             
 <div class="td-content">
-	<h1>Nice tools to use</h1>
-    <div class="lead">Tools to simplify your development workflow</div>
+	<h1>Quarks Job</h1>
+    <div class="lead">The <strong>QuarksJob</strong> component is a categorization of a set of controllers, under the same group. Inside the <strong>QuarksJob</strong> component we have a set of 2 controllers together with one separate reconciliation loop per controller.</div>
 	       
 	
 
-<p>The following is a list of tools with their respective main features that can help you
-to simplify your development work when dealing with <a href="https://github.com/cloudfoundry-incubator/quarks-operator" target="_blank">quarks-operator</a> and <a href="https://github.com/SUSE/kubecf" target="_blank">kubecf</a></p>
+<ol>
+<li><a href="#quarksjob">QuarksJob</a>
 
-<h3 id="k9s-https-github-com-derailed-k9s"><a href="https://github.com/derailed/k9s" target="_blank">k9s</a></h3>
+<ol>
+<li><a href="#quarksjob-component">QuarksJob Component</a>
 
-<p>It provides an easy way to navigate through your k8s resources, while watching lively
-to changes on them. Main features that can be helpful for containerized CF are:</p>
+<ol>
+<li><a href="#errand-controller">Errand Controller</a>
+
+<ol>
+<li><a href="#watches-in-errand-controller">Watches</a></li>
+<li><a href="#reconciliation-in-errand-controller">Reconciliation</a></li>
+<li><a href="#highlights-in-errand-controller">Highlights</a></li>
+</ol></li>
+<li><a href="#job-controller">Job Controller</a>
+
+<ol>
+<li><a href="#watches-in-job-controller">Watches</a></li>
+<li><a href="#reconciliation-in-job-controller">Reconciliation</a></li>
+<li><a href="#highlights-in-job-controller">Highlights</a></li>
+</ol></li>
+</ol></li>
+<li><a href="#relationship-with-the-bdpl-component">Relationship with the BDPL component</a></li>
+<li><a href="#quarksjob-examples">QuarksJob Examples</a></li>
+</ol></li>
+</ol>
+
+<h2 id="description">Description</h2>
+
+<p>The <strong>QuarksJob</strong> component is a categorization of a set of controllers, under the same group. Inside the <strong>QuarksJob</strong> component we have a set of 2 controllers together with one separate reconciliation loop per controller.</p>
+
+<p>Figure 1, illustrates the <strong>QuarksJob</strong> component diagram and the set of controllers it uses.</p>
+
+<p><img src="../quarks_qjobcomponent_flow.png" alt="flow-quarks-job" />
+<em>Fig. 1: The QuarksJob component</em></p>
+
+<h3 id="errand-controller"><strong><em>Errand Controller</em></strong></h3>
+
+<p><img src="../quarks_qjoberrandcontroller_flow.png" alt="errand-controller-flow" />
+<em>Fig. 2: The Errand controller flow</em></p>
+
+<p>This is the controller responsible for implementing <strong>Errands</strong>, this will lead to the generation of a Kubernetes job, in order to complete a task.</p>
+
+<h4 id="watches-in-errand-controller">Watches in Errand controller</h4>
 
 <ul>
-<li><p>inmediate access to resources YAMLs definition</p></li>
-
-<li><p>inmediate access to services endpoints</p></li>
-
-<li><p>inmediate access to pods/container logs</p></li>
-
-<li><p>sort resources(e.g. pods) by cpu or memory consumption</p></li>
-
-<li><p>inmediate access to a container secure shell</p></li>
+<li><code>QuarksJob</code> resources: Create and Update</li>
+<li><code>ConfigMaps</code>: Update</li>
+<li><code>Secrets</code>: Create and Update</li>
 </ul>
 
-<h3 id="havener-https-github-com-homeport-havener"><a href="https://github.com/homeport/havener" target="_blank">havener</a></h3>
-
-<p>A tool-kit with different features around k8s and CloudFoundry</p>
+<h4 id="reconciliation-in-errand-controller">Reconciliation in Errand controller</h4>
 
 <ul>
-<li><p><code>top</code>, to get an overview on the cpu/memory/load of the cluster, per ns and pods.</p></li>
-
-<li><p><code>logs</code>, to download all logs from all pods into your local system</p></li>
-
-<li><p><code>pod-exec</code>, to open a shell into containers. This can execute cmds in different containers
-simultaneously.</p></li>
-
-<li><p><code>node-exec</code>, to open a shell into nodes. This can execute cmds in different containers
-simultaneously.</p></li>
+<li>When an <code>QuarksJob</code> instance is generated, it will create an associated Kubernetes Job.</li>
+<li>The generation of new Kubernetes Jobs also serves as the trigger for the <code>Job Controller</code>, to start the Reconciliation.</li>
 </ul>
 
-<h3 id="stern-https-github-com-wercker-stern"><a href="https://github.com/wercker/stern" target="_blank">stern</a></h3>
+<h3 id="job-controller"><strong><em>Job Controller</em></strong></h3>
 
-<p>Allows you to tail multiple pods on k8s and multiple containers within the pod.</p>
+<p><img src="../quarks_qjobjobcontroller_flow.png" alt="job-controller-flow" />
+<em>Fig. 3: The Job controller flow</em></p>
 
-<h3 id="kube-dashboard-https-kubernetes-io-docs-tasks-access-application-cluster-web-ui-dashboard"><a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/" target="_blank">kube dashboard</a></h3>
+<p>This is an auxiliary controller that relies on the Errand Controller output. It will be watching for Kubernetes Jobs that have Succeeded and deletes the job. If the jobpod of the succeeded job has a label <code>delete=pod</code>, it deletes the job pod too.</p>
 
-<p>A more user friendly way to navigate your k8s cluster resources.</p>
+<h4 id="watches-in-job-controller">Watches in job controller</h4>
+
+<ul>
+<li><code>Jobs</code>: Succeeded</li>
+</ul>
+
+<h4 id="reconciliation-in-job-controller">Reconciliation in job controller</h4>
+
+<ul>
+<li>Deletes succeeded job and its pod.</li>
+</ul>
+
+<h2 id="relationship-with-the-bdpl-component">Relationship with the BDPL component</h2>
+
+<p><img src="../quarks_bdpl_and_qjob_flow.png" alt="bdpl-qjob-relationship" />
+<em>Fig. 4: Relationship between the BDPL controller and the QuarksJob component</em></p>
+
+<p>Figure 4 illustrates the interaction of the <strong>BOSHDeployment</strong> Controller with the <strong>Errand</strong> Controller and how the output of this one serves as the trigger for the <strong>Job</strong> Controller.</p>
+
+<h2 id="quarksjob-examples"><code>QuarksJob</code> Examples</h2>
+
+<p>See <a href="https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples" target="_blank">https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples</a></p>
 
 	
 	
