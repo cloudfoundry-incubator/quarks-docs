@@ -2958,7 +2958,7 @@ This will create corresponding secrets. If the user decides to change a secret, 
 
 &lt;h2 id=&#34;quarkssecret-examples&#34;&gt;&lt;code&gt;QuarksSecret&lt;/code&gt; Examples&lt;/h2&gt;
 
-&lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-secret&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-secret&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -4195,6 +4195,10 @@ nats-5
 &lt;h2 id=&#34;quarkssecret-examples&#34;&gt;&lt;code&gt;QuarksSecret&lt;/code&gt; Examples&lt;/h2&gt;
 
 &lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;controller-architecture&#34;&gt;Controller architecture&lt;/h2&gt;
+
+&lt;p&gt;See: &lt;a href=&#34;../../controllers/quarks_secret/&#34;&gt;Quarks secret controller section&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>

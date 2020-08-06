@@ -24,12 +24,12 @@
 <meta property="og:description" content="bdv1.LabelDeploymentName &ldquo;quarks.cloudfoundry.org/deployment-name&rdquo; bdv1.LabelDeploymentSecretType &ldquo;quarks.cloudfoundry.org/secret-type&rdquo; bdv1.LabelDeploymentVersion &ldquo;quarks.cloudfoundry.org/deployment-version&rdquo; bdv1.LabelInstanceGroupName &ldquo;quarks.cloudfoundry.org/instance-group-name&rdquo; bdv1.LabelReferencedJobName &ldquo;quarks.cloudfoundry.org/referenced-job-name&rdquo; qstsv1a1.LabelAZIndex &ldquo;quarks.cloudfoundry.org/az-index&rdquo; qstsv1a1.LabelAZName &ldquo;quarks.cloudfoundry.org/az-name&rdquo; qstsv1a1.LabelActivePod &ldquo;quarks.cloudfoundry.org/pod-active&rdquo; qstsv1a1.LabelPodOrdinal &ldquo;quarks.cloudfoundry.org/pod-ordinal&rdquo; qstsv1a1.LabelQStsName &ldquo;quarks.cloudfoundry.org/quarks-statefulset-name&rdquo; qsv1a1.LabelKind &ldquo;quarks.cloudfoundry.org/secret-kind&rdquo; delete = pod variableName app  Data From Tests ConfigMaps Secret Rotation ConfigMap quarks.cloudfoundry.org/secret-rotation = yes  QJob quarks.cloudfoundry.org/deployment-name = bosh-manifest-two-instance-groups delete=pod quarks.cloudfoundry.org/deployment-version = 1 quarks.cloudfoundry.org/instance-group-name = nats-smoke-tests  QJob Job quarks.cloudfoundry.org/qjob-name = ig-bosh-manifest-two-instance-groups  Pod from Job delete=pod quarks.cloudfoundry.org/qjob-name=dm-test  QSTS quarks.cloudfoundry.org/deployment-name = test quarks.cloudfoundry.org/deployment-version = 1 quarks." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/development/labels/" />
-<meta property="article:modified_time" content="2020-08-06T09:27:40+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-06T09:54:48+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Labels">
 <meta itemprop="description" content="bdv1.LabelDeploymentName &ldquo;quarks.cloudfoundry.org/deployment-name&rdquo; bdv1.LabelDeploymentSecretType &ldquo;quarks.cloudfoundry.org/secret-type&rdquo; bdv1.LabelDeploymentVersion &ldquo;quarks.cloudfoundry.org/deployment-version&rdquo; bdv1.LabelInstanceGroupName &ldquo;quarks.cloudfoundry.org/instance-group-name&rdquo; bdv1.LabelReferencedJobName &ldquo;quarks.cloudfoundry.org/referenced-job-name&rdquo; qstsv1a1.LabelAZIndex &ldquo;quarks.cloudfoundry.org/az-index&rdquo; qstsv1a1.LabelAZName &ldquo;quarks.cloudfoundry.org/az-name&rdquo; qstsv1a1.LabelActivePod &ldquo;quarks.cloudfoundry.org/pod-active&rdquo; qstsv1a1.LabelPodOrdinal &ldquo;quarks.cloudfoundry.org/pod-ordinal&rdquo; qstsv1a1.LabelQStsName &ldquo;quarks.cloudfoundry.org/quarks-statefulset-name&rdquo; qsv1a1.LabelKind &ldquo;quarks.cloudfoundry.org/secret-kind&rdquo; delete = pod variableName app  Data From Tests ConfigMaps Secret Rotation ConfigMap quarks.cloudfoundry.org/secret-rotation = yes  QJob quarks.cloudfoundry.org/deployment-name = bosh-manifest-two-instance-groups delete=pod quarks.cloudfoundry.org/deployment-version = 1 quarks.cloudfoundry.org/instance-group-name = nats-smoke-tests  QJob Job quarks.cloudfoundry.org/qjob-name = ig-bosh-manifest-two-instance-groups  Pod from Job delete=pod quarks.cloudfoundry.org/qjob-name=dm-test  QSTS quarks.cloudfoundry.org/deployment-name = test quarks.cloudfoundry.org/deployment-version = 1 quarks.">
 
 
-<meta itemprop="dateModified" content="2020-08-06T09:27:40&#43;02:00" />
+<meta itemprop="dateModified" content="2020-08-06T09:54:48&#43;02:00" />
 <meta itemprop="wordCount" content="136">
 
 
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.87bb3084d82b7c593665537857eccf5ba0979826fc32d7aa8f8c83d20d23e0a210be471edc8ce3ec201fa4b3602a7b7ce7e51853eb9c3f60cd0ec9fcdf3c59b9.json"
+  data-offline-search-index-json-src="/offline-search-index.7c46320330e96ec702f69b68bc499b682f99e8050cf6b7ccec4b35763f11fa04836049c18d0625ff9b0be41c0d0e60b553f10d38b222a7ad2a8820c71548bab4.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -139,7 +139,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.87bb3084d82b7c593665537857eccf5ba0979826fc32d7aa8f8c83d20d23e0a210be471edc8ce3ec201fa4b3602a7b7ce7e51853eb9c3f60cd0ec9fcdf3c59b9.json"
+  data-offline-search-index-json-src="/offline-search-index.7c46320330e96ec702f69b68bc499b682f99e8050cf6b7ccec4b35763f11fa04836049c18d0625ff9b0be41c0d0e60b553f10d38b222a7ad2a8820c71548bab4.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -824,7 +824,7 @@ quarks.cloudfoundry.org/remote-id=nats
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 6, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/6b13e5457193821c53e024c98328706b4d415b0e">Add Quarks secret controller docs (6b13e54)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 6, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/c961cc7cfc99b62d3d1dd37e05eee81adb759942">Add link to controller docs (c961cc7)</a>
 </div>
 </div>
 
