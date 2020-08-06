@@ -59,7 +59,7 @@ description: >
 
 ## Deployment Lifecycle
 
-Please read the [documentation for the `BOSHDeployment` controller](../../controllers/bosh_deployment).
+Please read the [documentation for the `BOSHDeployment` controller](../../development/controllers/bosh_deployment).
 
 ## Example Deployment Manifest Conversion Details
 
@@ -544,11 +544,11 @@ BOSH Auto-Errands (supported only by the operator) are converted to `QuarksJobs`
 
 ### Dealing with AZs
 
-`QuarksStatefulSets` support AZs. You can learn more about this in [the docs](../../controllers/quarks_statefulset#az-support).
+`QuarksStatefulSets` support AZs. You can learn more about this in [the docs](../../development/controllers/quarks_statefulset#az-support).
 
 ### Support for active/passive pod replicas
 
-`QuarksStatefulSets` support active/passive pod replicas. You can learn more about this in [the docs](../../controllers/quarks_statefulset#quarksstatefulset-active-passive-controller).
+`QuarksStatefulSets` support active/passive pod replicas. You can learn more about this in [the docs](../../development/controllers/quarks_statefulset#quarksstatefulset-active-passive-controller).
 
 ### Ephemeral Disks
 

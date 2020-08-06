@@ -32,7 +32,7 @@ export GO111MODULE=on
 
 ## Custom Resource Definitions (CRDs)
 
-Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four [CRDs](https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds) (see [Controllers](../../controllers)):
+Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four [CRDs](https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds) (see [Controllers](../controllers)):
 
 - BOSHDeployment
 - QuarksJob

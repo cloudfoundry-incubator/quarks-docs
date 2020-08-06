@@ -42,4 +42,4 @@ See https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/exa
 
 ## Controller architecture
 
-See: [Quarks secret controller section](../../controllers/quarks_secret/)
+See: [Quarks secret controller section](../../development/controllers/quarks_secret/)
