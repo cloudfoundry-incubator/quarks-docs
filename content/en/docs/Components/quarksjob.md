@@ -110,3 +110,8 @@ Each versioned secret has the following characteristics:
 ## `QuarksJob` Examples
 
 See https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples
+
+
+## Controller architecture
+
+See: [Quarks Job controller section](../../development/controllers/quarksjob/)
