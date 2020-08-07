@@ -7,6 +7,7 @@
 
 <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
+<link rel="alternate" type="application/rss&#43;xml" href="https://quarks.suse.dev/docs/commands/cf-operator/index.xml">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -20,30 +21,20 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>cf-operator | Quarks project</title><meta property="og:title" content="cf-operator" />
-<meta property="og:description" content="cf-operator cf-operator manages BOSH deployments on Kubernetes
-Synopsis cf-operator manages BOSH deployments on Kubernetes
-cf-operator [flags]  Options  --apply-crd (APPLY_CRD) If true, apply CRDs on start (default true) --bosh-dns-docker-image string (BOSH_DNS_DOCKER_IMAGE) The docker image used for emulating bosh DNS (a CoreDNS image) (default &quot;coredns/coredns:1.6.3&quot;) -n, --cf-operator-namespace string (CF_OPERATOR_NAMESPACE) The operator namespace, for the webhook service (default &quot;default&quot;) --cluster-domain string (CLUSTER_DOMAIN) The Kubernetes cluster domain (default &quot;cluster.local&quot;) --ctx-timeout int (CTX_TIMEOUT) context timeout for each k8s API request in seconds (default 300) -o, --docker-image-org string (DOCKER_IMAGE_ORG) Dockerhub organization that provides the operator docker image (default &quot;cfcontainerization&quot;) --docker-image-pull-policy string (DOCKER_IMAGE_PULL_POLICY) Image pull policy (default &quot;IfNotPresent&quot;) -r, --docker-image-repository string (DOCKER_IMAGE_REPOSITORY) Dockerhub repository that provides the operator docker image (default &quot;cf-operator&quot;) -t, --docker-image-tag string (DOCKER_IMAGE_TAG) Tag of the operator docker image (default &quot;0." />
-<meta property="og:type" content="article" />
+<title>Quarks-operator | Quarks project</title><meta property="og:title" content="Quarks-operator" />
+<meta property="og:description" content="Quarks-operator
+" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/commands/cf-operator/" />
-<meta property="article:modified_time" content="2020-08-06T12:38:35+02:00" /><meta property="og:site_name" content="Quarks project" />
-<meta itemprop="name" content="cf-operator">
-<meta itemprop="description" content="cf-operator cf-operator manages BOSH deployments on Kubernetes
-Synopsis cf-operator manages BOSH deployments on Kubernetes
-cf-operator [flags]  Options  --apply-crd (APPLY_CRD) If true, apply CRDs on start (default true) --bosh-dns-docker-image string (BOSH_DNS_DOCKER_IMAGE) The docker image used for emulating bosh DNS (a CoreDNS image) (default &quot;coredns/coredns:1.6.3&quot;) -n, --cf-operator-namespace string (CF_OPERATOR_NAMESPACE) The operator namespace, for the webhook service (default &quot;default&quot;) --cluster-domain string (CLUSTER_DOMAIN) The Kubernetes cluster domain (default &quot;cluster.local&quot;) --ctx-timeout int (CTX_TIMEOUT) context timeout for each k8s API request in seconds (default 300) -o, --docker-image-org string (DOCKER_IMAGE_ORG) Dockerhub organization that provides the operator docker image (default &quot;cfcontainerization&quot;) --docker-image-pull-policy string (DOCKER_IMAGE_PULL_POLICY) Image pull policy (default &quot;IfNotPresent&quot;) -r, --docker-image-repository string (DOCKER_IMAGE_REPOSITORY) Dockerhub repository that provides the operator docker image (default &quot;cf-operator&quot;) -t, --docker-image-tag string (DOCKER_IMAGE_TAG) Tag of the operator docker image (default &quot;0.">
+<meta property="og:site_name" content="Quarks project" />
+<meta itemprop="name" content="Quarks-operator">
+<meta itemprop="description" content="Quarks-operator
+">
 
-
-<meta itemprop="dateModified" content="2020-08-06T12:38:35&#43;02:00" />
-<meta itemprop="wordCount" content="306">
-
-
-
-<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="cf-operator"/>
-<meta name="twitter:description" content="cf-operator cf-operator manages BOSH deployments on Kubernetes
-Synopsis cf-operator manages BOSH deployments on Kubernetes
-cf-operator [flags]  Options  --apply-crd (APPLY_CRD) If true, apply CRDs on start (default true) --bosh-dns-docker-image string (BOSH_DNS_DOCKER_IMAGE) The docker image used for emulating bosh DNS (a CoreDNS image) (default &quot;coredns/coredns:1.6.3&quot;) -n, --cf-operator-namespace string (CF_OPERATOR_NAMESPACE) The operator namespace, for the webhook service (default &quot;default&quot;) --cluster-domain string (CLUSTER_DOMAIN) The Kubernetes cluster domain (default &quot;cluster.local&quot;) --ctx-timeout int (CTX_TIMEOUT) context timeout for each k8s API request in seconds (default 300) -o, --docker-image-org string (DOCKER_IMAGE_ORG) Dockerhub organization that provides the operator docker image (default &quot;cfcontainerization&quot;) --docker-image-pull-policy string (DOCKER_IMAGE_PULL_POLICY) Image pull policy (default &quot;IfNotPresent&quot;) -r, --docker-image-repository string (DOCKER_IMAGE_REPOSITORY) Dockerhub repository that provides the operator docker image (default &quot;cf-operator&quot;) -t, --docker-image-tag string (DOCKER_IMAGE_TAG) Tag of the operator docker image (default &quot;0."/>
+<meta name="twitter:title" content="Quarks-operator"/>
+<meta name="twitter:description" content="Quarks-operator
+"/>
 
 
 
@@ -68,7 +59,7 @@ cf-operator [flags]  Options  --apply-crd (APPLY_CRD) If true, apply CRDs on sta
 
 
   </head>
-  <body class="td-page">
+  <body class="td-section">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -113,7 +104,7 @@ cf-operator [flags]  Options  --apply-crd (APPLY_CRD) If true, apply CRDs on sta
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.0e8d8a6f3907fc86fbacfd509db3aa3dcad774fa07582649d69a479cc0611402ae91165a15c72823afe9383e433703e7e00dbbce444eb4bba5faf2145686b1af.json"
+  data-offline-search-index-json-src="/offline-search-index.1a7d1fdc6e40755092603ecc1eea042b2b9781834a72f642400a2ecf30f5a8ad4ca145267e1f677c849ba8f7ae7694428cd04c1fe96c392e5c183a4a53df6e3f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,7 +136,7 @@ cf-operator [flags]  Options  --apply-crd (APPLY_CRD) If true, apply CRDs on sta
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.0e8d8a6f3907fc86fbacfd509db3aa3dcad774fa07582649d69a479cc0611402ae91165a15c72823afe9383e433703e7e00dbbce444eb4bba5faf2145686b1af.json"
+  data-offline-search-index-json-src="/offline-search-index.1a7d1fdc6e40755092603ecc1eea042b2b9781834a72f642400a2ecf30f5a8ad4ca145267e1f677c849ba8f7ae7694428cd04c1fe96c392e5c183a4a53df6e3f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -514,7 +505,7 @@ cf-operator [flags]  Options  --apply-crd (APPLY_CRD) If true, apply CRDs on sta
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/commands/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">CLI Options</a>
+    <a  href="/docs/commands/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Quarks CLI Options</a>
   </li>
   <ul>
     <li class="collapse show" id="docs-commands">
@@ -523,50 +514,149 @@ cf-operator [flags]  Options  --apply-crd (APPLY_CRD) If true, apply CRDs on sta
       
       
       
-      
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-commands-cf-operator" href="/docs/commands/cf-operator/">cf-operator</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-util" href="/docs/commands/cf-operator_util/">cf-operator util</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-util-instance-group" href="/docs/commands/cf-operator_util_instance-group/">cf-operator util instance-group</a>
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/commands/quarks-job/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Quarks Job</a>
+  </li>
+  <ul>
+    <li class="collapse " id="docs-commands-quarks-job">
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-util-tail-logs" href="/docs/commands/cf-operator_util_tail-logs/">cf-operator util tail-logs</a>
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-quarks-job-quarks-job" href="/docs/commands/quarks-job/quarks-job/">quarks-job</a>
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-util-template-render" href="/docs/commands/cf-operator_util_template-render/">cf-operator util template-render</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-quarks-job-quarks-job-persist-output" href="/docs/commands/quarks-job/quarks-job_persist-output/">quarks-job persist-output</a>
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-util-variable-interpolation" href="/docs/commands/cf-operator_util_variable-interpolation/">cf-operator util variable-interpolation</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-quarks-job-quarks-job-version" href="/docs/commands/quarks-job/quarks-job_version/">quarks-job version</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/commands/quarks-secret/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Quarks Secret</a>
+  </li>
+  <ul>
+    <li class="collapse " id="docs-commands-quarks-secret">
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-util-wait" href="/docs/commands/cf-operator_util_wait/">cf-operator util wait</a>
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-quarks-secret-quarks-secret" href="/docs/commands/quarks-secret/quarks-secret/">quarks-secret</a>
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-version" href="/docs/commands/cf-operator_version/">cf-operator version</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-quarks-secret-quarks-secret-version" href="/docs/commands/quarks-secret/quarks-secret_version/">quarks-secret version</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/commands/cf-operator/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Quarks-operator</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="docs-commands-cf-operator">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-cf-operator" href="/docs/commands/cf-operator/cf-operator/">cf-operator</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-cf-operator-util" href="/docs/commands/cf-operator/cf-operator_util/">cf-operator util</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-cf-operator-util-instance-group" href="/docs/commands/cf-operator/cf-operator_util_instance-group/">cf-operator util instance-group</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-cf-operator-util-tail-logs" href="/docs/commands/cf-operator/cf-operator_util_tail-logs/">cf-operator util tail-logs</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-cf-operator-util-template-render" href="/docs/commands/cf-operator/cf-operator_util_template-render/">cf-operator util template-render</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-cf-operator-util-variable-interpolation" href="/docs/commands/cf-operator/cf-operator_util_variable-interpolation/">cf-operator util variable-interpolation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-cf-operator-util-wait" href="/docs/commands/cf-operator/cf-operator_util_wait/">cf-operator util wait</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-commands-cf-operator-cf-operator-version" href="/docs/commands/cf-operator/cf-operator_version/">cf-operator version</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
       
       
     </li>
@@ -600,8 +690,8 @@ cf-operator [flags]  Options  --apply-crd (APPLY_CRD) If true, apply CRDs on sta
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/content/en/docs/commands/cf-operator.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/quarks-docs/issues/new?title=cf-operator" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/content/en/docs/commands/cf-operator/_index.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-docs/issues/new?title=Quarks-operator" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -610,31 +700,6 @@ cf-operator [flags]  Options  --apply-crd (APPLY_CRD) If true, apply CRDs on sta
 
 
 
-
-
-
-<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#cf-operator">cf-operator</a>
-<ul>
-<li><a href="#synopsis">Synopsis</a></li>
-<li><a href="#options">Options</a></li>
-<li><a href="#see-also">SEE ALSO</a>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#auto-generated-by-spf13-cobra-on-22-jul-2020">Auto generated by spf13/cobra on 22-Jul-2020</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
 
 
 
@@ -664,14 +729,14 @@ cf-operator [flags]  Options  --apply-crd (APPLY_CRD) If true, apply CRDs on sta
 
 
 <li class="breadcrumb-item" >
-	<a href="https://quarks.suse.dev/docs/commands/">CLI Options</a>
+	<a href="https://quarks.suse.dev/docs/commands/">Quarks CLI Options</a>
 </li>
 
 
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://quarks.suse.dev/docs/commands/cf-operator/">cf-operator</a>
+	<a href="https://quarks.suse.dev/docs/commands/cf-operator/">Quarks-operator</a>
 </li>
 
 	</ol>
@@ -679,61 +744,187 @@ cf-operator [flags]  Options  --apply-crd (APPLY_CRD) If true, apply CRDs on sta
 
             
 <div class="td-content">
-	<h1>cf-operator</h1>
+	<h1>Quarks-operator</h1>
+        <div class="lead">Quarks-operator</div>
+	
+	
+        <div class="section-index">
     
-	       
+    
+    
+    
+    <hr class="panel-line">
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/commands/cf-operator/cf-operator/">cf-operator</a>
+                    </h5>
+                    <p></p>
+                </div>
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/commands/cf-operator/cf-operator_util/">cf-operator util</a>
+                    </h5>
+                    <p></p>
+                </div>
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/commands/cf-operator/cf-operator_util_instance-group/">cf-operator util instance-group</a>
+                    </h5>
+                    <p></p>
+                </div>
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/commands/cf-operator/cf-operator_util_tail-logs/">cf-operator util tail-logs</a>
+                    </h5>
+                    <p></p>
+                </div>
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/commands/cf-operator/cf-operator_util_template-render/">cf-operator util template-render</a>
+                    </h5>
+                    <p></p>
+                </div>
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/commands/cf-operator/cf-operator_util_variable-interpolation/">cf-operator util variable-interpolation</a>
+                    </h5>
+                    <p></p>
+                </div>
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/commands/cf-operator/cf-operator_util_wait/">cf-operator util wait</a>
+                    </h5>
+                    <p></p>
+                </div>
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/commands/cf-operator/cf-operator_version/">cf-operator version</a>
+                    </h5>
+                    <p></p>
+                </div>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+</div>
+
 	
-
-<h2 id="cf-operator">cf-operator</h2>
-
-<p>cf-operator manages BOSH deployments on Kubernetes</p>
-
-<h3 id="synopsis">Synopsis</h3>
-
-<p>cf-operator manages BOSH deployments on Kubernetes</p>
-
-<pre><code>cf-operator [flags]
-</code></pre>
-
-<h3 id="options">Options</h3>
-
-<pre><code>      --apply-crd                                (APPLY_CRD) If true, apply CRDs on start (default true)
-      --bosh-dns-docker-image string             (BOSH_DNS_DOCKER_IMAGE) The docker image used for emulating bosh DNS (a CoreDNS image) (default &quot;coredns/coredns:1.6.3&quot;)
-  -n, --cf-operator-namespace string             (CF_OPERATOR_NAMESPACE) The operator namespace, for the webhook service (default &quot;default&quot;)
-      --cluster-domain string                    (CLUSTER_DOMAIN) The Kubernetes cluster domain (default &quot;cluster.local&quot;)
-      --ctx-timeout int                          (CTX_TIMEOUT) context timeout for each k8s API request in seconds (default 300)
-  -o, --docker-image-org string                  (DOCKER_IMAGE_ORG) Dockerhub organization that provides the operator docker image (default &quot;cfcontainerization&quot;)
-      --docker-image-pull-policy string          (DOCKER_IMAGE_PULL_POLICY) Image pull policy (default &quot;IfNotPresent&quot;)
-  -r, --docker-image-repository string           (DOCKER_IMAGE_REPOSITORY) Dockerhub repository that provides the operator docker image (default &quot;cf-operator&quot;)
-  -t, --docker-image-tag string                  (DOCKER_IMAGE_TAG) Tag of the operator docker image (default &quot;0.0.1&quot;)
-  -h, --help                                     help for cf-operator
-  -c, --kubeconfig string                        (KUBECONFIG) Path to a kubeconfig, not required in-cluster
-  -l, --log-level string                         (LOG_LEVEL) Only print log messages from this level onward (trace,debug,info,warn) (default &quot;debug&quot;)
-      --max-boshdeployment-workers int           (MAX_BOSHDEPLOYMENT_WORKERS) Maximum number of workers concurrently running BOSHDeployment controller (default 1)
-      --max-quarks-statefulset-workers int       (MAX_QUARKS_STATEFULSET_WORKERS) Maximum number of workers concurrently running QuarksStatefulSet controller (default 1)
-      --meltdown-duration int                    (MELTDOWN_DURATION) Duration (in seconds) of the meltdown period, in which we postpone further reconciles for the same resource (default 60)
-      --meltdown-requeue-after int               (MELTDOWN_REQUEUE_AFTER) Duration (in seconds) for which we delay the requeuing of the reconcile (default 30)
-      --monitored-id string                      (MONITORED_ID) only monitor namespaces with this id in their namespace label (default &quot;default&quot;)
-  -w, --operator-webhook-service-host string     (CF_OPERATOR_WEBHOOK_SERVICE_HOST) Hostname/IP under which the webhook server can be reached from the cluster
-  -p, --operator-webhook-service-port string     (CF_OPERATOR_WEBHOOK_SERVICE_PORT) Port the webhook server listens on (default &quot;2999&quot;)
-  -x, --operator-webhook-use-service-reference   (CF_OPERATOR_WEBHOOK_USE_SERVICE_REFERENCE) If true the webhook service is targeted using a service reference instead of a URL
-</code></pre>
-
-<h3 id="see-also">SEE ALSO</h3>
-
-<ul>
-<li><a href="../cf-operator_util">cf-operator util</a>    - Calls a utility subcommand</li>
-<li><a href="../cf-operator_version">cf-operator version</a>  - Print the version number</li>
-</ul>
-
-<h6 id="auto-generated-by-spf13-cobra-on-22-jul-2020">Auto generated by spf13/cobra on 22-Jul-2020</h6>
-
 	
-	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 6, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/a51583e5f9b390e715a21289db91092ff5a61c78">Fixup images in quarkjobs controller and links to internal sections (a51583e)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified January 1, 0001
 </div>
 </div>
-
 
           </main>
         </div>
