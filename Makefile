@@ -5,14 +5,14 @@ export ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 .DEFAULT_GOAL := build
 
-.PHONY: build
 build:
 	scripts/build.sh
 
-.PHONY: serve
 serve:
 	scripts/serve.sh
 
-.PHONY: publish
 publish:
 	scripts/publish.sh
+
+gen-command-docs:
+	scripts/gen_cli_docs.sh

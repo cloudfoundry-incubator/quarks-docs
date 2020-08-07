@@ -3,3 +3,4 @@ resources/
 node_modules/
 tech-doc-hugo
 bin/
+build/
