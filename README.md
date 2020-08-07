@@ -1,7 +1,7 @@
 # quarks-docs
 
 
-This repository holds the Quarks components docs.
+This repository holds the [Quarks components docs](https://quarks.suse.dev).
 
 The `master` branch holds the sources that are compiled with [Hugo](https://gohugo.io/).
 
@@ -27,4 +27,12 @@ To run the website locally in other platforms, e.g. MacOS:
 
 ```
 $> HUGO_PLATFORM=macOS-64bit make serve
+```
+
+## Generate CLI docs
+
+To automatically generate the CLI docs for the latest version of the Quarks components:
+
+```bash
+$> make gen-command-docs
 ```
