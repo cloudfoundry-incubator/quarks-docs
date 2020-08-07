@@ -6,7 +6,11 @@ description: >
   Build Quarks-operator from source
 ---
 
-The following steps layout the process of generating a `cf-operator` controller and how to install this in your Kubernetes cluster. This is probably a good approach, when developing, as a way to inmediately test your changes.
+The following steps layout the process of building `quarks-operator` (formerly `cf-operator`) from source and how to install it in your Kubernetes cluster. 
+
+{{% alert title="Note" color="info" %}}
+The Quarks Operator was previously known as `cf-operator`. We are renaming the `cf-operator` project into `quarks-operator`. Docker images and other sections might not be migrated yet, we are sorry for the confusion.
+{{% /alert %}}
 
 ## Build it from source
 
