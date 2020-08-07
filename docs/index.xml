@@ -1074,7 +1074,15 @@ The helm value setting &lt;code&gt;global.singleNamespace.name=&lt;/code&gt; all
         
         
 
-&lt;p&gt;The following steps layout the process of generating a &lt;code&gt;cf-operator&lt;/code&gt; controller and how to install this in your Kubernetes cluster. This is probably a good approach, when developing, as a way to inmediately test your changes.&lt;/p&gt;
+&lt;p&gt;The following steps layout the process of building &lt;code&gt;quarks-operator&lt;/code&gt; (formerly &lt;code&gt;cf-operator&lt;/code&gt;) from source and how to install it in your Kubernetes cluster.&lt;/p&gt;
+
+
+
+&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
+The Quarks Operator was previously known as &lt;code&gt;cf-operator&lt;/code&gt;. We are renaming the &lt;code&gt;cf-operator&lt;/code&gt; project into &lt;code&gt;quarks-operator&lt;/code&gt;. Docker images and other sections might not be migrated yet, we are sorry for the confusion.
+&lt;/div&gt;
+
 
 &lt;h2 id=&#34;build-it-from-source&#34;&gt;Build it from source&lt;/h2&gt;
 
