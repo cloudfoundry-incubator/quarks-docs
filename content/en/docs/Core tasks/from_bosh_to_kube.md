@@ -410,6 +410,7 @@ The following subsections describe the mapping of BPM configuration into contain
 | `unsafe.unrestricted_volumes` | `emptyDir`. Paths under /var/vcap/store are currently ignored.                                                              |
 | `unsafe.privileged`           | `container.SecurityContext.Privileged`.                                                                                     |
 
+If you are looking for limits and resource request for BPM processes, [see this section of the documentation](../../features/resources_limit).
 
 ### Health checks
 
@@ -421,15 +422,6 @@ In Kubernetes, we use [liveness and readiness probes](https://kubernetes.io/docs
 ### Hooks
 
 BPM supports `pre_start` hooks. CF-Operator will convert those to additional init containers.
-
-### Misc
-
-In addition, there are configuration variables that are not available in Bosh but are required for scaling in a kubernetes environment.
-
-| Job spec in Manifest                                 | Kube Pod Container                    | Description                                                                                                                                                  |
-| ---------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `properties.quarks.bpm.processes[n].requests.cpu`    | `container.Resources.Requests.cpu`    | [Guaranteed CPU](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container)    |
-| `properties.quarks.bpm.processes[n].requests.memory` | `container.Resources.Requests.memory` | [Guaranteed memory](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) |
 
 ## Conversion Details
 
