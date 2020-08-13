@@ -173,46 +173,16 @@ directly on minikube docker.&lt;/p&gt;
         
         
 
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#open-questions&#34;&gt;Open Questions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#missing-features&#34;&gt;Missing Features&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#high-level-direction&#34;&gt;High-level Direction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#deployment-lifecycle&#34;&gt;Deployment Lifecycle&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#example-deployment-manifest-conversion-details&#34;&gt;Example Deployment Manifest Conversion Details&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#bpm&#34;&gt;BPM&lt;/a&gt;
+&lt;h2 id=&#34;high-level-direction&#34;&gt;High-level Direction&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#entrypoint--environment-variables&#34;&gt;Entrypoint &amp;amp; Environment Variables&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#resources&#34;&gt;Resources&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#health-checks&#34;&gt;Health checks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#hooks&#34;&gt;Hooks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#misc&#34;&gt;Misc&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#conversion-details&#34;&gt;Conversion Details&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#calculation-of-docker-image-location-for-releases&#34;&gt;Calculation of docker image location for releases&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#variables-to-quarks-secrets&#34;&gt;Variables to Quarks Secrets&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#overriding-generated-variables&#34;&gt;Overriding generated variables&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#instance-groups-to-quarks-statefulsets-and-jobs&#34;&gt;Instance Groups to Quarks StatefulSets and Jobs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#bosh-services-vs-bosh-errands&#34;&gt;BOSH Services vs BOSH Errands&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#miscellaneous&#34;&gt;Miscellaneous&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#dealing-with-azs&#34;&gt;Dealing with AZs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#support-for-activepassive-pod-replicas&#34;&gt;Support for active/passive pod replicas&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#ephemeral-disks&#34;&gt;Ephemeral Disks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#credentials-for-docker-registries&#34;&gt;Credentials for Docker Registries&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#running-manual-errands&#34;&gt;Running manual errands&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#readiness-and-liveness-probes&#34;&gt;Readiness and Liveness Probes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#persistent-disks&#34;&gt;Persistent Disks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#manual-implicit-variables&#34;&gt;Manual (&amp;ldquo;implicit&amp;rdquo;) variables&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#pre_render_scripts&#34;&gt;Pre_render_scripts&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#bosh-dns&#34;&gt;BOSH DNS&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#flow&#34;&gt;Flow&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#naming-conventions&#34;&gt;Naming Conventions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;releases are defined in the usual way (a &lt;code&gt;releases&lt;/code&gt; block), but the information given is used to build a reference for a docker image&lt;/li&gt;
+&lt;li&gt;each instance group is transformed to an &lt;a href=&#34;../../development/controllers/quarks_statefulset&#34;&gt;Quarks StatefulSet&lt;/a&gt; or an &lt;a href=&#34;../../development/controllers/quarksjob&#34;&gt;QuarksJob&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;each BOSH Job corresponds to one or more containers in the &lt;code&gt;Pod&lt;/code&gt; template defined in the &lt;a href=&#34;../../development/controllers/quarks_statefulset&#34;&gt;Quarks StatefulSet&lt;/a&gt; or the &lt;a href=&#34;../../development/controllers/quarksjob&#34;&gt;QuarksJob&lt;/a&gt;; there&amp;rsquo;s one container for each process defined in the BPM information of each BOSH Job&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;explicit&amp;rdquo; &lt;code&gt;variables&lt;/code&gt; are generated using &lt;a href=&#34;../../development/controllers/quarks_secret&#34;&gt;Quarks Secret&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;for rendering of BOSH Job Templates, please read &lt;a href=&#34;../../features/rendering_templates&#34;&gt;this document&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;we have a concept of &lt;a href=&#34;../../features/desired_manifests&#34;&gt;Desired Manifests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;all communication happens through Kubernetes &lt;code&gt;Services&lt;/code&gt;, which have deterministic DNS Addresses; you can read more about these &lt;a href=&#34;../../features/rendering_templates#services-and-dns-addresses&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&#34;open-questions&#34;&gt;Open Questions&lt;/h2&gt;
@@ -227,18 +197,6 @@ directly on minikube docker.&lt;/p&gt;
 &lt;li&gt;Canary support in QuarksStatefulSets&lt;/li&gt;
 &lt;li&gt;Missing support for the &lt;code&gt;allow_executions&lt;/code&gt; flag in bpm configs&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;h2 id=&#34;high-level-direction&#34;&gt;High-level Direction&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;releases are defined in the usual way (a &lt;code&gt;releases&lt;/code&gt; block), but the information given is used to build a reference for a docker image&lt;/li&gt;
-&lt;li&gt;each instance group is transformed to an &lt;code&gt;QuarksStatefulSet&lt;/code&gt; or an &lt;code&gt;QuarksJob&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;each BOSH Job corresponds to one or more containers in the &lt;code&gt;Pod&lt;/code&gt; template defined in the &lt;code&gt;QuarksStatefulSet&lt;/code&gt; or the &lt;code&gt;QuarksJob&lt;/code&gt;; there&amp;rsquo;s one container for each process defined in the BPM information of each BOSH Job&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;explicit&amp;rdquo; &lt;code&gt;variables&lt;/code&gt; are generated using &lt;code&gt;QuarksSecrets&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;for rendering of BOSH Job Templates, please read &lt;a href=&#34;../../features/rendering_templates&#34;&gt;this document&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;we have a concept of &lt;a href=&#34;../../features/desired_manifests&#34;&gt;Desired Manifests&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;all communication happens through Kubernetes &lt;code&gt;Services&lt;/code&gt;, which have deterministic DNS Addresses; you can read more about these &lt;a href=&#34;../../features/rendering_templates#services-and-dns-addresses&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 
 &lt;h2 id=&#34;deployment-lifecycle&#34;&gt;Deployment Lifecycle&lt;/h2&gt;
 
@@ -685,6 +643,8 @@ directly on minikube docker.&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
+&lt;p&gt;If you are looking for limits and resource request for BPM processes, &lt;a href=&#34;../../features/resources_limit&#34;&gt;see this section of the documentation&lt;/a&gt;.&lt;/p&gt;
+
 &lt;h3 id=&#34;health-checks&#34;&gt;Health checks&lt;/h3&gt;
 
 &lt;p&gt;BPM doesn&amp;rsquo;t provide information for health checks and relies on monit instead.
@@ -695,34 +655,6 @@ CF-Operator provides health checks via the &lt;a href=&#34;https://github.com/cl
 &lt;h3 id=&#34;hooks&#34;&gt;Hooks&lt;/h3&gt;
 
 &lt;p&gt;BPM supports &lt;code&gt;pre_start&lt;/code&gt; hooks. CF-Operator will convert those to additional init containers.&lt;/p&gt;
-
-&lt;h3 id=&#34;misc&#34;&gt;Misc&lt;/h3&gt;
-
-&lt;p&gt;In addition, there are configuration variables that are not available in Bosh but are required for scaling in a kubernetes environment.&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Job spec in Manifest&lt;/th&gt;
-&lt;th&gt;Kube Pod Container&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;properties.quarks.bpm.processes[n].requests.cpu&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;container.Resources.Requests.cpu&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container&#34; target=&#34;_blank&#34;&gt;Guaranteed CPU&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;properties.quarks.bpm.processes[n].requests.memory&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;container.Resources.Requests.memory&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container&#34; target=&#34;_blank&#34;&gt;Guaranteed memory&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
 
 &lt;h2 id=&#34;conversion-details&#34;&gt;Conversion Details&lt;/h2&gt;
 
