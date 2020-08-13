@@ -508,6 +508,8 @@ BOSH Auto-Errands (supported only by the operator) are converted to `QuarksJobs`
 
 `QuarksStatefulSets` support AZs. You can learn more about this in [the docs](../../development/controllers/quarks_statefulset#az-support).
 
+If you don't want to use AZs, remove the key. Otherwise AZ names in the BOSH manifest correspond to the "failure-domain.beta.kubernetes.io/zone" labels that are set on the nodes.
+
 ### Support for active/passive pod replicas
 
 `QuarksStatefulSets` support active/passive pod replicas. You can learn more about this in [the docs](../../development/controllers/quarks_statefulset#quarksstatefulset-active-passive-controller).
