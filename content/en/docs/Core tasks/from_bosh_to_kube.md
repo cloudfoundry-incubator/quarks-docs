@@ -7,36 +7,16 @@ description: >
 ---
 
 
-- [Open Questions](#open-questions)
-- [Missing Features](#missing-features)
-- [High-level Direction](#high-level-direction)
-- [Deployment Lifecycle](#deployment-lifecycle)
-- [Example Deployment Manifest Conversion Details](#example-deployment-manifest-conversion-details)
-- [BPM](#bpm)
-  - [Entrypoint & Environment Variables](#entrypoint--environment-variables)
-  - [Resources](#resources)
-  - [Health checks](#health-checks)
-  - [Hooks](#hooks)
-  - [Misc](#misc)
-- [Conversion Details](#conversion-details)
-  - [Calculation of docker image location for releases](#calculation-of-docker-image-location-for-releases)
-  - [Variables to Quarks Secrets](#variables-to-quarks-secrets)
-    - [Overriding generated variables](#overriding-generated-variables)
-  - [Instance Groups to Quarks StatefulSets and Jobs](#instance-groups-to-quarks-statefulsets-and-jobs)
-    - [BOSH Services vs BOSH Errands](#bosh-services-vs-bosh-errands)
-- [Miscellaneous](#miscellaneous)
-  - [Dealing with AZs](#dealing-with-azs)
-  - [Support for active/passive pod replicas](#support-for-activepassive-pod-replicas)
-  - [Ephemeral Disks](#ephemeral-disks)
-  - [Credentials for Docker Registries](#credentials-for-docker-registries)
-  - [Running manual errands](#running-manual-errands)
-  - [Readiness and Liveness Probes](#readiness-and-liveness-probes)
-  - [Persistent Disks](#persistent-disks)
-  - [Manual ("implicit") variables](#manual-implicit-variables)
-  - [Pre_render_scripts](#pre_render_scripts)
-  - [BOSH DNS](#bosh-dns)
-- [Flow](#flow)
-- [Naming Conventions](#naming-conventions)
+## High-level Direction
+
+- releases are defined in the usual way (a `releases` block), but the information given is used to build a reference for a docker image
+- each instance group is transformed to an [Quarks StatefulSet](../../development/controllers/quarks_statefulset) or an [QuarksJob](../../development/controllers/quarksjob)
+- each BOSH Job corresponds to one or more containers in the `Pod` template defined in the [Quarks StatefulSet](../../development/controllers/quarks_statefulset) or the [QuarksJob](../../development/controllers/quarksjob); there's one container for each process defined in the BPM information of each BOSH Job
+- "explicit" `variables` are generated using [Quarks Secret](../../development/controllers/quarks_secret)
+- for rendering of BOSH Job Templates, please read [this document](../../features/rendering_templates)
+- we have a concept of [Desired Manifests](../../features/desired_manifests)
+- all communication happens through Kubernetes `Services`, which have deterministic DNS Addresses; you can read more about these [here](../../features/rendering_templates#services-and-dns-addresses)
+
 
 ## Open Questions
 
@@ -46,16 +26,6 @@ description: >
 
 1. Canary support in QuarksStatefulSets
 1. Missing support for the `allow_executions` flag in bpm configs
-
-## High-level Direction
-
-- releases are defined in the usual way (a `releases` block), but the information given is used to build a reference for a docker image
-- each instance group is transformed to an `QuarksStatefulSet` or an `QuarksJob`
-- each BOSH Job corresponds to one or more containers in the `Pod` template defined in the `QuarksStatefulSet` or the `QuarksJob`; there's one container for each process defined in the BPM information of each BOSH Job
-- "explicit" `variables` are generated using `QuarksSecrets`
-- for rendering of BOSH Job Templates, please read [this document](../../features/rendering_templates)
-- we have a concept of [Desired Manifests](../../features/desired_manifests)
-- all communication happens through Kubernetes `Services`, which have deterministic DNS Addresses; you can read more about these [here](../../features/rendering_templates#services-and-dns-addresses)
 
 ## Deployment Lifecycle
 
@@ -440,6 +410,7 @@ The following subsections describe the mapping of BPM configuration into contain
 | `unsafe.unrestricted_volumes` | `emptyDir`. Paths under /var/vcap/store are currently ignored.                                                              |
 | `unsafe.privileged`           | `container.SecurityContext.Privileged`.                                                                                     |
 
+If you are looking for limits and resource request for BPM processes, [see this section of the documentation](../../features/resources_limit).
 
 ### Health checks
 
@@ -451,15 +422,6 @@ In Kubernetes, we use [liveness and readiness probes](https://kubernetes.io/docs
 ### Hooks
 
 BPM supports `pre_start` hooks. CF-Operator will convert those to additional init containers.
-
-### Misc
-
-In addition, there are configuration variables that are not available in Bosh but are required for scaling in a kubernetes environment.
-
-| Job spec in Manifest                                 | Kube Pod Container                    | Description                                                                                                                                                  |
-| ---------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `properties.quarks.bpm.processes[n].requests.cpu`    | `container.Resources.Requests.cpu`    | [Guaranteed CPU](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container)    |
-| `properties.quarks.bpm.processes[n].requests.memory` | `container.Resources.Requests.memory` | [Guaranteed memory](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) |
 
 ## Conversion Details
 
