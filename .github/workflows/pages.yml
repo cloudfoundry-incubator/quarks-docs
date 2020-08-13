@@ -2,6 +2,7 @@ name: Github Pages
 on:
   push:
     branches: [ master ]
+  pull_request:
 
 jobs:
   build:
@@ -15,6 +16,7 @@ jobs:
       run: |
            make gen-command-docs build
     - name: Deploy 🚀
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
