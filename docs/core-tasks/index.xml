@@ -737,6 +737,8 @@ The &lt;code&gt;QuarksSecret&lt;/code&gt; is meant to generate the value require
 
 &lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support AZs. You can learn more about this in &lt;a href=&#34;../../development/controllers/quarks_statefulset#az-support&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
 
+&lt;p&gt;If you don&amp;rsquo;t want to use AZs, remove the key. Otherwise AZ names in the BOSH manifest correspond to the &amp;ldquo;failure-domain.beta.kubernetes.io/zone&amp;rdquo; labels that are set on the nodes.&lt;/p&gt;
+
 &lt;h3 id=&#34;support-for-active-passive-pod-replicas&#34;&gt;Support for active/passive pod replicas&lt;/h3&gt;
 
 &lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support active/passive pod replicas. You can learn more about this in &lt;a href=&#34;../../development/controllers/quarks_statefulset#quarksstatefulset-active-passive-controller&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
