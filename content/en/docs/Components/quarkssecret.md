@@ -46,27 +46,26 @@ In the case, where a certificate is generated, the QuarksSecret ensures that a c
 
 ### Secret copy
 
-The Quarks Secret operator can copy already existing secrets over different namespaces.
+The Quarks Secret operator can generate also copies in multiple namespaces while generating secrets.
 
-Example of a Quarks Secret `copy` type:
+For example, while generating passwords:
 
 {{<githubembed repo="cloudfoundry-incubator/quarks-secret" file="docs/examples/copy.yaml" lang="yaml" >}}
 
-The examples copies the `my-username` secret content into `copied-secret-2`  inside the `COPYNAMESPACE` namespace.
+It can be specified a  list of copying target, with `copies`:
 
-The `secretName` let you define the name of the secret that you wish to copy,  the namespace is the same where the `Quarks Secret` is going to be created.
-
-The `copies` section takes a list of secret names and namespaces where the secret will be copied over:
 ```yaml
   copies:
   - name: copied-secret
-    namespace: COPYNAMESPACE
-  - name: copied-secret
-    namespace: COPYNAMESPACE2
-  - name: copied-secret
-    namespace: COPYNAMESPACE3
-  ...
+    namespace: namespace1
 ```
+
+And each destination which is indicated needs to have a `Quarks Secret` of `copy` in the following form:
+
+{{<githubembed repo="cloudfoundry-incubator/quarks-secret" file="docs/examples/copy-qsecret-destination.yaml" lang="yaml" >}}
+
+
+The examples copies the generated `gen-secret` secret content into `copied-secret`  inside the `COPYNAMESPACE` namespace.
 
 ## See also
 
