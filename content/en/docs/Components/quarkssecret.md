@@ -6,19 +6,27 @@ description:
     A QuarksSecret allows the developers to deal with the management of credentials.
 ---
 
-- [QuarksSecret](#quarkssecret)
-  - [Description](#description)
-  - [Features](#features)
-    - [Generate credentials](#generate-credentials)
-    - [Rotate credentials](#rotate-credentials)
-    - [Approve Certificates](#approve-certificates)
-  - [`QuarksSecret` Examples](#quarkssecret-examples)
-
 ## Description
 
-A QuarksSecret allows the developers to deal with the management of credentials.
+A QuarksSecret lets you automatically generate secrets such as passwords, certificates and ssh keys, to ease management of credentials in Kubernetes.
 
-## Features
+## Overview of Quarks Secret
+
+A QuarkSecret is a Kubernetes Object that contains instuctions on the type of Kubernetes Secret that must be generated which can be later referenced in a Pod.
+
+For instance, to generate a basic auth password, we can apply the following yaml with `kubectl`:
+
+{{<githubembed repo="cloudfoundry-incubator/quarks-secret" file="docs/examples/password.yaml" lang="yaml"  options="hl_lines=6">}}
+
+the `type` field denotes the type of secret that should be generated, currently quarks-secret supports the following types:
+
+- `password`
+- `certificate`
+- `ssh`	
+- `rsa`
+- `basic-auth`
+- `dockerconfigjson`
+- `copy`
 
 ### Generate credentials
 
@@ -36,10 +44,31 @@ quarks.cloudfoundry.org/secret-rotation
 
 In the case, where a certificate is generated, the QuarksSecret ensures that a certificate signing request is generated and is approved by the Kubernetes API server.
 
-## `QuarksSecret` Examples
+### Secret copy
 
-See https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples
+The Quarks Secret operator can copy already existing secrets over different namespaces.
 
-## Controller architecture
+Example of a Quarks Secret `copy` type:
 
-See: [Quarks secret controller section](../../development/controllers/quarks_secret/)
+{{<githubembed repo="cloudfoundry-incubator/quarks-secret" file="docs/examples/copy.yaml" lang="yaml" >}}
+
+The examples copies the `my-username` secret content into `copied-secret-2`  inside the `COPYNAMESPACE` namespace.
+
+The `secretName` let you define the name of the secret that you wish to copy,  the namespace is the same where the `Quarks Secret` is going to be created.
+
+The `copies` section takes a list of secret names and namespaces where the secret will be copied over:
+```yaml
+  copies:
+  - name: copied-secret
+    namespace: COPYNAMESPACE
+  - name: copied-secret
+    namespace: COPYNAMESPACE2
+  - name: copied-secret
+    namespace: COPYNAMESPACE3
+  ...
+```
+
+## See also
+
+- [Examples](https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples)
+- [Quarks Secret Controller architecture](../../development/controllers/quarks_secret/)
