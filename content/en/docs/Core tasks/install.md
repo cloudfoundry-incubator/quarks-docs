@@ -103,6 +103,10 @@ kubectl get events -n cf-operator --watch
 
 The main input to the operator is the `BOSH deployment` custom resource and the according manifest config map or secret. Changes to the `Spec` or `Data` fields of either of those will trigger the operator to recalculate the desired state and apply the required changes from the current state.
 
+> **Note:**
+>
+> Each creation or update can trigger the creation of multiple pods with the `dm-` or `ig-` prefix. Those are _warm up_ jobs, which are preparing manifests and eventually configure the pods your BOSH releases will be running on. When `dm-` and `ig-` pods are completed, the pods are ready to start up. See also [Bosh deployment status](../../development/controllers/bosh_deployment/#boshdeployment-status).
+
 Besides that there are more things the user can change which will trigger an update of the deployment:
 
 * `ops files` can be added or removed from the `BOSH deployment`. Existing `ops file` config maps and secrets can be modified
