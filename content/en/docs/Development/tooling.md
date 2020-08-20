@@ -9,9 +9,9 @@ description: >
 The following is a list of tools with their respective main features that can help you
 to simplify your development work when dealing with [quarks-operator](https://github.com/cloudfoundry-incubator/quarks-operator) and [kubecf](https://github.com/SUSE/kubecf)
 
-### [k9s](https://github.com/derailed/k9s)
+### k9s
 
-It provides an easy way to navigate through your k8s resources, while watching lively
+[k9s](https://github.com/derailed/k9s) provides an easy way to navigate through your k8s resources, while watching lively
 to changes on them. Main features that can be helpful for containerized CF are:
 
 * inmediate access to resources YAMLs definition
@@ -24,9 +24,9 @@ to changes on them. Main features that can be helpful for containerized CF are:
 
 * inmediate access to a container secure shell
 
-### [havener](https://github.com/homeport/havener)
+### havener
 
-A tool-kit with different features around k8s and CloudFoundry
+[havener](https://github.com/homeport/havener) is a tool-kit with different features around k8s and CloudFoundry
 
 * `top`, to get an overview on the cpu/memory/load of the cluster, per ns and pods.
 
@@ -38,10 +38,10 @@ simultaneously.
 * `node-exec`, to open a shell into nodes. This can execute cmds in different containers
 simultaneously.
 
-### [stern](https://github.com/wercker/stern)
+### stern
 
-Allows you to tail multiple pods on k8s and multiple containers within the pod.
+[stern](https://github.com/wercker/stern) allows you to tail from your terminal to multiple pod logs on Kubernetes, including all containers.
 
-### [kube dashboard](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
+### kube dashboard
 
-A more user friendly way to navigate your k8s cluster resources.
+[kube dashboard](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/) is a more user friendly way to navigate your k8s cluster resources.
