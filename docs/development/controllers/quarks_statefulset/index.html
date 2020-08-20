@@ -25,14 +25,14 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/development/controllers/quarks_statefulset/" />
-<meta property="article:modified_time" content="2020-08-14T07:05:43+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-20T11:39:03+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Quarks StatefulSet">
 <meta itemprop="description" content="The QuarksStatefulSet component can be understood as the set of controllers responsible for translating the BOSH manifest `instance_groups` into Kubernetes resources.
 ">
 
 
-<meta itemprop="dateModified" content="2020-08-14T07:05:43&#43;02:00" />
-<meta itemprop="wordCount" content="1054">
+<meta itemprop="dateModified" content="2020-08-20T11:39:03&#43;02:00" />
+<meta itemprop="wordCount" content="1120">
 
 
 
@@ -110,7 +110,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -142,7 +142,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -892,19 +892,38 @@ The operator watches all the <code>ConfigMaps</code> and <code>Secrets</code> re
 <h4 id="cluster-ip">Cluster IP</h4>
 
 <p>Following is the example which creates a service with type <strong>ClusterIP</strong> for a single instance group named <code>nats</code> in deployment <code>nats-deployment</code> for exposing port 4222.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Service<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nats-service<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>spec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>type<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>ClusterIP<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>selector<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>quarks.cloudfoundry.org/instance-group-name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nats<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>quarks.cloudfoundry.org/deployment-name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nats-deployment<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>ports<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>protocol<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>TCP<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>port<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">80</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>targetPort<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">4222</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666"></span>kind:<span style="color:#666"> </span>Service<span style="color:#666">
+</span><span style="color:#666"></span>metadata:<span style="color:#666">
+</span><span style="color:#666">  </span>name:<span style="color:#666"> </span>nats-service<span style="color:#666">
+</span><span style="color:#666"></span>spec:<span style="color:#666">
+</span><span style="color:#666">  </span>type:<span style="color:#666"> </span>ClusterIP<span style="color:#666">
+</span><span style="color:#666">  </span>selector:<span style="color:#666">
+</span><span style="color:#666">    </span>quarks.cloudfoundry.org/instance-group-name:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">    </span>quarks.cloudfoundry.org/deployment-name:<span style="color:#666"> </span>nats-deployment<span style="color:#666">
+</span><span style="color:#666">  </span>ports:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>protocol:<span style="color:#666"> </span>TCP<span style="color:#666">
+</span><span style="color:#666">      </span>port:<span style="color:#666"> </span><span style="color:#3677a9">80</span><span style="color:#666">
+</span><span style="color:#666">      </span>targetPort:<span style="color:#666"> </span><span style="color:#3677a9">4222</span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Complete example can be found <a href="https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment/boshdeployment-with-service.yaml" target="_blank">here</a>.</p>
 
 <p>Though, by default, quarks creates three services of type <strong>ClusterIP</strong> as defined <a href="../../core-tasks/from_bosh_to_kube/#naming-conventions">here</a> for any instance group.</p>
@@ -943,47 +962,111 @@ The operator watches all the <code>ConfigMaps</code> and <code>Secrets</code> re
 The default value for <code>zoneNodeLabel</code> is <code>failure-domain.beta.kubernetes.io/zone</code>.</p>
 
 <p>The example below defines an <code>QuarksStatefulSet</code> that should be deployed in two availability zones, <strong>us-central1-a</strong> and <strong>us-central1-b</strong>.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>QuarksStatefulSet<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>MyQuarksStatefulSet<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>spec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>zoneNodeLabel<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;failure-domain.beta.kubernetes.io/zone&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>zones<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;us-central1-a&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;us-central1-b&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>...<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>template<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>spec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>replicas<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>...</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion:<span style="color:#666"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#666">
+</span><span style="color:#666"></span>kind:<span style="color:#666"> </span>QuarksStatefulSet<span style="color:#666">
+</span><span style="color:#666"></span>metadata:<span style="color:#666">
+</span><span style="color:#666">  </span>name:<span style="color:#666"> </span>MyQuarksStatefulSet<span style="color:#666">
+</span><span style="color:#666"></span>spec:<span style="color:#666">
+</span><span style="color:#666">  </span>zoneNodeLabel:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;failure-domain.beta.kubernetes.io/zone&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>zones:<span style="color:#666"> </span>[<span style="color:#ed9d13">&#34;us-central1-a&#34;</span>,<span style="color:#666"> </span><span style="color:#ed9d13">&#34;us-central1-b&#34;</span>]<span style="color:#666">
+</span><span style="color:#666">  </span>...<span style="color:#666">
+</span><span style="color:#666">  </span>template:<span style="color:#666">
+</span><span style="color:#666">    </span>spec:<span style="color:#666">
+</span><span style="color:#666">      </span>replicas:<span style="color:#666"> </span><span style="color:#3677a9">2</span><span style="color:#666">
+</span><span style="color:#666">  </span>...</code></pre></td></tr></table>
+</div>
+</div>
 <p>The <code>QuarksStatefulSet</code> controller creates one <code>StatefulSet</code> version for each availability zone, and adds affinity information to the pods of those <code>StatefulSets</code>:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">affinity<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>nodeAffinity<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>requiredDuringSchedulingIgnoredDuringExecution<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>nodeSelectorTerms<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>matchExpressions<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>key<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;failure-domain.beta.kubernetes.io/zone&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">          </span>operator<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>In<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">          </span>values<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;us-central1-a&#34;</span><span style="color:#000;font-weight:bold">]</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">affinity:<span style="color:#666">
+</span><span style="color:#666">  </span>nodeAffinity:<span style="color:#666">
+</span><span style="color:#666">    </span>requiredDuringSchedulingIgnoredDuringExecution:<span style="color:#666">
+</span><span style="color:#666">      </span>nodeSelectorTerms:<span style="color:#666">
+</span><span style="color:#666">      </span>-<span style="color:#666"> </span>matchExpressions:<span style="color:#666">
+</span><span style="color:#666">        </span>-<span style="color:#666"> </span>key:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;failure-domain.beta.kubernetes.io/zone&#34;</span><span style="color:#666">
+</span><span style="color:#666">          </span>operator:<span style="color:#666"> </span>In<span style="color:#666">
+</span><span style="color:#666">          </span>values:<span style="color:#666"> </span>[<span style="color:#ed9d13">&#34;us-central1-a&#34;</span>]</code></pre></td></tr></table>
+</div>
+</div>
 <p>If zones are set for an <code>QuarksStatefulSet</code>, the following occurs:</p>
 
 <ul>
 <li><p>The name of each created <code>StatefulSet</code> is generated as <code>&lt;quarks statefulset name&gt;-z&lt;index of az&gt;</code>.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">myquarksstatefulset-z0</code></pre></div></li>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">myquarksstatefulset-z0</code></pre></td></tr></table>
+</div>
+</div></li>
 
 <li><p>The <code>StatefulSet</code> and its <code>Pods</code> are labeled with the following:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">quarks.cloudfoundry.org/az-index<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;0&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>quarks.cloudfoundry.org/az-name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;us-central1-a&#34;</span></code></pre></div></li>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">quarks.cloudfoundry.org/az-index:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;0&#34;</span><span style="color:#666">
+</span><span style="color:#666"></span>quarks.cloudfoundry.org/az-name:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;us-central1-a&#34;</span></code></pre></td></tr></table>
+</div>
+</div></li>
 
 <li><p>The <code>StatefulSet</code> and its <code>Pods</code> are annotated with an <strong>ordered</strong> JSON array of all the availability zones:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">quarks.cloudfoundry.org/zones<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;[&#34;us-central1-a&#34;, &#34;us-central1-b&#34;]&#39;</span></code></pre></div></li>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">quarks.cloudfoundry.org/zones:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;[&#34;us-central1-a&#34;, &#34;us-central1-b&#34;]&#39;</span></code></pre></td></tr></table>
+</div>
+</div></li>
 
 <li><p>As defined above, each pod is modified to contain affinity rules.</p></li>
 
 <li><p>Each container and init container of each pod have the following env vars set:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#000">KUBE_AZ</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;zone name&#34;</span>
-<span style="color:#000">BOSH_AZ</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;zone name&#34;</span>
-<span style="color:#000">CF_OPERATOR_AZ</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;zone name&#34;</span>
-<span style="color:#000">AZ_INDEX</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;zone index&#34;</span></code></pre></div></li>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#40ffff">KUBE_AZ</span>=<span style="color:#ed9d13">&#34;zone name&#34;</span>
+<span style="color:#40ffff">BOSH_AZ</span>=<span style="color:#ed9d13">&#34;zone name&#34;</span>
+<span style="color:#40ffff">CF_OPERATOR_AZ</span>=<span style="color:#ed9d13">&#34;zone name&#34;</span>
+<span style="color:#40ffff">AZ_INDEX</span>=<span style="color:#ed9d13">&#34;zone index&#34;</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 
 <h5 id="tolerations">Tolerations</h5>
@@ -1013,31 +1096,62 @@ The default value for <code>zoneNodeLabel</code> is <code>failure-domain.beta.ku
 <p>Active/passive model is application model that have multiple running instances, but only one instance is active and all other instances are passive (standby). If the active instance is down, one of the passive instances will be promoted to active immediately.</p>
 
 <p>The <code>activePassiveProbes</code> key defines active probe to be performed on a container. The controller examines the active probe periodically to see if the active one is still active. If active pod is down or there isn’t an active pod, the first running pod will be promoted as active and label it as <code>quarks.cloudfoundry.org/pod-active: active</code>.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>QuarksStatefulSet<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>myquarksstatefulset<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>spec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>activePassiveProbes<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>busybox<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#8f5902;font-style:italic"># define a active probe on the container</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>exec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>command<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>/bin/sh<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>-c<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>/root/check-active.sh<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>template<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>spec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>replicas<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>template<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>spec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">          </span>containers<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">          </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>busybox<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>image<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>busybox<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>command<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>sleep<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;3600&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>...</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion:<span style="color:#666"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#666">
+</span><span style="color:#666"></span>kind:<span style="color:#666"> </span>QuarksStatefulSet<span style="color:#666">
+</span><span style="color:#666"></span>metadata:<span style="color:#666">
+</span><span style="color:#666">  </span>name:<span style="color:#666"> </span>myquarksstatefulset<span style="color:#666">
+</span><span style="color:#666"></span>spec:<span style="color:#666">
+</span><span style="color:#666">  </span>activePassiveProbes:<span style="color:#666">
+</span><span style="color:#666">    </span>busybox:<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#999;font-style:italic"># define a active probe on the container</span><span style="color:#666">
+</span><span style="color:#666">      </span>exec:<span style="color:#666">
+</span><span style="color:#666">        </span>command:<span style="color:#666">
+</span><span style="color:#666">        </span>-<span style="color:#666"> </span>/bin/sh<span style="color:#666">
+</span><span style="color:#666">        </span>-<span style="color:#666"> </span>-c<span style="color:#666">
+</span><span style="color:#666">        </span>-<span style="color:#666"> </span>/root/check-active.sh<span style="color:#666">
+</span><span style="color:#666">  </span>template:<span style="color:#666">
+</span><span style="color:#666">    </span>spec:<span style="color:#666">
+</span><span style="color:#666">      </span>replicas:<span style="color:#666"> </span><span style="color:#3677a9">2</span><span style="color:#666">
+</span><span style="color:#666">      </span>template:<span style="color:#666">
+</span><span style="color:#666">        </span>spec:<span style="color:#666">
+</span><span style="color:#666">          </span>containers:<span style="color:#666">
+</span><span style="color:#666">          </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>busybox<span style="color:#666">
+</span><span style="color:#666">            </span>image:<span style="color:#666"> </span>busybox<span style="color:#666">
+</span><span style="color:#666">            </span>command:<span style="color:#666">
+</span><span style="color:#666">            </span>-<span style="color:#666"> </span>sleep<span style="color:#666">
+</span><span style="color:#666">            </span>-<span style="color:#666"> </span><span style="color:#ed9d13">&#34;3600&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>...</code></pre></td></tr></table>
+</div>
+</div>
 <p>The controller manages this active probing and provides pod designation label to the service&rsquo;s selectors. Any requests sent to the service will then only be sent to the active pod.</p>
 
 <h2 id="relationship-with-the-bdpl-component">Relationship with the BDPL component</h2>
@@ -1053,7 +1167,7 @@ The default value for <code>zoneNodeLabel</code> is <code>failure-domain.beta.ku
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 14, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/028bea137e62c9cbd38988d2d0752d91812c1e21">Merge pull request #3 from cloudfoundry-incubator/az-docs (028bea1)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/483ad1b3bbfb6e2cb3280eb5e17d597ee305875b">Merge pull request #4 from cloudfoundry-incubator/173656732-qsecrequest (483ad1b)</a>
 </div>
 </div>
 

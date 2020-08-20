@@ -25,14 +25,14 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/features/resources_limit/" />
-<meta property="article:modified_time" content="2020-08-14T07:05:43+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-20T11:39:03+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="BOSH resource requests and limit">
 <meta itemprop="description" content="Converting BOSH resource requests and limits to Kubernetes
 ">
 
 
-<meta itemprop="dateModified" content="2020-08-14T07:05:43&#43;02:00" />
-<meta itemprop="wordCount" content="124">
+<meta itemprop="dateModified" content="2020-08-20T11:39:03&#43;02:00" />
+<meta itemprop="wordCount" content="186">
 
 
 
@@ -110,7 +110,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -142,7 +142,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -770,69 +770,137 @@
 
 
 
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>apiVersion<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>ConfigMap<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>ops-scale<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>data<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>ops<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">|
-</span><span style="color:#8f5902;font-style:italic">    - type: replace</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>path<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>/instance_groups/name=quarks-gora<span style="color:#000;font-weight:bold">?</span>/instances<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>value<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>---<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>apiVersion<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>ConfigMap<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks-gora-manifest<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>data<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>manifest<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">|
-</span><span style="color:#8f5902;font-style:italic">    ---</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks-gora-deployment<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>releases<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks-gora<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>version<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;0.0.7&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>url<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>docker.io/cfcontainerization<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>stemcell<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>os<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>SLE_15_SP1<span style="color:#0000cf;font-weight:bold">-26.5</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>version<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">7.0</span>.0_374.gb8e8e6af<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>instance_groups<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks-gora<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>instances<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>jobs<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks-gora<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>release<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks-gora<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>properties<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">          </span>quarks-gora<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>port<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">55556</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>ssl<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">          </span>quarks<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>ports<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;quarks-gora&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">              </span>protocol<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;TCP&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">              </span>internal<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">55556</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>bpm<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">              </span>processes<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">              </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks-gora<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">                </span>requests<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">                  </span>cpu<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;2m&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">                  </span>memory<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;128Mi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">                </span>limits<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">                  </span>cpu<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;4&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">                  </span>memory<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;2Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>---<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>apiVersion<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>BOSHDeployment<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks-gora-deployment<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>spec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>manifest<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks-gora-manifest<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>type<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>configmap<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>ops<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>ops-scale<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>type<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>configmap<span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">62
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#666">
+</span><span style="color:#666"></span>apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666"></span>kind:<span style="color:#666"> </span>ConfigMap<span style="color:#666">
+</span><span style="color:#666"></span>metadata:<span style="color:#666">
+</span><span style="color:#666">  </span>name:<span style="color:#666"> </span>ops-scale<span style="color:#666">
+</span><span style="color:#666"></span>data:<span style="color:#666">
+</span><span style="color:#666">  </span>ops:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">    - type: replace</span><span style="color:#666">
+</span><span style="color:#666">      </span>path:<span style="color:#666"> </span>/instance_groups/name=quarks-gora?/instances<span style="color:#666">
+</span><span style="color:#666">      </span>value:<span style="color:#666"> </span><span style="color:#3677a9">2</span><span style="color:#666">
+</span><span style="color:#666"></span>---<span style="color:#666">
+</span><span style="color:#666"></span>apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666"></span>kind:<span style="color:#666"> </span>ConfigMap<span style="color:#666">
+</span><span style="color:#666"></span>metadata:<span style="color:#666">
+</span><span style="color:#666">  </span>name:<span style="color:#666"> </span>quarks-gora-manifest<span style="color:#666">
+</span><span style="color:#666"></span>data:<span style="color:#666">
+</span><span style="color:#666">  </span>manifest:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">    ---</span><span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>quarks-gora-deployment<span style="color:#666">
+</span><span style="color:#666">    </span>releases:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">      </span>version:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;0.0.7&#34;</span><span style="color:#666">
+</span><span style="color:#666">      </span>url:<span style="color:#666"> </span>docker.io/cfcontainerization<span style="color:#666">
+</span><span style="color:#666">      </span>stemcell:<span style="color:#666">
+</span><span style="color:#666">        </span>os:<span style="color:#666"> </span>SLE_15_SP1<span style="color:#3677a9">-26.5</span><span style="color:#666">
+</span><span style="color:#666">        </span>version:<span style="color:#666"> </span><span style="color:#3677a9">7.0</span>.0_374.gb8e8e6af<span style="color:#666">
+</span><span style="color:#666">    </span>instance_groups:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">      </span>instances:<span style="color:#666"> </span><span style="color:#3677a9">1</span><span style="color:#666">
+</span><span style="color:#666">      </span>jobs:<span style="color:#666">
+</span><span style="color:#666">      </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">        </span>release:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">        </span>properties:<span style="color:#666">
+</span><span style="color:#666">          </span>quarks-gora:<span style="color:#666">
+</span><span style="color:#666">            </span>port:<span style="color:#666"> </span><span style="color:#3677a9">55556</span><span style="color:#666">
+</span><span style="color:#666">            </span>ssl:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">false</span><span style="color:#666">
+</span><span style="color:#666">          </span>quarks:<span style="color:#666">
+</span><span style="color:#666">            </span>ports:<span style="color:#666">
+</span><span style="color:#666">            </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;quarks-gora&#34;</span><span style="color:#666">
+</span><span style="color:#666">              </span>protocol:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;TCP&#34;</span><span style="color:#666">
+</span><span style="color:#666">              </span>internal:<span style="color:#666"> </span><span style="color:#3677a9">55556</span><span style="color:#666">
+</span><span style="color:#666">            </span>bpm:<span style="color:#666">
+</span><span style="color:#666">              </span>processes:<span style="color:#666">
+</span><span style="color:#666">              </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">                </span>requests:<span style="color:#666">
+</span><span style="color:#666">                  </span>cpu:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;2m&#34;</span><span style="color:#666">
+</span><span style="color:#666">                  </span>memory:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;128Mi&#34;</span><span style="color:#666">
+</span><span style="color:#666">                </span>limits:<span style="color:#666">
+</span><span style="color:#666">                  </span>cpu:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;4&#34;</span><span style="color:#666">
+</span><span style="color:#666">                  </span>memory:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;2Gi&#34;</span><span style="color:#666">
+</span><span style="color:#666"></span>---<span style="color:#666">
+</span><span style="color:#666"></span>apiVersion:<span style="color:#666"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#666">
+</span><span style="color:#666"></span>kind:<span style="color:#666"> </span>BOSHDeployment<span style="color:#666">
+</span><span style="color:#666"></span>metadata:<span style="color:#666">
+</span><span style="color:#666">  </span>name:<span style="color:#666"> </span>quarks-gora-deployment<span style="color:#666">
+</span><span style="color:#666"></span>spec:<span style="color:#666">
+</span><span style="color:#666">  </span>manifest:<span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>quarks-gora-manifest<span style="color:#666">
+</span><span style="color:#666">    </span>type:<span style="color:#666"> </span>configmap<span style="color:#666">
+</span><span style="color:#666">  </span>ops:<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>ops-scale<span style="color:#666">
+</span><span style="color:#666">    </span>type:<span style="color:#666"> </span>configmap<span style="color:#666">
+</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/quarks-gora-cpu-mem.yaml">https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/quarks-gora-cpu-mem.yaml</a> </small>
 <hr>
@@ -877,7 +945,7 @@
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 14, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/028bea137e62c9cbd38988d2d0752d91812c1e21">Merge pull request #3 from cloudfoundry-incubator/az-docs (028bea1)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/483ad1b3bbfb6e2cb3280eb5e17d597ee305875b">Merge pull request #4 from cloudfoundry-incubator/173656732-qsecrequest (483ad1b)</a>
 </div>
 </div>
 

@@ -183,9 +183,18 @@ All &lt;code&gt;&amp;quot;_&amp;quot;&lt;/code&gt; characters are replaced with 
 &lt;p&gt;The &lt;code&gt;name&lt;/code&gt; cannot start or end with a &lt;code&gt;&amp;quot;-&amp;quot;&lt;/code&gt;. These characters are trimmed.&lt;/p&gt;
 
 &lt;p&gt;Names are also restricted to 63 characters in length, so if a generated name exceeds 63 characters, it should be recalculated as:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;name=&amp;lt;INSTANCE_GROUP_NAME&amp;gt;-&amp;lt;INDEX&amp;gt;&amp;lt;DEPLOYMENT_NAME&amp;gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;name=&amp;lt;INSTANCE_GROUP_NAME&amp;gt;-&amp;lt;INDEX&amp;gt;&amp;lt;DEPLOYMENT_NAME&amp;gt;
 
-&amp;lt;name trimmed to 31 characters&amp;gt;&amp;lt;md5 hash of name&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&amp;lt;name trimmed to 31 characters&amp;gt;&amp;lt;md5 hash of name&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;h3 id=&#34;kubernetes-services&#34;&gt;Kubernetes Services&lt;/h3&gt;
 
 &lt;p&gt;The same check needs to apply to the entire address of a &lt;code&gt;Service&lt;/code&gt;. If an entire address is longer than 253 characters, the &lt;code&gt;servicename&lt;/code&gt; is trimmed until there&amp;rsquo;s enough room for the MD5 hash. If it&amp;rsquo;s not possible to include the hash (&lt;code&gt;KUBE_NAMESPACE&lt;/code&gt; and &lt;code&gt;KUBE_SERVICE_DOMAIN&lt;/code&gt; and the dots are 221 characters or more), an error is thrown.&lt;/p&gt;

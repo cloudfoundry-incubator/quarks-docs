@@ -210,18 +210,36 @@ as the &lt;code&gt;.ig-resolved.&amp;lt;instance_group_name&amp;gt;-v1&lt;/code&
 The controller annotates the instance groups and the jobs counters and it resolves the BDPL State (&lt;code&gt;Deployed&lt;/code&gt;, &lt;code&gt;Converting&lt;/code&gt; , &lt;code&gt;Resolving&lt;/code&gt;) by looking at the associated resources states and computing the overall state.&lt;/p&gt;
 
 &lt;p&gt;The &lt;code&gt;BOSHDeployment&lt;/code&gt; status spec is composed of the following fields:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// BOSHDeploymentStatus defines the observed state of BOSHDeployment
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;BOSHDeploymentStatus&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-	&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// Timestamp for the last reconcile
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000&#34;&gt;LastReconcile&lt;/span&gt;          &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;metav1&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Time&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;lastReconcile&amp;#34;`&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;State&lt;/span&gt;                  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;string&lt;/span&gt;       &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;state&amp;#34;`&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;Message&lt;/span&gt;                &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;string&lt;/span&gt;       &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;message&amp;#34;`&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;TotalJobCount&lt;/span&gt;          &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;int&lt;/span&gt;          &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;totalJobCount&amp;#34;`&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;CompletedJobCount&lt;/span&gt;      &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;int&lt;/span&gt;          &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;completedJobCount&amp;#34;`&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;TotalInstanceGroups&lt;/span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;int&lt;/span&gt;          &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;totalInstanceGroups&amp;#34;`&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;DeployedInstanceGroups&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;int&lt;/span&gt;          &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;deployedInstanceGroups&amp;#34;`&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;StateTimestamp&lt;/span&gt;         &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;metav1&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Time&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;stateTimestamp&amp;#34;`&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// BOSHDeploymentStatus defines the observed state of BOSHDeployment
+&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;type&lt;/span&gt; BOSHDeploymentStatus &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;struct&lt;/span&gt; {
+	&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// Timestamp for the last reconcile
+&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;	LastReconcile          *metav1.Time &lt;span style=&#34;color:#ed9d13&#34;&gt;`json:&amp;#34;lastReconcile&amp;#34;`&lt;/span&gt;
+	State                  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;       &lt;span style=&#34;color:#ed9d13&#34;&gt;`json:&amp;#34;state&amp;#34;`&lt;/span&gt;
+	Message                &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;       &lt;span style=&#34;color:#ed9d13&#34;&gt;`json:&amp;#34;message&amp;#34;`&lt;/span&gt;
+	TotalJobCount          &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;int&lt;/span&gt;          &lt;span style=&#34;color:#ed9d13&#34;&gt;`json:&amp;#34;totalJobCount&amp;#34;`&lt;/span&gt;
+	CompletedJobCount      &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;int&lt;/span&gt;          &lt;span style=&#34;color:#ed9d13&#34;&gt;`json:&amp;#34;completedJobCount&amp;#34;`&lt;/span&gt;
+	TotalInstanceGroups    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;int&lt;/span&gt;          &lt;span style=&#34;color:#ed9d13&#34;&gt;`json:&amp;#34;totalInstanceGroups&amp;#34;`&lt;/span&gt;
+	DeployedInstanceGroups &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;int&lt;/span&gt;          &lt;span style=&#34;color:#ed9d13&#34;&gt;`json:&amp;#34;deployedInstanceGroups&amp;#34;`&lt;/span&gt;
+	StateTimestamp         *metav1.Time &lt;span style=&#34;color:#ed9d13&#34;&gt;`json:&amp;#34;stateTimestamp&amp;#34;`&lt;/span&gt;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;The &lt;code&gt;BOSHDeployment&lt;/code&gt; States can be:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -539,21 +557,50 @@ The controller annotates the instance groups and the jobs counters and it resolv
 &lt;h5 id=&#34;auto-approving-certificates&#34;&gt;Auto-approving Certificates&lt;/h5&gt;
 
 &lt;p&gt;A certificate &lt;code&gt;QuarksSecret&lt;/code&gt; can be signed by the Kubernetes API Server. The &lt;strong&gt;QuarksSecret&lt;/strong&gt; Controller is responsible for generating the certificate signing request:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;apiVersion&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;certificates.k8s.io/v1beta1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;kind&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;CertificateSigningRequest&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;metadata&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;generate-certificate&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;spec&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;request&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;((encoded-cert-signing-request))&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;usages&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;digital&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;signature&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;key&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;encipherment&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;8
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;apiVersion:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;certificates.k8s.io/v1beta1&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;kind:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;CertificateSigningRequest&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;metadata:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;generate-certificate&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;spec:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;request:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;((encoded-cert-signing-request))&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;usages:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;digital&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;signature&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;key&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;encipherment&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;h5 id=&#34;copies&#34;&gt;Copies&lt;/h5&gt;
 
 &lt;p&gt;The &lt;code&gt;QuarksSecret&lt;/code&gt; controller can create copies of a generated secret across multiple namespaces, as long as the target secrets (that live in a namespace other than the namespace of the &lt;code&gt;QuarksSecret&lt;/code&gt;) already exist, and have an annotation of:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/generate-password-with-copies&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/generate-password-with-copies&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;as well as the usual label for generated secrets:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;quarks.cloudfoundry.org/secret-kind: generated&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;quarks.cloudfoundry.org/secret-kind: generated&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;This ensures that the creator of the &lt;code&gt;QuarksSecret&lt;/code&gt; must have access to the copy target namespace.&lt;/p&gt;
 
 &lt;p&gt;Copied &lt;code&gt;Secrets&lt;/code&gt; do not have an owner set, and are not cleaned up automatically when the &lt;code&gt;QuarksSecret&lt;/code&gt; is deleted.&lt;/p&gt;
@@ -704,19 +751,38 @@ The operator watches all the &lt;code&gt;ConfigMaps&lt;/code&gt; and &lt;code&gt
 &lt;h4 id=&#34;cluster-ip&#34;&gt;Cluster IP&lt;/h4&gt;
 
 &lt;p&gt;Following is the example which creates a service with type &lt;strong&gt;ClusterIP&lt;/strong&gt; for a single instance group named &lt;code&gt;nats&lt;/code&gt; in deployment &lt;code&gt;nats-deployment&lt;/code&gt; for exposing port 4222.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;apiVersion&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;kind&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;Service&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;metadata&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;nats-service&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;spec&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;type&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;ClusterIP&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;selector&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;quarks.cloudfoundry.org/instance-group-name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;nats&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;quarks.cloudfoundry.org/deployment-name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;nats-deployment&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;ports&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;protocol&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;TCP&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;port&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;80&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;targetPort&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;4222&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;apiVersion:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;v1&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;kind:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;Service&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;metadata:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;nats-service&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;spec:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;type:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;ClusterIP&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;selector:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;quarks.cloudfoundry.org/instance-group-name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;nats&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;quarks.cloudfoundry.org/deployment-name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;nats-deployment&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;ports:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;protocol:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;TCP&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;port:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#3677a9&#34;&gt;80&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;targetPort:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#3677a9&#34;&gt;4222&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;Complete example can be found &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment/boshdeployment-with-service.yaml&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Though, by default, quarks creates three services of type &lt;strong&gt;ClusterIP&lt;/strong&gt; as defined &lt;a href=&#34;../../core-tasks/from_bosh_to_kube/#naming-conventions&#34;&gt;here&lt;/a&gt; for any instance group.&lt;/p&gt;
@@ -755,47 +821,111 @@ The operator watches all the &lt;code&gt;ConfigMaps&lt;/code&gt; and &lt;code&gt
 The default value for &lt;code&gt;zoneNodeLabel&lt;/code&gt; is &lt;code&gt;failure-domain.beta.kubernetes.io/zone&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;The example below defines an &lt;code&gt;QuarksStatefulSet&lt;/code&gt; that should be deployed in two availability zones, &lt;strong&gt;us-central1-a&lt;/strong&gt; and &lt;strong&gt;us-central1-b&lt;/strong&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;apiVersion&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;quarks.cloudfoundry.org/v1alpha1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;kind&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;QuarksStatefulSet&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;metadata&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;MyQuarksStatefulSet&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;spec&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;zoneNodeLabel&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;failure-domain.beta.kubernetes.io/zone&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;zones&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;us-central1-a&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;us-central1-b&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;...&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;template&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;spec&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;replicas&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;apiVersion:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;quarks.cloudfoundry.org/v1alpha1&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;kind:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;QuarksStatefulSet&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;metadata:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;MyQuarksStatefulSet&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;spec:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;zoneNodeLabel:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;failure-domain.beta.kubernetes.io/zone&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;zones:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;[&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;us-central1-a&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;us-central1-b&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;...&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;template:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;spec:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;replicas:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#3677a9&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;...&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;The &lt;code&gt;QuarksStatefulSet&lt;/code&gt; controller creates one &lt;code&gt;StatefulSet&lt;/code&gt; version for each availability zone, and adds affinity information to the pods of those &lt;code&gt;StatefulSets&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;affinity&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;nodeAffinity&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;requiredDuringSchedulingIgnoredDuringExecution&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;nodeSelectorTerms&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;matchExpressions&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;key&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;failure-domain.beta.kubernetes.io/zone&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;operator&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;In&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;values&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;us-central1-a&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;affinity:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;nodeAffinity:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;requiredDuringSchedulingIgnoredDuringExecution:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;nodeSelectorTerms:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;matchExpressions:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;key:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;failure-domain.beta.kubernetes.io/zone&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;          &lt;/span&gt;operator:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;In&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;          &lt;/span&gt;values:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;[&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;us-central1-a&amp;#34;&lt;/span&gt;]&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;If zones are set for an &lt;code&gt;QuarksStatefulSet&lt;/code&gt;, the following occurs:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;The name of each created &lt;code&gt;StatefulSet&lt;/code&gt; is generated as &lt;code&gt;&amp;lt;quarks statefulset name&amp;gt;-z&amp;lt;index of az&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;myquarksstatefulset-z0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;myquarksstatefulset-z0&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;The &lt;code&gt;StatefulSet&lt;/code&gt; and its &lt;code&gt;Pods&lt;/code&gt; are labeled with the following:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;quarks.cloudfoundry.org/az-index&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;quarks.cloudfoundry.org/az-name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;us-central1-a&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;quarks.cloudfoundry.org/az-index:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;quarks.cloudfoundry.org/az-name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;us-central1-a&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;The &lt;code&gt;StatefulSet&lt;/code&gt; and its &lt;code&gt;Pods&lt;/code&gt; are annotated with an &lt;strong&gt;ordered&lt;/strong&gt; JSON array of all the availability zones:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;quarks.cloudfoundry.org/zones&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;[&amp;#34;us-central1-a&amp;#34;, &amp;#34;us-central1-b&amp;#34;]&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;quarks.cloudfoundry.org/zones:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;[&amp;#34;us-central1-a&amp;#34;, &amp;#34;us-central1-b&amp;#34;]&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;As defined above, each pod is modified to contain affinity rules.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Each container and init container of each pod have the following env vars set:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;KUBE_AZ&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;zone name&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;BOSH_AZ&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;zone name&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;CF_OPERATOR_AZ&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;zone name&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;AZ_INDEX&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;zone index&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;KUBE_AZ&lt;/span&gt;=&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;zone name&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#40ffff&#34;&gt;BOSH_AZ&lt;/span&gt;=&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;zone name&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#40ffff&#34;&gt;CF_OPERATOR_AZ&lt;/span&gt;=&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;zone name&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#40ffff&#34;&gt;AZ_INDEX&lt;/span&gt;=&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;zone index&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h5 id=&#34;tolerations&#34;&gt;Tolerations&lt;/h5&gt;
@@ -825,31 +955,62 @@ The default value for &lt;code&gt;zoneNodeLabel&lt;/code&gt; is &lt;code&gt;fail
 &lt;p&gt;Active/passive model is application model that have multiple running instances, but only one instance is active and all other instances are passive (standby). If the active instance is down, one of the passive instances will be promoted to active immediately.&lt;/p&gt;
 
 &lt;p&gt;The &lt;code&gt;activePassiveProbes&lt;/code&gt; key defines active probe to be performed on a container. The controller examines the active probe periodically to see if the active one is still active. If active pod is down or there isn’t an active pod, the first running pod will be promoted as active and label it as &lt;code&gt;quarks.cloudfoundry.org/pod-active: active&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;apiVersion&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;quarks.cloudfoundry.org/v1alpha1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;kind&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;QuarksStatefulSet&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;metadata&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;myquarksstatefulset&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;spec&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;activePassiveProbes&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;busybox&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# define a active probe on the container&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;exec&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;command&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;/bin/sh&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;-c&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;/root/check-active.sh&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;template&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;spec&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;replicas&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;template&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;spec&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;containers&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;busybox&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;image&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;busybox&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;command&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;sleep&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;3600&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;13
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;14
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;15
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;16
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;17
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;18
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;19
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;20
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;21
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;22
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;23
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;24
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;25
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;apiVersion:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;quarks.cloudfoundry.org/v1alpha1&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;kind:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;QuarksStatefulSet&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;metadata:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;myquarksstatefulset&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;spec:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;activePassiveProbes:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;busybox:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# define a active probe on the container&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;exec:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;command:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;/bin/sh&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;-c&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;/root/check-active.sh&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;template:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;spec:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;replicas:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#3677a9&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;template:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;spec:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;          &lt;/span&gt;containers:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;          &lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;busybox&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;            &lt;/span&gt;image:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;busybox&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;            &lt;/span&gt;command:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;            &lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;sleep&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;            &lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;3600&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;...&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;The controller manages this active probing and provides pod designation label to the service&amp;rsquo;s selectors. Any requests sent to the service will then only be sent to the active pod.&lt;/p&gt;
 
 &lt;h2 id=&#34;relationship-with-the-bdpl-component&#34;&gt;Relationship with the BDPL component&lt;/h2&gt;

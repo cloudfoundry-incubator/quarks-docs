@@ -27,7 +27,7 @@ Running make test executes all the test suites.
 We use ginkgo for testing. Every package needs a suite_test." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/development/testing/" />
-<meta property="article:modified_time" content="2020-08-14T07:05:43+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-20T11:39:03+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Testing">
 <meta itemprop="description" content="Testing  Tests description Unit Integration End-to-End Running tests in minikube in KinD Makefile General Targets Build Targets Test Targets Generate Targets CI   Tests description Based on upstreams documentation https://github.com/thtanaka/kubernetes/blob/master/docs/devel/testing.md we use three levels of testing: unit, integration and e2e.
 Before starting, run make tools to install the required dependencies.
@@ -35,8 +35,8 @@ Running make test executes all the test suites.
 We use ginkgo for testing. Every package needs a suite_test.">
 
 
-<meta itemprop="dateModified" content="2020-08-14T07:05:43&#43;02:00" />
-<meta itemprop="wordCount" content="1450">
+<meta itemprop="dateModified" content="2020-08-20T11:39:03&#43;02:00" />
+<meta itemprop="wordCount" content="1469">
 
 
 
@@ -116,7 +116,7 @@ We use ginkgo for testing. Every package needs a suite_test."/>
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -148,7 +148,7 @@ We use ginkgo for testing. Every package needs a suite_test."/>
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -850,7 +850,14 @@ There is also <code>ginkgo generate</code> to create skeleton test files.</p>
 <h3 id="setup-ruby">Setup Ruby</h3>
 
 <p>Ruby gem for template rendering</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gem install bosh-template</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gem install bosh-template</code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="integration">Integration</h2>
 
 <p>Integration tests formulate expectations on the interactions of several components.
@@ -868,9 +875,18 @@ In <code>testing</code> the <code>catalog</code> defines test objects.</p>
 Each Ginkgo test node has a separate namespace, log file and webhook server port and certificate.</p>
 
 <p>The node index starts at 1 and is used as following to generate names:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">namespace: <span style="color:#000">$TEST_NAMESPACE</span> + &lt;node_index&gt;
-webhook port: <span style="color:#000">$CF_OPERATOR_WEBHOOK_SERVICE_PORT</span> + &lt;node_index&gt;
-log file: <span style="color:#000">$CF_OPERATOR_TESTING_TMP</span>/cf-operator-tests-&lt;node_index&gt;.log</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">namespace: <span style="color:#40ffff">$TEST_NAMESPACE</span> + &lt;node_index&gt;
+webhook port: <span style="color:#40ffff">$CF_OPERATOR_WEBHOOK_SERVICE_PORT</span> + &lt;node_index&gt;
+log file: <span style="color:#40ffff">$CF_OPERATOR_TESTING_TMP</span>/cf-operator-tests-&lt;node_index&gt;.log</code></pre></td></tr></table>
+</div>
+</div>
 <p>Integration tests use the <code>TEST_NAMESPACE</code> environment variable as a base to
 calculate the namespace name. Test namespaces are deleted automatically once
 the tests are completed.</p>
@@ -929,32 +945,81 @@ The CLI tests build the operator binary themselves.</p>
 
 <ol>
 <li><p>Start <code>minikube</code></p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube start --kubernetes-version v1.15.5</code></pre></div></li>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube start --kubernetes-version v1.15.5</code></pre></td></tr></table>
+</div>
+</div></li>
 
 <li><p>Switch to minikube docker daemon</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">eval</span> <span style="color:#204a87;font-weight:bold">$(</span>minikube docker-env<span style="color:#204a87;font-weight:bold">)</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#24909d">eval</span> <span style="color:#6ab825;font-weight:bold">$(</span>minikube docker-env<span style="color:#6ab825;font-weight:bold">)</span></code></pre></td></tr></table>
+</div>
+</div>
 <p><em><strong>Note</strong></em>: Template rendering for BOSH jobs is done at deployment time by the operator
 binary. Therefore the operator docker image needs to be made available to
 Kubernetes cluster.</p></li>
 
 <li><p>Export the <code>CF_OPERATOR_WEBHOOK_SERVICE_HOST</code> env variable</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">export</span> <span style="color:#000">CF_OPERATOR_WEBHOOK_SERVICE_HOST</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87;font-weight:bold">$(</span>ip -4 a s dev <span style="color:#204a87;font-weight:bold">$(</span>ip r l <span style="color:#0000cf;font-weight:bold">0</span>/0 <span style="color:#000;font-weight:bold">|</span> cut -f5 -d<span style="color:#4e9a06">&#39; &#39;</span><span style="color:#204a87;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">|</span> grep -oP <span style="color:#4e9a06">&#39;inet \K\S+(?=/)&#39;</span><span style="color:#204a87;font-weight:bold">)</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#24909d">export</span> <span style="color:#40ffff">CF_OPERATOR_WEBHOOK_SERVICE_HOST</span>=<span style="color:#6ab825;font-weight:bold">$(</span>ip -4 a s dev <span style="color:#6ab825;font-weight:bold">$(</span>ip r l <span style="color:#3677a9">0</span>/0 | cut -f5 -d<span style="color:#ed9d13">&#39; &#39;</span><span style="color:#6ab825;font-weight:bold">)</span> | grep -oP <span style="color:#ed9d13">&#39;inet \K\S+(?=/)&#39;</span><span style="color:#6ab825;font-weight:bold">)</span></code></pre></td></tr></table>
+</div>
+</div>
 <p><em><strong>Note</strong></em>: On Mac, use <code>export CF_OPERATOR_WEBHOOK_SERVICE_HOST=$(ip a s $(ip r g 0/0 | cut -f5 -d' ') | grep -oE 'inet [^ /]+' | cut -f2 -d' ')</code>, because grep cannot handle perl regexs.
 <em><strong>Note</strong></em>: You can also find the correct IP, by running <code>ip addr</code>. The IP address under <code>vboxnet1</code> is the IP that you need.</p></li>
 
 <li><p>Export the <code>OPERATOR_TEST_STORAGE_CLASS</code> env variable</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">export</span> <span style="color:#000">OPERATOR_TEST_STORAGE_CLASS</span><span style="color:#ce5c00;font-weight:bold">=</span>standard</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#24909d">export</span> <span style="color:#40ffff">OPERATOR_TEST_STORAGE_CLASS</span>=standard</code></pre></td></tr></table>
+</div>
+</div>
 <p><em><strong>Note</strong></em>: Require for the PVC test creation, in minikube.</p></li>
 
 <li><p>Ensure <code>GO111MODULE</code> is set</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">export</span> <span style="color:#000">GO111MODULE</span><span style="color:#ce5c00;font-weight:bold">=</span>on</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#24909d">export</span> <span style="color:#40ffff">GO111MODULE</span>=on</code></pre></td></tr></table>
+</div>
+</div>
 <p><em><strong>Note</strong></em>: When you have a vendor folder (either from the submodule or manually created) settings this to <code>off</code> speeds up the <code>build-image</code> target.</p></li>
 
 <li><p>Build the <code>cf-operator</code> binary</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/build</code></pre></div></li>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/build</code></pre></td></tr></table>
+</div>
+</div></li>
 
 <li><p>Build the <code>cf-operator</code> docker image</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/build-image</code></pre></div></li>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/build-image</code></pre></td></tr></table>
+</div>
+</div></li>
 </ol>
 
 <p><em><strong>Note</strong></em>: Consider setting <code>DOCKER_IMAGE_TAG</code> to a fixed variable. This will avoid rebuilding the docker image everytime, when doing changes in files not related to the <code>cf-operator</code>
@@ -962,8 +1027,16 @@ binary.</p>
 
 <p><em><strong>Note</strong></em>: When not running in CI, nothing ensures a proper cleanup of resources after the deletion of the <code>cf-operator</code> in the environment. You can make sure to manually verify that none
 old resources will interfere with a future installation, by:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8f5902;font-style:italic"># Deleting old mutating webhooks configurations</span>
-kubectl get mutatingwebhookconfiguration -oname <span style="color:#000;font-weight:bold">|</span> xargs -n <span style="color:#0000cf;font-weight:bold">1</span> kubectl delete</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#999;font-style:italic"># Deleting old mutating webhooks configurations</span>
+kubectl get mutatingwebhookconfiguration -oname | xargs -n <span style="color:#3677a9">1</span> kubectl delete</code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="in-kind">In KinD</h3>
 
 <p>The following steps are necessary to have a proper environment setup, where all types of tests can be executed:</p>
@@ -976,23 +1049,58 @@ kubectl get mutatingwebhookconfiguration -oname <span style="color:#000;font-wei
 
 <ol>
 <li><p>Start cluster</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kind create cluster --image kindest/node:v1.15.6</code></pre></div></li>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kind create cluster --image kindest/node:v1.15.6</code></pre></td></tr></table>
+</div>
+</div></li>
 
 <li><p>Export the <code>CF_OPERATOR_WEBHOOK_SERVICE_HOST</code> env variable. Use the IP of the docker bridge or your public IP. Firewall rules may interfere.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">export</span> <span style="color:#000">CF_OPERATOR_WEBHOOK_SERVICE_HOST</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87;font-weight:bold">$(</span>ip -4 a s dev <span style="color:#204a87;font-weight:bold">$(</span>ip r l <span style="color:#0000cf;font-weight:bold">0</span>/0 <span style="color:#000;font-weight:bold">|</span> cut -f5 -d<span style="color:#4e9a06">&#39; &#39;</span><span style="color:#204a87;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">|</span> grep -oP <span style="color:#4e9a06">&#39;inet \K\S+(?=/)&#39;</span><span style="color:#204a87;font-weight:bold">)</span></code></pre></div></li>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#24909d">export</span> <span style="color:#40ffff">CF_OPERATOR_WEBHOOK_SERVICE_HOST</span>=<span style="color:#6ab825;font-weight:bold">$(</span>ip -4 a s dev <span style="color:#6ab825;font-weight:bold">$(</span>ip r l <span style="color:#3677a9">0</span>/0 | cut -f5 -d<span style="color:#ed9d13">&#39; &#39;</span><span style="color:#6ab825;font-weight:bold">)</span> | grep -oP <span style="color:#ed9d13">&#39;inet \K\S+(?=/)&#39;</span><span style="color:#6ab825;font-weight:bold">)</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ol>
 
 <p><em><strong>Note</strong></em>: On Mac, use <code>export CF_OPERATOR_WEBHOOK_SERVICE_HOST=$(ip a s $(ip r g 0/0 | cut -f5 -d' ') | grep -oE 'inet [^ /]+' | cut -f2 -d' ')</code>, because grep cannot handle perl regexs.</p>
 
 <ol>
 <li><p>Export the <code>OPERATOR_TEST_STORAGE_CLASS</code> env variable</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">export</span> <span style="color:#000">OPERATOR_TEST_STORAGE_CLASS</span><span style="color:#ce5c00;font-weight:bold">=</span>standard</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#24909d">export</span> <span style="color:#40ffff">OPERATOR_TEST_STORAGE_CLASS</span>=standard</code></pre></td></tr></table>
+</div>
+</div>
 <p><em><strong>Note</strong></em>: Required for the PVC tests.</p></li>
 
 <li><p>Build the <code>cf-operator</code> docker image</p>
 
 <p>First set the version to something static, not dependant on git:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">export</span> <span style="color:#000">DOCKER_IMAGE_TAG</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">${</span><span style="color:#000">DOCKER_IMAGE_TAG</span><span style="color:#204a87;font-weight:bold">:-</span><span style="color:#000">dev</span><span style="color:#4e9a06">}</span></code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/build-image</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#24909d">export</span> <span style="color:#40ffff">DOCKER_IMAGE_TAG</span>=<span style="color:#ed9d13">${</span><span style="color:#40ffff">DOCKER_IMAGE_TAG</span><span style="color:#6ab825;font-weight:bold">:-</span><span style="color:#40ffff">dev</span><span style="color:#ed9d13">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/build-image</code></pre></td></tr></table>
+</div>
+</div>
 <p>Or if you have local changes and use <code>go mod edit --replace</code>,
 follow instructions from <a href="../../development/development#standalone-components">development</a>.</p></li>
 
@@ -1182,7 +1290,7 @@ follow instructions from <a href="../../development/development#standalone-compo
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 14, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/028bea137e62c9cbd38988d2d0752d91812c1e21">Merge pull request #3 from cloudfoundry-incubator/az-docs (028bea1)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/483ad1b3bbfb6e2cb3280eb5e17d597ee305875b">Merge pull request #4 from cloudfoundry-incubator/173656732-qsecrequest (483ad1b)</a>
 </div>
 </div>
 

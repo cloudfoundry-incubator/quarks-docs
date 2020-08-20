@@ -25,14 +25,14 @@
 Flow The following points describe each process that involves working with BOSH Job Templates, from beginning to end." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/features/rendering_templates/" />
-<meta property="article:modified_time" content="2020-08-14T07:05:43+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-20T11:39:03+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Rendering BOSH Templates">
 <meta itemprop="description" content="Rendering BOSH Templates  Flow Data Gathering  Extract Job Spec and Templates from Image Calculation of Required Properties for an Instance Group and BPM Info  Run  Create QuarksStatefulSet and QuarksJobs Render Templates Run the entrypoints  Details Services and DNS Addresses Resolving Links Calculating spec.* and link().instances[].* FAQ   You can read more about BOSH templates on bosh.io.
 Flow The following points describe each process that involves working with BOSH Job Templates, from beginning to end.">
 
 
-<meta itemprop="dateModified" content="2020-08-14T07:05:43&#43;02:00" />
-<meta itemprop="wordCount" content="1160">
+<meta itemprop="dateModified" content="2020-08-20T11:39:03&#43;02:00" />
+<meta itemprop="wordCount" content="1186">
 
 
 
@@ -110,7 +110,7 @@ Flow The following points describe each process that involves working with BOSH 
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -142,7 +142,7 @@ Flow The following points describe each process that involves working with BOSH 
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -929,13 +929,49 @@ Their entrypoints, env vars, capabilities, etc. are set based on <a href="https:
 <h3 id="services-and-dns-addresses">Services and DNS Addresses</h3>
 
 <p>DNS Addresses for instance groups are calculated in the following manner:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&lt;DEPLOYMENT_NAME&gt;-&lt;INSTANCE_GROUP_NAME&gt;-&lt;INDEX&gt;.&lt;KUBE_NAMESPACE&gt;.&lt;KUBE_SERVICE_DOMAIN&gt;</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&lt;DEPLOYMENT_NAME&gt;-&lt;INSTANCE_GROUP_NAME&gt;-&lt;INDEX&gt;.&lt;KUBE_NAMESPACE&gt;.&lt;KUBE_SERVICE_DOMAIN&gt;</code></pre></td></tr></table>
+</div>
+</div>
 <p>The <code>INDEX</code> is calculated using the following formula:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(AZ_INDEX - 1) * REPLICAS + POD_ORDINAL</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(AZ_INDEX - 1) * REPLICAS + POD_ORDINAL</code></pre></td></tr></table>
+</div>
+</div>
 <p>In order for things to work correctly across versions and AZs, we need <a href="https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#using-stable-network-identities" target="_blank">ClusterIP <code>Services</code></a> that select for Instance Group <code>Pods</code>.</p>
 
 <p>For example, assuming a <code>REPLICAS</code> of <code>3</code> and an <code>AZ_COUNT</code> of <code>2</code> for a &ldquo;nats&rdquo; <code>BOSHDeployment</code>, with <code>2</code> <code>StatefulSet</code> versions available, we would see the following <code>Services</code>:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">nats-0
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">nats-0
   selects pod z0-v1-0
   selects pod z0-v2-0
 nats-1
@@ -952,7 +988,9 @@ nats-4
   selects pod z0-v2-2
 nats-5
   selects pod z1-v1-2
-  selects pod z1-v2-2</code></pre></div>
+  selects pod z1-v2-2</code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="resolving-links">Resolving Links</h3>
 
 <p>The following steps describe how to resolve links assuming all information is available. The actual implementation transforms data and stores it in between steps, but the outcome is the same.</p>
@@ -983,12 +1021,24 @@ nats-5
 <h3 id="calculating-spec-and-link-instances">Calculating spec.* and link().instances[].*</h3>
 
 <p>The <code>spec</code> of each job instance can be calculated:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;name<span style="color:#f8f8f8;text-decoration:underline"> </span>of<span style="color:#f8f8f8;text-decoration:underline"> </span>the<span style="color:#f8f8f8;text-decoration:underline"> </span>instance<span style="color:#f8f8f8;text-decoration:underline"> </span>group&gt;-&lt;name<span style="color:#f8f8f8;text-decoration:underline"> </span>of<span style="color:#f8f8f8;text-decoration:underline"> </span>the<span style="color:#f8f8f8;text-decoration:underline"> </span>job&gt;<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>index<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>(&lt;az<span style="color:#f8f8f8;text-decoration:underline"> </span>index&gt;-<span style="color:#0000cf;font-weight:bold">1</span>)<span style="color:#8f5902;font-style:italic">*&lt;replicas&gt;+&lt;pod_ordinal&gt;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>az<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;BOSH_AZ_INDEX&gt;<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>id<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;name<span style="color:#f8f8f8;text-decoration:underline"> </span>of<span style="color:#f8f8f8;text-decoration:underline"> </span>the<span style="color:#f8f8f8;text-decoration:underline"> </span>instance<span style="color:#f8f8f8;text-decoration:underline"> </span>group&gt;-&lt;index&gt;-&lt;name<span style="color:#f8f8f8;text-decoration:underline"> </span>of<span style="color:#f8f8f8;text-decoration:underline"> </span>the<span style="color:#f8f8f8;text-decoration:underline"> </span>job&gt;<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>address<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;calculated<span style="color:#f8f8f8;text-decoration:underline"> </span>address&gt;<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>bootstrap<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;index<span style="color:#f8f8f8;text-decoration:underline"> </span>==<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">0</span>&gt;</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">name:<span style="color:#666"> </span>&lt;name<span style="color:#666"> </span>of<span style="color:#666"> </span>the<span style="color:#666"> </span>instance<span style="color:#666"> </span>group&gt;-&lt;name<span style="color:#666"> </span>of<span style="color:#666"> </span>the<span style="color:#666"> </span>job&gt;<span style="color:#666">
+</span><span style="color:#666"></span>index:<span style="color:#666"> </span>(&lt;az<span style="color:#666"> </span>index&gt;-<span style="color:#3677a9">1</span>)<span style="color:#cd2828;font-weight:bold">*&lt;replicas&gt;+&lt;pod_ordinal&gt;</span><span style="color:#666">
+</span><span style="color:#666"></span>az:<span style="color:#666"> </span>&lt;BOSH_AZ_INDEX&gt;<span style="color:#666">
+</span><span style="color:#666"></span>id:<span style="color:#666"> </span>&lt;name<span style="color:#666"> </span>of<span style="color:#666"> </span>the<span style="color:#666"> </span>instance<span style="color:#666"> </span>group&gt;-&lt;index&gt;-&lt;name<span style="color:#666"> </span>of<span style="color:#666"> </span>the<span style="color:#666"> </span>job&gt;<span style="color:#666">
+</span><span style="color:#666"></span>address:<span style="color:#666"> </span>&lt;calculated<span style="color:#666"> </span>address&gt;<span style="color:#666">
+</span><span style="color:#666"></span>bootstrap:<span style="color:#666"> </span>&lt;index<span style="color:#666"> </span>==<span style="color:#666"> </span><span style="color:#3677a9">0</span>&gt;</code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="faq">FAQ</h2>
 
 <ul>
@@ -1028,7 +1078,7 @@ nats-5
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 14, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/028bea137e62c9cbd38988d2d0752d91812c1e21">Merge pull request #3 from cloudfoundry-incubator/az-docs (028bea1)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/483ad1b3bbfb6e2cb3280eb5e17d597ee305875b">Merge pull request #4 from cloudfoundry-incubator/173656732-qsecrequest (483ad1b)</a>
 </div>
 </div>
 

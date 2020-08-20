@@ -104,7 +104,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -136,7 +136,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -769,12 +769,24 @@
 <p>The <code>cf-operator</code> requires the according CRDs to be installed in the cluster in order to work as expected. By default, the <code>cf-operator</code> applies CRDs in your cluster automatically.</p>
 
 <p>To verify that the CRD´s are installed:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get crds
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get crds
 NAME                                            CREATED AT
-boshdeployments.quarks.cloudfoundry.org        <span style="color:#0000cf;font-weight:bold">2019</span>-06-25T07:08:37Z
-quarksjobs.quarks.cloudfoundry.org           <span style="color:#0000cf;font-weight:bold">2019</span>-06-25T07:08:37Z
-quarkssecrets.quarks.cloudfoundry.org        <span style="color:#0000cf;font-weight:bold">2019</span>-06-25T07:08:37Z
-quarksstatefulsets.quarks.cloudfoundry.org   <span style="color:#0000cf;font-weight:bold">2019</span>-06-25T07:08:37Z</code></pre></div>
+boshdeployments.quarks.cloudfoundry.org        <span style="color:#3677a9">2019</span>-06-25T07:08:37Z
+quarksjobs.quarks.cloudfoundry.org           <span style="color:#3677a9">2019</span>-06-25T07:08:37Z
+quarkssecrets.quarks.cloudfoundry.org        <span style="color:#3677a9">2019</span>-06-25T07:08:37Z
+quarksstatefulsets.quarks.cloudfoundry.org   <span style="color:#3677a9">2019</span>-06-25T07:08:37Z</code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="architecture-design">Architecture design</h3>
 
 <p>Draw.io with the sources for the <code>quarks_deployment_flow-*png</code> controller charts:</p>
@@ -950,7 +962,7 @@ quarksstatefulsets.quarks.cloudfoundry.org   <span style="color:#0000cf;font-wei
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 14, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/028bea137e62c9cbd38988d2d0752d91812c1e21">Merge pull request #3 from cloudfoundry-incubator/az-docs (028bea1)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/483ad1b3bbfb6e2cb3280eb5e17d597ee305875b">Merge pull request #4 from cloudfoundry-incubator/173656732-qsecrequest (483ad1b)</a>
 </div>
 </div>
 

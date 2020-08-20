@@ -52,7 +52,14 @@
 &lt;h2 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h2&gt;
 
 &lt;p&gt;Run with libraries fetched via go modules:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;GO111MODULE&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;on&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;GO111MODULE&lt;/span&gt;=on&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 id=&#34;custom-resource-definitions-crds&#34;&gt;Custom Resource Definitions (CRDs)&lt;/h2&gt;
 
 &lt;p&gt;Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds&#34; target=&#34;_blank&#34;&gt;CRDs&lt;/a&gt; (see &lt;a href=&#34;../controllers&#34;&gt;Controllers&lt;/a&gt;):&lt;/p&gt;
@@ -94,23 +101,54 @@ You can also copy the files and modify them.&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;in &lt;code&gt;bin/gen-kube&lt;/code&gt;, add your resource to the &lt;code&gt;GROUP_VERSIONS&lt;/code&gt; variable (separated by a space &lt;code&gt;&amp;quot; &amp;quot;&lt;/code&gt;):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# ...&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;GROUP_VERSIONS&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;boshdeployment:v1alpha1 &amp;lt;controller_name&amp;gt;:&amp;lt;version&amp;gt;&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# ...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# ...&lt;/span&gt;
+&lt;span style=&#34;color:#40ffff&#34;&gt;GROUP_VERSIONS&lt;/span&gt;=&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;boshdeployment:v1alpha1 &amp;lt;controller_name&amp;gt;:&amp;lt;version&amp;gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# ...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;regenerate code&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# int the root of the project&lt;/span&gt;
-make generate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# int the root of the project&lt;/span&gt;
+make generate&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;create a directory structure like this for your actual controller code:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;.
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;.
 +-- pkg
    +-- kube
        +-- controllers
            +-- &amp;lt;controller_name&amp;gt;
            ¦   +-- controller.go
            ¦   +-- reconciler.go
-           +-- controller.go&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+           +-- controller.go&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;controller.go&lt;/code&gt; is your controller implementation; this is where you should implement an &lt;code&gt;Add&lt;/code&gt; function where register the controller with the &lt;code&gt;Manager&lt;/code&gt;, and you watch for changes for resources that you care about.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;reconciler.go&lt;/code&gt; contains the code that takes action and reconciles actual state with desired state.&lt;/li&gt;
@@ -121,71 +159,147 @@ make generate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
   As always, use the other implementations to get you started.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Controller:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mycontroller&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;13
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;14
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;15
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;16
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;17
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;18
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;19
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;20
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;21
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;22
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;23
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;24
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;25
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;26
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;27
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;28
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;29
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;30
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;31
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;package&lt;/span&gt; mycontroller
 
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;
-    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;go.uber.org/zap&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;import&lt;/span&gt; (
+    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;go.uber.org/zap&amp;#34;&lt;/span&gt;
 
-    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/controller&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/controller/controllerutil&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/handler&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/manager&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/source&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/controller&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/controller/controllerutil&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/handler&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/manager&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/source&amp;#34;&lt;/span&gt;
 
-    &lt;span style=&#34;color:#000&#34;&gt;mrcv1&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;code.cloudfoundry.org/quarks-operator/pkg/kube/apis/myresourcecontroller/v1&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
+    mrcv1 &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;code.cloudfoundry.org/quarks-operator/pkg/kube/apis/myresourcecontroller/v1&amp;#34;&lt;/span&gt;
+  )
 
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Add&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;log&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;zap&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;SugaredLogger&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mgr&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;manager&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Manager&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;error&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;r&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;NewReconciler&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mgr&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;controllerutil&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;SetControllerReference&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
+  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;Add&lt;/span&gt;(log *zap.SugaredLogger, mgr manager.Manager) &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;error&lt;/span&gt; {
+    r := &lt;span style=&#34;color:#447fcf&#34;&gt;NewReconciler&lt;/span&gt;(log, mgr, controllerutil.SetControllerReference)
 
-    &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// Create a new controller
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000&#34;&gt;c&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;New&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;myresource-controller&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mgr&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Options&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Reconciler&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;})&lt;/span&gt;
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-      &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt;
-    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// Create a new controller
+&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;    c, err := controller.&lt;span style=&#34;color:#447fcf&#34;&gt;New&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;myresource-controller&amp;#34;&lt;/span&gt;, mgr, controller.Options{Reconciler: r})
+    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;if&lt;/span&gt; err != &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;nil&lt;/span&gt; {
+      &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; err
+    }
 
-    &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// Watch for changes to primary resource
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;c&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Watch&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;source&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Type&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mrcv1&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;MyResource&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{}},&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;handler&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;EnqueueRequestForObject&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{})&lt;/span&gt;
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-      &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt;
-    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// Watch for changes to primary resource
+&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;    err = c.&lt;span style=&#34;color:#447fcf&#34;&gt;Watch&lt;/span&gt;(&amp;amp;source.Kind{Type: &amp;amp;mrcv1.MyResource{}}, &amp;amp;handler.EnqueueRequestForObject{})
+    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;if&lt;/span&gt; err != &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;nil&lt;/span&gt; {
+      &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; err
+    }
 
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt;
-  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;nil&lt;/span&gt;
+  }&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Reconciler:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;myresource&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;13
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;14
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;15
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;16
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;17
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;18
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;19
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;20
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;21
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;22
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;23
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;24
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;25
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;26
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;27
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;28
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;29
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;30
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;31
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;32
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;33
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;package&lt;/span&gt; myresource
 
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;
-    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;go.uber.org/zap&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;metav1&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;k8s.io/apimachinery/pkg/apis/meta/v1&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;k8s.io/apimachinery/pkg/runtime&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/client&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/manager&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/reconcile&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
+  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;import&lt;/span&gt; (
+    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;go.uber.org/zap&amp;#34;&lt;/span&gt;
+    metav1 &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;k8s.io/apimachinery/pkg/apis/meta/v1&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;k8s.io/apimachinery/pkg/runtime&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/client&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/manager&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/reconcile&amp;#34;&lt;/span&gt;
+  )
 
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;setReferenceFunc&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;func&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;owner&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;object&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;metav1&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Object&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;scheme&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;runtime&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Scheme&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;error&lt;/span&gt;
+  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;type&lt;/span&gt; setReferenceFunc &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt;(owner, object metav1.Object, scheme *runtime.Scheme) &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;error&lt;/span&gt;
 
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;NewReconciler&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;log&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;zap&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;SugaredLogger&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mgr&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;manager&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Manager&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;srf&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;setReferenceFunc&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;reconcile&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Reconciler&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ReconcileMyResource&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-      &lt;span style=&#34;color:#000&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;          &lt;span style=&#34;color:#000&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
-      &lt;span style=&#34;color:#000&#34;&gt;client&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;       &lt;span style=&#34;color:#000&#34;&gt;mgr&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;GetClient&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(),&lt;/span&gt;
-      &lt;span style=&#34;color:#000&#34;&gt;scheme&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;       &lt;span style=&#34;color:#000&#34;&gt;mgr&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;GetScheme&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(),&lt;/span&gt;
-      &lt;span style=&#34;color:#000&#34;&gt;setReference&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;srf&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
-    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;NewReconciler&lt;/span&gt;(log *zap.SugaredLogger, mgr manager.Manager, srf setReferenceFunc) reconcile.Reconciler {
+    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; &amp;amp;ReconcileMyResource{
+      log:          log,
+      client:       mgr.&lt;span style=&#34;color:#447fcf&#34;&gt;GetClient&lt;/span&gt;(),
+      scheme:       mgr.&lt;span style=&#34;color:#447fcf&#34;&gt;GetScheme&lt;/span&gt;(),
+      setReference: srf,
+    }
+  }
 
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ReconcileMyResource&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;client&lt;/span&gt;       &lt;span style=&#34;color:#000&#34;&gt;client&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Client&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;scheme&lt;/span&gt;       &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;runtime&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Scheme&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;setReference&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;setReferenceFunc&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;log&lt;/span&gt;          &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;zap&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;SugaredLogger&lt;/span&gt;
-  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;type&lt;/span&gt; ReconcileMyResource &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;struct&lt;/span&gt; {
+    client       client.Client
+    scheme       *runtime.Scheme
+    setReference setReferenceFunc
+    log          *zap.SugaredLogger
+  }
 
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;r&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ReconcileMyResource&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Reconcile&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;request&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;reconcile&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Request&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;reconcile&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Result&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;error&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Infof&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Reconciling MyResource %s\n&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;request&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;NamespacedName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;reconcile&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Result&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{},&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt;
-  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; (r *ReconcileMyResource) &lt;span style=&#34;color:#447fcf&#34;&gt;Reconcile&lt;/span&gt;(request reconcile.Request) (reconcile.Result, &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;error&lt;/span&gt;) {
+    r.log.&lt;span style=&#34;color:#447fcf&#34;&gt;Infof&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Reconciling MyResource %s\n&amp;#34;&lt;/span&gt;, request.NamespacedName)
+    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; reconcile.Result{}, &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;nil&lt;/span&gt;
+  }&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;add the new resource to &lt;code&gt;addToSchemes&lt;/code&gt; in &lt;code&gt;pkg/controllers/controller.go&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;add the new controller to &lt;code&gt;addToManagerFuncs&lt;/code&gt; in the same file.&lt;/li&gt;
@@ -193,14 +307,28 @@ make generate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;reconcile-results&#34;&gt;Reconcile Results&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// RequeueOnError will requeue if reconcile also returns an error
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;RequeueOnError&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;reconcile&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Result&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{}&lt;/span&gt;
-&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// Requeue will requeue the request, behaviour is different than returning an error
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Requeue&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;reconcile&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Result&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Requeue&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// RequeueAfterDefault requeues after the default, unless reconcile also returns an error
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;RequeueAfterDefault&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;reconcile&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Result&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;RequeueAfter&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;RequeueAfter&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// NoRequeue does not requeue, unless reconcile also returns an error
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;NoRequeue&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;reconcile&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Result&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Requeue&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// RequeueOnError will requeue if reconcile also returns an error
+&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;RequeueOnError = reconcile.Result{}
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// Requeue will requeue the request, behaviour is different than returning an error
+&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;Requeue = reconcile.Result{Requeue: &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;true&lt;/span&gt;}
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// RequeueAfterDefault requeues after the default, unless reconcile also returns an error
+&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;RequeueAfterDefault = reconcile.Result{RequeueAfter: config.RequeueAfter}
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// NoRequeue does not requeue, unless reconcile also returns an error
+&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;NoRequeue = reconcile.Result{Requeue: &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;false&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;h3 id=&#34;testing&#34;&gt;Testing&lt;/h3&gt;
 
 &lt;ul&gt;
@@ -211,16 +339,32 @@ make generate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;h2 id=&#34;create-or-update-pattern&#34;&gt;Create-Or-Update pattern&lt;/h2&gt;
 
 &lt;p&gt;A pattern that comes up quite often is that an object needs to be updated if it already exists or created if it doesn&amp;rsquo;t. &lt;code&gt;controller-runtime&lt;/code&gt; provides the &lt;code&gt;controller-util&lt;/code&gt; package which has a &lt;code&gt;CreateOrUpdate&lt;/code&gt; function that can help with that. The object&amp;rsquo;s desired state must be reconciled with the existing state inside the passed in callback MutateFn - &lt;code&gt;type MutateFn func() error&lt;/code&gt;. The MutateFn is called regardless of creating or updating an object.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;controllerutil&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;CreateOrUpdate&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ctx&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;client&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;someSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;secretMutateFn&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;someSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;someSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;StringData&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;someSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Labels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;someSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;))&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;_, err = controllerutil.&lt;span style=&#34;color:#447fcf&#34;&gt;CreateOrUpdate&lt;/span&gt;(ctx, r.client, someSecret, &lt;span style=&#34;color:#447fcf&#34;&gt;secretMutateFn&lt;/span&gt;(someSecret, someSecret.StringData, someSecret.Labels, someSecret.Annotations))
 
-&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;secretMutateFn&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;s&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;corev1&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Secret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;secretData&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;map&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;string&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;string&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;labels&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;map&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;string&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;string&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;annotations&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;map&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;string&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;string&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;controllerutil&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;MutateFn&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;func&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;error&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Labels&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;labels&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Annotations&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;annotations&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;StringData&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;secretData&lt;/span&gt;
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt;
-  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;secretMutateFn&lt;/span&gt;(s *corev1.Secret, secretData &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;map&lt;/span&gt;[&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;]&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;, labels &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;map&lt;/span&gt;[&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;]&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;, annotations &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;map&lt;/span&gt;[&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;]&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;) controllerutil.MutateFn {
+  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt;() &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;error&lt;/span&gt; {
+    s.Labels = labels
+    s.Annotations = annotations
+    s.StringData = secretData
+    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;nil&lt;/span&gt;
+  }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;Care must be taken when persisting objects that are already in their final state because they will be overwritten with the existing state if there already is such an object in the system.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;CreateOrUpdate&lt;/code&gt;s should not use blindly &lt;code&gt;DeepCopyInto&lt;/code&gt; or &lt;code&gt;DeepCopy&lt;/code&gt; all the time, but make more precise changes.&lt;/li&gt;
@@ -235,19 +379,41 @@ being handled.&lt;/p&gt;
 
 &lt;p&gt;The &lt;code&gt;ctxlog&lt;/code&gt; module provides a context with a named zap logger and an event recorder to the reconcilers.
 This is how it&amp;rsquo;s set up for reconcilers:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// after logger is available
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ctx&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ctxlog&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;NewParentContext&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// adding named log and event recorder in controllers
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ctx&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ctxlog&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;NewContextWithRecorder&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ctx&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example-reconciler&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mgr&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;GetEventRecorderFor&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example-recorder&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;))&lt;/span&gt;
-&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// adding timeout in reconcilers
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ctx&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;cancel&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;WithTimeout&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ctx&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;timeout&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;defer&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;cancel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// after logger is available
+&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;ctx := ctxlog.&lt;span style=&#34;color:#447fcf&#34;&gt;NewParentContext&lt;/span&gt;(log)
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// adding named log and event recorder in controllers
+&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;ctx = ctxlog.&lt;span style=&#34;color:#447fcf&#34;&gt;NewContextWithRecorder&lt;/span&gt;(ctx, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;example-reconciler&amp;#34;&lt;/span&gt;, mgr.&lt;span style=&#34;color:#447fcf&#34;&gt;GetEventRecorderFor&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;example-recorder&amp;#34;&lt;/span&gt;))
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// adding timeout in reconcilers
+&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;ctx, cancel := context.&lt;span style=&#34;color:#447fcf&#34;&gt;WithTimeout&lt;/span&gt;(ctx, timeout)
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;defer&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;cancel&lt;/span&gt;()&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;The &lt;code&gt;ctxlog&lt;/code&gt; package provides several logging functions. &lt;code&gt;Infof&lt;/code&gt;, &lt;code&gt;Errorf&lt;/code&gt;, &lt;code&gt;Error&lt;/code&gt; and such wrap the corresponding zap log methods.&lt;/p&gt;
 
 &lt;p&gt;The logging functions are also implemented on struct, to add event generation to the logging:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;ctxlog&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;WithEvent&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;instance&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Reason&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Infof&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;message: %s&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;v&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ctxlog&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;WithEvent&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;instance&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Reason&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Errorf&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;message: %s&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;v&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ctxlog&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;WithEvent&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;instance&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Reason&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Error&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;part&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;part&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;part&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;ctxlog.&lt;span style=&#34;color:#447fcf&#34;&gt;WithEvent&lt;/span&gt;(instance, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Reason&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#447fcf&#34;&gt;Infof&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;message: %s&amp;#34;&lt;/span&gt;, v)
+err := ctxlog.&lt;span style=&#34;color:#447fcf&#34;&gt;WithEvent&lt;/span&gt;(instance, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Reason&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#447fcf&#34;&gt;Errorf&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;message: %s&amp;#34;&lt;/span&gt;, v)
+err := ctxlog.&lt;span style=&#34;color:#447fcf&#34;&gt;WithEvent&lt;/span&gt;(instance, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Reason&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#447fcf&#34;&gt;Error&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;part&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;part&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;part&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;The reason should be camel-case, so switch statements could match it.&lt;/p&gt;
 
 &lt;p&gt;Error funcs like &lt;code&gt;WithEvent().Errorf()&lt;/code&gt; also return an error, with the same message as the log message and event that were generated.&lt;/p&gt;
@@ -414,7 +580,14 @@ There is also &lt;code&gt;ginkgo generate&lt;/code&gt; to create skeleton test f
 &lt;h3 id=&#34;setup-ruby&#34;&gt;Setup Ruby&lt;/h3&gt;
 
 &lt;p&gt;Ruby gem for template rendering&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;gem install bosh-template&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;gem install bosh-template&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 id=&#34;integration&#34;&gt;Integration&lt;/h2&gt;
 
 &lt;p&gt;Integration tests formulate expectations on the interactions of several components.
@@ -432,9 +605,18 @@ In &lt;code&gt;testing&lt;/code&gt; the &lt;code&gt;catalog&lt;/code&gt; defines
 Each Ginkgo test node has a separate namespace, log file and webhook server port and certificate.&lt;/p&gt;
 
 &lt;p&gt;The node index starts at 1 and is used as following to generate names:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;namespace: &lt;span style=&#34;color:#000&#34;&gt;$TEST_NAMESPACE&lt;/span&gt; + &amp;lt;node_index&amp;gt;
-webhook port: &lt;span style=&#34;color:#000&#34;&gt;$CF_OPERATOR_WEBHOOK_SERVICE_PORT&lt;/span&gt; + &amp;lt;node_index&amp;gt;
-log file: &lt;span style=&#34;color:#000&#34;&gt;$CF_OPERATOR_TESTING_TMP&lt;/span&gt;/cf-operator-tests-&amp;lt;node_index&amp;gt;.log&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;namespace: &lt;span style=&#34;color:#40ffff&#34;&gt;$TEST_NAMESPACE&lt;/span&gt; + &amp;lt;node_index&amp;gt;
+webhook port: &lt;span style=&#34;color:#40ffff&#34;&gt;$CF_OPERATOR_WEBHOOK_SERVICE_PORT&lt;/span&gt; + &amp;lt;node_index&amp;gt;
+log file: &lt;span style=&#34;color:#40ffff&#34;&gt;$CF_OPERATOR_TESTING_TMP&lt;/span&gt;/cf-operator-tests-&amp;lt;node_index&amp;gt;.log&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;Integration tests use the &lt;code&gt;TEST_NAMESPACE&lt;/code&gt; environment variable as a base to
 calculate the namespace name. Test namespaces are deleted automatically once
 the tests are completed.&lt;/p&gt;
@@ -493,32 +675,81 @@ The CLI tests build the operator binary themselves.&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Start &lt;code&gt;minikube&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;minikube start --kubernetes-version v1.15.5&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;minikube start --kubernetes-version v1.15.5&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Switch to minikube docker daemon&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;eval&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;minikube docker-env&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;eval&lt;/span&gt; &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;minikube docker-env&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Template rendering for BOSH jobs is done at deployment time by the operator
 binary. Therefore the operator docker image needs to be made available to
 Kubernetes cluster.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Export the &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt; env variable&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip -4 a s dev &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip r l &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;/0 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; cut -f5 -d&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; grep -oP &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;inet \K\S+(?=/)&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/span&gt;=&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip -4 a s dev &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip r l &lt;span style=&#34;color:#3677a9&#34;&gt;0&lt;/span&gt;/0 | cut -f5 -d&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt; | grep -oP &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;inet \K\S+(?=/)&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: On Mac, use &lt;code&gt;export CF_OPERATOR_WEBHOOK_SERVICE_HOST=$(ip a s $(ip r g 0/0 | cut -f5 -d&#39; &#39;) | grep -oE &#39;inet [^ /]+&#39; | cut -f2 -d&#39; &#39;)&lt;/code&gt;, because grep cannot handle perl regexs.
 &lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: You can also find the correct IP, by running &lt;code&gt;ip addr&lt;/code&gt;. The IP address under &lt;code&gt;vboxnet1&lt;/code&gt; is the IP that you need.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Export the &lt;code&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/code&gt; env variable&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;standard&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/span&gt;=standard&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Require for the PVC test creation, in minikube.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Ensure &lt;code&gt;GO111MODULE&lt;/code&gt; is set&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;GO111MODULE&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;on&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;GO111MODULE&lt;/span&gt;=on&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: When you have a vendor folder (either from the submodule or manually created) settings this to &lt;code&gt;off&lt;/code&gt; speeds up the &lt;code&gt;build-image&lt;/code&gt; target.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Build the &lt;code&gt;cf-operator&lt;/code&gt; binary&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Build the &lt;code&gt;cf-operator&lt;/code&gt; docker image&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-image&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-image&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Consider setting &lt;code&gt;DOCKER_IMAGE_TAG&lt;/code&gt; to a fixed variable. This will avoid rebuilding the docker image everytime, when doing changes in files not related to the &lt;code&gt;cf-operator&lt;/code&gt;
@@ -526,8 +757,16 @@ binary.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: When not running in CI, nothing ensures a proper cleanup of resources after the deletion of the &lt;code&gt;cf-operator&lt;/code&gt; in the environment. You can make sure to manually verify that none
 old resources will interfere with a future installation, by:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Deleting old mutating webhooks configurations&lt;/span&gt;
-kubectl get mutatingwebhookconfiguration -oname &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; xargs -n &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; kubectl delete&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# Deleting old mutating webhooks configurations&lt;/span&gt;
+kubectl get mutatingwebhookconfiguration -oname | xargs -n &lt;span style=&#34;color:#3677a9&#34;&gt;1&lt;/span&gt; kubectl delete&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;h3 id=&#34;in-kind&#34;&gt;In KinD&lt;/h3&gt;
 
 &lt;p&gt;The following steps are necessary to have a proper environment setup, where all types of tests can be executed:&lt;/p&gt;
@@ -540,23 +779,58 @@ kubectl get mutatingwebhookconfiguration -oname &lt;span style=&#34;color:#000;f
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Start cluster&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kind create cluster --image kindest/node:v1.15.6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kind create cluster --image kindest/node:v1.15.6&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Export the &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt; env variable. Use the IP of the docker bridge or your public IP. Firewall rules may interfere.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip -4 a s dev &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip r l &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;/0 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; cut -f5 -d&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; grep -oP &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;inet \K\S+(?=/)&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/span&gt;=&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip -4 a s dev &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip r l &lt;span style=&#34;color:#3677a9&#34;&gt;0&lt;/span&gt;/0 | cut -f5 -d&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt; | grep -oP &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;inet \K\S+(?=/)&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: On Mac, use &lt;code&gt;export CF_OPERATOR_WEBHOOK_SERVICE_HOST=$(ip a s $(ip r g 0/0 | cut -f5 -d&#39; &#39;) | grep -oE &#39;inet [^ /]+&#39; | cut -f2 -d&#39; &#39;)&lt;/code&gt;, because grep cannot handle perl regexs.&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Export the &lt;code&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/code&gt; env variable&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;standard&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/span&gt;=standard&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Required for the PVC tests.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Build the &lt;code&gt;cf-operator&lt;/code&gt; docker image&lt;/p&gt;
 
 &lt;p&gt;First set the version to something static, not dependant on git:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;DOCKER_IMAGE_TAG&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;DOCKER_IMAGE_TAG&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dev&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-image&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;DOCKER_IMAGE_TAG&lt;/span&gt;=&lt;span style=&#34;color:#ed9d13&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;DOCKER_IMAGE_TAG&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;dev&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-image&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;Or if you have local changes and use &lt;code&gt;go mod edit --replace&lt;/code&gt;,
 follow instructions from &lt;a href=&#34;../../development/development#standalone-components&#34;&gt;development&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
 
@@ -768,8 +1042,16 @@ That job triggers itself, when a draft release is created.&lt;/p&gt;
 
 &lt;p&gt;We release from release-branches. Each maintained release has a separate pipeline in Concourse.
 To create a new pipeline run this in the CI repository:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; pipelines/cf-operator-release
-./configure.sh CFO v0.4.x v0.4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;cd&lt;/span&gt; pipelines/cf-operator-release
+./configure.sh CFO v0.4.x v0.4&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;Where &lt;code&gt;CFO&lt;/code&gt; is your concourse target and &lt;code&gt;v0.4.x&lt;/code&gt; is the name of the branch.
 The last argument, &lt;code&gt;v0.4&lt;/code&gt; is used to filter Github tags, which belong to the release.&lt;/p&gt;
 
@@ -850,12 +1132,24 @@ The assets will be copied into a &amp;lsquo;release&amp;rsquo; folder on S3.&lt;
 &lt;p&gt;The &lt;code&gt;cf-operator&lt;/code&gt; requires the according CRDs to be installed in the cluster in order to work as expected. By default, the &lt;code&gt;cf-operator&lt;/code&gt; applies CRDs in your cluster automatically.&lt;/p&gt;
 
 &lt;p&gt;To verify that the CRD´s are installed:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl get crds
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl get crds
 NAME                                            CREATED AT
-boshdeployments.quarks.cloudfoundry.org        &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z
-quarksjobs.quarks.cloudfoundry.org           &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z
-quarkssecrets.quarks.cloudfoundry.org        &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z
-quarksstatefulsets.quarks.cloudfoundry.org   &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+boshdeployments.quarks.cloudfoundry.org        &lt;span style=&#34;color:#3677a9&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z
+quarksjobs.quarks.cloudfoundry.org           &lt;span style=&#34;color:#3677a9&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z
+quarkssecrets.quarks.cloudfoundry.org        &lt;span style=&#34;color:#3677a9&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z
+quarksstatefulsets.quarks.cloudfoundry.org   &lt;span style=&#34;color:#3677a9&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;h3 id=&#34;architecture-design&#34;&gt;Architecture design&lt;/h3&gt;
 
 &lt;p&gt;Draw.io with the sources for the &lt;code&gt;quarks_deployment_flow-*png&lt;/code&gt; controller charts:&lt;/p&gt;

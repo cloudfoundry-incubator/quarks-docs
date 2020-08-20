@@ -25,14 +25,14 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/core-tasks/troubleshooting/" />
-<meta property="article:modified_time" content="2020-08-14T07:05:43+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-20T11:39:03+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Troubleshooting">
 <meta itemprop="description" content="Troubleshooting notes for Quarks-operator
 ">
 
 
-<meta itemprop="dateModified" content="2020-08-14T07:05:43&#43;02:00" />
-<meta itemprop="wordCount" content="187">
+<meta itemprop="dateModified" content="2020-08-20T11:39:03&#43;02:00" />
+<meta itemprop="wordCount" content="201">
 
 
 
@@ -110,7 +110,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -142,7 +142,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -787,24 +787,50 @@ The operator uses mutating webhooks to modify pods on the fly and Kubernetes fai
 The webhook configurations are installed cluster wide and don&rsquo;t belong to a single namespace, just like custom resources.</p>
 
 <p>To remove the webhook configurations for the cf-operator namespace run:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#000">CF_OPERATOR_NAMESPACE</span><span style="color:#ce5c00;font-weight:bold">=</span>cf-operator
-kubectl delete mutatingwebhookconfiguration <span style="color:#4e9a06">&#34;cf-operator-hook-</span><span style="color:#000">$CF_OPERATOR_NAMESPACE</span><span style="color:#4e9a06">&#34;</span>
-kubectl delete validatingwebhookconfiguration <span style="color:#4e9a06">&#34;cf-operator-hook-</span><span style="color:#000">$CF_OPERATOR_NAMESPACE</span><span style="color:#4e9a06">&#34;</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#40ffff">CF_OPERATOR_NAMESPACE</span>=cf-operator
+kubectl delete mutatingwebhookconfiguration <span style="color:#ed9d13">&#34;cf-operator-hook-</span><span style="color:#40ffff">$CF_OPERATOR_NAMESPACE</span><span style="color:#ed9d13">&#34;</span>
+kubectl delete validatingwebhookconfiguration <span style="color:#ed9d13">&#34;cf-operator-hook-</span><span style="color:#40ffff">$CF_OPERATOR_NAMESPACE</span><span style="color:#ed9d13">&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
 <p>From <strong>Kubernetes 1.15</strong> onwards, it is possible to instead patch the webhook configurations for the cf-operator namespace via:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#000">CF_OPERATOR_NAMESPACE</span><span style="color:#ce5c00;font-weight:bold">=</span>cf-operator
-kubectl patch mutatingwebhookconfigurations <span style="color:#4e9a06">&#34;cf-operator-hook-</span><span style="color:#000">$CF_OPERATOR_NAMESPACE</span><span style="color:#4e9a06">&#34;</span> -p <span style="color:#4e9a06">&#39;
-</span><span style="color:#4e9a06">webhooks:
-</span><span style="color:#4e9a06">- name: mutate-pods.quarks.cloudfoundry.org
-</span><span style="color:#4e9a06">  objectSelector:
-</span><span style="color:#4e9a06">    matchExpressions:
-</span><span style="color:#4e9a06">    - key: name
-</span><span style="color:#4e9a06">      operator: NotIn
-</span><span style="color:#4e9a06">      values:
-</span><span style="color:#4e9a06">      - &#34;cf-operator&#34;
-</span><span style="color:#4e9a06">&#39;</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#40ffff">CF_OPERATOR_NAMESPACE</span>=cf-operator
+kubectl patch mutatingwebhookconfigurations <span style="color:#ed9d13">&#34;cf-operator-hook-</span><span style="color:#40ffff">$CF_OPERATOR_NAMESPACE</span><span style="color:#ed9d13">&#34;</span> -p <span style="color:#ed9d13">&#39;
+</span><span style="color:#ed9d13">webhooks:
+</span><span style="color:#ed9d13">- name: mutate-pods.quarks.cloudfoundry.org
+</span><span style="color:#ed9d13">  objectSelector:
+</span><span style="color:#ed9d13">    matchExpressions:
+</span><span style="color:#ed9d13">    - key: name
+</span><span style="color:#ed9d13">      operator: NotIn
+</span><span style="color:#ed9d13">      values:
+</span><span style="color:#ed9d13">      - &#34;cf-operator&#34;
+</span><span style="color:#ed9d13">&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 14, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/028bea137e62c9cbd38988d2d0752d91812c1e21">Merge pull request #3 from cloudfoundry-incubator/az-docs (028bea1)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/483ad1b3bbfb6e2cb3280eb5e17d597ee305875b">Merge pull request #4 from cloudfoundry-incubator/173656732-qsecrequest (483ad1b)</a>
 </div>
 </div>
 

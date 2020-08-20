@@ -26,15 +26,15 @@ The name cannot start or end with a &quot;-&quot;. These characters are trimmed.
 Names are also restricted to 63 characters in length, so if a generated name exceeds 63 characters, it should be recalculated as:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/concepts/naming/" />
-<meta property="article:modified_time" content="2020-08-14T07:05:43+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-20T11:39:03+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Naming Conventions">
 <meta itemprop="description" content="Naming Conventions  Kubernetes Resources Kubernetes Services   Kubernetes Resources Kube names can only consist of lowercase alphanumeric characters, and the character &quot;-&quot;. All &quot;_&quot; characters are replaced with &quot;-&quot;. All other non-alphanumeric characters are removed.
 The name cannot start or end with a &quot;-&quot;. These characters are trimmed.
 Names are also restricted to 63 characters in length, so if a generated name exceeds 63 characters, it should be recalculated as:">
 
 
-<meta itemprop="dateModified" content="2020-08-14T07:05:43&#43;02:00" />
-<meta itemprop="wordCount" content="137">
+<meta itemprop="dateModified" content="2020-08-20T11:39:03&#43;02:00" />
+<meta itemprop="wordCount" content="140">
 
 
 
@@ -113,7 +113,7 @@ Names are also restricted to 63 characters in length, so if a generated name exc
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,7 +145,7 @@ Names are also restricted to 63 characters in length, so if a generated name exc
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -795,16 +795,25 @@ All <code>&quot;_&quot;</code> characters are replaced with <code>&quot;-&quot;<
 <p>The <code>name</code> cannot start or end with a <code>&quot;-&quot;</code>. These characters are trimmed.</p>
 
 <p>Names are also restricted to 63 characters in length, so if a generated name exceeds 63 characters, it should be recalculated as:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">name=&lt;INSTANCE_GROUP_NAME&gt;-&lt;INDEX&gt;&lt;DEPLOYMENT_NAME&gt;
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">name=&lt;INSTANCE_GROUP_NAME&gt;-&lt;INDEX&gt;&lt;DEPLOYMENT_NAME&gt;
 
-&lt;name trimmed to 31 characters&gt;&lt;md5 hash of name&gt;</code></pre></div>
+&lt;name trimmed to 31 characters&gt;&lt;md5 hash of name&gt;</code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="kubernetes-services">Kubernetes Services</h3>
 
 <p>The same check needs to apply to the entire address of a <code>Service</code>. If an entire address is longer than 253 characters, the <code>servicename</code> is trimmed until there&rsquo;s enough room for the MD5 hash. If it&rsquo;s not possible to include the hash (<code>KUBE_NAMESPACE</code> and <code>KUBE_SERVICE_DOMAIN</code> and the dots are 221 characters or more), an error is thrown.</p>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 14, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/028bea137e62c9cbd38988d2d0752d91812c1e21">Merge pull request #3 from cloudfoundry-incubator/az-docs (028bea1)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/483ad1b3bbfb6e2cb3280eb5e17d597ee305875b">Merge pull request #4 from cloudfoundry-incubator/173656732-qsecrequest (483ad1b)</a>
 </div>
 </div>
 

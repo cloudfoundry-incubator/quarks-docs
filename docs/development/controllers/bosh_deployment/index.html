@@ -25,14 +25,14 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/development/controllers/bosh_deployment/" />
-<meta property="article:modified_time" content="2020-08-14T07:05:43+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-20T11:39:03+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Bosh Deployment">
 <meta itemprop="description" content="Deploying a Bosh Deployment on Kubernetes
 ">
 
 
-<meta itemprop="dateModified" content="2020-08-14T07:05:43&#43;02:00" />
-<meta itemprop="wordCount" content="1006">
+<meta itemprop="dateModified" content="2020-08-20T11:39:03&#43;02:00" />
+<meta itemprop="wordCount" content="1018">
 
 
 
@@ -110,7 +110,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -142,7 +142,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -992,18 +992,36 @@ as the <code>.ig-resolved.&lt;instance_group_name&gt;-v1</code> versioned secret
 The controller annotates the instance groups and the jobs counters and it resolves the BDPL State (<code>Deployed</code>, <code>Converting</code> , <code>Resolving</code>) by looking at the associated resources states and computing the overall state.</p>
 
 <p>The <code>BOSHDeployment</code> status spec is composed of the following fields:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8f5902;font-style:italic">// BOSHDeploymentStatus defines the observed state of BOSHDeployment
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">BOSHDeploymentStatus</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000;font-weight:bold">{</span>
-	<span style="color:#8f5902;font-style:italic">// Timestamp for the last reconcile
-</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">LastReconcile</span>          <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">metav1</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Time</span> <span style="color:#4e9a06">`json:&#34;lastReconcile&#34;`</span>
-	<span style="color:#000">State</span>                  <span style="color:#204a87;font-weight:bold">string</span>       <span style="color:#4e9a06">`json:&#34;state&#34;`</span>
-	<span style="color:#000">Message</span>                <span style="color:#204a87;font-weight:bold">string</span>       <span style="color:#4e9a06">`json:&#34;message&#34;`</span>
-	<span style="color:#000">TotalJobCount</span>          <span style="color:#204a87;font-weight:bold">int</span>          <span style="color:#4e9a06">`json:&#34;totalJobCount&#34;`</span>
-	<span style="color:#000">CompletedJobCount</span>      <span style="color:#204a87;font-weight:bold">int</span>          <span style="color:#4e9a06">`json:&#34;completedJobCount&#34;`</span>
-	<span style="color:#000">TotalInstanceGroups</span>    <span style="color:#204a87;font-weight:bold">int</span>          <span style="color:#4e9a06">`json:&#34;totalInstanceGroups&#34;`</span>
-	<span style="color:#000">DeployedInstanceGroups</span> <span style="color:#204a87;font-weight:bold">int</span>          <span style="color:#4e9a06">`json:&#34;deployedInstanceGroups&#34;`</span>
-	<span style="color:#000">StateTimestamp</span>         <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">metav1</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Time</span> <span style="color:#4e9a06">`json:&#34;stateTimestamp&#34;`</span>
-<span style="color:#000;font-weight:bold">}</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#999;font-style:italic">// BOSHDeploymentStatus defines the observed state of BOSHDeployment
+</span><span style="color:#999;font-style:italic"></span><span style="color:#6ab825;font-weight:bold">type</span> BOSHDeploymentStatus <span style="color:#6ab825;font-weight:bold">struct</span> {
+	<span style="color:#999;font-style:italic">// Timestamp for the last reconcile
+</span><span style="color:#999;font-style:italic"></span>	LastReconcile          *metav1.Time <span style="color:#ed9d13">`json:&#34;lastReconcile&#34;`</span>
+	State                  <span style="color:#6ab825;font-weight:bold">string</span>       <span style="color:#ed9d13">`json:&#34;state&#34;`</span>
+	Message                <span style="color:#6ab825;font-weight:bold">string</span>       <span style="color:#ed9d13">`json:&#34;message&#34;`</span>
+	TotalJobCount          <span style="color:#6ab825;font-weight:bold">int</span>          <span style="color:#ed9d13">`json:&#34;totalJobCount&#34;`</span>
+	CompletedJobCount      <span style="color:#6ab825;font-weight:bold">int</span>          <span style="color:#ed9d13">`json:&#34;completedJobCount&#34;`</span>
+	TotalInstanceGroups    <span style="color:#6ab825;font-weight:bold">int</span>          <span style="color:#ed9d13">`json:&#34;totalInstanceGroups&#34;`</span>
+	DeployedInstanceGroups <span style="color:#6ab825;font-weight:bold">int</span>          <span style="color:#ed9d13">`json:&#34;deployedInstanceGroups&#34;`</span>
+	StateTimestamp         *metav1.Time <span style="color:#ed9d13">`json:&#34;stateTimestamp&#34;`</span>
+}</code></pre></td></tr></table>
+</div>
+</div>
 <p>The <code>BOSHDeployment</code> States can be:</p>
 
 <ul>
@@ -1025,7 +1043,7 @@ The controller annotates the instance groups and the jobs counters and it resolv
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 14, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/028bea137e62c9cbd38988d2d0752d91812c1e21">Merge pull request #3 from cloudfoundry-incubator/az-docs (028bea1)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/483ad1b3bbfb6e2cb3280eb5e17d597ee305875b">Merge pull request #4 from cloudfoundry-incubator/173656732-qsecrequest (483ad1b)</a>
 </div>
 </div>
 

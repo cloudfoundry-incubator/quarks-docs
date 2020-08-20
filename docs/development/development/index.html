@@ -22,17 +22,17 @@
 
 <title>Development Guidelines | Quarks project</title><meta property="og:title" content="Development Guidelines" />
 <meta property="og:description" content="Development  Requirements Dependencies Creating a new Resource and Controller Reconcile Results Testing Create-Or-Update pattern Logging and Events Standalone Components Versioning Colourise Logs   Requirements  A working Kubernetes cluster Helm v3 binary Go 1.12.2 and install the tool chain: make tools  Dependencies Run with libraries fetched via go modules:
-export GO111MODULE=on Custom Resource Definitions (CRDs) Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs)." />
+1  export GO111MODULE=on   Custom Resource Definitions (CRDs) Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs)." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/development/development/" />
-<meta property="article:modified_time" content="2020-08-14T07:05:43+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-20T11:39:03+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Development Guidelines">
 <meta itemprop="description" content="Development  Requirements Dependencies Creating a new Resource and Controller Reconcile Results Testing Create-Or-Update pattern Logging and Events Standalone Components Versioning Colourise Logs   Requirements  A working Kubernetes cluster Helm v3 binary Go 1.12.2 and install the tool chain: make tools  Dependencies Run with libraries fetched via go modules:
-export GO111MODULE=on Custom Resource Definitions (CRDs) Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs).">
+1  export GO111MODULE=on   Custom Resource Definitions (CRDs) Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs).">
 
 
-<meta itemprop="dateModified" content="2020-08-14T07:05:43&#43;02:00" />
-<meta itemprop="wordCount" content="1391">
+<meta itemprop="dateModified" content="2020-08-20T11:39:03&#43;02:00" />
+<meta itemprop="wordCount" content="1497">
 
 
 
@@ -40,7 +40,7 @@ export GO111MODULE=on Custom Resource Definitions (CRDs) Kubernetes allows devel
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Development Guidelines"/>
 <meta name="twitter:description" content="Development  Requirements Dependencies Creating a new Resource and Controller Reconcile Results Testing Create-Or-Update pattern Logging and Events Standalone Components Versioning Colourise Logs   Requirements  A working Kubernetes cluster Helm v3 binary Go 1.12.2 and install the tool chain: make tools  Dependencies Run with libraries fetched via go modules:
-export GO111MODULE=on Custom Resource Definitions (CRDs) Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs)."/>
+1  export GO111MODULE=on   Custom Resource Definitions (CRDs) Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs)."/>
 
 
 
@@ -110,7 +110,7 @@ export GO111MODULE=on Custom Resource Definitions (CRDs) Kubernetes allows devel
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -142,7 +142,7 @@ export GO111MODULE=on Custom Resource Definitions (CRDs) Kubernetes allows devel
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -821,7 +821,14 @@ export GO111MODULE=on Custom Resource Definitions (CRDs) Kubernetes allows devel
 <h2 id="dependencies">Dependencies</h2>
 
 <p>Run with libraries fetched via go modules:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">export</span> <span style="color:#000">GO111MODULE</span><span style="color:#ce5c00;font-weight:bold">=</span>on</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#24909d">export</span> <span style="color:#40ffff">GO111MODULE</span>=on</code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="custom-resource-definitions-crds">Custom Resource Definitions (CRDs)</h2>
 
 <p>Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four <a href="https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds" target="_blank">CRDs</a> (see <a href="../controllers">Controllers</a>):</p>
@@ -863,23 +870,54 @@ You can also copy the files and modify them.</p>
 
 <ul>
 <li><p>in <code>bin/gen-kube</code>, add your resource to the <code>GROUP_VERSIONS</code> variable (separated by a space <code>&quot; &quot;</code>):</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8f5902;font-style:italic"># ...</span>
-<span style="color:#000">GROUP_VERSIONS</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;boshdeployment:v1alpha1 &lt;controller_name&gt;:&lt;version&gt;&#34;</span>
-<span style="color:#8f5902;font-style:italic"># ...</span></code></pre></div></li>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#999;font-style:italic"># ...</span>
+<span style="color:#40ffff">GROUP_VERSIONS</span>=<span style="color:#ed9d13">&#34;boshdeployment:v1alpha1 &lt;controller_name&gt;:&lt;version&gt;&#34;</span>
+<span style="color:#999;font-style:italic"># ...</span></code></pre></td></tr></table>
+</div>
+</div></li>
 
 <li><p>regenerate code</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8f5902;font-style:italic"># int the root of the project</span>
-make generate</code></pre></div></li>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#999;font-style:italic"># int the root of the project</span>
+make generate</code></pre></td></tr></table>
+</div>
+</div></li>
 
 <li><p>create a directory structure like this for your actual controller code:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">.
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">.
 +-- pkg
    +-- kube
        +-- controllers
            +-- &lt;controller_name&gt;
            ¦   +-- controller.go
            ¦   +-- reconciler.go
-           +-- controller.go</code></pre></div>
+           +-- controller.go</code></pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li><code>controller.go</code> is your controller implementation; this is where you should implement an <code>Add</code> function where register the controller with the <code>Manager</code>, and you watch for changes for resources that you care about.</li>
 <li><code>reconciler.go</code> contains the code that takes action and reconciles actual state with desired state.</li>
@@ -890,71 +928,147 @@ make generate</code></pre></div></li>
   As always, use the other implementations to get you started.</p>
 
 <p><strong>Controller:</strong></p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">  <span style="color:#204a87;font-weight:bold">package</span> <span style="color:#000">mycontroller</span>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">  <span style="color:#6ab825;font-weight:bold">package</span> mycontroller
 
-  <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
-    <span style="color:#4e9a06">&#34;go.uber.org/zap&#34;</span>
+  <span style="color:#6ab825;font-weight:bold">import</span> (
+    <span style="color:#ed9d13">&#34;go.uber.org/zap&#34;</span>
 
-    <span style="color:#4e9a06">&#34;sigs.k8s.io/controller-runtime/pkg/controller&#34;</span>
-    <span style="color:#4e9a06">&#34;sigs.k8s.io/controller-runtime/pkg/controller/controllerutil&#34;</span>
-    <span style="color:#4e9a06">&#34;sigs.k8s.io/controller-runtime/pkg/handler&#34;</span>
-    <span style="color:#4e9a06">&#34;sigs.k8s.io/controller-runtime/pkg/manager&#34;</span>
-    <span style="color:#4e9a06">&#34;sigs.k8s.io/controller-runtime/pkg/source&#34;</span>
+    <span style="color:#ed9d13">&#34;sigs.k8s.io/controller-runtime/pkg/controller&#34;</span>
+    <span style="color:#ed9d13">&#34;sigs.k8s.io/controller-runtime/pkg/controller/controllerutil&#34;</span>
+    <span style="color:#ed9d13">&#34;sigs.k8s.io/controller-runtime/pkg/handler&#34;</span>
+    <span style="color:#ed9d13">&#34;sigs.k8s.io/controller-runtime/pkg/manager&#34;</span>
+    <span style="color:#ed9d13">&#34;sigs.k8s.io/controller-runtime/pkg/source&#34;</span>
 
-    <span style="color:#000">mrcv1</span> <span style="color:#4e9a06">&#34;code.cloudfoundry.org/quarks-operator/pkg/kube/apis/myresourcecontroller/v1&#34;</span>
-  <span style="color:#000;font-weight:bold">)</span>
+    mrcv1 <span style="color:#ed9d13">&#34;code.cloudfoundry.org/quarks-operator/pkg/kube/apis/myresourcecontroller/v1&#34;</span>
+  )
 
-  <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">Add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">log</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">zap</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">SugaredLogger</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">mgr</span> <span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Manager</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
-    <span style="color:#000">r</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">NewReconciler</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">log</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">mgr</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">controllerutil</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">SetControllerReference</span><span style="color:#000;font-weight:bold">)</span>
+  <span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">Add</span>(log *zap.SugaredLogger, mgr manager.Manager) <span style="color:#6ab825;font-weight:bold">error</span> {
+    r := <span style="color:#447fcf">NewReconciler</span>(log, mgr, controllerutil.SetControllerReference)
 
-    <span style="color:#8f5902;font-style:italic">// Create a new controller
-</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000">c</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">controller</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">New</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;myresource-controller&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">mgr</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">controller</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Reconciler</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">r</span><span style="color:#000;font-weight:bold">})</span>
-    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
-      <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">err</span>
-    <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#999;font-style:italic">// Create a new controller
+</span><span style="color:#999;font-style:italic"></span>    c, err := controller.<span style="color:#447fcf">New</span>(<span style="color:#ed9d13">&#34;myresource-controller&#34;</span>, mgr, controller.Options{Reconciler: r})
+    <span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+      <span style="color:#6ab825;font-weight:bold">return</span> err
+    }
 
-    <span style="color:#8f5902;font-style:italic">// Watch for changes to primary resource
-</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000">err</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">c</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Watch</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">source</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Kind</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Type</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">mrcv1</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">MyResource</span><span style="color:#000;font-weight:bold">{}},</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">handler</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EnqueueRequestForObject</span><span style="color:#000;font-weight:bold">{})</span>
-    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
-      <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">err</span>
-    <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#999;font-style:italic">// Watch for changes to primary resource
+</span><span style="color:#999;font-style:italic"></span>    err = c.<span style="color:#447fcf">Watch</span>(&amp;source.Kind{Type: &amp;mrcv1.MyResource{}}, &amp;handler.EnqueueRequestForObject{})
+    <span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+      <span style="color:#6ab825;font-weight:bold">return</span> err
+    }
 
-    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">nil</span>
-  <span style="color:#000;font-weight:bold">}</span></code></pre></div>
+    <span style="color:#6ab825;font-weight:bold">return</span> <span style="color:#6ab825;font-weight:bold">nil</span>
+  }</code></pre></td></tr></table>
+</div>
+</div>
 <p><strong>Reconciler:</strong></p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">  <span style="color:#204a87;font-weight:bold">package</span> <span style="color:#000">myresource</span>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">33
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">  <span style="color:#6ab825;font-weight:bold">package</span> myresource
 
-  <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
-    <span style="color:#4e9a06">&#34;go.uber.org/zap&#34;</span>
-    <span style="color:#000">metav1</span> <span style="color:#4e9a06">&#34;k8s.io/apimachinery/pkg/apis/meta/v1&#34;</span>
-    <span style="color:#4e9a06">&#34;k8s.io/apimachinery/pkg/runtime&#34;</span>
-    <span style="color:#4e9a06">&#34;sigs.k8s.io/controller-runtime/pkg/client&#34;</span>
-    <span style="color:#4e9a06">&#34;sigs.k8s.io/controller-runtime/pkg/manager&#34;</span>
-    <span style="color:#4e9a06">&#34;sigs.k8s.io/controller-runtime/pkg/reconcile&#34;</span>
-  <span style="color:#000;font-weight:bold">)</span>
+  <span style="color:#6ab825;font-weight:bold">import</span> (
+    <span style="color:#ed9d13">&#34;go.uber.org/zap&#34;</span>
+    metav1 <span style="color:#ed9d13">&#34;k8s.io/apimachinery/pkg/apis/meta/v1&#34;</span>
+    <span style="color:#ed9d13">&#34;k8s.io/apimachinery/pkg/runtime&#34;</span>
+    <span style="color:#ed9d13">&#34;sigs.k8s.io/controller-runtime/pkg/client&#34;</span>
+    <span style="color:#ed9d13">&#34;sigs.k8s.io/controller-runtime/pkg/manager&#34;</span>
+    <span style="color:#ed9d13">&#34;sigs.k8s.io/controller-runtime/pkg/reconcile&#34;</span>
+  )
 
-  <span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">setReferenceFunc</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">owner</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">object</span> <span style="color:#000">metav1</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Object</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">scheme</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">runtime</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Scheme</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span>
+  <span style="color:#6ab825;font-weight:bold">type</span> setReferenceFunc <span style="color:#6ab825;font-weight:bold">func</span>(owner, object metav1.Object, scheme *runtime.Scheme) <span style="color:#6ab825;font-weight:bold">error</span>
 
-  <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">NewReconciler</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">log</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">zap</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">SugaredLogger</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">mgr</span> <span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Manager</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">srf</span> <span style="color:#000">setReferenceFunc</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">reconcile</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Reconciler</span> <span style="color:#000;font-weight:bold">{</span>
-    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">ReconcileMyResource</span><span style="color:#000;font-weight:bold">{</span>
-      <span style="color:#000">log</span><span style="color:#000;font-weight:bold">:</span>          <span style="color:#000">log</span><span style="color:#000;font-weight:bold">,</span>
-      <span style="color:#000">client</span><span style="color:#000;font-weight:bold">:</span>       <span style="color:#000">mgr</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetClient</span><span style="color:#000;font-weight:bold">(),</span>
-      <span style="color:#000">scheme</span><span style="color:#000;font-weight:bold">:</span>       <span style="color:#000">mgr</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetScheme</span><span style="color:#000;font-weight:bold">(),</span>
-      <span style="color:#000">setReference</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">srf</span><span style="color:#000;font-weight:bold">,</span>
-    <span style="color:#000;font-weight:bold">}</span>
-  <span style="color:#000;font-weight:bold">}</span>
+  <span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">NewReconciler</span>(log *zap.SugaredLogger, mgr manager.Manager, srf setReferenceFunc) reconcile.Reconciler {
+    <span style="color:#6ab825;font-weight:bold">return</span> &amp;ReconcileMyResource{
+      log:          log,
+      client:       mgr.<span style="color:#447fcf">GetClient</span>(),
+      scheme:       mgr.<span style="color:#447fcf">GetScheme</span>(),
+      setReference: srf,
+    }
+  }
 
-  <span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">ReconcileMyResource</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000;font-weight:bold">{</span>
-    <span style="color:#000">client</span>       <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Client</span>
-    <span style="color:#000">scheme</span>       <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">runtime</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Scheme</span>
-    <span style="color:#000">setReference</span> <span style="color:#000">setReferenceFunc</span>
-    <span style="color:#000">log</span>          <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">zap</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">SugaredLogger</span>
-  <span style="color:#000;font-weight:bold">}</span>
+  <span style="color:#6ab825;font-weight:bold">type</span> ReconcileMyResource <span style="color:#6ab825;font-weight:bold">struct</span> {
+    client       client.Client
+    scheme       *runtime.Scheme
+    setReference setReferenceFunc
+    log          *zap.SugaredLogger
+  }
 
-  <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">r</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">ReconcileMyResource</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">Reconcile</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">request</span> <span style="color:#000">reconcile</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Request</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">reconcile</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Result</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-    <span style="color:#000">r</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Infof</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Reconciling MyResource %s\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">request</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NamespacedName</span><span style="color:#000;font-weight:bold">)</span>
-    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">reconcile</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Result</span><span style="color:#000;font-weight:bold">{},</span> <span style="color:#204a87;font-weight:bold">nil</span>
-  <span style="color:#000;font-weight:bold">}</span></code></pre></div>
+  <span style="color:#6ab825;font-weight:bold">func</span> (r *ReconcileMyResource) <span style="color:#447fcf">Reconcile</span>(request reconcile.Request) (reconcile.Result, <span style="color:#6ab825;font-weight:bold">error</span>) {
+    r.log.<span style="color:#447fcf">Infof</span>(<span style="color:#ed9d13">&#34;Reconciling MyResource %s\n&#34;</span>, request.NamespacedName)
+    <span style="color:#6ab825;font-weight:bold">return</span> reconcile.Result{}, <span style="color:#6ab825;font-weight:bold">nil</span>
+  }</code></pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>add the new resource to <code>addToSchemes</code> in <code>pkg/controllers/controller.go</code>.</li>
 <li>add the new controller to <code>addToManagerFuncs</code> in the same file.</li>
@@ -962,14 +1076,28 @@ make generate</code></pre></div></li>
 </ul>
 
 <h3 id="reconcile-results">Reconcile Results</h3>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8f5902;font-style:italic">// RequeueOnError will requeue if reconcile also returns an error
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">RequeueOnError</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">reconcile</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Result</span><span style="color:#000;font-weight:bold">{}</span>
-<span style="color:#8f5902;font-style:italic">// Requeue will requeue the request, behaviour is different than returning an error
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">Requeue</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">reconcile</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Result</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Requeue</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">}</span>
-<span style="color:#8f5902;font-style:italic">// RequeueAfterDefault requeues after the default, unless reconcile also returns an error
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">RequeueAfterDefault</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">reconcile</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Result</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">RequeueAfter</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">RequeueAfter</span><span style="color:#000;font-weight:bold">}</span>
-<span style="color:#8f5902;font-style:italic">// NoRequeue does not requeue, unless reconcile also returns an error
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">NoRequeue</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">reconcile</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Result</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Requeue</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">false</span><span style="color:#000;font-weight:bold">}</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#999;font-style:italic">// RequeueOnError will requeue if reconcile also returns an error
+</span><span style="color:#999;font-style:italic"></span>RequeueOnError = reconcile.Result{}
+<span style="color:#999;font-style:italic">// Requeue will requeue the request, behaviour is different than returning an error
+</span><span style="color:#999;font-style:italic"></span>Requeue = reconcile.Result{Requeue: <span style="color:#6ab825;font-weight:bold">true</span>}
+<span style="color:#999;font-style:italic">// RequeueAfterDefault requeues after the default, unless reconcile also returns an error
+</span><span style="color:#999;font-style:italic"></span>RequeueAfterDefault = reconcile.Result{RequeueAfter: config.RequeueAfter}
+<span style="color:#999;font-style:italic">// NoRequeue does not requeue, unless reconcile also returns an error
+</span><span style="color:#999;font-style:italic"></span>NoRequeue = reconcile.Result{Requeue: <span style="color:#6ab825;font-weight:bold">false</span>}</code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="testing">Testing</h3>
 
 <ul>
@@ -980,16 +1108,32 @@ make generate</code></pre></div></li>
 <h2 id="create-or-update-pattern">Create-Or-Update pattern</h2>
 
 <p>A pattern that comes up quite often is that an object needs to be updated if it already exists or created if it doesn&rsquo;t. <code>controller-runtime</code> provides the <code>controller-util</code> package which has a <code>CreateOrUpdate</code> function that can help with that. The object&rsquo;s desired state must be reconciled with the existing state inside the passed in callback MutateFn - <code>type MutateFn func() error</code>. The MutateFn is called regardless of creating or updating an object.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">controllerutil</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">CreateOrUpdate</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">r</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">someSecret</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">secretMutateFn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">someSecret</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">someSecret</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">StringData</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">someSecret</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Labels</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">someSecret</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Annotations</span><span style="color:#000;font-weight:bold">))</span>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">_, err = controllerutil.<span style="color:#447fcf">CreateOrUpdate</span>(ctx, r.client, someSecret, <span style="color:#447fcf">secretMutateFn</span>(someSecret, someSecret.StringData, someSecret.Labels, someSecret.Annotations))
 
-<span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">secretMutateFn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">corev1</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Secret</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">secretData</span> <span style="color:#204a87;font-weight:bold">map</span><span style="color:#000;font-weight:bold">[</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">]</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">labels</span> <span style="color:#204a87;font-weight:bold">map</span><span style="color:#000;font-weight:bold">[</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">]</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">annotations</span> <span style="color:#204a87;font-weight:bold">map</span><span style="color:#000;font-weight:bold">[</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">]</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">controllerutil</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">MutateFn</span> <span style="color:#000;font-weight:bold">{</span>
-  <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
-    <span style="color:#000">s</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Labels</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">labels</span>
-    <span style="color:#000">s</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Annotations</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">annotations</span>
-    <span style="color:#000">s</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">StringData</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">secretData</span>
-    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">nil</span>
-  <span style="color:#000;font-weight:bold">}</span>
-<span style="color:#000;font-weight:bold">}</span></code></pre></div>
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">secretMutateFn</span>(s *corev1.Secret, secretData <span style="color:#6ab825;font-weight:bold">map</span>[<span style="color:#6ab825;font-weight:bold">string</span>]<span style="color:#6ab825;font-weight:bold">string</span>, labels <span style="color:#6ab825;font-weight:bold">map</span>[<span style="color:#6ab825;font-weight:bold">string</span>]<span style="color:#6ab825;font-weight:bold">string</span>, annotations <span style="color:#6ab825;font-weight:bold">map</span>[<span style="color:#6ab825;font-weight:bold">string</span>]<span style="color:#6ab825;font-weight:bold">string</span>) controllerutil.MutateFn {
+  <span style="color:#6ab825;font-weight:bold">return</span> <span style="color:#6ab825;font-weight:bold">func</span>() <span style="color:#6ab825;font-weight:bold">error</span> {
+    s.Labels = labels
+    s.Annotations = annotations
+    s.StringData = secretData
+    <span style="color:#6ab825;font-weight:bold">return</span> <span style="color:#6ab825;font-weight:bold">nil</span>
+  }
+}</code></pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>Care must be taken when persisting objects that are already in their final state because they will be overwritten with the existing state if there already is such an object in the system.</li>
 <li><code>CreateOrUpdate</code>s should not use blindly <code>DeepCopyInto</code> or <code>DeepCopy</code> all the time, but make more precise changes.</li>
@@ -1004,19 +1148,41 @@ being handled.</p>
 
 <p>The <code>ctxlog</code> module provides a context with a named zap logger and an event recorder to the reconcilers.
 This is how it&rsquo;s set up for reconcilers:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8f5902;font-style:italic">// after logger is available
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">ctx</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">ctxlog</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewParentContext</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">log</span><span style="color:#000;font-weight:bold">)</span>
-<span style="color:#8f5902;font-style:italic">// adding named log and event recorder in controllers
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">ctx</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">ctxlog</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewContextWithRecorder</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;example-reconciler&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">mgr</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetEventRecorderFor</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;example-recorder&#34;</span><span style="color:#000;font-weight:bold">))</span>
-<span style="color:#8f5902;font-style:italic">// adding timeout in reconcilers
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">cancel</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithTimeout</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">timeout</span><span style="color:#000;font-weight:bold">)</span>
-<span style="color:#204a87;font-weight:bold">defer</span> <span style="color:#000">cancel</span><span style="color:#000;font-weight:bold">()</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#999;font-style:italic">// after logger is available
+</span><span style="color:#999;font-style:italic"></span>ctx := ctxlog.<span style="color:#447fcf">NewParentContext</span>(log)
+<span style="color:#999;font-style:italic">// adding named log and event recorder in controllers
+</span><span style="color:#999;font-style:italic"></span>ctx = ctxlog.<span style="color:#447fcf">NewContextWithRecorder</span>(ctx, <span style="color:#ed9d13">&#34;example-reconciler&#34;</span>, mgr.<span style="color:#447fcf">GetEventRecorderFor</span>(<span style="color:#ed9d13">&#34;example-recorder&#34;</span>))
+<span style="color:#999;font-style:italic">// adding timeout in reconcilers
+</span><span style="color:#999;font-style:italic"></span>ctx, cancel := context.<span style="color:#447fcf">WithTimeout</span>(ctx, timeout)
+<span style="color:#6ab825;font-weight:bold">defer</span> <span style="color:#447fcf">cancel</span>()</code></pre></td></tr></table>
+</div>
+</div>
 <p>The <code>ctxlog</code> package provides several logging functions. <code>Infof</code>, <code>Errorf</code>, <code>Error</code> and such wrap the corresponding zap log methods.</p>
 
 <p>The logging functions are also implemented on struct, to add event generation to the logging:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">ctxlog</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithEvent</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">instance</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;Reason&#34;</span><span style="color:#000;font-weight:bold">).</span><span style="color:#000">Infof</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;message: %s&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">v</span><span style="color:#000;font-weight:bold">)</span>
-<span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">ctxlog</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithEvent</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">instance</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;Reason&#34;</span><span style="color:#000;font-weight:bold">).</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;message: %s&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">v</span><span style="color:#000;font-weight:bold">)</span>
-<span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">ctxlog</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithEvent</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">instance</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;Reason&#34;</span><span style="color:#000;font-weight:bold">).</span><span style="color:#000">Error</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;part&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;part&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;part&#34;</span><span style="color:#000;font-weight:bold">)</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">ctxlog.<span style="color:#447fcf">WithEvent</span>(instance, <span style="color:#ed9d13">&#34;Reason&#34;</span>).<span style="color:#447fcf">Infof</span>(<span style="color:#ed9d13">&#34;message: %s&#34;</span>, v)
+err := ctxlog.<span style="color:#447fcf">WithEvent</span>(instance, <span style="color:#ed9d13">&#34;Reason&#34;</span>).<span style="color:#447fcf">Errorf</span>(<span style="color:#ed9d13">&#34;message: %s&#34;</span>, v)
+err := ctxlog.<span style="color:#447fcf">WithEvent</span>(instance, <span style="color:#ed9d13">&#34;Reason&#34;</span>).<span style="color:#447fcf">Error</span>(<span style="color:#ed9d13">&#34;part&#34;</span>, <span style="color:#ed9d13">&#34;part&#34;</span>, <span style="color:#ed9d13">&#34;part&#34;</span>)</code></pre></td></tr></table>
+</div>
+</div>
 <p>The reason should be camel-case, so switch statements could match it.</p>
 
 <p>Error funcs like <code>WithEvent().Errorf()</code> also return an error, with the same message as the log message and event that were generated.</p>
@@ -1121,7 +1287,7 @@ grcat conf.zap &lt; /tmp/cf-operator-tests.log
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 14, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/028bea137e62c9cbd38988d2d0752d91812c1e21">Merge pull request #3 from cloudfoundry-incubator/az-docs (028bea1)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/483ad1b3bbfb6e2cb3280eb5e17d597ee305875b">Merge pull request #4 from cloudfoundry-incubator/173656732-qsecrequest (483ad1b)</a>
 </div>
 </div>
 

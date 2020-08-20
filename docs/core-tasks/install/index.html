@@ -25,14 +25,14 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/core-tasks/install/" />
-<meta property="article:modified_time" content="2020-08-14T07:05:43+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-20T11:39:03+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Install">
 <meta itemprop="description" content="Installation of Quarks-operator in your Kubernetes cluster with helm
 ">
 
 
-<meta itemprop="dateModified" content="2020-08-14T07:05:43&#43;02:00" />
-<meta itemprop="wordCount" content="504">
+<meta itemprop="dateModified" content="2020-08-20T11:39:03&#43;02:00" />
+<meta itemprop="wordCount" content="517">
 
 
 
@@ -110,7 +110,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -142,7 +142,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d92e0a0c984aefa84fffbbc040dd2761dec7d7a890711c172075584483b45066012d9573566a2895d1b48bebcecc0d2a984d5ae8bdfc9a93f600375bc4faf094.json"
+  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -796,9 +796,23 @@
 <h2 id="installation">Installation</h2>
 
 <p>Add the quarks repository to helm if you haven&rsquo;t already:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/</code></pre></td></tr></table>
+</div>
+</div>
 <p>The simplest way to install the operator, is by using the default values:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install cf-operator quarks/cf-operator --namespace cf-operator</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install cf-operator quarks/cf-operator --namespace cf-operator</code></pre></td></tr></table>
+</div>
+</div>
 <p>The operator will watch for BOSH deployments in separate namespaces, not the one it has been deployed to. By default, it creates a namespace <code>staging</code> and starts watching it.</p>
 
 <p>A complete list of the chart settings is available <a href="https://hub.helm.sh/charts/quarks/cf-operator" target="_blank">here</a>.</p>
@@ -809,16 +823,35 @@
 The helm value setting <code>global.singleNamespace.name=</code> allows to automatically create a namespace which is being watched by the quarks-operator.</p>
 
 <p>For example, to watch to a different namespace with a specific ID:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install relname1 quarks/cf-operator <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --namespace namespace1
-  --set <span style="color:#4e9a06">&#34;global.singleNamespace.name=staging1&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;global.monitoredID=id1&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;quarks-job.persistOutputClusterRole.name=clusterrole1&#34;</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install relname1 quarks/cf-operator <span style="color:#ed9d13">\
+</span><span style="color:#ed9d13"></span>  --namespace namespace1
+  --set <span style="color:#ed9d13">&#34;global.singleNamespace.name=staging1&#34;</span> <span style="color:#ed9d13">\
+</span><span style="color:#ed9d13"></span>  --set <span style="color:#ed9d13">&#34;global.monitoredID=id1&#34;</span> <span style="color:#ed9d13">\
+</span><span style="color:#ed9d13"></span>  --set <span style="color:#ed9d13">&#34;quarks-job.persistOutputClusterRole.name=clusterrole1&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="using-multiple-namespaces-with-one-operator">Using multiple namespaces with one operator</h3>
 
 <p>The cluster role can be reused between namespaces. The service account (and role binding) should be different for each namespace.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install relname1 quarks/cf-operator <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;global.singleNamespace.create=false&#34;</span></code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install relname1 quarks/cf-operator <span style="color:#ed9d13">\
+</span><span style="color:#ed9d13"></span>  --set <span style="color:#ed9d13">&#34;global.singleNamespace.create=false&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Manually create before running helm install, for each namespace:</p>
 
 <ul>
@@ -834,17 +867,45 @@ The helm value setting <code>global.singleNamespace.name=</code> allows to autom
 </ul>
 
 <p>For more options look at the README for the chart</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm show readme quarks/cf-operator</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm show readme quarks/cf-operator</code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="what-next">What next?</h2>
 
 <p>With a running <code>quarks-operator</code> pod, you can try one of the files (see <a href="https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml" target="_blank">boshdeployment-with-custom-variable.yaml</a> ), as follows (if you installed it with default values):</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl -n staging apply -f https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl -n staging apply -f https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml</code></pre></td></tr></table>
+</div>
+</div>
 <p>The above will spawn two pods in your <code>cf-operator</code> namespace (which needs to be created upfront), running the BOSH nats release.</p>
 
 <p>You can access the <code>quarks-operator</code> logs by following the operator pod&rsquo;s output:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl logs -f -n cf-operator cf-operator</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl logs -f -n cf-operator cf-operator</code></pre></td></tr></table>
+</div>
+</div>
 <p>Or look at the k8s event log:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get events -n cf-operator --watch</code></pre></div>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get events -n cf-operator --watch</code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="modifying-the-deployment">Modifying the deployment</h2>
 
 <p>The main input to the operator is the <code>BOSH deployment</code> custom resource and the according manifest config map or secret. Changes to the <code>Spec</code> or <code>Data</code> fields of either of those will trigger the operator to recalculate the desired state and apply the required changes from the current state.</p>
@@ -859,7 +920,7 @@ The helm value setting <code>global.singleNamespace.name=</code> allows to autom
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 14, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/028bea137e62c9cbd38988d2d0752d91812c1e21">Merge pull request #3 from cloudfoundry-incubator/az-docs (028bea1)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/483ad1b3bbfb6e2cb3280eb5e17d597ee305875b">Merge pull request #4 from cloudfoundry-incubator/173656732-qsecrequest (483ad1b)</a>
 </div>
 </div>
 
