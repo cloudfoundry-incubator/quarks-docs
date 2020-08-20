@@ -25,14 +25,14 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/core-tasks/troubleshooting/" />
-<meta property="article:modified_time" content="2020-08-20T12:49:58+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-20T13:07:02+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Troubleshooting">
 <meta itemprop="description" content="Troubleshooting notes for Quarks-operator
 ">
 
 
-<meta itemprop="dateModified" content="2020-08-20T12:49:58&#43;02:00" />
-<meta itemprop="wordCount" content="201">
+<meta itemprop="dateModified" content="2020-08-20T13:07:02&#43;02:00" />
+<meta itemprop="wordCount" content="660">
 
 
 
@@ -110,7 +110,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
+  data-offline-search-index-json-src="/offline-search-index.9edea7af093cbc7439ec63a0e3f15604212193c4aed24ac4b2cf05ec31aa96c557d73531912fcbda1081e2ed7d639177049c45cda86c7bd96358a3d334b1c2d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -142,7 +142,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.33621e719a9a50efd8d182e99f36254f2f81881e766bd5bfa26aa255aadb5bf2634f95d6dd960183e018ebbbfa8b4e1553a2d4ac7fe6c109c7c178b90883f289.json"
+  data-offline-search-index-json-src="/offline-search-index.9edea7af093cbc7439ec63a0e3f15604212193c4aed24ac4b2cf05ec31aa96c557d73531912fcbda1081e2ed7d639177049c45cda86c7bd96358a3d334b1c2d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -719,7 +719,11 @@
 <ul>
 <li>
 <ul>
-<li>
+<li><a href="#kubernetes-events">Kubernetes events</a></li>
+<li><a href="#checking-logs">Checking logs</a></li>
+<li><a href="#debugging-bosh-releases">Debugging BOSH Releases</a></li>
+<li><a href="#checking-containers-state">Checking containers state</a></li>
+<li><a href="#my-pod-looks-stuck">My pod looks stuck</a>
 <ul>
 <li><a href="#cluster-ca">Cluster CA</a></li>
 <li><a href="#recovering-from-a-crash">Recovering from a crash</a></li>
@@ -776,13 +780,135 @@
 	       
 	
 
+<p>There might be situations where things might go wrong, this section is providing tips to debug issues in your cluster and your applications deployed with <code>quarks-operator</code>.</p>
+
+<p>You should also check the known issues for the <a href="https://github.com/cloudfoundry-incubator/quarks-operator/releases" target="_blank">release</a> you are using.</p>
+
+<p>Also, checkout <a href="../../development/tooling">these awesome tools</a> that can help you while debugging your cluster.</p>
+
+<h2 id="kubernetes-events">Kubernetes events</h2>
+
+<p>The <code>quarks-operator</code> streams results of its actions throughout logs and Kubernetes events. If you notice issues, or if you are just unsure on what is happening, check first the event logs of all the namespaces (or the namespace where you are deploying your bosh release)</p>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; kubectl get events -A</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="checking-logs">Checking logs</h2>
+
+<p>Catching logs from all the <code>quarks-operator</code> components might be somehow challenging, we suggest to use <a href="../../development/tooling#stern">stern</a>.</p>
+
+<p>For example, to stream all the logs of all pods in your cluster in your terminal:</p>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; stern --all-namespaces .</code></pre></td></tr></table>
+</div>
+</div>
+<p>With kubectl, you can check all container logs with:</p>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; kubectl logs -n namespace -f pod --all-containers</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="debugging-bosh-releases">Debugging BOSH Releases</h2>
+
+<p>The quarks operator exposes a <code>debug</code> parameter to enable hooking into a bosh release before starting. In this way you can open a shell in a pod for further debugging.
+To do so, you have to specify <code>quarks.debug=true</code> to the relevant part you are interested in debugging, for example, in your Configmap:</p>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#666">
+</span><span style="color:#666"></span>apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666"></span>kind:<span style="color:#666"> </span>ConfigMap<span style="color:#666">
+</span><span style="color:#666"></span>metadata:<span style="color:#666">
+</span><span style="color:#666">  </span>name:<span style="color:#666"> </span>quarks-gora-manifest<span style="color:#666">
+</span><span style="color:#666"></span>data:<span style="color:#666">
+</span><span style="color:#666">  </span>manifest:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">    ---</span><span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>quarks-gora-deployment<span style="color:#666">
+</span><span style="color:#666">    </span>releases:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">        </span>....<span style="color:#666">
+</span><span style="color:#666">    </span>instance_groups:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">      </span>jobs:<span style="color:#666">
+</span><span style="color:#666">      </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">        </span>release:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">        </span>properties:<span style="color:#666">
+</span><span style="color:#666">          </span>quarks:<span style="color:#666">
+</span><span style="color:#666">            </span>debug:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="checking-containers-state">Checking containers state</h2>
+
+<p>We strongly suggest to use <a href="../../development/tooling#k9s">k9s</a>. It gives a quick glance over your cluster state, and quickly allows to introspect pods container statuses.</p>
+
+<p>In most cases, while you are debugging a BOSH deployment you will have to check the states of all the containers running in a pod.</p>
+
+<p>You can do that in k9s by navigating into the pod and pressing <strong>[Enter]</strong> , in plain kubectl commands, you can describe a resource to get all its events and in case of pods, an overview of all the containers belonging to it</p>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; kubectl describe pod my-bosh-release</code></pre></td></tr></table>
+</div>
+</div>
+<p>or, if you are checking a <code>QuarksSecret</code> state:</p>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; kubectl describe qsec my-quarks-secret</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="my-pod-looks-stuck">My pod looks stuck</h2>
+
+<p>There might be various reasons why this could happen, here are few suggestions:</p>
+
+<ul>
+<li>Check if your pod is having a container with the <code>wait-for</code> prefix, means it&rsquo;s waiting for a specific service which can be identified by the container name.</li>
+<li>Check if your pod is depending on a secret which isn&rsquo;t being generated yet. If the secret is generated by a <code>QuarksSecret</code>, check the events related to the <code>QuarksSecret</code> which should generate it (with <code>kubectl describe ...</code>, or <code>kubectl events</code>).</li>
+</ul>
+
 <h3 id="cluster-ca">Cluster CA</h3>
 
 <p>The <code>cf-operator</code> assumes that the cluster root CA is also used for signing CSRs via the certificates.k8s.io API and will embed this CA in the generated certificate secrets. If your cluster is set up to use a different cluster-signing CA the generated certificates will have the wrong CA embedded. See <a href="https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/" target="_blank">https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/</a> for more information on cluster trust.</p>
 
 <h3 id="recovering-from-a-crash">Recovering from a crash</h3>
 
-<p>If the operator pod crashes, it cannot be restarted in the same namespace before the existing mutating webhook configuration for that namespace is removed.
+<p>If the operator pod crashes from unrecoverable errors, it cannot be restarted in the same namespace before the existing mutating webhook configuration for that namespace is removed.
 The operator uses mutating webhooks to modify pods on the fly and Kubernetes fails to create pods if the webhook server is unreachable.
 The webhook configurations are installed cluster wide and don&rsquo;t belong to a single namespace, just like custom resources.</p>
 
@@ -828,9 +954,11 @@ kubectl patch mutatingwebhookconfigurations <span style="color:#ed9d13">&#34;cf-
 </span><span style="color:#ed9d13">&#39;</span></code></pre></td></tr></table>
 </div>
 </div>
+<p>See also <a href="https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#monitoring-admission-webhooks" target="_blank">how to monitor admission webhooks</a> if you are debugging the changes introduced by a <code>Quarks operator</code> webhook</p>
+
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/07a4a34f320142a15b012a830bbf99288413b023">Merge pull request #6 from cloudfoundry-incubator/174417942-logo (07a4a34)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/e10350b3ea56daf434e7fdafdf334e79f07fdb2d">Merge pull request #5 from cloudfoundry-incubator/167162334-debugging (e10350b)</a>
 </div>
 </div>
 

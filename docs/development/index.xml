@@ -1325,9 +1325,9 @@ quarks.cloudfoundry.org/remote-id=nats
 &lt;p&gt;The following is a list of tools with their respective main features that can help you
 to simplify your development work when dealing with &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator&#34; target=&#34;_blank&#34;&gt;quarks-operator&lt;/a&gt; and &lt;a href=&#34;https://github.com/SUSE/kubecf&#34; target=&#34;_blank&#34;&gt;kubecf&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;k9s-https-github-com-derailed-k9s&#34;&gt;&lt;a href=&#34;https://github.com/derailed/k9s&#34; target=&#34;_blank&#34;&gt;k9s&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;k9s&#34;&gt;k9s&lt;/h3&gt;
 
-&lt;p&gt;It provides an easy way to navigate through your k8s resources, while watching lively
+&lt;p&gt;&lt;a href=&#34;https://github.com/derailed/k9s&#34; target=&#34;_blank&#34;&gt;k9s&lt;/a&gt; provides an easy way to navigate through your k8s resources, while watching lively
 to changes on them. Main features that can be helpful for containerized CF are:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -1342,9 +1342,9 @@ to changes on them. Main features that can be helpful for containerized CF are:&
 &lt;li&gt;&lt;p&gt;inmediate access to a container secure shell&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;havener-https-github-com-homeport-havener&#34;&gt;&lt;a href=&#34;https://github.com/homeport/havener&#34; target=&#34;_blank&#34;&gt;havener&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;havener&#34;&gt;havener&lt;/h3&gt;
 
-&lt;p&gt;A tool-kit with different features around k8s and CloudFoundry&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/homeport/havener&#34; target=&#34;_blank&#34;&gt;havener&lt;/a&gt; is a tool-kit with different features around k8s and CloudFoundry&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;code&gt;top&lt;/code&gt;, to get an overview on the cpu/memory/load of the cluster, per ns and pods.&lt;/p&gt;&lt;/li&gt;
@@ -1358,13 +1358,13 @@ simultaneously.&lt;/p&gt;&lt;/li&gt;
 simultaneously.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;stern-https-github-com-wercker-stern&#34;&gt;&lt;a href=&#34;https://github.com/wercker/stern&#34; target=&#34;_blank&#34;&gt;stern&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;stern&#34;&gt;stern&lt;/h3&gt;
 
-&lt;p&gt;Allows you to tail multiple pods on k8s and multiple containers within the pod.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/wercker/stern&#34; target=&#34;_blank&#34;&gt;stern&lt;/a&gt; allows you to tail from your terminal to multiple pod logs on Kubernetes, including all containers.&lt;/p&gt;
 
-&lt;h3 id=&#34;kube-dashboard-https-kubernetes-io-docs-tasks-access-application-cluster-web-ui-dashboard&#34;&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/&#34; target=&#34;_blank&#34;&gt;kube dashboard&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;kube-dashboard&#34;&gt;kube dashboard&lt;/h3&gt;
 
-&lt;p&gt;A more user friendly way to navigate your k8s cluster resources.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/&#34; target=&#34;_blank&#34;&gt;kube dashboard&lt;/a&gt; is a more user friendly way to navigate your k8s cluster resources.&lt;/p&gt;
 
       </description>
     </item>
