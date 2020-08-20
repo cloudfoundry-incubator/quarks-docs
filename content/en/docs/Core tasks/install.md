@@ -105,7 +105,7 @@ The main input to the operator is the `BOSH deployment` custom resource and the 
 
 > **Note:**
 >
-> Each creation or update can trigger the creation of multiple pods with the `dm-` or `ig-` prefix, those are _warm up_ jobs which are preparating the pods where your BOSH releases will be running to. When `dm-` and `ig-` pods are completed, you should have your deployment ready and running. See also [Bosh deployment status](../../development/controllers/bosh_deployment/#boshdeployment-status).
+> Each creation or update can trigger the creation of multiple pods with the `dm-` or `ig-` prefix. Those are _warm up_ jobs, which are preparing manifests and eventually configure the pods your BOSH releases will be running on. When `dm-` and `ig-` pods are completed, the pods are ready to start up. See also [Bosh deployment status](../../development/controllers/bosh_deployment/#boshdeployment-status).
 
 Besides that there are more things the user can change which will trigger an update of the deployment:
 
