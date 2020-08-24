@@ -144,7 +144,7 @@ _**Note**_: If you have issues to start integration tests, and they fail by cont
               },                                                                                                                       
           }                                                       
 ```
-Check your firewall, if it's preventing the webhook server to be contacted from your target cluster.
+Check your firewall if it's preventing the webhook server to be contacted from your target cluster or either if `CF_OPERATOR_WEBHOOK_SERVICE_HOST` is configured correctly
 
 The certificates and keys are written to disk, so the webhook server can use
 them.  They are also cached in a k8s secret for production, but that is not
