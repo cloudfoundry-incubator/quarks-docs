@@ -24,13 +24,13 @@
 <meta property="og:description" content="A QuarksJob allows the developer to run jobs when something interesting happens" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/components/quarksjob/" />
-<meta property="article:modified_time" content="2020-08-25T16:09:33+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-25T16:11:51+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Quarks Job">
 <meta itemprop="description" content="A QuarksJob allows the developer to run jobs when something interesting happens">
 
 
-<meta itemprop="dateModified" content="2020-08-25T16:09:33&#43;02:00" />
-<meta itemprop="wordCount" content="690">
+<meta itemprop="dateModified" content="2020-08-25T16:11:51&#43;02:00" />
+<meta itemprop="wordCount" content="839">
 
 
 
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.2a872b3f0c47d3b2c38eb792e54740f083bb2b065943b44f09a206d2bdfa6ff5a741ac7c489c086ba1d9095292ac90b50780e798ed63adbff8a916f887abadaf.json"
+  data-offline-search-index-json-src="/offline-search-index.8620807d035bb20cfe15a74cf0079742b721dd33166c83975582f08ad6c7c5ea0da213344da6a666b5d9b63c852a3750d1f4a1b1524b77548a21d2ff40e99cf2.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -139,7 +139,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.2a872b3f0c47d3b2c38eb792e54740f083bb2b065943b44f09a206d2bdfa6ff5a741ac7c489c086ba1d9095292ac90b50780e798ed63adbff8a916f887abadaf.json"
+  data-offline-search-index-json-src="/offline-search-index.8620807d035bb20cfe15a74cf0079742b721dd33166c83975582f08ad6c7c5ea0da213344da6a666b5d9b63c852a3750d1f4a1b1524b77548a21d2ff40e99cf2.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -717,6 +717,11 @@
 <li>
 <ul>
 <li><a href="#description">Description</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#upgrade">Upgrade</a>
+<ul>
+<li><a href="#watching-multiple-namespaces">Watching multiple namespaces</a></li>
+</ul></li>
 <li><a href="#features">Features</a>
 <ul>
 <li><a href="#errand-jobs">Errand Jobs</a></li>
@@ -729,8 +734,7 @@
 <li><a href="#versioned-secrets">Versioned Secrets</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#quarksjob-examples"><code>QuarksJob</code> Examples</a></li>
-<li><a href="#controller-architecture">Controller architecture</a></li>
+<li><a href="#see-also">See also</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -783,27 +787,6 @@
 	       
 	
 
-<ul>
-<li><a href="#quarksjob">QuarksJob</a>
-
-<ul>
-<li><a href="#description">Description</a></li>
-<li><a href="#features">Features</a></li>
-<li><a href="#errand-jobs">Errand Jobs</a></li>
-<li><a href="#one-off-jobs--auto-errands">One-Off Jobs / Auto-Errands</a>
-
-<ul>
-<li><a href="#restarting-on-config-change">Restarting on Config Change</a></li>
-</ul></li>
-<li><a href="#persisted-output">Persisted Output</a>
-
-<ul>
-<li><a href="#versioned-secrets">Versioned Secrets</a></li>
-</ul></li>
-<li><a href="#quarksjob-examples"><code>QuarksJob</code> Examples</a></li>
-</ul></li>
-</ul>
-
 <h2 id="description">Description</h2>
 
 <p>A <code>QuarksJob</code> allows the developer to run jobs when something interesting happens. It also allows the developer to store the output of the job into a <code>Secret</code>.
@@ -815,6 +798,51 @@ The job started by an <code>QuarksJob</code> is deleted automatically after it s
 <li><strong>one-offs</strong>: automatically runs once after it&rsquo;s created</li>
 <li><strong>errands</strong>: needs to be run manually by a user</li>
 </ul>
+
+<h2 id="installation">Installation</h2>
+
+<p>Add the quarks repository to helm if you haven&rsquo;t already:</p>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/</code></pre></td></tr></table>
+</div>
+</div>
+<p>The simplest way to install the latest release of <code>Quarks Job</code>, is by using helm 3 with the default values:</p>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create namespace quarks
+helm install qjob quarks/quarks-job --namespace quarks</code></pre></td></tr></table>
+</div>
+</div>
+<p>The operator will watch for <code>QuarksJob</code> resources in separate namespaces from the one it has been deployed to. By default, it creates a namespace <code>staging</code> and starts watching it.</p>
+
+<p>A complete list of the chart settings is available <a href="https://hub.helm.sh/charts/quarks/quarks-job" target="_blank">here</a>.</p>
+
+<h2 id="upgrade">Upgrade</h2>
+
+<p>Can be managed as a standard helm package:</p>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm upgrade --namespace quarks qjob quarks/quarks-job</code></pre></td></tr></table>
+</div>
+</div>
+<p>so just be sure to keep your customization in a values file</p>
+
+<h3 id="watching-multiple-namespaces">Watching multiple namespaces</h3>
+
+<p>By default the component will watch for resources created in the <code>staging</code> namespace, but it can be configured to watch over multiple namespaces.</p>
+
+<p>It is possible to configure Quarks Job to watch over different namespaces, <a href="../../core-tasks/install/#multiple-namespaces">refer to the quarks-operator instructions</a> as they are share between all the <code>Quarks</code> components.</p>
 
 <h2 id="features">Features</h2>
 
@@ -905,17 +933,18 @@ args: [&quot;-c&quot;,&quot;json='{\&quot;foo\&quot;: \&quot;1\&quot;, \&quot;ba
 <li>an annotation of <code>quarks.cloudfoundry.org/source-description</code> that contains arbitrary information about the creator of the secret</li>
 </ul>
 
-<h2 id="quarksjob-examples"><code>QuarksJob</code> Examples</h2>
+<h2 id="see-also">See also</h2>
 
-<p>See <a href="https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples" target="_blank">https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples</a></p>
-
-<h2 id="controller-architecture">Controller architecture</h2>
-
-<p>See: <a href="../../development/controllers/quarksjob/">Quarks Job controller section</a></p>
+<ul>
+<li><a href="https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples" target="_blank">Examples</a></li>
+<li><a href="../../development/controllers/quarksjob/">Quarks Job controller architecture section</a></li>
+<li><a href="https://hub.helm.sh/charts/quarks/quarks-job" target="_blank">Helm hub</a></li>
+<li><a href="https://github.com/cloudfoundry-incubator/quarks-secret" target="_blank">Github</a></li>
+</ul>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 25, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/69d33ff2ed9328c4fac3cbc18b41ebe0f5299b48">Merge pull request #7 from cloudfoundry-incubator/webhook-firewall-integration-tests (69d33ff)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 25, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/a8c85075f9e6efae67855ec15e5bcfa3dc09c0fc">Merge pull request #9 from cloudfoundry-incubator/174250852-howtoinstall (a8c8507)</a>
 </div>
 </div>
 
