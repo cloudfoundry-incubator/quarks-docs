@@ -27,7 +27,7 @@ Running make test executes all the test suites.
 We use ginkgo for testing. Every package needs a suite_test." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/development/testing/" />
-<meta property="article:modified_time" content="2020-08-25T16:09:15+02:00" /><meta property="og:site_name" content="Quarks project" />
+<meta property="article:modified_time" content="2020-08-25T16:09:33+02:00" /><meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Testing">
 <meta itemprop="description" content="Testing  Tests description Unit Integration End-to-End Running tests in minikube in KinD Makefile General Targets Build Targets Test Targets Generate Targets CI   Tests description Based on upstreams documentation https://github.com/thtanaka/kubernetes/blob/master/docs/devel/testing.md we use three levels of testing: unit, integration and e2e.
 Before starting, run make tools to install the required dependencies.
@@ -35,8 +35,8 @@ Running make test executes all the test suites.
 We use ginkgo for testing. Every package needs a suite_test.">
 
 
-<meta itemprop="dateModified" content="2020-08-25T16:09:15&#43;02:00" />
-<meta itemprop="wordCount" content="1469">
+<meta itemprop="dateModified" content="2020-08-25T16:09:33&#43;02:00" />
+<meta itemprop="wordCount" content="1635">
 
 
 
@@ -116,7 +116,7 @@ We use ginkgo for testing. Every package needs a suite_test."/>
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.8cd952e2707feecff96472b0c7f7571717aa700b6700a825cd7b79f3cbc829e50fd93f3fd8ba15a23ab5b7d47b3e49d37a1f9cdf2b167534a706f54ea50795f1.json"
+  data-offline-search-index-json-src="/offline-search-index.2a872b3f0c47d3b2c38eb792e54740f083bb2b065943b44f09a206d2bdfa6ff5a741ac7c489c086ba1d9095292ac90b50780e798ed63adbff8a916f887abadaf.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -148,7 +148,7 @@ We use ginkgo for testing. Every package needs a suite_test."/>
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.8cd952e2707feecff96472b0c7f7571717aa700b6700a825cd7b79f3cbc829e50fd93f3fd8ba15a23ab5b7d47b3e49d37a1f9cdf2b167534a706f54ea50795f1.json"
+  data-offline-search-index-json-src="/offline-search-index.2a872b3f0c47d3b2c38eb792e54740f083bb2b065943b44f09a206d2bdfa6ff5a741ac7c489c086ba1d9095292ac90b50780e798ed63adbff8a916f887abadaf.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -921,6 +921,75 @@ connect to this address. The address needs to be reachable from the cluster.</p>
 <code>CF_OPERATOR_WEBHOOK_SERVICE_HOST</code> and the calculated port.
 It also contains SSL certificates and CA, which are necessary to connect to the webhook.</p>
 
+<p><em><strong>Note</strong></em>: If you have issues to start integration tests, and they fail by contacting the webhook server, for example if you see a error message like:</p>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">    Unexpected error:                                                                                                                
+          &lt;*errors.StatusError | 0xc0002b4780&gt;: {                                                                                      
+              ErrStatus: {                                                                                                             
+                  TypeMeta: {Kind: <span style="color:#ed9d13">&#34;&#34;</span>, APIVersion: <span style="color:#ed9d13">&#34;&#34;</span>},                                                                                
+                  ListMeta: {                                                                                                          
+                      SelfLink: <span style="color:#ed9d13">&#34;&#34;</span>,                                                                                                    
+                      ResourceVersion: <span style="color:#ed9d13">&#34;&#34;</span>,                                                                                             
+                      Continue: <span style="color:#ed9d13">&#34;&#34;</span>,
+                      RemainingItemCount: nil,                                                                                         
+                  },                                               
+                  Status: <span style="color:#ed9d13">&#34;Failure&#34;</span>,                                                                                                   
+                  Message: <span style="color:#ed9d13">&#34;Internal error occurred: failed calling webhook \&#34;mutate-statefulsets.quarks.cloudfoundry.org\&#34;: Post https://192.168.100.66:40603/mutate-statefulsets?timeout=30s: dial tcp 192.168.100.66:40603: connect: no route to host&#34;</span>,
+                  Reason: <span style="color:#ed9d13">&#34;InternalError&#34;</span>,                                                                                             
+                  Details: {                                                                                                           
+                      Name: <span style="color:#ed9d13">&#34;&#34;</span>,                                                                                                        
+                      Group: <span style="color:#ed9d13">&#34;&#34;</span>,                                   
+                      Kind: <span style="color:#ed9d13">&#34;&#34;</span>,                                                                                                        
+                      UID: <span style="color:#ed9d13">&#34;&#34;</span>,                                     
+                      Causes: [                                                                                                        
+                          {                                        
+                              Type: <span style="color:#ed9d13">&#34;&#34;</span>,                                                                                                
+                              Message: <span style="color:#ed9d13">&#34;failed calling webhook \&#34;mutate-statefulsets.quarks.cloudfoundry.org\&#34;: Post https://192.168.100.66:40603/mutate-statefulsets?timeout=30s: dial tcp 192.168.100.66:40603: connect: no route to host&#34;</span>,
+                              Field: <span style="color:#ed9d13">&#34;&#34;</span>,                                                                                               
+                          },                                                                                                           
+                      ],                                                                                                               
+                      RetryAfterSeconds: <span style="color:#3677a9">0</span>,                        
+                  },                                                                                                                   
+                  Code: <span style="color:#3677a9">500</span>,                                                                                                           
+              },                                                                                                                       
+          }                                                       </code></pre></td></tr></table>
+</div>
+</div>
+<p>Check your firewall if it&rsquo;s preventing the webhook server to be contacted from your target cluster or either if <code>CF_OPERATOR_WEBHOOK_SERVICE_HOST</code> is configured correctly</p>
+
 <p>The certificates and keys are written to disk, so the webhook server can use
 them.  They are also cached in a k8s secret for production, but that is not
 being used in integration tests, since they delete the test namespaces.</p>
@@ -1290,7 +1359,7 @@ follow instructions from <a href="../../development/development#standalone-compo
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 25, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/7f20c95d8e9479de3c9912b5a6578b83799b28c7">Merge pull request #8 from cloudfoundry-incubator/quarks-restart (7f20c95)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 25, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/69d33ff2ed9328c4fac3cbc18b41ebe0f5299b48">Merge pull request #7 from cloudfoundry-incubator/webhook-firewall-integration-tests (69d33ff)</a>
 </div>
 </div>
 

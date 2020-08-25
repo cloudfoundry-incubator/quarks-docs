@@ -651,6 +651,75 @@ connect to this address. The address needs to be reachable from the cluster.&lt;
 &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt; and the calculated port.
 It also contains SSL certificates and CA, which are necessary to connect to the webhook.&lt;/p&gt;
 
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: If you have issues to start integration tests, and they fail by contacting the webhook server, for example if you see a error message like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;13
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;14
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;15
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;16
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;17
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;18
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;19
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;20
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;21
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;22
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;23
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;24
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;25
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;26
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;27
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;28
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;29
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;30
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;    Unexpected error:                                                                                                                
+          &amp;lt;*errors.StatusError | 0xc0002b4780&amp;gt;: {                                                                                      
+              ErrStatus: {                                                                                                             
+                  TypeMeta: {Kind: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;, APIVersion: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;},                                                                                
+                  ListMeta: {                                                                                                          
+                      SelfLink: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                                    
+                      ResourceVersion: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                             
+                      Continue: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+                      RemainingItemCount: nil,                                                                                         
+                  },                                               
+                  Status: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Failure&amp;#34;&lt;/span&gt;,                                                                                                   
+                  Message: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Internal error occurred: failed calling webhook \&amp;#34;mutate-statefulsets.quarks.cloudfoundry.org\&amp;#34;: Post https://192.168.100.66:40603/mutate-statefulsets?timeout=30s: dial tcp 192.168.100.66:40603: connect: no route to host&amp;#34;&lt;/span&gt;,
+                  Reason: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;InternalError&amp;#34;&lt;/span&gt;,                                                                                             
+                  Details: {                                                                                                           
+                      Name: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                                        
+                      Group: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                   
+                      Kind: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                                        
+                      UID: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                     
+                      Causes: [                                                                                                        
+                          {                                        
+                              Type: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                                
+                              Message: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;failed calling webhook \&amp;#34;mutate-statefulsets.quarks.cloudfoundry.org\&amp;#34;: Post https://192.168.100.66:40603/mutate-statefulsets?timeout=30s: dial tcp 192.168.100.66:40603: connect: no route to host&amp;#34;&lt;/span&gt;,
+                              Field: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                               
+                          },                                                                                                           
+                      ],                                                                                                               
+                      RetryAfterSeconds: &lt;span style=&#34;color:#3677a9&#34;&gt;0&lt;/span&gt;,                        
+                  },                                                                                                                   
+                  Code: &lt;span style=&#34;color:#3677a9&#34;&gt;500&lt;/span&gt;,                                                                                                           
+              },                                                                                                                       
+          }                                                       &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Check your firewall if it&amp;rsquo;s preventing the webhook server to be contacted from your target cluster or either if &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt; is configured correctly&lt;/p&gt;
+
 &lt;p&gt;The certificates and keys are written to disk, so the webhook server can use
 them.  They are also cached in a k8s secret for production, but that is not
 being used in integration tests, since they delete the test namespaces.&lt;/p&gt;
