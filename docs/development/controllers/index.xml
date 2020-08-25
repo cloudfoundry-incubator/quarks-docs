@@ -386,7 +386,7 @@ The controller annotates the instance groups and the jobs counters and it resolv
 &lt;h4 id=&#34;watches-in-quarks-restart-controller&#34;&gt;Watches in Quarks Restart Controller&lt;/h4&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Secret&lt;/code&gt;: Updates for secrets that have the annotation &lt;code&gt;quarks.cloudfoundry.org/restart-on-update&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Secret&lt;/code&gt;: Restart pods that have the annotation &lt;code&gt;quarks.cloudfoundry.org/restart-on-update&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h4 id=&#34;reconciliation-in-quarks-restart-controller&#34;&gt;Reconciliation in Quarks Restart Controller&lt;/h4&gt;
