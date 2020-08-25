@@ -14,7 +14,7 @@ This feature also enables updating entangled pods whenever the link secrets get 
 
 #### Watches in Quarks Restart Controller
 
-- `Secret`: Updates for secrets that have the annotation `quarks.cloudfoundry.org/restart-on-update`
+- `Secret`: Restart pods that have the annotation `quarks.cloudfoundry.org/restart-on-update`
 
 #### Reconciliation in Quarks Restart Controller
 
