@@ -110,6 +110,42 @@ The configuration only applies to a single namespace, by using a selector. It co
 `CF_OPERATOR_WEBHOOK_SERVICE_HOST` and the calculated port.
 It also contains SSL certificates and CA, which are necessary to connect to the webhook.
 
+_**Note**_: If you have issues to start integration tests, and they fail by contacting the webhook server, for example if you see a error message like:
+
+```bash
+    Unexpected error:                                                                                                                
+          <*errors.StatusError | 0xc0002b4780>: {                                                                                      
+              ErrStatus: {                                                                                                             
+                  TypeMeta: {Kind: "", APIVersion: ""},                                                                                
+                  ListMeta: {                                                                                                          
+                      SelfLink: "",                                                                                                    
+                      ResourceVersion: "",                                                                                             
+                      Continue: "",
+                      RemainingItemCount: nil,                                                                                         
+                  },                                               
+                  Status: "Failure",                                                                                                   
+                  Message: "Internal error occurred: failed calling webhook \"mutate-statefulsets.quarks.cloudfoundry.org\": Post https://192.168.100.66:40603/mutate-statefulsets?timeout=30s: dial tcp 192.168.100.66:40603: connect: no route to host",
+                  Reason: "InternalError",                                                                                             
+                  Details: {                                                                                                           
+                      Name: "",                                                                                                        
+                      Group: "",                                   
+                      Kind: "",                                                                                                        
+                      UID: "",                                     
+                      Causes: [                                                                                                        
+                          {                                        
+                              Type: "",                                                                                                
+                              Message: "failed calling webhook \"mutate-statefulsets.quarks.cloudfoundry.org\": Post https://192.168.100.66:40603/mutate-statefulsets?timeout=30s: dial tcp 192.168.100.66:40603: connect: no route to host",
+                              Field: "",                                                                                               
+                          },                                                                                                           
+                      ],                                                                                                               
+                      RetryAfterSeconds: 0,                        
+                  },                                                                                                                   
+                  Code: 500,                                                                                                           
+              },                                                                                                                       
+          }                                                       
+```
+Check your firewall if it's preventing the webhook server to be contacted from your target cluster or either if `CF_OPERATOR_WEBHOOK_SERVICE_HOST` is configured correctly
+
 The certificates and keys are written to disk, so the webhook server can use
 them.  They are also cached in a k8s secret for production, but that is not
 being used in integration tests, since they delete the test namespaces.
