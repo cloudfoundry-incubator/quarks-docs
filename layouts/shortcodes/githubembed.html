@@ -1,5 +1,5 @@
 {{/* https://github.com/haideralipunjabi/hugo-shortcodes/tree/master/github */}}
-<hr>
+
 {{ $dataJ := getJSON "https://api.github.com/repos/"  (.Get "repo")  "/contents/"  (.Get "file")  }}
 {{ $con := base64Decode $dataJ.content }}
 

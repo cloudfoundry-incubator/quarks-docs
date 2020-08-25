@@ -6,4 +6,4 @@ description: >
   Quarks components
 ---
 
-The quarks-operator is composed by different stand-alone controllers that can be deployed separately.
+`quarks-operator` is composed of different stand-alone controllers that can be deployed separately.

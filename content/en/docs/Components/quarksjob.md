@@ -6,16 +6,6 @@ description:
     A QuarksJob allows the developer to run jobs when something interesting happens
 ---
 
-- [QuarksJob](#quarksjob)
-  - [Description](#description)
-  - [Features](#features)
-    - [Errand Jobs](#errand-jobs)
-    - [One-Off Jobs / Auto-Errands](#one-off-jobs--auto-errands)
-      - [Restarting on Config Change](#restarting-on-config-change)
-    - [Persisted Output](#persisted-output)
-      - [Versioned Secrets](#versioned-secrets)
-  - [`QuarksJob` Examples](#quarksjob-examples)
-
 ## Description
 
 A `QuarksJob` allows the developer to run jobs when something interesting happens. It also allows the developer to store the output of the job into a `Secret`.
@@ -25,6 +15,43 @@ There are two different kinds of `QuarksJob`:
 
 - **one-offs**: automatically runs once after it's created
 - **errands**: needs to be run manually by a user
+
+## Installation
+
+Add the quarks repository to helm if you haven't already:
+
+```bash
+helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/
+```
+
+The simplest way to install the latest release of `Quarks Job`, is by using helm 3 with the default values:
+
+```bash
+kubectl create namespace quarks
+helm install qjob quarks/quarks-job --namespace quarks
+```
+
+The operator will watch for `QuarksJob` resources in separate namespaces from the one it has been deployed to. By default, it creates a namespace `staging` and starts watching it.
+
+A complete list of the chart settings is available [here](https://hub.helm.sh/charts/quarks/quarks-job).
+
+## Upgrade
+
+Can be managed as a standard helm package:
+
+```bash
+helm upgrade --namespace quarks qjob quarks/quarks-job
+```
+
+ so just be sure to keep your customization in a values file
+
+### Watching multiple namespaces
+
+By default the component will watch for resources created in the `staging` namespace, but it can be configured to watch over multiple namespaces.
+
+
+It is possible to configure Quarks Job to watch over different namespaces, [refer to the quarks-operator instructions](../../core-tasks/install/#multiple-namespaces) as they are share between all the `Quarks` components.
+
 
 ## Features
 
@@ -107,11 +134,9 @@ Each versioned secret has the following characteristics:
   - `quarks.cloudfoundry.org/secret-version` with a value set to the `ordinal` of the secret
 - an annotation of `quarks.cloudfoundry.org/source-description` that contains arbitrary information about the creator of the secret
 
-## `QuarksJob` Examples
+## See also
 
-See https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples
-
-
-## Controller architecture
-
-See: [Quarks Job controller section](../../development/controllers/quarksjob/)
+- [Examples](https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples)
+- [Quarks Job controller architecture section](../../development/controllers/quarksjob/)
+- [Helm hub](https://hub.helm.sh/charts/quarks/quarks-job)
+- [Github](https://github.com/cloudfoundry-incubator/quarks-secret)
