@@ -13,7 +13,7 @@ description: >
 - each BOSH Job corresponds to one or more containers in the `Pod` template defined in the [Quarks StatefulSet](../../../quarks-statefulset/development) or the [QuarksJob](../../../quarks-job/development); there's one container for each process defined in the BPM information of each BOSH Job
 - "explicit" `variables` are generated using [Quarks Secret](../../../quarks-secret/development)
 - for rendering of BOSH Job Templates, please read "[Rendering BOSH templates](../rendering_templates)"
-- we have a concept of [Desired Manifests](../features/desired_manifests)
+- we have a concept of [Desired Manifests](../desired_manifests)
 - all communication happens through Kubernetes `Services`, which have deterministic DNS Addresses; you can read more about these [here](../rendering_templates#services-and-dns-addresses)
 
 
