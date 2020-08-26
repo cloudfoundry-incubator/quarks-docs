@@ -14,5 +14,9 @@ serve:
 publish:
 	scripts/publish.sh
 
+check404:
+	-wget --spider -r -erobots=off -nd -nv -o run1.log http://localhost:1313/
+	-grep -B1 'broken link!' run1.log
+
 gen-command-docs:
 	scripts/gen_cli_docs.sh
