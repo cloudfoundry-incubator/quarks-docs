@@ -98,36 +98,36 @@ It also contains SSL certificates and CA, which are necessary to connect to the 
 _**Note**_: If you have issues to start integration tests, and they fail by contacting the webhook server, for example if you see a error message like:
 
 ```bash
-    Unexpected error:                                                                                                                
-          <*errors.StatusError | 0xc0002b4780>: {                                                                                      
-              ErrStatus: {                                                                                                             
-                  TypeMeta: {Kind: "", APIVersion: ""},                                                                                
-                  ListMeta: {                                                                                                          
-                      SelfLink: "",                                                                                                    
-                      ResourceVersion: "",                                                                                             
+    Unexpected error:
+          <*errors.StatusError | 0xc0002b4780>: {
+              ErrStatus: {
+                  TypeMeta: {Kind: "", APIVersion: ""},
+                  ListMeta: {
+                      SelfLink: "",
+                      ResourceVersion: "",
                       Continue: "",
-                      RemainingItemCount: nil,                                                                                         
-                  },                                               
-                  Status: "Failure",                                                                                                   
+                      RemainingItemCount: nil,
+                  },
+                  Status: "Failure",
                   Message: "Internal error occurred: failed calling webhook \"mutate-statefulsets.quarks.cloudfoundry.org\": Post https://192.168.100.66:40603/mutate-statefulsets?timeout=30s: dial tcp 192.168.100.66:40603: connect: no route to host",
-                  Reason: "InternalError",                                                                                             
-                  Details: {                                                                                                           
-                      Name: "",                                                                                                        
-                      Group: "",                                   
-                      Kind: "",                                                                                                        
-                      UID: "",                                     
-                      Causes: [                                                                                                        
-                          {                                        
-                              Type: "",                                                                                                
+                  Reason: "InternalError",
+                  Details: {
+                      Name: "",
+                      Group: "",
+                      Kind: "",
+                      UID: "",
+                      Causes: [
+                          {
+                              Type: "",
                               Message: "failed calling webhook \"mutate-statefulsets.quarks.cloudfoundry.org\": Post https://192.168.100.66:40603/mutate-statefulsets?timeout=30s: dial tcp 192.168.100.66:40603: connect: no route to host",
-                              Field: "",                                                                                               
-                          },                                                                                                           
-                      ],                                                                                                               
-                      RetryAfterSeconds: 0,                        
-                  },                                                                                                                   
-                  Code: 500,                                                                                                           
-              },                                                                                                                       
-          }                                                       
+                              Field: "",
+                          },
+                      ],
+                      RetryAfterSeconds: 0,
+                  },
+                  Code: 500,
+              },
+          }
 ```
 Check your firewall if it's preventing the webhook server to be contacted from your target cluster or either if `CF_OPERATOR_WEBHOOK_SERVICE_HOST` is configured correctly
 
@@ -286,7 +286,13 @@ _**Note**_: On Mac, use `export CF_OPERATOR_WEBHOOK_SERVICE_HOST=$(ip a s $(ip r
 
 The following are the make targets available and their actions. When building and running the targets manually on the quarks-operator codebase, please set `PROJECT=quarks-operator`.
 
-The common scripts between the `quarks-operator` components are in the `quarks-utils` [project](https://github.com/cloudfoundry-incubator/quarks-utils/). To download them, make sure to run `bin/tools-shared` or `make tools` before running any other script/target.
+The common scripts shared between the `quarks-operator` components are in the `quarks-utils` [project](https://github.com/cloudfoundry-incubator/quarks-utils/) repository. To download them, make sure to run `bin/tools`, before running any other script.
+The Makefile should download them automatically.
+
+The Makefile is intended for users, who don't want to use the scripts in bin directly. It conveniently sets up some environment variables.
+
+**Note:**
+CI and automation should not use the make targets to avoid indirection and declare variable explicitly.
 
 
 ### General Targets

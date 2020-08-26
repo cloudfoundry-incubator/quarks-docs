@@ -6,19 +6,15 @@ description: >
   Shared documentation for the Quarks operators
 ---
 
+{{% pageinfo %}}
+The quarks-* operators share some common scripts, that are in the [`quarks-utils` project](https://github.com/cloudfoundry-incubator/quarks-utils/). You can run `bin/tools` to download them. Or download them manually from `quarks-utils`.
+{{% /pageinfo %}}
+
 ## Requirements
 
 - A working Kubernetes cluster
 - Helm v3 binary
 - Go 1.14 and install the tool chain: `make tools`
-
-## Dependencies
-
-Run with libraries fetched via go modules:
-
-```bash
-export GO111MODULE=on
-```
 
 ## Custom Resource Definitions (CRDs)
 
