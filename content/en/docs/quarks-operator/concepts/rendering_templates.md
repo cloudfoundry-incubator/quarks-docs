@@ -6,21 +6,6 @@ description: >
   How the BOSH job templates are rendered
 ---
 
-- [Rendering BOSH Templates](#rendering-bosh-templates)
-  - [Flow](#flow)
-    - [Data Gathering](#data-gathering)
-      - [Extract Job Spec and Templates from Image](#extract-job-spec-and-templates-from-image)
-      - [Calculation of Required Properties for an Instance Group and BPM Info](#calculation-of-required-properties-for-an-instance-group-and-bpm-info)
-    - [Run](#run)
-      - [Create QuarksStatefulSet and QuarksJobs](#create-quarks-statefulset-and-quarks-jobs)
-      - [Render Templates](#render-templates)
-      - [Run the entrypoints](#run-the-entrypoints)
-  - [Details](#details)
-    - [Services and DNS Addresses](#services-and-dns-addresses)
-    - [Resolving Links](#resolving-links)
-    - [Calculating spec.* and link().instances[].*](#calculating-spec-and-linkinstances)
-  - [FAQ](#faq)
-
 You can read more about BOSH templates on [bosh.io](https://bosh.io/docs/jobs/#templates).
 
 ## Flow

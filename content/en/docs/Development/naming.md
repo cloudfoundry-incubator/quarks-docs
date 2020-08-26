@@ -4,10 +4,6 @@ linkTitle: "Naming Conventions"
 weight: 11
 ---
 
-- [Naming Conventions](#naming-conventions)
-  - [Kubernetes Resources](#kubernetes-resources)
-    - [Kubernetes Services](#kubernetes-services)
-
 ## Kubernetes Resources
 
 Kube names can only consist of lowercase alphanumeric characters, and the character `"-"`.

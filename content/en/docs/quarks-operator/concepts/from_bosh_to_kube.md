@@ -6,7 +6,6 @@ description: >
   Guidelines on transforming BOSH concepts to Kubernetes
 ---
 
-
 ## High-level Direction
 
 - releases are defined in the usual way (a `releases` block), but the information given is used to build a reference for a docker image

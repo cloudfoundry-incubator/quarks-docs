@@ -4,21 +4,6 @@ linkTitle: "Testing"
 weight: 2
 ---
 
-- [Testing](#testing)
-  - [Tests description](#tests-description)
-  - [Unit](#unit)
-  - [Integration](#integration)
-  - [End-to-End](#end-to-end)
-  - [Running tests](#running-tests)
-    - [in minikube](#in-minikube)
-    - [in KinD](#in-kind)
-  - [Makefile](#makefile)
-    - [General Targets](#general-targets)
-    - [Build Targets](#build-targets)
-    - [Test Targets](#test-targets)
-    - [Generate Targets](#generate-targets)
-  - [CI](#ci)
-
 ## Tests description
 
 Based on upstreams documentation https://github.com/thtanaka/kubernetes/blob/master/docs/devel/testing.md we use three levels of testing: `unit`, `integration` and `e2e`.

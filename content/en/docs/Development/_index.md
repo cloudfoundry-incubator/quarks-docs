@@ -6,18 +6,6 @@ description: >
   Shared documentation for the quarks operators
 ---
 
-- [Development](#development)
-  - [Requirements](#requirements)
-  - [Dependencies](#dependencies)
-  - [Creating a new Resource and Controller](#creating-a-new-resource-and-controller)
-    - [Reconcile Results](#reconcile-results)
-    - [Testing](#testing)
-  - [Create-Or-Update pattern](#create-or-update-pattern)
-  - [Logging and Events](#logging-and-events)
-  - [Standalone Components](#standalone-components)
-  - [Versioning](#versioning)
-  - [Colourise Logs](#colourise-logs)
-
 ## Requirements
 
 - A working Kubernetes cluster

@@ -6,27 +6,6 @@ description: >
   Deploying a BOSH deployment on Kubernetes
 ---
 
-# BOSHDeployment
-
-1. [BOSHDeployment](#boshdeployment)
-   1. [Description](#description)
-   2. [BDPL Component](#bdpl-component)
-      1. [BOSHDeployment Controller](#boshdeployment-controller)
-         1. [Watches](#watches-in-bdpl-controller)
-         2. [Reconciliation](#reconciliation-in-bdpl-controller)
-         3. [Highlights](#highlights-in-bdpl-controller)
-      2. [Generate Variables Controller](#generate-variables-controller)
-         1. [Watches](#watches-in-gv-controller)
-         2. [Reconciliation](#reconciliation-in-gv-controller)
-         3. [Highlights](#highlights-in-gv-controller)
-      3. [BPM Controller](#bpm-controller)
-         1. [Watches](#watches-in-bpm-controller)
-         2. [Reconciliation](#reconciliation-in-bpm-controller)
-         3. [Highlights](#highlights-in-bpm-controller)
-   3. [BDPL Abstract view](#bdpl-abstract-view)
-   4. [BOSHDeployment resource examples](#boshdeployment-resource-examples)
-   5. [BOSHDeployment status][#boshdeployment-status]
-
 ## Description
 
 A BOSH deployment is created from a deployment manifest and optionally ops files.

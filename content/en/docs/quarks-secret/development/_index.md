@@ -6,27 +6,6 @@ description: >
   A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.
 ---
 
-
-- [QuarksSecret](#quarkssecret)
-  - [Description](#description)
-  - [QuarksSecret Component](#quarkssecret-component)
-    - [**_QuarksSecret Controller_**](#quarkssecret-controller)
-      - [Watches in Quarks Secret Controller](#watches-in-quarks-secret-controller)
-      - [Reconciliation in Quarks Secret Controller](#reconciliation-in-quarks-secret-controller)
-      - [Highlights in Quarks Secret Controller](#highlights-in-quarks-secret-controller)
-        - [Types](#types)
-        - [Auto-approving Certificates](#auto-approving-certificates)
-        - [Copies](#copies)
-    - [**_CertificateSigningRequest Controller_**](#certificatesigningrequest-controller)
-      - [Watches in CSR Controller](#watches-in-csr-controller)
-      - [Reconciliation in CSR Controller](#reconciliation-in-csr-controller)
-      - [Highlights in CSR Controller](#highlights-in-csr-controller)
-    - [**_SecretRotation Controller_**](#secretrotation-controller)
-      - [Watches in Secret Rotation Controller](#watches-in-secret-rotation-controller)
-      - [Reconciliation in Secret Rotation Controller](#reconciliation-in-secret-rotation-controller)
-  - [Relationship With the BDPL Component](#relationship-with-the-bdpl-component)
-  - [`QuarksSecret` Examples](#quarkssecret-examples)
-
 ## Description
 
 A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.
