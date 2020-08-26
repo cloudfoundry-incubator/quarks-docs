@@ -97,7 +97,7 @@ Quarks StatefulSet requires a k8s webhook to mutate the volumes of a pod.
 Kubernetes will call back to the operator for certain requests and use the
 modified pod manifest, which is returned.
 CF-Operator also uses a validating webhook to validate the BOSH deployment spec and the creation
-of reference resources specified in the spec. Secret validation admission webhook restricts the 
+of reference resources specified in the spec. Secret validation admission webhook restricts the
 user from updating a versioned secret.
 
 The cf-operator integration tests use `CF_OPERATOR_WEBHOOK_SERVICE_PORT` as a
@@ -277,7 +277,7 @@ _**Note**_: On Mac, use `export CF_OPERATOR_WEBHOOK_SERVICE_HOST=$(ip a s $(ip r
     ```
 
     Or if you have local changes and use `go mod edit --replace`,
-    follow instructions from [development](../../development/development#standalone-components).
+    follow the instructions from [standalone components](../../development#standalone-components).
 
 1. Load image into KinD
 
@@ -295,13 +295,13 @@ _**Note**_: On Mac, use `export CF_OPERATOR_WEBHOOK_SERVICE_HOST=$(ip a s $(ip r
 
     ```kind load docker-image cfcontainerization/quarks-job:$QUARKS_JOB_IMAGE_TAG```
 
-    (see [development](../../development/development#standalone-components)).
+    (see [standalone components](../../development#standalone-components)).
 
 ## Makefile
 
 The following are the make targets available and their actions. When building and running the targets manually on the quarks-operator codebase, please set `PROJECT=quarks-operator`.
 
-The common scripts between the `quarks-operator` components are in the `quarks-utils` [project](https://github.com/cloudfoundry-incubator/quarks-utils/). To download them, make sure to run `bin/tools-shared` or `make tools` before running any other script/target. 
+The common scripts between the `quarks-operator` components are in the `quarks-utils` [project](https://github.com/cloudfoundry-incubator/quarks-utils/). To download them, make sure to run `bin/tools-shared` or `make tools` before running any other script/target.
 
 
 ### General Targets

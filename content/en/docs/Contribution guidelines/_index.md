@@ -1,7 +1,7 @@
 ---
 title: "Contribution Guidelines"
 linkTitle: "Contribution Guidelines"
-weight: 10
+weight: 90
 description: >
   How to contribute to Quarks
 ---
@@ -31,11 +31,11 @@ Instead, report to the CloudFoundry Foundation team first <security@cloudfoundry
 some time to fix it in a timely matter before disclosing it to the public. For more
 information check the CloudFoundry Security [page](https://www.cloudfoundry.org/security/).
 
-Don't forget to familiarize yourself with our processes and tools, by reading about them [here](../development/tooling).
+Don't forget to familiarize yourself with our processes and tools, by reading about [tooling](../development/tooling).
 
 ### Conversation
 
-When contributing to this repository, please discuss the changes through an existing Github issue 
+When contributing to this repository, please discuss the changes through an existing Github issue
 with the core team. We believe it's the right place to have an open conversation.
 
 ### Pull Request
@@ -66,7 +66,7 @@ new issue by selecting the "Feature" issue type and answer some needed questions
 
 ### How are Github issues handled
 
-When you create a github issue, cf-bot creates a story in the `IceBox` board in the tracker automatically 
+When you create a github issue, cf-bot creates a story in the `IceBox` board in the tracker automatically
 and comments on the issue with the link to the story.
 The core team conducts its planning session once every week during which your issue will be discussed.
 
@@ -77,10 +77,10 @@ The core team conducts its planning session once every week during which your is
 
 ### How are tracker stories handled
 
-* By default, a story is in an `Unstarted` state. 
-* When the developer clicks on the `Start` button, the story moves to `Started` state. 
+* By default, a story is in an `Unstarted` state.
+* When the developer clicks on the `Start` button, the story moves to `Started` state.
 * When the developer finishes the story, submits a PR and clicks on `Finish` button, the story moves to `Finished` state.
-* After approving all PRs that belong to a story, the reviewer and author then try to merge and rebase those PRs, changing references as needed, and ensure all tests are still green. Finally one of them clicks the `Deliver` button which is when the story moves to the `Delivered` state. 
+* After approving all PRs that belong to a story, the reviewer and author then try to merge and rebase those PRs, changing references as needed, and ensure all tests are still green. Finally one of them clicks the `Deliver` button which is when the story moves to the `Delivered` state.
 * The team lead, after checking the feature/bugfix, will accept the story. That is the end of the life of a story. A detailed flow diagram can be found [here](https://www.pivotaltracker.com/help/articles/story_states/).
 
 ## Code review process

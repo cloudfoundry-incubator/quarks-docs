@@ -2,6 +2,7 @@
 ---
 title: "Documentation"
 linkTitle: "Documentation"
+no_list: true
 weight: 20
 menu:
   main:
@@ -12,6 +13,7 @@ menu:
 
 * Incubation Proposal: [Containerizing Cloud Foundry](https://docs.google.com/document/d/1_IvFf-cCR4_Hxg-L7Z_R51EKhZfBqlprrs5NgC2iO2w/edit#heading=h.lybtsdyh8res)
 * Backlog: [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2192232)
+* Slack: #quarks-dev on [https://slack.cloudfoundry.org](https://slack.cloudfoundry.org/)
 * Docker: https://hub.docker.com/r/cfcontainerization/cf-operator/tags
 
 [Project Quarks](https://www.cloudfoundry.org/project-quarks/) is an incubating effort within the Cloud Foundry Foundation to integrate Cloud Foundry and Kubernetes.
