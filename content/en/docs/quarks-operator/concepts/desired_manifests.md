@@ -3,7 +3,6 @@ title: "Desired Manifests"
 linkTitle: "Desired Manifests"
 weight: 10
 description: >
-description: >
   The desired manifest is fully computed manifest, before it's split into smaller 'instance group' manifests.
   The desired manifest is fully computed manifest, before it's split into smaller 'instance group' manifests.
 ---
