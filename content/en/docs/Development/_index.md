@@ -8,6 +8,8 @@ description: >
 
 {{% pageinfo %}}
 The quarks-* operators share some common scripts, that are in the [`quarks-utils` project](https://github.com/cloudfoundry-incubator/quarks-utils/). You can run `bin/tools` to download them. Or download them manually from `quarks-utils`.
+
+Some scripts require the `PROJECT` env var to be set, e.g. `PROJECT=quarks-secret`.
 {{% /pageinfo %}}
 
 ## Requirements
