@@ -1,7 +1,7 @@
 ---
 title: "About operators"
 linkTitle: "About operators"
-weight: 4
+weight: 90
 description: >
   Useful links to Kubernetes operators implementations or patterns
 ---
