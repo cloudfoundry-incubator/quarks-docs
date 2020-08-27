@@ -54,7 +54,7 @@ anchor = "smart"
 
 [languages]
 [languages.en]
-title = "Quarks project"
+title = "Quarks Project"
 description = "Development documentation for quarks-operator"
 languageName ="English"
 # Weight used for sorting.
