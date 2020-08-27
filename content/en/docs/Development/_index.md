@@ -3,7 +3,7 @@ title: "Development"
 linkTitle: "Development"
 weight: 80
 description: >
-  Shared documentation for the quarks operators
+  Shared documentation for the Quarks operators
 ---
 
 ## Requirements
