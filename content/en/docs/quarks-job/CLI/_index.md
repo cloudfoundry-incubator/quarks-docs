@@ -3,6 +3,6 @@ title: "CLI"
 linkTitle: "CLI"
 weight: 20
 description: >
-    Quarks Job CLI options
+    Command line options for the quarks-job binary
 ---
 
