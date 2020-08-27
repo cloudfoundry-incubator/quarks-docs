@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Quarks project – Development</title>
+    <title>Quarks Project – Development</title>
     <link>https://quarks.suse.dev/docs/development/</link>
-    <description>Recent content in Development on Quarks project</description>
+    <description>Recent content in Development on Quarks Project</description>
     <generator>Hugo -- gohugo.io</generator>
     
 	  <atom:link href="https://quarks.suse.dev/docs/development/index.xml" rel="self" type="application/rss+xml" />
@@ -14,508 +14,98 @@
     
     
     <item>
-      <title>Docs: Development Guidelines</title>
-      <link>https://quarks.suse.dev/docs/development/development/</link>
+      <title>Docs: Build</title>
+      <link>https://quarks.suse.dev/docs/development/building/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://quarks.suse.dev/docs/development/development/</guid>
+      <guid>https://quarks.suse.dev/docs/development/building/</guid>
       <description>
         
         
-        
+        &lt;p&gt;The following steps layout the process of building &lt;code&gt;quarks-operator&lt;/code&gt; (formerly &lt;code&gt;cf-operator&lt;/code&gt;) from source and how to install it in your Kubernetes cluster.&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#development&#34;&gt;Development&lt;/a&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#requirements&#34;&gt;Requirements&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#dependencies&#34;&gt;Dependencies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#creating-a-new-resource-and-controller&#34;&gt;Creating a new Resource and Controller&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#reconcile-results&#34;&gt;Reconcile Results&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#testing&#34;&gt;Testing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#create-or-update-pattern&#34;&gt;Create-Or-Update pattern&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#logging-and-events&#34;&gt;Logging and Events&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#standalone-components&#34;&gt;Standalone Components&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#versioning&#34;&gt;Versioning&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#colourise-logs&#34;&gt;Colourise Logs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
+The Quarks Operator was previously known as &lt;code&gt;cf-operator&lt;/code&gt;. We are renaming the &lt;code&gt;cf-operator&lt;/code&gt; project into &lt;code&gt;quarks-operator&lt;/code&gt;. Docker images and other sections might not be migrated yet, we are sorry for the confusion.
+&lt;/div&gt;
 
-&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A working Kubernetes cluster&lt;/li&gt;
-&lt;li&gt;Helm v3 binary&lt;/li&gt;
-&lt;li&gt;Go 1.12.2 and install the tool chain: &lt;code&gt;make tools&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h2&gt;
-
-&lt;p&gt;Run with libraries fetched via go modules:&lt;/p&gt;
+&lt;h2 id=&#34;build-it-from-source&#34;&gt;Build it from source&lt;/h2&gt;
+&lt;p&gt;Follow this steps to build a proper docker image and generate a deployable helm chart:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Checkout the latest stable release / or run it from develop branch&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;GO111MODULE&lt;/span&gt;=on&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;h2 id=&#34;custom-resource-definitions-crds&#34;&gt;Custom Resource Definitions (CRDs)&lt;/h2&gt;
-
-&lt;p&gt;Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds&#34; target=&#34;_blank&#34;&gt;CRDs&lt;/a&gt; (see &lt;a href=&#34;../controllers&#34;&gt;Controllers&lt;/a&gt;):&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;BOSHDeployment&lt;/li&gt;
-&lt;li&gt;QuarksJob&lt;/li&gt;
-&lt;li&gt;QuarksSecret&lt;/li&gt;
-&lt;li&gt;QuarksStatefulSet&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The CRDs are also defined in code and applied automatically when cf-operator starts. If you are editing CRDs, you should update changes to this YAML files in sync.&lt;/p&gt;
-
-&lt;h2 id=&#34;creating-a-new-resource-and-controller&#34;&gt;Creating a new Resource and Controller&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;create a new directory: &lt;code&gt;./pkg/kube/apis/&amp;lt;group_name&amp;gt;/&amp;lt;version&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;in that directory, create the following files:
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;types.go&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;register.go&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;doc.go&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;You can safely use the implementation from another controller as inspiration.
-You can also copy the files and modify them.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The &lt;code&gt;types.go&lt;/code&gt; file contains the definition of your resource. This is the file you care about. Make sure to run &lt;code&gt;make generate&lt;/code&gt; &lt;em&gt;every time you make a change&lt;/em&gt;. You can also check to see what changes would be done by running &lt;code&gt;make verify-gen-kube&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code&gt;register.go&lt;/code&gt; file contains some code that registers your new types.
-  This file looks almost the same for all API resources.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code&gt;doc.go&lt;/code&gt; (deep object copy) is required to make the &lt;code&gt;deepcopy&lt;/code&gt; generator work.
-  It&amp;rsquo;s safe to copy this file from another controller.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;in &lt;code&gt;bin/gen-kube&lt;/code&gt;, add your resource to the &lt;code&gt;GROUP_VERSIONS&lt;/code&gt; variable (separated by a space &lt;code&gt;&amp;quot; &amp;quot;&lt;/code&gt;):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# ...&lt;/span&gt;
-&lt;span style=&#34;color:#40ffff&#34;&gt;GROUP_VERSIONS&lt;/span&gt;=&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;boshdeployment:v1alpha1 &amp;lt;controller_name&amp;gt;:&amp;lt;version&amp;gt;&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# ...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git checkout v0.3.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;regenerate code&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;Build the cf-operator binary, this will be embedded later on the docker image&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# int the root of the project&lt;/span&gt;
-make generate&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;create a directory structure like this for your actual controller code:&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;Build the docker image&lt;/p&gt;
+&lt;p&gt;When running in minikube, please run: &lt;code&gt;eval $(minikube docker-env)&lt;/code&gt;, to build the image
+directly on minikube docker.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;7
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;8
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;.
-+-- pkg
-   +-- kube
-       +-- controllers
-           +-- &amp;lt;controller_name&amp;gt;
-           ¦   +-- controller.go
-           ¦   +-- reconciler.go
-           +-- controller.go&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-image
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;controller.go&lt;/code&gt; is your controller implementation; this is where you should implement an &lt;code&gt;Add&lt;/code&gt; function where register the controller with the &lt;code&gt;Manager&lt;/code&gt;, and you watch for changes for resources that you care about.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;reconciler.go&lt;/code&gt; contains the code that takes action and reconciles actual state with desired state.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Simple implementation to get you started below.
-  As always, use the other implementations to get you started.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Controller:&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: This will automatically generate a docker image tag based on your current commit, tag and SHA.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Generated helm charts with a proper docker image tag, org and repository&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 7
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 8
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 9
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;10
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;11
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;12
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;13
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;14
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;15
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;16
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;17
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;18
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;19
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;20
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;21
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;22
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;23
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;24
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;25
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;26
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;27
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;28
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;29
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;30
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;31
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;package&lt;/span&gt; mycontroller
-
-  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;import&lt;/span&gt; (
-    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;go.uber.org/zap&amp;#34;&lt;/span&gt;
-
-    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/controller&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/controller/controllerutil&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/handler&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/manager&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/source&amp;#34;&lt;/span&gt;
-
-    mrcv1 &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;code.cloudfoundry.org/quarks-operator/pkg/kube/apis/myresourcecontroller/v1&amp;#34;&lt;/span&gt;
-  )
-
-  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;Add&lt;/span&gt;(log *zap.SugaredLogger, mgr manager.Manager) &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;error&lt;/span&gt; {
-    r := &lt;span style=&#34;color:#447fcf&#34;&gt;NewReconciler&lt;/span&gt;(log, mgr, controllerutil.SetControllerReference)
-
-    &lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// Create a new controller
-&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;    c, err := controller.&lt;span style=&#34;color:#447fcf&#34;&gt;New&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;myresource-controller&amp;#34;&lt;/span&gt;, mgr, controller.Options{Reconciler: r})
-    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;if&lt;/span&gt; err != &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;nil&lt;/span&gt; {
-      &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; err
-    }
-
-    &lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// Watch for changes to primary resource
-&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;    err = c.&lt;span style=&#34;color:#447fcf&#34;&gt;Watch&lt;/span&gt;(&amp;amp;source.Kind{Type: &amp;amp;mrcv1.MyResource{}}, &amp;amp;handler.EnqueueRequestForObject{})
-    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;if&lt;/span&gt; err != &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;nil&lt;/span&gt; {
-      &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; err
-    }
-
-    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;nil&lt;/span&gt;
-  }&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-helm
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Reconciler:&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: This will generate a new directory under the base dir, named &lt;code&gt;helm/&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the helm chart(apply Kubernetes Custom Resources)&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 7
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 8
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 9
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;10
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;11
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;12
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;13
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;14
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;15
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;16
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;17
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;18
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;19
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;20
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;21
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;22
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;23
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;24
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;25
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;26
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;27
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;28
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;29
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;30
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;31
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;32
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;33
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;package&lt;/span&gt; myresource
-
-  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;import&lt;/span&gt; (
-    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;go.uber.org/zap&amp;#34;&lt;/span&gt;
-    metav1 &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;k8s.io/apimachinery/pkg/apis/meta/v1&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;k8s.io/apimachinery/pkg/runtime&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/client&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/manager&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sigs.k8s.io/controller-runtime/pkg/reconcile&amp;#34;&lt;/span&gt;
-  )
-
-  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;type&lt;/span&gt; setReferenceFunc &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt;(owner, object metav1.Object, scheme *runtime.Scheme) &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;error&lt;/span&gt;
-
-  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;NewReconciler&lt;/span&gt;(log *zap.SugaredLogger, mgr manager.Manager, srf setReferenceFunc) reconcile.Reconciler {
-    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; &amp;amp;ReconcileMyResource{
-      log:          log,
-      client:       mgr.&lt;span style=&#34;color:#447fcf&#34;&gt;GetClient&lt;/span&gt;(),
-      scheme:       mgr.&lt;span style=&#34;color:#447fcf&#34;&gt;GetScheme&lt;/span&gt;(),
-      setReference: srf,
-    }
-  }
-
-  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;type&lt;/span&gt; ReconcileMyResource &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;struct&lt;/span&gt; {
-    client       client.Client
-    scheme       *runtime.Scheme
-    setReference setReferenceFunc
-    log          *zap.SugaredLogger
-  }
-
-  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; (r *ReconcileMyResource) &lt;span style=&#34;color:#447fcf&#34;&gt;Reconcile&lt;/span&gt;(request reconcile.Request) (reconcile.Result, &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;error&lt;/span&gt;) {
-    r.log.&lt;span style=&#34;color:#447fcf&#34;&gt;Infof&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Reconciling MyResource %s\n&amp;#34;&lt;/span&gt;, request.NamespacedName)
-    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; reconcile.Result{}, &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;nil&lt;/span&gt;
-  }&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install cf-operator-test helm/cf-operator
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;add the new resource to &lt;code&gt;addToSchemes&lt;/code&gt; in &lt;code&gt;pkg/controllers/controller.go&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;add the new controller to &lt;code&gt;addToManagerFuncs&lt;/code&gt; in the same file.&lt;/li&gt;
-&lt;li&gt;create a custom resource definition and add docs to &lt;code&gt;docs/crds&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;reconcile-results&#34;&gt;Reconcile Results&lt;/h3&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: The cf-operator will be available under the namespace set in the context, usually &lt;code&gt;default&lt;/code&gt;, running as a pod.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+&lt;h3 id=&#34;local-development-with-minikube-and-havener&#34;&gt;Local Development with Minikube and Havener&lt;/h3&gt;
+&lt;p&gt;Make sure you have &lt;a href=&#34;https://github.com/homeport/havener&#34;&gt;havener&lt;/a&gt; install.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;7
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;8
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// RequeueOnError will requeue if reconcile also returns an error
-&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;RequeueOnError = reconcile.Result{}
-&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// Requeue will requeue the request, behaviour is different than returning an error
-&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;Requeue = reconcile.Result{Requeue: &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;true&lt;/span&gt;}
-&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// RequeueAfterDefault requeues after the default, unless reconcile also returns an error
-&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;RequeueAfterDefault = reconcile.Result{RequeueAfter: config.RequeueAfter}
-&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// NoRequeue does not requeue, unless reconcile also returns an error
-&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;NoRequeue = reconcile.Result{Requeue: &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;false&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;havener deploy --config dev-env-havener.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;h3 id=&#34;testing&#34;&gt;Testing&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;create functions in &lt;code&gt;env/machine&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;create functions in &lt;code&gt;env/catalog&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;create-or-update-pattern&#34;&gt;Create-Or-Update pattern&lt;/h2&gt;
-
-&lt;p&gt;A pattern that comes up quite often is that an object needs to be updated if it already exists or created if it doesn&amp;rsquo;t. &lt;code&gt;controller-runtime&lt;/code&gt; provides the &lt;code&gt;controller-util&lt;/code&gt; package which has a &lt;code&gt;CreateOrUpdate&lt;/code&gt; function that can help with that. The object&amp;rsquo;s desired state must be reconciled with the existing state inside the passed in callback MutateFn - &lt;code&gt;type MutateFn func() error&lt;/code&gt;. The MutateFn is called regardless of creating or updating an object.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 7
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 8
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 9
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;10
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;_, err = controllerutil.&lt;span style=&#34;color:#447fcf&#34;&gt;CreateOrUpdate&lt;/span&gt;(ctx, r.client, someSecret, &lt;span style=&#34;color:#447fcf&#34;&gt;secretMutateFn&lt;/span&gt;(someSecret, someSecret.StringData, someSecret.Labels, someSecret.Annotations))
-
-&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;secretMutateFn&lt;/span&gt;(s *corev1.Secret, secretData &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;map&lt;/span&gt;[&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;]&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;, labels &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;map&lt;/span&gt;[&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;]&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;, annotations &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;map&lt;/span&gt;[&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;]&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;string&lt;/span&gt;) controllerutil.MutateFn {
-  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt;() &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;error&lt;/span&gt; {
-    s.Labels = labels
-    s.Annotations = annotations
-    s.StringData = secretData
-    &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;nil&lt;/span&gt;
-  }
-}&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;Care must be taken when persisting objects that are already in their final state because they will be overwritten with the existing state if there already is such an object in the system.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;CreateOrUpdate&lt;/code&gt;s should not use blindly &lt;code&gt;DeepCopyInto&lt;/code&gt; or &lt;code&gt;DeepCopy&lt;/code&gt; all the time, but make more precise changes.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;logging-and-events&#34;&gt;Logging and Events&lt;/h2&gt;
-
-&lt;p&gt;We start with a single context and pass that down via controllers into
-reconcilers. Reconcilers will create a context with timeout from the inherited
-context and linting will check if the &lt;code&gt;cancel()&lt;/code&gt; function of that context is
-being handled.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code&gt;ctxlog&lt;/code&gt; module provides a context with a named zap logger and an event recorder to the reconcilers.
-This is how it&amp;rsquo;s set up for reconcilers:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;7
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// after logger is available
-&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;ctx := ctxlog.&lt;span style=&#34;color:#447fcf&#34;&gt;NewParentContext&lt;/span&gt;(log)
-&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// adding named log and event recorder in controllers
-&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;ctx = ctxlog.&lt;span style=&#34;color:#447fcf&#34;&gt;NewContextWithRecorder&lt;/span&gt;(ctx, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;example-reconciler&amp;#34;&lt;/span&gt;, mgr.&lt;span style=&#34;color:#447fcf&#34;&gt;GetEventRecorderFor&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;example-recorder&amp;#34;&lt;/span&gt;))
-&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;// adding timeout in reconcilers
-&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;ctx, cancel := context.&lt;span style=&#34;color:#447fcf&#34;&gt;WithTimeout&lt;/span&gt;(ctx, timeout)
-&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;defer&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;cancel&lt;/span&gt;()&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;The &lt;code&gt;ctxlog&lt;/code&gt; package provides several logging functions. &lt;code&gt;Infof&lt;/code&gt;, &lt;code&gt;Errorf&lt;/code&gt;, &lt;code&gt;Error&lt;/code&gt; and such wrap the corresponding zap log methods.&lt;/p&gt;
-
-&lt;p&gt;The logging functions are also implemented on struct, to add event generation to the logging:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;ctxlog.&lt;span style=&#34;color:#447fcf&#34;&gt;WithEvent&lt;/span&gt;(instance, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Reason&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#447fcf&#34;&gt;Infof&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;message: %s&amp;#34;&lt;/span&gt;, v)
-err := ctxlog.&lt;span style=&#34;color:#447fcf&#34;&gt;WithEvent&lt;/span&gt;(instance, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Reason&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#447fcf&#34;&gt;Errorf&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;message: %s&amp;#34;&lt;/span&gt;, v)
-err := ctxlog.&lt;span style=&#34;color:#447fcf&#34;&gt;WithEvent&lt;/span&gt;(instance, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Reason&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#447fcf&#34;&gt;Error&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;part&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;part&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;part&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;The reason should be camel-case, so switch statements could match it.&lt;/p&gt;
-
-&lt;p&gt;Error funcs like &lt;code&gt;WithEvent().Errorf()&lt;/code&gt; also return an error, with the same message as the log message and event that were generated.&lt;/p&gt;
-
-&lt;p&gt;Calling &lt;code&gt;WarningEvent&lt;/code&gt; just creates a warning event, without logging.&lt;/p&gt;
-
-&lt;h2 id=&#34;standalone-components&#34;&gt;Standalone Components&lt;/h2&gt;
-
-&lt;p&gt;The cf-operator uses quarks-job as an external component.
-The quarks-job operator is run in a separate process.&lt;/p&gt;
-
-&lt;p&gt;When using jobs that capture output, quarks-job needs to know its docker image, to run the &lt;code&gt;persist-output&lt;/code&gt; command in a container.&lt;/p&gt;
-
-&lt;h3 id=&#34;references-in-cf-operator&#34;&gt;References in cf-operator&lt;/h3&gt;
-
-&lt;p&gt;References to quarks job:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;as a library, for the API type, via git commit sha in &lt;code&gt;go.mod&lt;/code&gt;:
-&amp;lsquo;b5dc240&amp;rsquo;&lt;/li&gt;
-&lt;li&gt;the docker image for integration tests is set via  &lt;code&gt;QUARKS_JOB_IMAGE_TAG&lt;/code&gt;:
-&amp;lsquo;v0.0.0-0.gb5dc240&amp;rsquo;&lt;/li&gt;
-&lt;li&gt;releases and e2e test use the helm sub chart, build by &lt;code&gt;bin/build-helm&lt;/code&gt;, which uses the &lt;code&gt;QUARKS_JOB_HELM_VERSION&lt;/code&gt; variable:
-&amp;lsquo;0.0.0-0.gb5dc240&amp;rsquo;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Both variables are set in &lt;code&gt;bin/include/dependencies&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;update-dependencies&#34;&gt;Update Dependencies&lt;/h3&gt;
-
-&lt;p&gt;To update a dependency in a project use &lt;code&gt;go get&lt;/code&gt;, e.g.:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;go get -t -u code.cloudfoundry.org/quarks-job@aad515c
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Using the git commit sha prevents caching problems, which might occur with branch names.&lt;/p&gt;
-
-&lt;h3 id=&#34;local-development-and-go-mod-replace&#34;&gt;Local Development And go mod &amp;lsquo;replace&amp;rsquo;&lt;/h3&gt;
-
-&lt;p&gt;When working locally with multiple repositories it&amp;rsquo;s helpful to replace github dependencies with local directories. The &lt;code&gt;go mod edit -replace&lt;/code&gt; will modify the &lt;code&gt;go.mod&lt;/code&gt; file to point to a local dir, e.g. &amp;lsquo;../quarks-job&amp;rsquo; instead:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;go mod edit -replace code.cloudfoundry.org/quarks-utils=../quarks-utils
-go mod edit -replace code.cloudfoundry.org/quarks-job=../quarks-job
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;building-docker-image-when-using-go-mod-replace&#34;&gt;Building Docker Image When Using go mod &amp;lsquo;replace&amp;rsquo;&lt;/h3&gt;
-
-&lt;p&gt;The modified libraries are not visible to the container. As a workaround a vendor folder can be used, which is also faster:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;GO111MODULE=on go mod vendor
-GO111MODULE=off make build-image
-rm -fr vendor
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;use-a-local-quarksjob-image-in-integration-tests&#34;&gt;Use a Local QuarksJob Image in Integration Tests&lt;/h3&gt;
-
-&lt;p&gt;To use a local docker image export &lt;code&gt;QUARKS_JOB_IMAGE_TAG&lt;/code&gt; and make sure the image is available to the cluster, e.g. for kind:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;kind load docker-image cfcontainerization/cf-operator:$DOCKER_IMAGE_TAG
-kind load docker-image cfcontainerization/quarks-job:$QUARKS_JOB_IMAGE_TAG
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;use-a-local-quarksjob-image-in-integration-tests-with-kubernetes-for-docker-desktop&#34;&gt;Use a Local QuarksJob Image in Integration Tests with Kubernetes for Docker Desktop&lt;/h3&gt;
-
-&lt;p&gt;To use a local docker image export &lt;code&gt;QUARKS_JOB_IMAGE_TAG&lt;/code&gt; and make sure the image is available to the cluster, e.g. for kind:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;docker tag &amp;lt;cf-operator-tag&amp;gt; cfcontainerization/cf-operator:$DOCKER_IMAGE_TAG
-docker tag &amp;lt;quarks-job-tag&amp;gt; cfcontainerization/quarks-job:$QUARKS_JOB_IMAGE_TAG
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;merging-prs&#34;&gt;Merging PRs&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;In PR reviews, make sure only reviewed branches of dependencies are used.&lt;/li&gt;
-&lt;li&gt;If several PRs across repos belong together, be careful to merge them together and in order, so that the master branches stay compatible if one of the merges fails.&lt;/li&gt;
-&lt;li&gt;Make sure that the cf-operator repo PR has updated value of quarks image tag or version at these places
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/blob/master/bin/include/dependencies#L3&#34; target=&#34;_blank&#34;&gt;Dependency File&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/blob/master/go.mod&#34; target=&#34;_blank&#34;&gt;Go mod file&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;versioning&#34;&gt;Versioning&lt;/h2&gt;
-
-&lt;p&gt;APIs and types follow the upstream versioning scheme described at: &lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/kubernetes-api/#api-versioning&#34; target=&#34;_blank&#34;&gt;https://kubernetes.io/docs/concepts/overview/kubernetes-api/#api-versioning&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;colourise-logs&#34;&gt;Colourise Logs&lt;/h2&gt;
-
-&lt;p&gt;Copy the &lt;a href=&#34;https://github.com/garabik/grc&#34; target=&#34;_blank&#34;&gt;grc&lt;/a&gt; (generic colouriser grcat) config file &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/zap.grc.conf&#34; target=&#34;_blank&#34;&gt;zap.grc.conf&lt;/a&gt; to &lt;code&gt;/usr/share/grc/conf.zap&lt;/code&gt; and pipe logs to &lt;code&gt;grcat conf.zap&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# install the custom log config
-cp docs/zap.grc.conf /usr/share/grc/conf.zap
-
-# running operator
-kubectl get pods -A -l name=cf-operator --no-headers=true | tail -1 | read namespace name _
-kubectl logs -f -n &amp;quot;$namespace&amp;quot; &amp;quot;$name&amp;quot; | grcat conf.zap
-
-# integration tests example
-grcat conf.zap &amp;lt; /tmp/cf-operator-tests.log
-&lt;/code&gt;&lt;/pre&gt;
-
       </description>
     </item>
     
@@ -528,43 +118,14 @@ grcat conf.zap &amp;lt; /tmp/cf-operator-tests.log
       <description>
         
         
-        
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#testing&#34;&gt;Testing&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#tests-description&#34;&gt;Tests description&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#unit&#34;&gt;Unit&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#integration&#34;&gt;Integration&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#end-to-end&#34;&gt;End-to-End&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#running-tests&#34;&gt;Running tests&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#in-minikube&#34;&gt;in minikube&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#in-kind&#34;&gt;in KinD&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#makefile&#34;&gt;Makefile&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#general-targets&#34;&gt;General Targets&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#build-targets&#34;&gt;Build Targets&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#test-targets&#34;&gt;Test Targets&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#generate-targets&#34;&gt;Generate Targets&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#ci&#34;&gt;CI&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;tests-description&#34;&gt;Tests description&lt;/h2&gt;
-
-&lt;p&gt;Based on upstreams documentation &lt;a href=&#34;https://github.com/thtanaka/kubernetes/blob/master/docs/devel/testing.md&#34; target=&#34;_blank&#34;&gt;https://github.com/thtanaka/kubernetes/blob/master/docs/devel/testing.md&lt;/a&gt; we use three levels of testing: &lt;code&gt;unit&lt;/code&gt;, &lt;code&gt;integration&lt;/code&gt; and &lt;code&gt;e2e&lt;/code&gt;.&lt;/p&gt;
-
+        &lt;h2 id=&#34;tests-description&#34;&gt;Tests description&lt;/h2&gt;
+&lt;p&gt;Based on upstreams documentation &lt;a href=&#34;https://github.com/thtanaka/kubernetes/blob/master/docs/devel/testing.md&#34;&gt;https://github.com/thtanaka/kubernetes/blob/master/docs/devel/testing.md&lt;/a&gt; we use three levels of testing: &lt;code&gt;unit&lt;/code&gt;, &lt;code&gt;integration&lt;/code&gt; and &lt;code&gt;e2e&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Before starting, run &lt;code&gt;make tools&lt;/code&gt; to install the required dependencies.&lt;/p&gt;
-
 &lt;p&gt;Running &lt;code&gt;make test&lt;/code&gt; executes all the test suites.&lt;/p&gt;
-
 &lt;p&gt;We use ginkgo for testing. Every package needs a &lt;code&gt;suite_test.go&lt;/code&gt; for setup. It can be generated by running &lt;code&gt;ginkgo bootstrap&lt;/code&gt; in the sub folder. Rename the generated file afterwards, to stay consistent.
 There is also &lt;code&gt;ginkgo generate&lt;/code&gt; to create skeleton test files.&lt;/p&gt;
-
 &lt;h2 id=&#34;unit&#34;&gt;Unit&lt;/h2&gt;
-
 &lt;p&gt;While unit testing we:&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;test classes in isolation&lt;/li&gt;
 &lt;li&gt;pass all dependencies to the constructor, so we can inject fakes for testing&lt;/li&gt;
@@ -576,85 +137,68 @@ There is also &lt;code&gt;ginkgo generate&lt;/code&gt; to create skeleton test f
 &lt;li&gt;assert all handled error cases are triggered&lt;/li&gt;
 &lt;li&gt;can ignore outgoing queries, which only change internal state&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h3 id=&#34;setup-ruby&#34;&gt;Setup Ruby&lt;/h3&gt;
-
 &lt;p&gt;Ruby gem for template rendering&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;gem install bosh-template&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;gem install bosh-template
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;h2 id=&#34;integration&#34;&gt;Integration&lt;/h2&gt;
-
+&lt;/div&gt;&lt;h2 id=&#34;integration&#34;&gt;Integration&lt;/h2&gt;
 &lt;p&gt;Integration tests formulate expectations on the interactions of several components.
 They require access to a Kubernetes, preferably &lt;code&gt;minikube&lt;/code&gt;.&lt;/p&gt;
-
 &lt;p&gt;Integration tests start our operator directly, bypassing the command line.
 They do require the operator &lt;a href=&#34;#upload-operator-image&#34;&gt;docker image&lt;/a&gt; and the &lt;code&gt;bosh-template&lt;/code&gt; Ruby gem.&lt;/p&gt;
-
 &lt;p&gt;The &lt;code&gt;environment&lt;/code&gt; package provides helpers to start the operator, get the kubeconfig and use the clients to create objects.
 In &lt;code&gt;testing&lt;/code&gt; the &lt;code&gt;catalog&lt;/code&gt; defines test objects.&lt;/p&gt;
-
 &lt;p&gt;Integration tests use a special logger, which does not log to stdout and whose messages can be accessed as a an array by calling &lt;code&gt;env.AllLogMessages()&lt;/code&gt;.&lt;/p&gt;
-
 &lt;p&gt;When using &lt;code&gt;bin/test-integration&lt;/code&gt; the integration tests are run in parallel.
 Each Ginkgo test node has a separate namespace, log file and webhook server port and certificate.&lt;/p&gt;
-
 &lt;p&gt;The node index starts at 1 and is used as following to generate names:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;namespace: &lt;span style=&#34;color:#40ffff&#34;&gt;$TEST_NAMESPACE&lt;/span&gt; + &amp;lt;node_index&amp;gt;
 webhook port: &lt;span style=&#34;color:#40ffff&#34;&gt;$CF_OPERATOR_WEBHOOK_SERVICE_PORT&lt;/span&gt; + &amp;lt;node_index&amp;gt;
-log file: &lt;span style=&#34;color:#40ffff&#34;&gt;$CF_OPERATOR_TESTING_TMP&lt;/span&gt;/cf-operator-tests-&amp;lt;node_index&amp;gt;.log&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+log file: &lt;span style=&#34;color:#40ffff&#34;&gt;$CF_OPERATOR_TESTING_TMP&lt;/span&gt;/cf-operator-tests-&amp;lt;node_index&amp;gt;.log
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Integration tests use the &lt;code&gt;TEST_NAMESPACE&lt;/code&gt; environment variable as a base to
+&lt;/div&gt;&lt;p&gt;Integration tests use the &lt;code&gt;TEST_NAMESPACE&lt;/code&gt; environment variable as a base to
 calculate the namespace name. Test namespaces are deleted automatically once
 the tests are completed.&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;CF_OPERATOR_TESTING_TMP&lt;/code&gt; can be used to set a tmp directory for storing logs
 and other files generated during testing. If this variable is not set &lt;code&gt;/tmp&lt;/code&gt;
 will be used instead.&lt;/p&gt;
-
 &lt;p&gt;The tests will create some NodePort services; normally the test can detect an IP
 address automatically. &lt;code&gt;CF_OPERATOR_NODE_IP&lt;/code&gt; can set to the node IP of any
 arbitrary node to override this (e.g. for OpenStack Kubernetes clusters).&lt;/p&gt;
-
 &lt;p&gt;Generated files will be cleand up after the test run unless &lt;code&gt;SKIP_CF_OPERATOR_TESTING_TMP_CLEANUP&lt;/code&gt;
 is set to &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
-
 &lt;h3 id=&#34;webhook-configuration&#34;&gt;&lt;strong&gt;Webhook Configuration&lt;/strong&gt;&lt;/h3&gt;
-
 &lt;p&gt;Quarks StatefulSet requires a k8s webhook to mutate the volumes of a pod.
 Kubernetes will call back to the operator for certain requests and use the
 modified pod manifest, which is returned.
 CF-Operator also uses a validating webhook to validate the BOSH deployment spec and the creation
 of reference resources specified in the spec. Secret validation admission webhook restricts the
 user from updating a versioned secret.&lt;/p&gt;
-
 &lt;p&gt;The cf-operator integration tests use &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_PORT&lt;/code&gt; as a
 base value to calculate the port number to listen to on &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt;.&lt;/p&gt;
-
 &lt;p&gt;The tests use a &lt;code&gt;mutatingwebhookconfiguration&lt;/code&gt; and a &lt;code&gt;validatingwebhookconfiguration&lt;/code&gt; to configure Kubernetes to
 connect to this address. The address needs to be reachable from the cluster.&lt;/p&gt;
-
 &lt;p&gt;The configuration only applies to a single namespace, by using a selector. It contains the URL of the webhooks, build from
 &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt; and the calculated port.
 It also contains SSL certificates and CA, which are necessary to connect to the webhook.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: If you have issues to start integration tests, and they fail by contacting the webhook server, for example if you see a error message like:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 1
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 2
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 3
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt; 4
@@ -685,7 +229,7 @@ It also contains SSL certificates and CA, which are necessary to connect to the 
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;29
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;30
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;    Unexpected error:                                                                                                                
           &amp;lt;*errors.StatusError | 0xc0002b4780&amp;gt;: {                                                                                      
               ErrStatus: {                                                                                                             
@@ -711,222 +255,209 @@ It also contains SSL certificates and CA, which are necessary to connect to the 
                               Field: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                               
                           },                                                                                                           
                       ],                                                                                                               
-                      RetryAfterSeconds: &lt;span style=&#34;color:#3677a9&#34;&gt;0&lt;/span&gt;,                        
+                      RetryAfterSeconds: 0,                        
                   },                                                                                                                   
-                  Code: &lt;span style=&#34;color:#3677a9&#34;&gt;500&lt;/span&gt;,                                                                                                           
+                  Code: 500,                                                                                                           
               },                                                                                                                       
-          }                                                       &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+          }                                                       
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Check your firewall if it&amp;rsquo;s preventing the webhook server to be contacted from your target cluster or either if &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt; is configured correctly&lt;/p&gt;
-
+&lt;/div&gt;&lt;p&gt;Check your firewall if it&amp;rsquo;s preventing the webhook server to be contacted from your target cluster or either if &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt; is configured correctly&lt;/p&gt;
 &lt;p&gt;The certificates and keys are written to disk, so the webhook server can use
 them.  They are also cached in a k8s secret for production, but that is not
 being used in integration tests, since they delete the test namespaces.&lt;/p&gt;
-
 &lt;p&gt;Tests suites should clean up their, namespace dependant, webhook configuration automatically.&lt;/p&gt;
-
 &lt;h2 id=&#34;end-to-end&#34;&gt;End-to-End&lt;/h2&gt;
-
 &lt;p&gt;The e2e tests are meant to test acceptance scenarios. They are written from an end user perspective.
 They are split into two types, &amp;lsquo;cli&amp;rsquo; and &amp;lsquo;kube&amp;rsquo;.&lt;/p&gt;
-
 &lt;p&gt;The e2e CLI test exercise different command line options and commands which don&amp;rsquo;t need a running Kubernetes, like template rendering.
 The CLI tests build the operator binary themselves.&lt;/p&gt;
-
 &lt;p&gt;The second type of e2e tests use &lt;code&gt;helm&lt;/code&gt; to install the CF operator into the k8s cluster and use the files from &lt;code&gt;docs/examples&lt;/code&gt; for testing.&lt;/p&gt;
-
 &lt;h2 id=&#34;running-tests&#34;&gt;Running tests&lt;/h2&gt;
-
 &lt;h3 id=&#34;in-minikube&#34;&gt;In minikube&lt;/h3&gt;
-
 &lt;p&gt;The following steps are necessary to have a proper environment setup, where all types of tests can be executed:&lt;/p&gt;
-
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Start &lt;code&gt;minikube&lt;/code&gt;&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;Start &lt;code&gt;minikube&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;minikube start --kubernetes-version v1.15.5&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;minikube start --kubernetes-version v1.15.5
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Switch to minikube docker daemon&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;Switch to minikube docker daemon&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;eval&lt;/span&gt; &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;minikube docker-env&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;eval&lt;/span&gt; &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;minikube docker-env&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Template rendering for BOSH jobs is done at deployment time by the operator
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Template rendering for BOSH jobs is done at deployment time by the operator
 binary. Therefore the operator docker image needs to be made available to
-Kubernetes cluster.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Export the &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt; env variable&lt;/p&gt;
+Kubernetes cluster.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Export the &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt; env variable&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/span&gt;=&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip -4 a s dev &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip r l &lt;span style=&#34;color:#3677a9&#34;&gt;0&lt;/span&gt;/0 | cut -f5 -d&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt; | grep -oP &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;inet \K\S+(?=/)&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/span&gt;=&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip -4 a s dev &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip r l 0/0 | cut -f5 -d&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt; | grep -oP &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;inet \K\S+(?=/)&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: On Mac, use &lt;code&gt;export CF_OPERATOR_WEBHOOK_SERVICE_HOST=$(ip a s $(ip r g 0/0 | cut -f5 -d&#39; &#39;) | grep -oE &#39;inet [^ /]+&#39; | cut -f2 -d&#39; &#39;)&lt;/code&gt;, because grep cannot handle perl regexs.
-&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: You can also find the correct IP, by running &lt;code&gt;ip addr&lt;/code&gt;. The IP address under &lt;code&gt;vboxnet1&lt;/code&gt; is the IP that you need.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Export the &lt;code&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/code&gt; env variable&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: On Mac, use &lt;code&gt;export CF_OPERATOR_WEBHOOK_SERVICE_HOST=$(ip a s $(ip r g 0/0 | cut -f5 -d&#39; &#39;) | grep -oE &#39;inet [^ /]+&#39; | cut -f2 -d&#39; &#39;)&lt;/code&gt;, because grep cannot handle perl regexs.
+&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: You can also find the correct IP, by running &lt;code&gt;ip addr&lt;/code&gt;. The IP address under &lt;code&gt;vboxnet1&lt;/code&gt; is the IP that you need.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Export the &lt;code&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/code&gt; env variable&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/span&gt;=standard&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/span&gt;=standard
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Require for the PVC test creation, in minikube.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Ensure &lt;code&gt;GO111MODULE&lt;/code&gt; is set&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Require for the PVC test creation, in minikube.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ensure &lt;code&gt;GO111MODULE&lt;/code&gt; is set&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;GO111MODULE&lt;/span&gt;=on&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;GO111MODULE&lt;/span&gt;=on
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: When you have a vendor folder (either from the submodule or manually created) settings this to &lt;code&gt;off&lt;/code&gt; speeds up the &lt;code&gt;build-image&lt;/code&gt; target.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Build the &lt;code&gt;cf-operator&lt;/code&gt; binary&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: When you have a vendor folder (either from the submodule or manually created) settings this to &lt;code&gt;off&lt;/code&gt; speeds up the &lt;code&gt;build-image&lt;/code&gt; target.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Build the &lt;code&gt;cf-operator&lt;/code&gt; binary&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Build the &lt;code&gt;cf-operator&lt;/code&gt; docker image&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;Build the &lt;code&gt;cf-operator&lt;/code&gt; docker image&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-image&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-image
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Consider setting &lt;code&gt;DOCKER_IMAGE_TAG&lt;/code&gt; to a fixed variable. This will avoid rebuilding the docker image everytime, when doing changes in files not related to the &lt;code&gt;cf-operator&lt;/code&gt;
 binary.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: When not running in CI, nothing ensures a proper cleanup of resources after the deletion of the &lt;code&gt;cf-operator&lt;/code&gt; in the environment. You can make sure to manually verify that none
 old resources will interfere with a future installation, by:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# Deleting old mutating webhooks configurations&lt;/span&gt;
-kubectl get mutatingwebhookconfiguration -oname | xargs -n &lt;span style=&#34;color:#3677a9&#34;&gt;1&lt;/span&gt; kubectl delete&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+kubectl get mutatingwebhookconfiguration -oname | xargs -n &lt;span style=&#34;color:#3677a9&#34;&gt;1&lt;/span&gt; kubectl delete
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;h3 id=&#34;in-kind&#34;&gt;In KinD&lt;/h3&gt;
-
+&lt;/div&gt;&lt;h3 id=&#34;in-kind&#34;&gt;In KinD&lt;/h3&gt;
 &lt;p&gt;The following steps are necessary to have a proper environment setup, where all types of tests can be executed:&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;Install &lt;code&gt;KinD&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;Follow the instructions from &lt;a href=&#34;https://github.com/kubernetes-sigs/kind/&#34; target=&#34;_blank&#34;&gt;https://github.com/kubernetes-sigs/kind/&lt;/a&gt;&lt;/p&gt;
-
+&lt;p&gt;Follow the instructions from &lt;a href=&#34;https://github.com/kubernetes-sigs/kind/&#34;&gt;https://github.com/kubernetes-sigs/kind/&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Start cluster&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;Start cluster&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kind create cluster --image kindest/node:v1.15.6&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kind create cluster --image kindest/node:v1.15.6
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Export the &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt; env variable. Use the IP of the docker bridge or your public IP. Firewall rules may interfere.&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;Export the &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt; env variable. Use the IP of the docker bridge or your public IP. Firewall rules may interfere.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/span&gt;=&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip -4 a s dev &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip r l &lt;span style=&#34;color:#3677a9&#34;&gt;0&lt;/span&gt;/0 | cut -f5 -d&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt; | grep -oP &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;inet \K\S+(?=/)&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/span&gt;=&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip -4 a s dev &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;ip r l 0/0 | cut -f5 -d&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt; | grep -oP &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;inet \K\S+(?=/)&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: On Mac, use &lt;code&gt;export CF_OPERATOR_WEBHOOK_SERVICE_HOST=$(ip a s $(ip r g 0/0 | cut -f5 -d&#39; &#39;) | grep -oE &#39;inet [^ /]+&#39; | cut -f2 -d&#39; &#39;)&lt;/code&gt;, because grep cannot handle perl regexs.&lt;/p&gt;
-
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Export the &lt;code&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/code&gt; env variable&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;Export the &lt;code&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/code&gt; env variable&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/span&gt;=standard&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;OPERATOR_TEST_STORAGE_CLASS&lt;/span&gt;=standard
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Required for the PVC tests.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Build the &lt;code&gt;cf-operator&lt;/code&gt; docker image&lt;/p&gt;
-
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Required for the PVC tests.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Build the &lt;code&gt;cf-operator&lt;/code&gt; docker image&lt;/p&gt;
 &lt;p&gt;First set the version to something static, not dependant on git:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;DOCKER_IMAGE_TAG&lt;/span&gt;=&lt;span style=&#34;color:#ed9d13&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;DOCKER_IMAGE_TAG&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;dev&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;DOCKER_IMAGE_TAG&lt;/span&gt;=&lt;span style=&#34;color:#ed9d13&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;DOCKER_IMAGE_TAG&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;dev&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-image&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-image
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Or if you have local changes and use &lt;code&gt;go mod edit --replace&lt;/code&gt;,
-follow instructions from &lt;a href=&#34;../../development/development#standalone-components&#34;&gt;development&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Load image into KinD&lt;/p&gt;
-
+&lt;/div&gt;&lt;p&gt;Or if you have local changes and use &lt;code&gt;go mod edit --replace&lt;/code&gt;,
+follow the instructions from &lt;a href=&#34;../../development#standalone-components&#34;&gt;standalone components&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Load image into KinD&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kind load docker-image cfcontainerization/cf-operator:$DOCKER_IMAGE_TAG
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Set QuarksJob dependency. Choose a tag from &lt;a href=&#34;https://hub.docker.com/r/cfcontainerization/quarks-job/tags&#34; target=&#34;_blank&#34;&gt;docker.io&lt;/a&gt;.&lt;/p&gt;
-
+&lt;li&gt;
+&lt;p&gt;Set QuarksJob dependency. Choose a tag from &lt;a href=&#34;https://hub.docker.com/r/cfcontainerization/quarks-job/tags&#34;&gt;docker.io&lt;/a&gt;.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;export QUARKS_JOB_IMAGE_TAG=${QUARKS_JOB_IMAGE_TAG:-dev}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If using a locally built quarks-job image, load it via&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If using a locally built quarks-job image, load it via&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kind load docker-image cfcontainerization/quarks-job:$QUARKS_JOB_IMAGE_TAG&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;(see &lt;a href=&#34;../../development/development#standalone-components&#34;&gt;development&lt;/a&gt;).&lt;/p&gt;
-
+&lt;p&gt;(see &lt;a href=&#34;../../development#standalone-components&#34;&gt;standalone components&lt;/a&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h2 id=&#34;makefile&#34;&gt;Makefile&lt;/h2&gt;
-
 &lt;p&gt;The following are the make targets available and their actions. When building and running the targets manually on the quarks-operator codebase, please set &lt;code&gt;PROJECT=quarks-operator&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;The common scripts between the &lt;code&gt;quarks-operator&lt;/code&gt; components are in the &lt;code&gt;quarks-utils&lt;/code&gt; &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-utils/&#34; target=&#34;_blank&#34;&gt;project&lt;/a&gt;. To download them, make sure to run &lt;code&gt;bin/tools-shared&lt;/code&gt; or &lt;code&gt;make tools&lt;/code&gt; before running any other script/target.&lt;/p&gt;
-
+&lt;p&gt;The common scripts between the &lt;code&gt;quarks-operator&lt;/code&gt; components are in the &lt;code&gt;quarks-utils&lt;/code&gt; &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-utils/&#34;&gt;project&lt;/a&gt;. To download them, make sure to run &lt;code&gt;bin/tools-shared&lt;/code&gt; or &lt;code&gt;make tools&lt;/code&gt; before running any other script/target.&lt;/p&gt;
 &lt;h3 id=&#34;general-targets&#34;&gt;General Targets&lt;/h3&gt;
-
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -934,42 +465,34 @@ follow instructions from &lt;a href=&#34;../../development/development#standalon
 &lt;th&gt;Action&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
-
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;all&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;install dependencies, run tests and builds &lt;code&gt;cf-operator&lt;/code&gt; binary.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;up&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;starts the operator using the binary created by &lt;code&gt;build&lt;/code&gt; make target.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;vet&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;runs the code analyzing tool &lt;code&gt;vet&lt;/code&gt; to identify problems in the source code.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;lint&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;runs &lt;code&gt;go lint&lt;/code&gt;to identify style mistakes.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;tools&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;installs go dependencies required to &lt;code&gt;cf-operator&lt;/code&gt;.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;check-scripts&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;runs &lt;code&gt;shellcheck&lt;/code&gt; to identify syntax, semmantic and subtle caveats in shell scripts.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-
 &lt;h3 id=&#34;build-targets&#34;&gt;Build Targets&lt;/h3&gt;
-
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -977,27 +500,22 @@ follow instructions from &lt;a href=&#34;../../development/development#standalon
 &lt;th&gt;Action&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
-
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;build&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;builds the &lt;code&gt;cf-operator&lt;/code&gt; binary.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;build-image&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;builds the &lt;code&gt;cf-operator&lt;/code&gt; docker image.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;build-helm&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;builds the &lt;code&gt;cf-operator&lt;/code&gt; helm tar file.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-
 &lt;h3 id=&#34;test-targets&#34;&gt;Test Targets&lt;/h3&gt;
-
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1005,47 +523,38 @@ follow instructions from &lt;a href=&#34;../../development/development#standalon
 &lt;th&gt;Action&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
-
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;test&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;runs unit,integration and e2e tests.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;test-unit&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;runs unit tests only.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;test-integration&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;runs integration tests only.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;test-cli-e2e&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;runs end to end tests for CLI.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;test-helm-e2e&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;runs end to end tests on k8s using &lt;code&gt;helm install&lt;/code&gt;.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;test-integration-storage&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;runs integration storage tests.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;test-helm-e2e-storage&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;runs e2e storage tests.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-
 &lt;h3 id=&#34;generate-targets&#34;&gt;Generate Targets&lt;/h3&gt;
-
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1053,329 +562,114 @@ follow instructions from &lt;a href=&#34;../../development/development#standalon
 &lt;th&gt;Action&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
-
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;generate&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;runs &lt;code&gt;gen-kube&lt;/code&gt; and &lt;code&gt;gen-fakes&lt;/code&gt;.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;gen-kube&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;generates kube client,informers, lister code.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;gen-fakes&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;generates fake objects for unit testing.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;gen-command-docs&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;generates docs for all commands.&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;verify-gen-kube&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;informs if you need to run &lt;code&gt;gen-kube&lt;/code&gt; make target.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-
 &lt;h2 id=&#34;ci&#34;&gt;CI&lt;/h2&gt;
-
-&lt;p&gt;Our Concourse pipeline definitions are kept in the &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator-ci&#34; target=&#34;_blank&#34;&gt;cf-operator-ci&lt;/a&gt; repo.&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;Our Concourse pipeline definitions are kept in the &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator-ci&#34;&gt;cf-operator-ci&lt;/a&gt; repo.&lt;/p&gt;
 
       </description>
     </item>
     
     <item>
-      <title>Docs: Releasing</title>
-      <link>https://quarks.suse.dev/docs/development/releasing/</link>
+      <title>Docs: About operators</title>
+      <link>https://quarks.suse.dev/docs/development/about_operators/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://quarks.suse.dev/docs/development/releasing/</guid>
+      <guid>https://quarks.suse.dev/docs/development/about_operators/</guid>
       <description>
         
         
-        
-
-&lt;p&gt;We&amp;rsquo;re releasing based on tags, which contain our version number. The format is &amp;lsquo;v0.0.0&amp;rsquo;.
-The release title will be set to this version.&lt;/p&gt;
-
-&lt;p&gt;The CI pipeline has a &amp;lsquo;release&amp;rsquo; job, which will update the release on Github.
-That job triggers itself, when a draft release is created.&lt;/p&gt;
-
-&lt;h2 id=&#34;create-new-release-pipeline&#34;&gt;Create new release pipeline&lt;/h2&gt;
-
-&lt;p&gt;We release from release-branches. Each maintained release has a separate pipeline in Concourse.
-To create a new pipeline run this in the CI repository:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;cd&lt;/span&gt; pipelines/cf-operator-release
-./configure.sh CFO v0.4.x v0.4&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Where &lt;code&gt;CFO&lt;/code&gt; is your concourse target and &lt;code&gt;v0.4.x&lt;/code&gt; is the name of the branch.
-The last argument, &lt;code&gt;v0.4&lt;/code&gt; is used to filter Github tags, which belong to the release.&lt;/p&gt;
-
-&lt;p&gt;This allows a separate Github branch and Concourse pipeline for each major version.
-Within those pipelines, releases can be built from minor versions.&lt;/p&gt;
-
-&lt;h2 id=&#34;create-a-new-release&#34;&gt;Create a new release&lt;/h2&gt;
-
-&lt;p&gt;After completion, the pipeline will create several artifacts:&lt;/p&gt;
-
+        &lt;h1 id=&#34;about-operators&#34;&gt;About Operators&lt;/h1&gt;
+&lt;h2 id=&#34;framework-controller-runtime&#34;&gt;Framework: Controller Runtime&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;helm chart on S3&lt;/li&gt;
-&lt;li&gt;helm chart in our repo at &lt;a href=&#34;https://cloudfoundry-incubator.github.io/quarks-helm/&#34; target=&#34;_blank&#34;&gt;https://cloudfoundry-incubator.github.io/quarks-helm/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;cf-operator binary on S3&lt;/li&gt;
-&lt;li&gt;docker image of the operator on dockerhub&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://book.kubebuilder.io/&#34;&gt;Kubebuilder docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://godoc.org/github.com/kubernetes-sigs/controller-runtime/pkg&#34;&gt;controller-runtime docs&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;Running the &amp;lsquo;release&amp;rsquo; job will take the latest artificats, which passed through the pipeline and add them to the Github release:&lt;/p&gt;
-
+&lt;h2 id=&#34;operator-pattern--features&#34;&gt;Operator Pattern &amp;amp; Features&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;to the body&lt;/li&gt;
-&lt;li&gt;as Github assets for downloading&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The version numbers (&lt;code&gt;v0.0.0-&amp;lt;number-of-commits&amp;gt;.&amp;lt;commit-SHA&amp;gt;&lt;/code&gt;) of these assets are taken from the info on S3.
-They have to match the Github tag, else the release job will fail.
-The assets will be copied into a &amp;lsquo;release&amp;rsquo; folder on S3.&lt;/p&gt;
-
-&lt;p&gt;The docker image is only referenced from the helm chart and not mentioned in the release, though.&lt;/p&gt;
-
-&lt;h2 id=&#34;checklist&#34;&gt;Checklist&lt;/h2&gt;
-
-&lt;h3 id=&#34;major-release&#34;&gt;Major Release&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Create version branch&lt;/li&gt;
-&lt;li&gt;Create a new release pipeline for that branch&lt;/li&gt;
-&lt;li&gt;Unpause pipeline&lt;/li&gt;
-&lt;li&gt;Continue with &amp;ldquo;Minor Bump&amp;rdquo;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;minor-bump&#34;&gt;Minor Bump&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Tag commit with new version&lt;/li&gt;
-&lt;li&gt;Push commit&lt;/li&gt;
-&lt;li&gt;Wait for commit to pass release pipeline, &amp;lsquo;publish&amp;rsquo; needs to create the binary and helm chart, before the &amp;lsquo;release&amp;rsquo; job can run&lt;/li&gt;
-&lt;li&gt;Create a draft Github release for that tag, &amp;lsquo;release&amp;rsquo; job triggers&lt;/li&gt;
-&lt;li&gt;Wait for &amp;lsquo;release&amp;rsquo; job to finish on Concourse&lt;/li&gt;
-&lt;li&gt;Edit the draft release on Github and publish it&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Try not to push to the pipeline again, until step 4 is completed. The &amp;lsquo;release&amp;rsquo; job will always take the most recent artifacts from S3. Maybe pause the &amp;lsquo;publish&amp;rsquo; job manually to avoid accidental updates.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Kubernetes Controllers</title>
-      <link>https://quarks.suse.dev/docs/development/controllers/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://quarks.suse.dev/docs/development/controllers/</guid>
-      <description>
-        
-        
-        
-
-&lt;p&gt;The &lt;code&gt;quarks-operator&lt;/code&gt; watches four different types of custom resources:&lt;/p&gt;
-
+&lt;li&gt;
+&lt;p&gt;Operator pattern&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;bosh_deployment&#34; target=&#34;_blank&#34;&gt;BoshDeployment&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;quarksjob&#34; target=&#34;_blank&#34;&gt;QuarksJob&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;quarks_secret&#34; target=&#34;_blank&#34;&gt;QuarksSecret&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;quarks_statefulset&#34; target=&#34;_blank&#34;&gt;QuarksStatefulSet&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://admiralty.io/blog/kubernetes-custom-resource-controller-and-operator-development-tools/&#34;&gt;Kubernetes Custom Resource Controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.slideshare.net/Jakobkaralus/the-kubernetes-operator-pattern-containerconf-nov-2017&#34;&gt;The Kubernetes Operator Pattern&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;The &lt;code&gt;cf-operator&lt;/code&gt; requires the according CRDs to be installed in the cluster in order to work as expected. By default, the &lt;code&gt;cf-operator&lt;/code&gt; applies CRDs in your cluster automatically.&lt;/p&gt;
-
-&lt;p&gt;To verify that the CRD´s are installed:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl get crds
-NAME                                            CREATED AT
-boshdeployments.quarks.cloudfoundry.org        &lt;span style=&#34;color:#3677a9&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z
-quarksjobs.quarks.cloudfoundry.org           &lt;span style=&#34;color:#3677a9&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z
-quarkssecrets.quarks.cloudfoundry.org        &lt;span style=&#34;color:#3677a9&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z
-quarksstatefulsets.quarks.cloudfoundry.org   &lt;span style=&#34;color:#3677a9&#34;&gt;2019&lt;/span&gt;-06-25T07:08:37Z&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;h3 id=&#34;architecture-design&#34;&gt;Architecture design&lt;/h3&gt;
-
-&lt;p&gt;Draw.io with the sources for the &lt;code&gt;quarks_deployment_flow-*png&lt;/code&gt; controller charts:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://drive.google.com/file/d/1Uk2h5pOmY-gLtbfpDNO3POTcqI5UdZgj/view?usp=sharing&#34; target=&#34;_blank&#34;&gt;https://drive.google.com/file/d/1Uk2h5pOmY-gLtbfpDNO3POTcqI5UdZgj/view?usp=sharing&lt;/a&gt;&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Labels</title>
-      <link>https://quarks.suse.dev/docs/development/labels/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://quarks.suse.dev/docs/development/labels/</guid>
-      <description>
-        
-        
-        
-
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Admission webhooks and eventing&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;bdv1.LabelDeploymentName&lt;/code&gt; &amp;ldquo;quarks.cloudfoundry.org/deployment-name&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;bdv1.LabelDeploymentSecretType&lt;/code&gt; &amp;ldquo;quarks.cloudfoundry.org/secret-type&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;bdv1.LabelDeploymentVersion&lt;/code&gt; &amp;ldquo;quarks.cloudfoundry.org/deployment-version&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;bdv1.LabelInstanceGroupName&lt;/code&gt; &amp;ldquo;quarks.cloudfoundry.org/instance-group-name&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;bdv1.LabelReferencedJobName&lt;/code&gt; &amp;ldquo;quarks.cloudfoundry.org/referenced-job-name&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;qstsv1a1.LabelAZIndex&lt;/code&gt; &amp;ldquo;quarks.cloudfoundry.org/az-index&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;qstsv1a1.LabelAZName&lt;/code&gt; &amp;ldquo;quarks.cloudfoundry.org/az-name&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;qstsv1a1.LabelActivePod&lt;/code&gt; &amp;ldquo;quarks.cloudfoundry.org/pod-active&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;qstsv1a1.LabelPodOrdinal&lt;/code&gt; &amp;ldquo;quarks.cloudfoundry.org/pod-ordinal&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;qstsv1a1.LabelQStsName&lt;/code&gt; &amp;ldquo;quarks.cloudfoundry.org/quarks-statefulset-name&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;qsv1a1.LabelKind&lt;/code&gt; &amp;ldquo;quarks.cloudfoundry.org/secret-kind&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;delete&lt;/code&gt; = pod&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;variableName&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;app&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://book.kubebuilder.io/beyond_basics/sample_webhook.html&#34;&gt;Sample Webhook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://schd.ws/hosted_files/kccncchina2018english/50/kubecon_Tom_Ilya_CRDs.pdf&#34;&gt;Custom Resource Definitions&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h1 id=&#34;data-from-tests&#34;&gt;Data From Tests&lt;/h1&gt;
-
-&lt;h2 id=&#34;configmaps&#34;&gt;ConfigMaps&lt;/h2&gt;
-
-&lt;h3 id=&#34;secret-rotation-configmap&#34;&gt;Secret Rotation ConfigMap&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/secret-rotation = yes
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;qjob&#34;&gt;QJob&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/deployment-name = bosh-manifest-two-instance-groups
-delete=pod
-quarks.cloudfoundry.org/deployment-version = 1
-quarks.cloudfoundry.org/instance-group-name = nats-smoke-tests
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;qjob-job&#34;&gt;QJob Job&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/qjob-name = ig-bosh-manifest-two-instance-groups
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;pod-from-job&#34;&gt;Pod from Job&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;delete=pod
-quarks.cloudfoundry.org/qjob-name=dm-test
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;qsts&#34;&gt;QSTS&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/deployment-name = test
-quarks.cloudfoundry.org/deployment-version = 1
-quarks.cloudfoundry.org/instance-group-name = nats
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;sts&#34;&gt;STS&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/az-index=0
-quarks.cloudfoundry.org/deployment-name=test
-quarks.cloudfoundry.org/instance-group-name=nats
-quarks.cloudfoundry.org/quarks-statefulset-name=test-nats
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;sts-pod&#34;&gt;STS Pod&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/az-index=0
-quarks.cloudfoundry.org/deployment-name=test
-quarks.cloudfoundry.org/instance-group-name=nats
-quarks.cloudfoundry.org/pod-active=active|true
-quarks.cloudfoundry.org/pod-ordinal=0
-quarks.cloudfoundry.org/quarks-statefulset-name=test-nats
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;service&#34;&gt;Service&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/az-index=0
-quarks.cloudfoundry.org/deployment-name=test
-quarks.cloudfoundry.org/instance-group-name=nats
-quarks.cloudfoundry.org/pod-ordinal=0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;qsec&#34;&gt;QSec&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/deployment-name = test
-variableName = nats_password
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;qsec-secret&#34;&gt;QSec Secret&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/secret-kind=generated
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;secrets&#34;&gt;Secrets&lt;/h2&gt;
-
-&lt;h3 id=&#34;withops-secrets&#34;&gt;WithOps Secrets&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/deployment-name=test
-quarks.cloudfoundry.org/secret-type=with-ops
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;desired-manifest-secret&#34;&gt;Desired Manifest Secret&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/container-name=desired-manifest
-quarks.cloudfoundry.org/deployment-name=test
-quarks.cloudfoundry.org/entanglement=testdesired-manifest
-quarks.cloudfoundry.org/referenced-job-name=instance-group-test
-quarks.cloudfoundry.org/secret-kind=versionedSecret
-quarks.cloudfoundry.org/secret-type=desired
-quarks.cloudfoundry.org/secret-version=1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;bpm-secret&#34;&gt;BPM Secret&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/container-name=nats
-quarks.cloudfoundry.org/deployment-name=test
-quarks.cloudfoundry.org/entanglement=testbpmnats
-quarks.cloudfoundry.org/remote-id=nats
-quarks.cloudfoundry.org/secret-kind=versionedSecret
-quarks.cloudfoundry.org/secret-type=bpm
-quarks.cloudfoundry.org/secret-version=1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;ig-resolved-secret&#34;&gt;IG Resolved Secret&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/container-name=nats
-quarks.cloudfoundry.org/deployment-name=test
-quarks.cloudfoundry.org/entanglement=testig-resolvednats
-quarks.cloudfoundry.org/remote-id=nats
-quarks.cloudfoundry.org/secret-kind=versionedSecret
-quarks.cloudfoundry.org/secret-type=ig-resolved
-quarks.cloudfoundry.org/secret-version=1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;link-secret&#34;&gt;Link Secret&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;quarks.cloudfoundry.org/container-name=nats
-quarks.cloudfoundry.org/deployment-name=test
-quarks.cloudfoundry.org/entanglement=link-test-nats-nats
-quarks.cloudfoundry.org/remote-id=nats
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Finalizers&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#finalizers&#34;&gt;Finalizers - Official Docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/giantswarm/operatorkit/blob/master/docs/using_finalizers.md&#34;&gt;Using Finalizers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Watches&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://book.kubebuilder.io/beyond_basics/controller_watches.html&#34;&gt;Controller Watches&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Generate resources&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.openshift.com/kubernetes-deep-dive-code-generation-customresources/&#34;&gt;Code Generation for Custom Resources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Apply CRD&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/velotio-perspectives/extending-kubernetes-apis-with-custom-resource-definitions-crds-139c99ed3477&#34;&gt;Extending Kubernetes APIs using CRDs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;operator-examples&#34;&gt;Operator Examples&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/upmc-enterprises/elasticsearch-operator&#34;&gt;Elastic Search Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/zalando-incubator/postgres-operator&#34;&gt;Postgres Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/kubeflow/tf-operator&#34;&gt;Tensorflow Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/nats-io/nats-operator&#34;&gt;NATS Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/knative/serving/blob/059bf5f8c193148e54ddac37fba337c2cf6496db/cmd/controller/main.go#L144&#34;&gt;Knative&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/kubernetes/sample-controller&#34;&gt;Sample controller&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;extending-kubernetes&#34;&gt;Extending Kubernetes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://engineering.bitnami.com/articles/a-deep-dive-into-kubernetes-controllers.html&#34;&gt;Controller pattern&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/@trstringer/create-kubernetes-controllers-for-core-and-custom-resources-62fc35ad64a3&#34;&gt;Custom controllers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#validation&#34;&gt;CRD openAPI validation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.de/Kubernetes-Design-Patterns-Extensions-container-cluster-ebook/dp/B07HSZHRHZ&#34;&gt;Kubernetes primitives (ebook)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;testing&#34;&gt;Testing&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/thtanaka/kubernetes/blob/master/docs/devel/testing.md#integration-tests&#34;&gt;Kubernetes docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://itnext.io/testing-kubernetes-go-applications-f1f87502b6ef&#34;&gt;Kubernetes fakes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://speakerdeck.com/skmetz/magic-tricks-of-testing-railsconf&#34;&gt;Magic tricks of testing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>
@@ -1389,51 +683,82 @@ quarks.cloudfoundry.org/remote-id=nats
       <description>
         
         
-        
-
-&lt;p&gt;The following is a list of tools with their respective main features that can help you
-to simplify your development work when dealing with &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator&#34; target=&#34;_blank&#34;&gt;quarks-operator&lt;/a&gt; and &lt;a href=&#34;https://github.com/SUSE/kubecf&#34; target=&#34;_blank&#34;&gt;kubecf&lt;/a&gt;&lt;/p&gt;
-
+        &lt;p&gt;The following is a list of tools with their respective main features that can help you
+to simplify your development work when dealing with &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator&#34;&gt;quarks-operator&lt;/a&gt; and &lt;a href=&#34;https://github.com/SUSE/kubecf&#34;&gt;kubecf&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;k9s&#34;&gt;k9s&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/derailed/k9s&#34; target=&#34;_blank&#34;&gt;k9s&lt;/a&gt; provides an easy way to navigate through your k8s resources, while watching lively
+&lt;p&gt;&lt;a href=&#34;https://github.com/derailed/k9s&#34;&gt;k9s&lt;/a&gt; provides an easy way to navigate through your k8s resources, while watching lively
 to changes on them. Main features that can be helpful for containerized CF are:&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;inmediate access to resources YAMLs definition&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;inmediate access to services endpoints&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;inmediate access to pods/container logs&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;sort resources(e.g. pods) by cpu or memory consumption&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;inmediate access to a container secure shell&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;inmediate access to resources YAMLs definition&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;inmediate access to services endpoints&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;inmediate access to pods/container logs&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sort resources(e.g. pods) by cpu or memory consumption&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;inmediate access to a container secure shell&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h3 id=&#34;havener&#34;&gt;havener&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/homeport/havener&#34; target=&#34;_blank&#34;&gt;havener&lt;/a&gt; is a tool-kit with different features around k8s and CloudFoundry&lt;/p&gt;
-
+&lt;p&gt;&lt;a href=&#34;https://github.com/homeport/havener&#34;&gt;havener&lt;/a&gt; is a tool-kit with different features around k8s and CloudFoundry&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;top&lt;/code&gt;, to get an overview on the cpu/memory/load of the cluster, per ns and pods.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;logs&lt;/code&gt;, to download all logs from all pods into your local system&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;pod-exec&lt;/code&gt;, to open a shell into containers. This can execute cmds in different containers
-simultaneously.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;node-exec&lt;/code&gt;, to open a shell into nodes. This can execute cmds in different containers
-simultaneously.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;top&lt;/code&gt;, to get an overview on the cpu/memory/load of the cluster, per ns and pods.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;logs&lt;/code&gt;, to download all logs from all pods into your local system&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;pod-exec&lt;/code&gt;, to open a shell into containers. This can execute cmds in different containers
+simultaneously.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;node-exec&lt;/code&gt;, to open a shell into nodes. This can execute cmds in different containers
+simultaneously.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h3 id=&#34;stern&#34;&gt;stern&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/wercker/stern&#34; target=&#34;_blank&#34;&gt;stern&lt;/a&gt; allows you to tail from your terminal to multiple pod logs on Kubernetes, including all containers.&lt;/p&gt;
-
+&lt;p&gt;&lt;a href=&#34;https://github.com/wercker/stern&#34;&gt;stern&lt;/a&gt; allows you to tail from your terminal to multiple pod logs on Kubernetes, including all containers.&lt;/p&gt;
 &lt;h3 id=&#34;kube-dashboard&#34;&gt;kube dashboard&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/&#34;&gt;kube dashboard&lt;/a&gt; is a more user friendly way to navigate your k8s cluster resources.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/&#34; target=&#34;_blank&#34;&gt;kube dashboard&lt;/a&gt; is a more user friendly way to navigate your k8s cluster resources.&lt;/p&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Naming Conventions</title>
+      <link>https://quarks.suse.dev/docs/development/naming/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/development/naming/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;kubernetes-resources&#34;&gt;Kubernetes Resources&lt;/h2&gt;
+&lt;p&gt;Kube names can only consist of lowercase alphanumeric characters, and the character &lt;code&gt;&amp;quot;-&amp;quot;&lt;/code&gt;.
+All &lt;code&gt;&amp;quot;_&amp;quot;&lt;/code&gt; characters are replaced with &lt;code&gt;&amp;quot;-&amp;quot;&lt;/code&gt;. All other non-alphanumeric characters are removed.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;name&lt;/code&gt; cannot start or end with a &lt;code&gt;&amp;quot;-&amp;quot;&lt;/code&gt;. These characters are trimmed.&lt;/p&gt;
+&lt;p&gt;Names are also restricted to 63 characters in length, so if a generated name exceeds 63 characters, it should be recalculated as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;name=&amp;lt;INSTANCE_GROUP_NAME&amp;gt;-&amp;lt;INDEX&amp;gt;&amp;lt;DEPLOYMENT_NAME&amp;gt;
+
+&amp;lt;name trimmed to 31 characters&amp;gt;&amp;lt;md5 hash of name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;kubernetes-services&#34;&gt;Kubernetes Services&lt;/h3&gt;
+&lt;p&gt;The same check needs to apply to the entire address of a &lt;code&gt;Service&lt;/code&gt;. If an entire address is longer than 253 characters, the &lt;code&gt;servicename&lt;/code&gt; is trimmed until there&amp;rsquo;s enough room for the MD5 hash. If it&amp;rsquo;s not possible to include the hash (&lt;code&gt;KUBE_NAMESPACE&lt;/code&gt; and &lt;code&gt;KUBE_SERVICE_DOMAIN&lt;/code&gt; and the dots are 221 characters or more), an error is thrown.&lt;/p&gt;
 
       </description>
     </item>

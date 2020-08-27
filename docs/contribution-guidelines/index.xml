@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Quarks project – Contribution Guidelines</title>
+    <title>Quarks Project – Contribution Guidelines</title>
     <link>https://quarks.suse.dev/docs/contribution-guidelines/</link>
-    <description>Recent content in Contribution Guidelines on Quarks project</description>
+    <description>Recent content in Contribution Guidelines on Quarks Project</description>
     <generator>Hugo -- gohugo.io</generator>
     
 	  <atom:link href="https://quarks.suse.dev/docs/contribution-guidelines/index.xml" rel="self" type="application/rss+xml" />

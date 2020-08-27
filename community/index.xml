@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Quarks project – Community</title>
+    <title>Quarks Project – Community</title>
     <link>https://quarks.suse.dev/community/</link>
-    <description>Recent content in Community on Quarks project</description>
+    <description>Recent content in Community on Quarks Project</description>
     <generator>Hugo -- gohugo.io</generator>
     
 	  <atom:link href="https://quarks.suse.dev/community/index.xml" rel="self" type="application/rss+xml" />

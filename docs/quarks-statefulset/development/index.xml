@@ -1,0 +1,55 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Quarks Project – Development</title>
+    <link>https://quarks.suse.dev/docs/quarks-statefulset/development/</link>
+    <description>Recent content in Development on Quarks Project</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://quarks.suse.dev/docs/quarks-statefulset/development/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: StatefulSet Rollout</title>
+      <link>https://quarks.suse.dev/docs/quarks-statefulset/development/statefulsetrollout/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/quarks-statefulset/development/statefulsetrollout/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
+&lt;p&gt;The former implementation use a new &lt;code&gt;StatefulSet&lt;/code&gt; for each new version of a manifest. This had the following drawbacks:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Update on a cluster with multiple nodes was not working. When the new pods were started on a different node, the volume was blocked by the old pod.&lt;/li&gt;
+&lt;li&gt;On a single node cluster this was also not working, if the workload (e.g. mysql) was using a lock on the volume on file-system level.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;why-standard-k8s-statefulset-is-not-sufficient&#34;&gt;Why standard K8s StatefulSet is not sufficient&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Out-of-order updates are possible when e.g. a pod/node crashes.&lt;/li&gt;
+&lt;li&gt;Recovering from a failed deployment is not possible with the standard kubernetes &lt;code&gt;StatefulSet&lt;/code&gt; controller.&lt;/li&gt;
+&lt;li&gt;There is no timeout when the new deployment is rolled out and is stuck.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;statemachine&#34;&gt;Statemachine&lt;/h2&gt;
+&lt;p&gt;This controller implements the following state machine&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_sts_rollout_fsm.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;known-limitations&#34;&gt;Known Limitations&lt;/h3&gt;
+&lt;h4 id=&#34;canaryupscale&#34;&gt;CanaryUpscale&lt;/h4&gt;
+&lt;p&gt;During upscale, there is no real canary behaviour implemented.
+If a &lt;code&gt;StatefulSet&lt;/code&gt; is scaled from 3 to 5 replicas, the state changes to &lt;code&gt;CanaryUpscale&lt;/code&gt; and &lt;code&gt;Partition&lt;/code&gt; is set to 2.
+The k8s statefulset controller creates the 2 missing instances.
+If all instances are ready the controller switches to state &lt;code&gt;Rollout&lt;/code&gt; and continues as usual.
+Due to the fact that more than 1 instance might be updated in state &lt;code&gt;CanaryUpscale&lt;/code&gt;, the &lt;code&gt;update-watch-time&lt;/code&gt; is used as timeout.&lt;/p&gt;
+&lt;h4 id=&#34;single-replica&#34;&gt;Single Replica&lt;/h4&gt;
+&lt;p&gt;The former implementation was starting a second pod during the update before shutting down the old one.
+This is no longer possible as the name of the pod won&amp;rsquo;t change and results in a downtime.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

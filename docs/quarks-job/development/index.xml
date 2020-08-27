@@ -1,0 +1,17 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Quarks Project – Development</title>
+    <link>https://quarks.suse.dev/docs/quarks-job/development/</link>
+    <description>Recent content in Development on Quarks Project</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://quarks.suse.dev/docs/quarks-job/development/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+  </channel>
+</rss>
