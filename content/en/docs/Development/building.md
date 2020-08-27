@@ -6,7 +6,7 @@ description: >
   Build Quarks-operator from source
 ---
 
-The following steps layout the process of building `quarks-operator` (formerly `cf-operator`) from source and how to install it in your Kubernetes cluster. 
+The following steps layout the process of building `quarks-operator` (formerly `cf-operator`) from source and how to install it in your Kubernetes cluster.
 
 {{% alert title="Note" color="info" %}}
 The Quarks Operator was previously known as `cf-operator`. We are renaming the `cf-operator` project into `quarks-operator`. Docker images and other sections might not be migrated yet, we are sorry for the confusion.
@@ -20,6 +20,12 @@ Follow this steps to build a proper docker image and generate a deployable helm 
 
     ```bash
     git checkout v0.3.0
+    ```
+
+2. Download the shared tools
+
+    ```bash
+    bin/tools
     ```
 
 2. Build the cf-operator binary, this will be embedded later on the docker image
