@@ -4,7 +4,6 @@ linkTitle: "Desired Manifests"
 weight: 10
 description: >
   The desired manifest is fully computed manifest, before it's split into smaller 'instance group' manifests.
-  The desired manifest is fully computed manifest, before it's split into smaller 'instance group' manifests.
 ---
 
 A desired manifest is a BOSH deployment manifest that has already been calculated so that it's the actual final state that the user wishes his software to be in. All ops files have been applied, variables have been calculated and replaced. This manifest is persisted and versioned.
