@@ -10,7 +10,7 @@ description: >
 
 - A working Kubernetes cluster
 - Helm v3 binary
-- Go 1.12.2 and install the tool chain: `make tools`
+- Go 1.14 and install the tool chain: `make tools`
 
 ## Dependencies
 
