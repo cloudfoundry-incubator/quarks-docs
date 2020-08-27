@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.a23375ad01f84a3089610fdb7bc159869bf22b600a74814dd745aa32579833a0da6167f486305d0de849aa9327e26311a2a60627334ff8e277dc91043bfe53d7.json"
+  data-offline-search-index-json-src="/offline-search-index.b9084466b6efc299fe35f6bd97b9d795c0310a616fc789134c0f3d4b31884d0dccf95fb2592bc7cb8bb5e01bd5572a7fc0d44031f2a5731e7227dbac5979db9d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -135,7 +135,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.a23375ad01f84a3089610fdb7bc159869bf22b600a74814dd745aa32579833a0da6167f486305d0de849aa9327e26311a2a60627334ff8e277dc91043bfe53d7.json"
+  data-offline-search-index-json-src="/offline-search-index.b9084466b6efc299fe35f6bd97b9d795c0310a616fc789134c0f3d4b31884d0dccf95fb2592bc7cb8bb5e01bd5572a7fc0d44031f2a5731e7227dbac5979db9d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -670,12 +670,6 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsdevelopmentabout_operators" href="/docs/development/about_operators/">About operators</a>
-      
-      
-      
-      
-      
       <a class="td-sidebar-link td-sidebar-link__page " id="m-docsdevelopmenttooling" href="/docs/development/tooling/">Tooling</a>
       
       
@@ -683,6 +677,12 @@
       
       
       <a class="td-sidebar-link td-sidebar-link__page " id="m-docsdevelopmentnaming" href="/docs/development/naming/">Naming Conventions</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsdevelopmentabout_operators" href="/docs/development/about_operators/">About operators</a>
       
       
     </li>
@@ -755,7 +755,6 @@
 <nav id="TableOfContents">
   <ul>
     <li><a href="#requirements">Requirements</a></li>
-    <li><a href="#dependencies">Dependencies</a></li>
     <li><a href="#custom-resource-definitions-crds">Custom Resource Definitions (CRDs)</a></li>
     <li><a href="#creating-a-new-resource-and-controller">Creating a new Resource and Controller</a>
       <ul>
@@ -817,23 +816,21 @@
 	<h1>Development</h1>
         <div class="lead">Shared documentation for the Quarks operators</div>
 	
-	<h2 id="requirements">Requirements</h2>
+	
+
+<div class="pageinfo pageinfo-primary">
+<p>The quarks-* operators share some common scripts, that are in the <a href="https://github.com/cloudfoundry-incubator/quarks-utils/"><code>quarks-utils</code> project</a>. You can run <code>bin/tools</code> to download them. Or download them manually from <code>quarks-utils</code>.</p>
+<p>Some scripts require the <code>PROJECT</code> env var to be set, e.g. <code>PROJECT=quarks-secret</code>.</p>
+
+</div>
+
+<h2 id="requirements">Requirements</h2>
 <ul>
 <li>A working Kubernetes cluster</li>
 <li>Helm v3 binary</li>
 <li>Go 1.14 and install the tool chain: <code>make tools</code></li>
 </ul>
-<h2 id="dependencies">Dependencies</h2>
-<p>Run with libraries fetched via go modules:</p>
-<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#24909d">export</span> <span style="color:#40ffff">GO111MODULE</span>=on
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="custom-resource-definitions-crds">Custom Resource Definitions (CRDs)</h2>
+<h2 id="custom-resource-definitions-crds">Custom Resource Definitions (CRDs)</h2>
 <p>Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four <a href="https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds">CRDs</a> (see <a href="../quarks-operator/development/controllers">Controllers</a>):</p>
 <ul>
 <li>BOSHDeployment</li>
@@ -1294,15 +1291,6 @@ grcat conf.zap &lt; /tmp/cf-operator-tests.log
             
         
             
-                <div class="entry">
-                    <h5>
-                        <a href="/docs/development/about_operators/">About operators</a>
-                    </h5>
-                    <p>Useful links to Kubernetes operators implementations or patterns</p>
-                </div>
-            
-        
-            
         
             
         
@@ -1381,13 +1369,22 @@ grcat conf.zap &lt; /tmp/cf-operator-tests.log
             
         
             
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/development/about_operators/">About operators</a>
+                    </h5>
+                    <p>Useful links to Kubernetes operators implementations or patterns</p>
+                </div>
+            
+        
+            
         
     
 </div>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 27, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/b79d3900d72de289d45d87f5e8f9110f7a8ec231">Merge pull request #10 from cloudfoundry-incubator/component-docs-174254540 (b79d390)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 27, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/410cbac05c45fa09f5e31be457da9617bb32462e">Merge pull request #11 from cloudfoundry-incubator/shared-tools-174254540 (410cbac)</a>
 </div>
 </div>
 

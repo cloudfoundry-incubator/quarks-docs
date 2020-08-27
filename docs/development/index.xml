@@ -45,6 +45,17 @@ The Quarks Operator was previously known as &lt;code&gt;cf-operator&lt;/code&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
+&lt;p&gt;Download the shared tools&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/tools
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;Build the cf-operator binary, this will be embedded later on the docker image&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
@@ -230,36 +241,36 @@ It also contains SSL certificates and CA, which are necessary to connect to the 
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;30
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;    Unexpected error:                                                                                                                
-          &amp;lt;*errors.StatusError | 0xc0002b4780&amp;gt;: {                                                                                      
-              ErrStatus: {                                                                                                             
-                  TypeMeta: {Kind: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;, APIVersion: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;},                                                                                
-                  ListMeta: {                                                                                                          
-                      SelfLink: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                                    
-                      ResourceVersion: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                             
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;    Unexpected error:
+          &amp;lt;*errors.StatusError | 0xc0002b4780&amp;gt;: {
+              ErrStatus: {
+                  TypeMeta: {Kind: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;, APIVersion: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;},
+                  ListMeta: {
+                      SelfLink: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+                      ResourceVersion: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
                       Continue: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
-                      RemainingItemCount: nil,                                                                                         
-                  },                                               
-                  Status: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Failure&amp;#34;&lt;/span&gt;,                                                                                                   
+                      RemainingItemCount: nil,
+                  },
+                  Status: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Failure&amp;#34;&lt;/span&gt;,
                   Message: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Internal error occurred: failed calling webhook \&amp;#34;mutate-statefulsets.quarks.cloudfoundry.org\&amp;#34;: Post https://192.168.100.66:40603/mutate-statefulsets?timeout=30s: dial tcp 192.168.100.66:40603: connect: no route to host&amp;#34;&lt;/span&gt;,
-                  Reason: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;InternalError&amp;#34;&lt;/span&gt;,                                                                                             
-                  Details: {                                                                                                           
-                      Name: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                                        
-                      Group: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                   
-                      Kind: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                                        
-                      UID: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                     
-                      Causes: [                                                                                                        
-                          {                                        
-                              Type: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                                
+                  Reason: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;InternalError&amp;#34;&lt;/span&gt;,
+                  Details: {
+                      Name: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+                      Group: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+                      Kind: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+                      UID: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+                      Causes: [
+                          {
+                              Type: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
                               Message: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;failed calling webhook \&amp;#34;mutate-statefulsets.quarks.cloudfoundry.org\&amp;#34;: Post https://192.168.100.66:40603/mutate-statefulsets?timeout=30s: dial tcp 192.168.100.66:40603: connect: no route to host&amp;#34;&lt;/span&gt;,
-                              Field: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,                                                                                               
-                          },                                                                                                           
-                      ],                                                                                                               
-                      RetryAfterSeconds: 0,                        
-                  },                                                                                                                   
-                  Code: 500,                                                                                                           
-              },                                                                                                                       
-          }                                                       
+                              Field: &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+                          },
+                      ],
+                      RetryAfterSeconds: 0,
+                  },
+                  Code: 500,
+              },
+          }
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Check your firewall if it&amp;rsquo;s preventing the webhook server to be contacted from your target cluster or either if &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt; is configured correctly&lt;/p&gt;
@@ -456,7 +467,11 @@ follow the instructions from &lt;a href=&#34;../../development#standalone-compon
 &lt;/ol&gt;
 &lt;h2 id=&#34;makefile&#34;&gt;Makefile&lt;/h2&gt;
 &lt;p&gt;The following are the make targets available and their actions. When building and running the targets manually on the quarks-operator codebase, please set &lt;code&gt;PROJECT=quarks-operator&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The common scripts between the &lt;code&gt;quarks-operator&lt;/code&gt; components are in the &lt;code&gt;quarks-utils&lt;/code&gt; &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-utils/&#34;&gt;project&lt;/a&gt;. To download them, make sure to run &lt;code&gt;bin/tools-shared&lt;/code&gt; or &lt;code&gt;make tools&lt;/code&gt; before running any other script/target.&lt;/p&gt;
+&lt;p&gt;The common scripts shared between the &lt;code&gt;quarks-operator&lt;/code&gt; components are in the &lt;code&gt;quarks-utils&lt;/code&gt; &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-utils/&#34;&gt;project&lt;/a&gt; repository. To download them, make sure to run &lt;code&gt;bin/tools&lt;/code&gt;, before running any other script.
+The Makefile should download them automatically.&lt;/p&gt;
+&lt;p&gt;The Makefile is intended for users, who don&amp;rsquo;t want to use the scripts in bin directly. It conveniently sets up some environment variables.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+CI and automation should not use the make targets to avoid indirection and declare variable explicitly.&lt;/p&gt;
 &lt;h3 id=&#34;general-targets&#34;&gt;General Targets&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -592,89 +607,6 @@ follow the instructions from &lt;a href=&#34;../../development#standalone-compon
     </item>
     
     <item>
-      <title>Docs: About operators</title>
-      <link>https://quarks.suse.dev/docs/development/about_operators/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://quarks.suse.dev/docs/development/about_operators/</guid>
-      <description>
-        
-        
-        &lt;h1 id=&#34;about-operators&#34;&gt;About Operators&lt;/h1&gt;
-&lt;h2 id=&#34;framework-controller-runtime&#34;&gt;Framework: Controller Runtime&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://book.kubebuilder.io/&#34;&gt;Kubebuilder docs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://godoc.org/github.com/kubernetes-sigs/controller-runtime/pkg&#34;&gt;controller-runtime docs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;operator-pattern--features&#34;&gt;Operator Pattern &amp;amp; Features&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Operator pattern&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://admiralty.io/blog/kubernetes-custom-resource-controller-and-operator-development-tools/&#34;&gt;Kubernetes Custom Resource Controller&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.slideshare.net/Jakobkaralus/the-kubernetes-operator-pattern-containerconf-nov-2017&#34;&gt;The Kubernetes Operator Pattern&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Admission webhooks and eventing&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://book.kubebuilder.io/beyond_basics/sample_webhook.html&#34;&gt;Sample Webhook&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://schd.ws/hosted_files/kccncchina2018english/50/kubecon_Tom_Ilya_CRDs.pdf&#34;&gt;Custom Resource Definitions&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Finalizers&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#finalizers&#34;&gt;Finalizers - Official Docs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/giantswarm/operatorkit/blob/master/docs/using_finalizers.md&#34;&gt;Using Finalizers&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Watches&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://book.kubebuilder.io/beyond_basics/controller_watches.html&#34;&gt;Controller Watches&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Generate resources&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.openshift.com/kubernetes-deep-dive-code-generation-customresources/&#34;&gt;Code Generation for Custom Resources&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Apply CRD&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://medium.com/velotio-perspectives/extending-kubernetes-apis-with-custom-resource-definitions-crds-139c99ed3477&#34;&gt;Extending Kubernetes APIs using CRDs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;operator-examples&#34;&gt;Operator Examples&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/upmc-enterprises/elasticsearch-operator&#34;&gt;Elastic Search Operator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/zalando-incubator/postgres-operator&#34;&gt;Postgres Operator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/kubeflow/tf-operator&#34;&gt;Tensorflow Operator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/nats-io/nats-operator&#34;&gt;NATS Operator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/knative/serving/blob/059bf5f8c193148e54ddac37fba337c2cf6496db/cmd/controller/main.go#L144&#34;&gt;Knative&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/kubernetes/sample-controller&#34;&gt;Sample controller&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;extending-kubernetes&#34;&gt;Extending Kubernetes&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://engineering.bitnami.com/articles/a-deep-dive-into-kubernetes-controllers.html&#34;&gt;Controller pattern&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://medium.com/@trstringer/create-kubernetes-controllers-for-core-and-custom-resources-62fc35ad64a3&#34;&gt;Custom controllers&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#validation&#34;&gt;CRD openAPI validation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.de/Kubernetes-Design-Patterns-Extensions-container-cluster-ebook/dp/B07HSZHRHZ&#34;&gt;Kubernetes primitives (ebook)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;testing&#34;&gt;Testing&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/thtanaka/kubernetes/blob/master/docs/devel/testing.md#integration-tests&#34;&gt;Kubernetes docs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://itnext.io/testing-kubernetes-go-applications-f1f87502b6ef&#34;&gt;Kubernetes fakes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://speakerdeck.com/skmetz/magic-tricks-of-testing-railsconf&#34;&gt;Magic tricks of testing&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
       <title>Docs: Nice tools to use</title>
       <link>https://quarks.suse.dev/docs/development/tooling/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -759,6 +691,89 @@ All &lt;code&gt;&amp;quot;_&amp;quot;&lt;/code&gt; characters are replaced with 
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;kubernetes-services&#34;&gt;Kubernetes Services&lt;/h3&gt;
 &lt;p&gt;The same check needs to apply to the entire address of a &lt;code&gt;Service&lt;/code&gt;. If an entire address is longer than 253 characters, the &lt;code&gt;servicename&lt;/code&gt; is trimmed until there&amp;rsquo;s enough room for the MD5 hash. If it&amp;rsquo;s not possible to include the hash (&lt;code&gt;KUBE_NAMESPACE&lt;/code&gt; and &lt;code&gt;KUBE_SERVICE_DOMAIN&lt;/code&gt; and the dots are 221 characters or more), an error is thrown.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: About operators</title>
+      <link>https://quarks.suse.dev/docs/development/about_operators/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/development/about_operators/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;about-operators&#34;&gt;About Operators&lt;/h1&gt;
+&lt;h2 id=&#34;framework-controller-runtime&#34;&gt;Framework: Controller Runtime&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://book.kubebuilder.io/&#34;&gt;Kubebuilder docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://godoc.org/github.com/kubernetes-sigs/controller-runtime/pkg&#34;&gt;controller-runtime docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;operator-pattern--features&#34;&gt;Operator Pattern &amp;amp; Features&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Operator pattern&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://admiralty.io/blog/kubernetes-custom-resource-controller-and-operator-development-tools/&#34;&gt;Kubernetes Custom Resource Controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.slideshare.net/Jakobkaralus/the-kubernetes-operator-pattern-containerconf-nov-2017&#34;&gt;The Kubernetes Operator Pattern&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Admission webhooks and eventing&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://book.kubebuilder.io/beyond_basics/sample_webhook.html&#34;&gt;Sample Webhook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://schd.ws/hosted_files/kccncchina2018english/50/kubecon_Tom_Ilya_CRDs.pdf&#34;&gt;Custom Resource Definitions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Finalizers&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#finalizers&#34;&gt;Finalizers - Official Docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/giantswarm/operatorkit/blob/master/docs/using_finalizers.md&#34;&gt;Using Finalizers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Watches&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://book.kubebuilder.io/beyond_basics/controller_watches.html&#34;&gt;Controller Watches&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Generate resources&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.openshift.com/kubernetes-deep-dive-code-generation-customresources/&#34;&gt;Code Generation for Custom Resources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Apply CRD&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/velotio-perspectives/extending-kubernetes-apis-with-custom-resource-definitions-crds-139c99ed3477&#34;&gt;Extending Kubernetes APIs using CRDs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;operator-examples&#34;&gt;Operator Examples&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/upmc-enterprises/elasticsearch-operator&#34;&gt;Elastic Search Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/zalando-incubator/postgres-operator&#34;&gt;Postgres Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/kubeflow/tf-operator&#34;&gt;Tensorflow Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/nats-io/nats-operator&#34;&gt;NATS Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/knative/serving/blob/059bf5f8c193148e54ddac37fba337c2cf6496db/cmd/controller/main.go#L144&#34;&gt;Knative&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/kubernetes/sample-controller&#34;&gt;Sample controller&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;extending-kubernetes&#34;&gt;Extending Kubernetes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://engineering.bitnami.com/articles/a-deep-dive-into-kubernetes-controllers.html&#34;&gt;Controller pattern&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/@trstringer/create-kubernetes-controllers-for-core-and-custom-resources-62fc35ad64a3&#34;&gt;Custom controllers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#validation&#34;&gt;CRD openAPI validation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.de/Kubernetes-Design-Patterns-Extensions-container-cluster-ebook/dp/B07HSZHRHZ&#34;&gt;Kubernetes primitives (ebook)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;testing&#34;&gt;Testing&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/thtanaka/kubernetes/blob/master/docs/devel/testing.md#integration-tests&#34;&gt;Kubernetes docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://itnext.io/testing-kubernetes-go-applications-f1f87502b6ef&#34;&gt;Kubernetes fakes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://speakerdeck.com/skmetz/magic-tricks-of-testing-railsconf&#34;&gt;Magic tricks of testing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>
