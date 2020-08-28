@@ -51,7 +51,7 @@ helm upgrade --namespace quarks qsecret quarks/quarks-secret
 
 By default the component will watch for resources created in the `staging` namespace, but it can be configured to watch over multiple namespaces.
 
-It is possible to configure Quarks Secret to watch over different namespaces, [refer to the quarks-operator instructions](../quarks-operator/install/#multiple-namespaces) as they are share between all the `Quarks` components.
+[Refer to the quarks-operator instructions](../quarks-operator/install/#multiple-namespaces) as they are shared between all the `Quarks` components.
 
 ## Overview of Quarks Secret
 
