@@ -74,10 +74,10 @@ spec:
 
 ##### Copies
 
-The `QuarksSecret` controller can create copies of a generated secret across multiple namespaces, as long as the target secrets (that live in a namespace other than the namespace of the `QuarksSecret`) already exist, and have an annotation of:
+The `QuarksSecret` controller can create copies of a generated secret or a user created secret across multiple namespaces, as long as the target secrets or target `QuarksSecret` with type `copy` (that live in a namespace other than the namespace of the `QuarksSecret`) already exist. If it is a generated secret in the source namespace, then the secret or `QuarksSecret` in target namespace shoud have the following annotaton
 
 ```text
-quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/generate-password-with-copies
+quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/SOURCE_QUARKS_SECRET_NAME
 ```
 
 as well as the usual label for generated secrets:
@@ -87,6 +87,12 @@ quarks.cloudfoundry.org/secret-kind: generated
 ```
 
 This ensures that the creator of the `QuarksSecret` must have access to the copy target namespace.
+
+If it is the user generated secret in the source namespace, then the secret or `QuarksSecret` should have the following annotation
+
+```text
+quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/SOURCE_QUARKS_SECRET_NAME
+```
 
 Copied `Secrets` do not have an owner set, and are not cleaned up automatically when the `QuarksSecret` is deleted.
 
