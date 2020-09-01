@@ -642,6 +642,9 @@ instance_groups:
 ### BOSH DNS
 
 The BOSH DNS addon is implemented using a separate DNS server (coredns). For each BOSHDeployment, which enables this addon, an additional DNS server is created within the namespace.
+The addon is detected by looking at the release field of the addon config, which has to equal 'bosh-dns-aliases' or 'bosh-dns'.
+Multiple DNS addons are supported that way, according to the BOSH manifest spec, their names should be unique.
+
 This DNS server rewrites all BOSH dns requests to standard k8s queries (e.g. `api.service.cf.internal` -> `api.<namespace>.svc.cluster.local`) and forwards them to the k8s DNS server.
 All pods created from the BOSHDeployment are configured to use this DNS server.
 
@@ -662,6 +665,26 @@ will create a headless service with the name `blobstore` instead of `singleton-b
 For migration purpose, the DNS service does also a rewrite of all previous headless service names
 (e.g. `singleton-blobstore` is rewritten to `blobstore.<namespace>.svc.cluster.local`).
 
+The DNS handler addon can be used to conditionally forward queries to another server.
+The following addon configuration, will forward all queries for the `corp.intranet.local` zone to the DNS server at '10.0.0.2'.
+
+```yaml
+addons:
+- name: bosh-dns
+  jobs:
+  - name: bosh-dns
+    release: bosh-dns
+    properties:
+      handlers:
+      - domain: corp.intranet.local.
+        source:
+          recursors:
+          - 10.0.0.2
+          type: dns
+```
+
+When specifying the type as "http" or "https", instead of "dns", coredns will use DNS over HTTPS (RFC 8484, DOH).
+When specifying "tls" DNS over TLS (RFC 7858) will be used to connect to the forwarding server.
 
 ## Flow
 
