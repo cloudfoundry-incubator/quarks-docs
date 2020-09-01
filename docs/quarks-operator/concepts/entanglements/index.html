@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/quarks-operator/concepts/entanglements/" />
-<meta property="article:modified_time" content="2020-08-28T11:07:50+03:00" /><meta property="og:site_name" content="Quarks Project" />
+<meta property="article:modified_time" content="2020-09-01T16:15:41+02:00" /><meta property="og:site_name" content="Quarks Project" />
 <meta itemprop="name" content="Entanglements">
 <meta itemprop="description" content="Quarks Links can provide secrets to pods outside the deployment and can consume existing secrets
 ">
-<meta itemprop="dateModified" content="2020-08-28T11:07:50+03:00" />
-<meta itemprop="wordCount" content="583">
+<meta itemprop="dateModified" content="2020-09-01T16:15:41+02:00" />
+<meta itemprop="wordCount" content="716">
 
 
 
@@ -46,8 +46,8 @@
 
 
 
-<link rel="preload" href="/scss/main.min.83856f4fe58f890afd31a466bd21dbb5cd927d0e2eb2f03c20cde7066ef2adb2.css" as="style">
-<link href="/scss/main.min.83856f4fe58f890afd31a466bd21dbb5cd927d0e2eb2f03c20cde7066ef2adb2.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.e7c735e1b34b8ec656d1f980a0c5c4af518f1e1b14181bfc5d09dab051e0be06.css" as="style">
+<link href="/scss/main.min.e7c735e1b34b8ec656d1f980a0c5c4af518f1e1b14181bfc5d09dab051e0be06.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -108,7 +108,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.fad0b9cbd0a0f39cee98dced9adb3014354c0b9620ffe13e01a874d417eafd6823d1efc9a167014426565d9c923d96d95b58c999ce252f9760237e3c296c4f78.json"
+  data-offline-search-index-json-src="/offline-search-index.d834683af48d13b788c488c2f215b94dac3817cfb8c9d60778069e5824044d453026c6a5c7bbba350be9b09020907850bcf59cc396c970b0a4802b731584d14b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -140,7 +140,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.fad0b9cbd0a0f39cee98dced9adb3014354c0b9620ffe13e01a874d417eafd6823d1efc9a167014426565d9c923d96d95b58c999ce252f9760237e3c296c4f78.json"
+  data-offline-search-index-json-src="/offline-search-index.d834683af48d13b788c488c2f215b94dac3817cfb8c9d60778069e5824044d453026c6a5c7bbba350be9b09020907850bcf59cc396c970b0a4802b731584d14b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -759,14 +759,14 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#using-k8s-native-values-in-bosh-deployments-native---bosh">Using k8s Native Values in BOSH Deployments (Native -&gt; BOSH)</a>
+    <li><a href="#using-k8s-native-values-in-bosh-deployments">Using k8s Native Values in BOSH Deployments</a>
       <ul>
-        <li><a href="#example-native---bosh">Example (Native -&gt; BOSH)</a></li>
+        <li><a href="#example">Example</a></li>
       </ul>
     </li>
-    <li><a href="#using-bosh-variables-in-k8s-pods-bosh---native">Using BOSH Variables in k8s Pods (BOSH -&gt; Native)</a>
+    <li><a href="#using-bosh-variables-in-k8s-pods">Using BOSH Variables in k8s Pods</a>
       <ul>
-        <li><a href="#example-bosh---native">Example (BOSH -&gt; Native)</a></li>
+        <li><a href="#example-1">Example</a></li>
       </ul>
     </li>
   </ul>
@@ -829,7 +829,14 @@
     <div class="lead">Quarks Links can provide secrets to pods outside the deployment and can consume existing secrets</div>
 	       
 	<p>Also known as &ldquo;Quarks Links&rdquo; - they provide a way to share/discover information between BOSH and Kube Native components.</p>
-<h2 id="using-k8s-native-values-in-bosh-deployments-native---bosh">Using k8s Native Values in BOSH Deployments (Native -&gt; BOSH)</h2>
+<h2 id="using-k8s-native-values-in-bosh-deployments">Using k8s Native Values in BOSH Deployments</h2>
+
+
+<div class="alert alert-info" role="alert">
+<h4 class="alert-heading">Note</h4>
+Native -&gt; BOSH
+</div>
+
 <p>In this case, the native component is a provider, and the BOSH component is a consumer.</p>
 <p>We construct link information from the native resources like this:</p>
 <table>
@@ -891,8 +898,8 @@
 <blockquote>
 <p>If multiple secrets or services are found with the same link information, the operator should error</p>
 </blockquote>
-<h3 id="example-native---bosh">Example (Native -&gt; BOSH)</h3>
-<p>When a job consumes a link, it will have a section like this in the in its job spec (<code>job.MF</code>), e.g. the nats release:</p>
+<h3 id="example">Example</h3>
+<p>When a job consumes a link, it will need a section like this in the in its job spec (<code>job.MF</code>), e.g. the nats release:</p>
 <div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
@@ -905,7 +912,12 @@
 </span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>nats<span style="color:#666">
 </span></code></pre></td></tr></table>
 </div>
-</div><p>We can create the following k8s secret to fulfill the link:</p>
+</div><p>The deployment manifests needs to explicitly consume the link:</p>
+
+
+
+
+
 <div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
@@ -913,41 +925,8 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>Secret<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>secretlink<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">labels</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/deployment-name</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;mydeployment&#34;</span><span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">annotations</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/provides</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;{&#34;name&#34;:&#34;nats&#34;,&#34;type&#34;:&#34;nats&#34;}&#39;</span><span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">data</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">link</span>:<span style="color:#666"> </span><span style="color:#ed9d13">|
-</span><span style="color:#ed9d13">      nats.user: myuser</span><span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">nats.password</span>:<span style="color:#666"> </span>mysecret<span style="color:#666">
-</span></code></pre></td></tr></table>
-</div>
-</div><p>Using this secret, the nats release can use <code>link(&quot;nats&quot;).p(&quot;password&quot;)</code> in its eruby templates.</p>
-<pre><code class="language-eruby" data-lang="eruby">&quot;&lt;%= p(&quot;nats.password&quot;) %&gt;&quot;
-</code></pre><p>Furthermore, if there is a matching k8s service, it will be used in the link:</p>
-<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="display:block;width:100%;background-color:#363636"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
@@ -956,32 +935,177 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">33
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>Secret<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>cf-operator-testing-manifest<span style="color:#666">
+</span><span style="display:block;width:100%;background-color:#363636"><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">stringData</span>:<span style="color:#666">
+</span></span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">manifest</span>:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">    ---</span><span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">releases</span>:<span style="color:#666">
+</span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">version</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;0.0.7&#34;</span><span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">url</span>:<span style="color:#666"> </span>docker.io/cfcontainerization<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">stemcell</span>:<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">os</span>:<span style="color:#666"> </span>SLE_15_SP1<span style="color:#3677a9">-26.5</span><span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">version</span>:<span style="color:#666"> </span><span style="color:#3677a9">7.0</span>.0_374.gb8e8e6af<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">instance_groups</span>:<span style="color:#666">
+</span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">instances</span>:<span style="color:#666"> </span><span style="color:#3677a9">2</span><span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">lifecycle</span>:<span style="color:#666"> </span>errand<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">jobs</span>:<span style="color:#666">
+</span><span style="color:#666">      </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>smoke-tests<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">release</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">consumes</span>:<span style="color:#666">
+</span><span style="color:#666">          </span><span style="color:#6ab825;font-weight:bold">quarks-gora</span>:<span style="color:#666"> </span>{<span style="color:#6ab825;font-weight:bold">from</span>:<span style="color:#666"> </span>quarks-gora}<span style="color:#666">
+</span><span style="color:#666"></span>---<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>BOSHDeployment<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>cfo-test-deployment<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">manifest</span>:<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>cf-operator-testing-manifest<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>secret<span style="color:#666">
+</span></code></pre></td></tr></table>
+</div>
+</div>
+
+<small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/quarks-link/native-to-bosh/boshdeployment.yaml">https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/quarks-link/native-to-bosh/boshdeployment.yaml</a> </small>
+<hr>
+<p>To fulfill the link we need to create a k8s secret, like this:</p>
+
+
+
+
+
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="display:block;width:100%;background-color:#363636"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>Secret<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>somesecret<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">labels</span>:<span style="color:#666">
+</span><span style="display:block;width:100%;background-color:#363636"><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/deployment-name</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;cfo-test-deployment&#34;</span><span style="color:#666">
+</span></span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">annotations</span>:<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/provides</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;{&#34;name&#34;:&#34;quarks-gora&#34;,&#34;type&#34;:&#34;quarks-gora&#34;}&#39;</span><span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">stringData</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">link</span>:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">    quarks-gora.ssl: false</span><span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks-gora.port</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;1234&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">text_message</span>:<span style="color:#666"> </span>admin<span style="color:#666">
+</span></code></pre></td></tr></table>
+</div>
+</div>
+
+<small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/quarks-link/native-to-bosh/link-secret.yaml">https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/quarks-link/native-to-bosh/link-secret.yaml</a> </small>
+<hr>
+<p>The <a href="https://github.com/cloudfoundry-incubator/quarks-gora-release/blob/master/jobs/quarks-gora/templates/bpm.yml.erb">quarks-gora release</a> can then use the links in its eruby templates:</p>
+<pre><code class="language-eruby" data-lang="eruby">&quot;&lt;%= p(&quot;quarks-gora.ssl&quot;) %&gt;&quot;
+</code></pre><p>Furthermore, if there is a matching k8s service, it will be used in the link:</p>
+
+
+
+
+
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="display:block;width:100%;background-color:#363636"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
 </span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>Service<span style="color:#666">
 </span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
 </span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">labels</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/deployment-name</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;mydeployment&#34;</span><span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">annotations</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/link-provider-name</span>:<span style="color:#666"> </span>nats<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats-service<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/deployment-name</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;cfo-test-deployment&#34;</span><span style="color:#666">
+</span><span style="display:block;width:100%;background-color:#363636"><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">annotations</span>:<span style="color:#666">
+</span></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/link-provider-name</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>testservice<span style="color:#666">
 </span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
 </span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">ports</span>:<span style="color:#666">
-</span><span style="color:#666">  </span>- <span style="color:#6ab825;font-weight:bold">port</span>:<span style="color:#666"> </span><span style="color:#3677a9">9099</span><span style="color:#666">
+</span><span style="color:#666">  </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>client<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">port</span>:<span style="color:#666"> </span><span style="color:#3677a9">2181</span><span style="color:#666">
 </span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">protocol</span>:<span style="color:#666"> </span>TCP<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">targetPort</span>:<span style="color:#666"> </span><span style="color:#3677a9">9099</span><span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">targetPort</span>:<span style="color:#666"> </span>client<span style="color:#666">
 </span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">selector</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">app</span>:<span style="color:#666"> </span>mynats<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">app</span>:<span style="color:#666"> </span>linkpod<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>ClusterIP<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">status</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">loadBalancer</span>:<span style="color:#666"> </span>{}<span style="color:#666">
 </span></code></pre></td></tr></table>
 </div>
-</div><p>Using this service, I should be able to use <code>link(&quot;nats&quot;).address</code>, and I should get a value of <code>nats-service</code>.</p>
-<p>This service selects for <code>Pods</code> that have the label <code>app: mynats</code>. The <code>instances</code> array should be populated using information from these pods.</p>
+</div>
+
+<small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/quarks-link/native-to-bosh/link-service.yaml">https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/quarks-link/native-to-bosh/link-service.yaml</a> </small>
+<hr>
+<p>Using this service, I should be able to use <code>link(&quot;quarks-gora&quot;).address</code>, and I should get a value of <code>testservice</code>.</p>
+<p>This service selects for <code>Pods</code> that have the label <code>app: linkpod</code>. The <code>instances</code> array should be populated using information from these pods.</p>
 <p>If the secret is changed, consumers of the link are automatically restarted.</p>
 <p>If the service is changed, or the list of pods selected by the service is changed, consumers of the link are automatically restarted.</p>
-<h2 id="using-bosh-variables-in-k8s-pods-bosh---native">Using BOSH Variables in k8s Pods (BOSH -&gt; Native)</h2>
+<h2 id="using-bosh-variables-in-k8s-pods">Using BOSH Variables in k8s Pods</h2>
+
+
+<div class="alert alert-info" role="alert">
+<h4 class="alert-heading">Note</h4>
+BOSH -&gt; Native
+</div>
+
 <p>In this case, the BOSH component is a provider, and the native component is a consumer.
-The native component is pod, which might belong to a deployment or statefulset.</p>
+The native component is a pod, which might belong to a deployment or statefulset.</p>
 <p>The operator creates link secrets for all providers in a BOSH deployment. Each secret contains a flattened map with the provided properties:</p>
 <div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -997,16 +1121,18 @@ The native component is pod, which might belong to a deployment or statefulset.<
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
 </span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>Secret<span style="color:#666">
 </span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>link-test-nats-nats<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">annotations</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/restart-on-update</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;true&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>link-nats-nats<span style="color:#666">
 </span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">labels</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/entanglement</span>:<span style="color:#666"> </span>link-test-nats-nats<span style="color:#666">
+</span><span style="color:#666">    </span>quarks.cloudfoundry.org/container-name=nats<span style="color:#666">
+</span><span style="color:#666">    </span>quarks.cloudfoundry.org/deployment-name=nats-deployment<span style="color:#666">
+</span><span style="color:#666">    </span>quarks.cloudfoundry.org/entanglement=<span style="color:#6ab825;font-weight:bold">true</span><span style="color:#666">
+</span><span style="color:#666">    </span>quarks.cloudfoundry.org/remote-id=nats<span style="color:#666">
 </span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">data</span>:<span style="color:#666">
 </span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">nats.password</span>:<span style="color:#666"> </span>YXBwYXJlbnRseSwgeW91Cg==<span style="color:#666">
 </span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">nats.port</span>:<span style="color:#666"> </span>aGF2ZSB0b28K<span style="color:#666">
@@ -1014,53 +1140,211 @@ The native component is pod, which might belong to a deployment or statefulset.<
 </span></code></pre></td></tr></table>
 </div>
 </div><p>If a pod is annotated with the following:</p>
-<ul>
-<li><code>quarks.cloudfoundry.org/deployment: foo</code></li>
-<li><code>quarks.cloudfoundry.org/consumes: '[{&quot;name&quot;:&quot;nats&quot;,&quot;type&quot;:&quot;nats&quot;}]'</code></li>
-</ul>
-<p>The operator will mutate the pod to:</p>
-<ul>
-<li>mount the link secrets as <code>/quarks/link/DEPLOYMENT/&lt;type&gt;-&lt;name&gt;/&lt;key&gt;</code></li>
-<li>add an environment variable for each key in the secret data mapping: <code>LINK_&lt;key&gt;</code></li>
-</ul>
-<p>The <code>&lt;name&gt;</code> and <code>&lt;type&gt;</code> are the respective link type and name. For example, the nats release uses <code>nats</code> for both the name and the type of the link. The <code>&lt;key&gt;</code> describes the BOSH property, flattened (dot-style), for example <code>nats.password</code>. The key name is modified to be upper case and without dots in the context of an environment variable, therefore <code>nats.password</code> becomes <code>LINK_NATS_PASSWORD</code> in the container.</p>
-<p>If link information changes, the operator will trigger an update (restart) of the deployment or statefulset owning the pod.
-This can be done by updating the template of the pod using an annotation.</p>
-<h3 id="example-bosh---native">Example (BOSH -&gt; Native)</h3>
-<p>an Eirini Helm Chart</p>
-<p>The OPI process of Eirini required the NATS password and IP.</p>
 <div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">...<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">template</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/deployment</span>:<span style="color:#666"> </span>{{<span style="color:#666"> </span>.Values.deploymentName<span style="color:#666"> </span>}}<span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/consumes</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;[{&#34;name&#34;:&#34;nats&#34;,&#34;type&#34;:&#34;nats&#34;}]&#39;</span>`<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
-</span><span style="color:#666">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/consumes</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;[{&#34;name&#34;:&#34;nats&#34;,&#34;type&#34;:&#34;nats&#34;}]&#39;</span><span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/deployment</span>:<span style="color:#666"> </span>nats-deployment<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/restart-on-update</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;true&#34;</span><span style="color:#666">
 </span></code></pre></td></tr></table>
 </div>
-</div><p>and a CF-Deployment with Operator, which has the following instance groups:</p>
+</div><p>The operator will mutate the pod to:</p>
 <ul>
-<li>API</li>
-<li>Diego Cell</li>
-<li>Gorouter</li>
-<li>NATS
-<code>provides: nats</code></li>
+<li>mount the link secrets as <code>/quarks/link/DEPLOYMENT/&lt;type&gt;-&lt;name&gt;/&lt;key&gt;</code></li>
+<li>add an environment variable for each key in the secret data mapping: <code>LINK_&lt;key&gt;</code></li>
 </ul>
+<p>The <code>&lt;name&gt;</code> and <code>&lt;type&gt;</code> are the respective link type and name. For example, the nats release uses <code>nats</code> for both the name and the type of the link. The <code>&lt;key&gt;</code> describes the BOSH property, flattened (dot-style), for example <code>nats.password</code>. The key name is modified to be upper case and without dots in the context of an environment variable, therefore <code>nats.password</code> becomes <code>LINK_NATS_PASSWORD</code> in the container.</p>
+<p>If link information changes and the pod has the &lsquo;restart-on-update&rsquo; annotation, the operator will trigger an update (restart) of the deployment or statefulset owning the pod.</p>
+<h3 id="example-1">Example</h3>
+<p>The following BOSH deployment, will create secrets for all links.</p>
+
+
+
+
+
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="display:block;width:100%;background-color:#363636"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">46
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>Secret<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats-manifest<span style="color:#666">
+</span><span style="display:block;width:100%;background-color:#363636"><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">stringData</span>:<span style="color:#666">
+</span></span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">manifest</span>:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">    ---</span><span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats-deployment<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">releases</span>:<span style="color:#666">
+</span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">version</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;33&#34;</span><span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">url</span>:<span style="color:#666"> </span>docker.io/cfcontainerization<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">stemcell</span>:<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">os</span>:<span style="color:#666"> </span>SLE_15_SP1<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">version</span>:<span style="color:#666"> </span><span style="color:#3677a9">26.1-7.0</span>.0_374.gb8e8e6af<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">instance_groups</span>:<span style="color:#666">
+</span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">instances</span>:<span style="color:#666"> </span><span style="color:#3677a9">1</span><span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">jobs</span>:<span style="color:#666">
+</span><span style="color:#666">      </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">release</span>:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">properties</span>:<span style="color:#666">
+</span><span style="color:#666">          </span><span style="color:#6ab825;font-weight:bold">nats</span>:<span style="color:#666">
+</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">user</span>:<span style="color:#666"> </span>admin<span style="color:#666">
+</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">password</span>:<span style="color:#666"> </span>onetwothreefour<span style="color:#666">
+</span><span style="color:#666">          </span><span style="color:#6ab825;font-weight:bold">quarks</span>:<span style="color:#666">
+</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">ports</span>:<span style="color:#666">
+</span><span style="color:#666">            </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;nats&#34;</span><span style="color:#666">
+</span><span style="color:#666">              </span><span style="color:#6ab825;font-weight:bold">protocol</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;TCP&#34;</span><span style="color:#666">
+</span><span style="color:#666">              </span><span style="color:#6ab825;font-weight:bold">internal</span>:<span style="color:#666"> </span><span style="color:#3677a9">4222</span><span style="color:#666">
+</span><span style="color:#666">            </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;nats-routes&#34;</span><span style="color:#666">
+</span><span style="color:#666">              </span><span style="color:#6ab825;font-weight:bold">protocol</span>:<span style="color:#666"> </span>TCP<span style="color:#666">
+</span><span style="color:#666">              </span><span style="color:#6ab825;font-weight:bold">internal</span>:<span style="color:#666"> </span><span style="color:#3677a9">4223</span><span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">variables</span>:<span style="color:#666">
+</span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats_password<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>password<span style="color:#666">
+</span><span style="color:#666"></span>---<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>BOSHDeployment<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats-deployment<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">manifest</span>:<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats-manifest<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>secret<span style="color:#666">
+</span></code></pre></td></tr></table>
+</div>
+</div>
+
+<small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/quarks-link/boshdeployment.yaml">https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/quarks-link/boshdeployment.yaml</a> </small>
+<hr>
+<p>The k8s deployment looks like this:</p>
+
+
+
+
+
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="display:block;width:100%;background-color:#363636"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>apps/v1<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>Deployment<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>entangled-deployment<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
+</span><span style="display:block;width:100%;background-color:#363636"><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">replicas</span>:<span style="color:#666"> </span><span style="color:#3677a9">1</span><span style="color:#666">
+</span></span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">selector</span>:<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">matchLabels</span>:<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">example</span>:<span style="color:#666"> </span>owned-by-dpl<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">template</span>:<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">annotations</span>:<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/consumes</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;[{&#34;name&#34;:&#34;nats&#34;,&#34;type&#34;:&#34;nats&#34;}]&#39;</span><span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/deployment</span>:<span style="color:#666"> </span>nats-deployment<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/restart-on-update</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;true&#34;</span><span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">labels</span>:<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">example</span>:<span style="color:#666"> </span>owned-by-dpl<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>entangled<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">containers</span>:<span style="color:#666">
+</span><span style="color:#666">      </span>- <span style="color:#6ab825;font-weight:bold">command</span>:<span style="color:#666">
+</span><span style="color:#666">        </span>- sleep<span style="color:#666">
+</span><span style="color:#666">        </span>- <span style="color:#ed9d13">&#34;3600&#34;</span><span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">image</span>:<span style="color:#666"> </span>busybox<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">imagePullPolicy</span>:<span style="color:#666"> </span>Always<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>busybox<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">restartPolicy</span>:<span style="color:#666"> </span>Always<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">terminationGracePeriodSeconds</span>:<span style="color:#666"> </span><span style="color:#3677a9">1</span><span style="color:#666">
+</span></code></pre></td></tr></table>
+</div>
+</div>
+
+<small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/quarks-link/entangled-dpl.yaml">https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/quarks-link/entangled-dpl.yaml</a> </small>
+<hr>
+<p>The nats release has the corresponding <a href="https://github.com/cloudfoundry/nats-release/blob/ed4bda59f835ce83eec2a129e8d3a25ad7405497/jobs/nats/spec#L18-L27"><code>provides:</code> section</a>.</p>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 28, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/9842fcc6f65616ef2d8ee0aefa39cd3d299c78eb">Fix sentence (9842fcc)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 1, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/4d1d888e8a52d88ca1655d0de129998bbb80a564">Merge pull request #13 from cloudfoundry-incubator/feature-docs-172994188 (4d1d888)</a>
 </div>
 </div>
 
