@@ -144,13 +144,13 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h5 id=&#34;copies&#34;&gt;Copies&lt;/h5&gt;
-&lt;p&gt;The &lt;code&gt;QuarksSecret&lt;/code&gt; controller can create copies of a generated secret across multiple namespaces, as long as the target secrets (that live in a namespace other than the namespace of the &lt;code&gt;QuarksSecret&lt;/code&gt;) already exist, and have an annotation of:&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;QuarksSecret&lt;/code&gt; controller can create copies of a generated secret or a user created secret across multiple namespaces, as long as the target secrets or target &lt;code&gt;QuarksSecret&lt;/code&gt; with type &lt;code&gt;copy&lt;/code&gt; (that live in a namespace other than the namespace of the &lt;code&gt;QuarksSecret&lt;/code&gt;) already exist. If it is a generated secret in the source namespace, then the secret or &lt;code&gt;QuarksSecret&lt;/code&gt; in target namespace shoud have the following annotaton&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/generate-password-with-copies
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/SOURCE_QUARKS_SECRET_NAME
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;as well as the usual label for generated secrets:&lt;/p&gt;
@@ -163,7 +163,16 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;This ensures that the creator of the &lt;code&gt;QuarksSecret&lt;/code&gt; must have access to the copy target namespace.&lt;/p&gt;
-&lt;p&gt;Copied &lt;code&gt;Secrets&lt;/code&gt; do not have an owner set, and are not cleaned up automatically when the &lt;code&gt;QuarksSecret&lt;/code&gt; is deleted.&lt;/p&gt;
+&lt;p&gt;If it is the user generated secret in the source namespace, then the secret or &lt;code&gt;QuarksSecret&lt;/code&gt; should have the following annotation&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/SOURCE_QUARKS_SECRET_NAME
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Copied &lt;code&gt;Secrets&lt;/code&gt; do not have an owner set, and are not cleaned up automatically when the &lt;code&gt;QuarksSecret&lt;/code&gt; is deleted.&lt;/p&gt;
 &lt;h3 id=&#34;_certificatesigningrequest-controller_&#34;&gt;&lt;strong&gt;&lt;em&gt;CertificateSigningRequest Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;quarks_certsrcontroller_flow.png&#34; alt=&#34;certsr-controller-flow&#34;&gt;
 &lt;em&gt;Fig. 3: The CertificateSigningRequest controller&lt;/em&gt;&lt;/p&gt;
