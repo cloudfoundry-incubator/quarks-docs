@@ -3,26 +3,26 @@ title: "Development"
 linkTitle: "Development"
 weight: 40
 description: >
-  A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.
+  Quarks Secret generates passwords, keys and certificates and stores them in Kubernetes secrets.
 ---
 
 ## Description
 
-A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.
+Quarks Secret generates passwords, keys and certificates and stores them in Kubernetes secrets.
 
-## QuarksSecret Component
+## Quarks Secret Component
 
-The **QuarksSecret** component consists of three controllers, each with a separate reconciliation loop.
+The **Quarks Secret** component consists of three controllers, each with a separate reconciliation loop.
 
 Figure 1, illustrates the component and associated set of controllers.
 
 ![qsec-component-flow](quarks_eseccomponent_flow.png)
-*Fig. 1: The QuarksSecret component*
+*Fig. 1: The Quarks Secret component*
 
-### **_QuarksSecret Controller_**
+### **_Quarks Secret Controller_**
 
 ![qsec-controller-flow](quarks_eseccontroller_flow.png)
-*Fig. 2: The QuarksSecret controller*
+*Fig. 2: The Quarks Secret controller*
 
 
 #### Watches in Quarks Secret Controller
@@ -40,7 +40,7 @@ Figure 1, illustrates the component and associated set of controllers.
 
 ##### Types
 
-Depending on the `spec.type`, `QuarksSecret` supports generating the following:
+Depending on the `spec.type`, Quarks Secret supports generating the following:
 
 | Secret Type                     | spec.type     | certificate.signerType | certificate.isCA |
 | ------------------------------- | ------------- | ---------------------- | ---------------- |
@@ -58,7 +58,7 @@ Depending on the `spec.type`, `QuarksSecret` supports generating the following:
 
 ##### Auto-approving Certificates
 
-A certificate `QuarksSecret` can be signed by the Kubernetes API Server. The **QuarksSecret** Controller is responsible for generating the certificate signing request:
+A certificate `QuarksSecret` resource can be signed by the Kubernetes API Server. The **Quarks Secret** Controller is responsible for generating the certificate signing request:
 
 ```yaml
 apiVersion: certificates.k8s.io/v1beta1
@@ -74,7 +74,7 @@ spec:
 
 ##### Copies
 
-The `QuarksSecret` controller can create copies of a generated secret or a user created secret across multiple namespaces, as long as the target secrets or target `QuarksSecret` with type `copy` (that live in a namespace other than the namespace of the `QuarksSecret`) already exist. If it is a generated secret in the source namespace, then the secret or `QuarksSecret` in target namespace shoud have the following annotaton
+The Quarks Secret controller can create copies of a generated secret or a user created secret across multiple namespaces, as long as the target secrets or target `QuarksSecret` with type `copy` (that live in a namespace other than the namespace of the `QuarksSecret`) already exist. If it is a generated secret in the source namespace, then the secret or `QuarksSecret` in target namespace shoud have the following annotaton
 
 ```text
 quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/SOURCE_QUARKS_SECRET_NAME
@@ -124,14 +124,14 @@ The secret rotation controller watches for a rotation config map and re-generate
 #### Reconciliation in Secret Rotation Controller
 
 - Will read the array of `QuarksSecret` names from the JSON under the config map key `secrets`.
-- Skip `QuarksSecret` where `.status.generated` is `false`, as these might be under control of the user.
+- Skip `QuarksSecret` where `.status.generated` is set and `false`
 - Set `.status.generated` for each named `QuarksSecret` to `false`, to trigger re-creation of the corresponding secret.
 
 ## Relationship With the BDPL Component
 
-All explicit variables of a BOSH manifest will be created as `QuarksSecret` instances, which will trigger the **QuarksSecret** Controller.
+All explicit variables of a BOSH manifest will be created as `QuarksSecret` instances, which will trigger the **Quarks Secret** Controller.
 This will create corresponding secrets. If the user decides to change a secret, the `.status.generated` field in the corresponding `QuarksSecret` should be set to `false`, to protect against overwriting.
 
-## `QuarksSecret` Examples
+## Examples
 
 See https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples
