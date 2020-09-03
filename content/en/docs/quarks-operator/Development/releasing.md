@@ -67,3 +67,15 @@ The docker image is only referenced from the helm chart and not mentioned in the
 1. Edit the draft release on Github and publish it
 
 Try not to push to the pipeline again, until step 4 is completed. The 'release' job will always take the most recent artifacts from S3. Maybe pause the 'publish' job manually to avoid accidental updates.
+
+
+## Docs
+
+Documentation for releases is kept in branches of the quarks-doc repo.
+Release docs are pushed to Cloudfoundry via Github Actions, as defined in the branch.
+
+On the release branch:
+* Use a unique app name in `manifest.yaml`.
+* Edit `.github/workflows/pages` branch to match the release branch.
+
+Be sure to adapt menus in all branches (`config.toml`) to match the new app URL.
