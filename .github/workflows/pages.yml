@@ -1,24 +1,30 @@
 name: Github Pages
 on:
   push:
-    branches: [ master ]
+    branches: [ v6.x ]
   pull_request:
 
 jobs:
-  build:
+  cloudfoundry:
     runs-on: ubuntu-latest
     if: github.repository == 'cloudfoundry-incubator/quarks-docs'
     steps:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
+
     - name: Build 🔧
       run: |
            make gen-command-docs build
+           touch public/Staticfile
+
     - name: Deploy 🚀
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      uses: JamesIves/github-pages-deploy-action@releases/v3
+      if: github.ref == 'refs/heads/v6.x' && github.event_name == 'push'
+      uses: citizen-of-planet-earth/cf-cli-action@master
       with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: public
+        cf_api: https://api.cap.explore.suse.dev
+        cf_username: ${{ secrets.CF_USER }}
+        cf_password: ${{ secrets.CF_PASSWORD }}
+        cf_org: ${{ secrets.CF_ORG }}
+        cf_space: dev
+        command: push -f manifest.yaml
