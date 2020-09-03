@@ -118,7 +118,7 @@ offlineSearch = true
 
 [[params.versions]]
   version = "v6.x"
-  url = "https://quarks.suse.dev"
+  url = "https://v6.cap.explore.suse.dev/docs"
 
 [[params.versions]]
   version = "v5.x"
