@@ -1,4 +1,4 @@
 ---
 applications:
-- name: v6
+- name: quarks-v6
   path: public
