@@ -22,17 +22,17 @@
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
 <title>Development | Quarks Project</title><meta property="og:title" content="Development" />
-<meta property="og:description" content="A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.
+<meta property="og:description" content="Quarks Secret generates passwords, keys and certificates and stores them in Kubernetes secrets.
 " />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/quarks-secret/development/" />
 <meta property="og:site_name" content="Quarks Project" />
 <meta itemprop="name" content="Development">
-<meta itemprop="description" content="A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.
+<meta itemprop="description" content="Quarks Secret generates passwords, keys and certificates and stores them in Kubernetes secrets.
 ">
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Development"/>
-<meta name="twitter:description" content="A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.
+<meta name="twitter:description" content="Quarks Secret generates passwords, keys and certificates and stores them in Kubernetes secrets.
 "/>
 
 
@@ -41,8 +41,8 @@
 
 
 
-<link rel="preload" href="/scss/main.min.e7c735e1b34b8ec656d1f980a0c5c4af518f1e1b14181bfc5d09dab051e0be06.css" as="style">
-<link href="/scss/main.min.e7c735e1b34b8ec656d1f980a0c5c4af518f1e1b14181bfc5d09dab051e0be06.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.aab9c0f02d1cff541a17e871c779afa503ebc937d758c786f68e08feae9bd24d.css" as="style">
+<link href="/scss/main.min.aab9c0f02d1cff541a17e871c779afa503ebc937d758c786f68e08feae9bd24d.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.087d411f5839eb3a3a6ae9100327c2d5fd17644b1c5024494aa433990055d046326c5b53d167ed5c490b70b6c90fa4b5d0c5c194e7ad4cd2c45160a515460034.json"
+  data-offline-search-index-json-src="/offline-search-index.eff4b683c5756beb27285d9045a721b4852db9a1070455bd33982158f75608d45707bb323a0b500642b7bc7df996b3e59acbd8a84ea2c57eb29c37ae82a0f51e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.087d411f5839eb3a3a6ae9100327c2d5fd17644b1c5024494aa433990055d046326c5b53d167ed5c490b70b6c90fa4b5d0c5c194e7ad4cd2c45160a515460034.json"
+  data-offline-search-index-json-src="/offline-search-index.eff4b683c5756beb27285d9045a721b4852db9a1070455bd33982158f75608d45707bb323a0b500642b7bc7df996b3e59acbd8a84ea2c57eb29c37ae82a0f51e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -577,6 +577,12 @@
       
       
       
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsquarks-secrettasks" href="/docs/quarks-secret/tasks/">Tasks</a>
+      
+      
+      
+      
 
 
 
@@ -773,15 +779,15 @@
 <nav id="TableOfContents">
   <ul>
     <li><a href="#description">Description</a></li>
-    <li><a href="#quarkssecret-component">QuarksSecret Component</a>
+    <li><a href="#quarks-secret-component">Quarks Secret Component</a>
       <ul>
-        <li><a href="#_quarkssecret-controller_"><strong><em>QuarksSecret Controller</em></strong></a></li>
+        <li><a href="#_quarks-secret-controller_"><strong><em>Quarks Secret Controller</em></strong></a></li>
         <li><a href="#_certificatesigningrequest-controller_"><strong><em>CertificateSigningRequest Controller</em></strong></a></li>
         <li><a href="#_secretrotation-controller_"><strong><em>SecretRotation Controller</em></strong></a></li>
       </ul>
     </li>
     <li><a href="#relationship-with-the-bdpl-component">Relationship With the BDPL Component</a></li>
-    <li><a href="#quarkssecret-examples"><code>QuarksSecret</code> Examples</a></li>
+    <li><a href="#examples">Examples</a></li>
   </ul>
 </nav>
 
@@ -829,18 +835,18 @@
             
 <div class="td-content">
 	<h1>Development</h1>
-        <div class="lead">A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.</div>
+        <div class="lead">Quarks Secret generates passwords, keys and certificates and stores them in Kubernetes secrets.</div>
 	
 	<h2 id="description">Description</h2>
-<p>A QuarksSecret generates passwords, keys and certificates and stores them in Kubernetes secrets.</p>
-<h2 id="quarkssecret-component">QuarksSecret Component</h2>
-<p>The <strong>QuarksSecret</strong> component consists of three controllers, each with a separate reconciliation loop.</p>
+<p>Quarks Secret generates passwords, keys and certificates and stores them in Kubernetes secrets.</p>
+<h2 id="quarks-secret-component">Quarks Secret Component</h2>
+<p>The <strong>Quarks Secret</strong> component consists of three controllers, each with a separate reconciliation loop.</p>
 <p>Figure 1, illustrates the component and associated set of controllers.</p>
 <p><img src="quarks_eseccomponent_flow.png" alt="qsec-component-flow">
-<em>Fig. 1: The QuarksSecret component</em></p>
-<h3 id="_quarkssecret-controller_"><strong><em>QuarksSecret Controller</em></strong></h3>
+<em>Fig. 1: The Quarks Secret component</em></p>
+<h3 id="_quarks-secret-controller_"><strong><em>Quarks Secret Controller</em></strong></h3>
 <p><img src="quarks_eseccontroller_flow.png" alt="qsec-controller-flow">
-<em>Fig. 2: The QuarksSecret controller</em></p>
+<em>Fig. 2: The Quarks Secret controller</em></p>
 <h4 id="watches-in-quarks-secret-controller">Watches in Quarks Secret Controller</h4>
 <ul>
 <li><code>QuarksSecret</code>: Creation</li>
@@ -854,7 +860,7 @@
 </ul>
 <h4 id="highlights-in-quarks-secret-controller">Highlights in Quarks Secret Controller</h4>
 <h5 id="types">Types</h5>
-<p>Depending on the <code>spec.type</code>, <code>QuarksSecret</code> supports generating the following:</p>
+<p>Depending on the <code>spec.type</code>, Quarks Secret supports generating the following:</p>
 <table>
 <thead>
 <tr>
@@ -914,7 +920,7 @@
 <p>You can find more details in the <a href="https://bosh.io/docs/variable-types">BOSH docs</a>.</p>
 </blockquote>
 <h5 id="auto-approving-certificates">Auto-approving Certificates</h5>
-<p>A certificate <code>QuarksSecret</code> can be signed by the Kubernetes API Server. The <strong>QuarksSecret</strong> Controller is responsible for generating the certificate signing request:</p>
+<p>A certificate <code>QuarksSecret</code> resource can be signed by the Kubernetes API Server. The <strong>Quarks Secret</strong> Controller is responsible for generating the certificate signing request:</p>
 <div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
@@ -940,7 +946,7 @@
 </span></code></pre></td></tr></table>
 </div>
 </div><h5 id="copies">Copies</h5>
-<p>The <code>QuarksSecret</code> controller can create copies of a generated secret or a user created secret across multiple namespaces, as long as the target secrets or target <code>QuarksSecret</code> with type <code>copy</code> (that live in a namespace other than the namespace of the <code>QuarksSecret</code>) already exist. If it is a generated secret in the source namespace, then the secret or <code>QuarksSecret</code> in target namespace shoud have the following annotaton</p>
+<p>The Quarks Secret controller can create copies of a generated secret or a user created secret across multiple namespaces, as long as the target secrets or target <code>QuarksSecret</code> with type <code>copy</code> (that live in a namespace other than the namespace of the <code>QuarksSecret</code>) already exist. If it is a generated secret in the source namespace, then the secret or <code>QuarksSecret</code> in target namespace shoud have the following annotaton</p>
 <div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
@@ -991,13 +997,13 @@
 <h4 id="reconciliation-in-secret-rotation-controller">Reconciliation in Secret Rotation Controller</h4>
 <ul>
 <li>Will read the array of <code>QuarksSecret</code> names from the JSON under the config map key <code>secrets</code>.</li>
-<li>Skip <code>QuarksSecret</code> where <code>.status.generated</code> is <code>false</code>, as these might be under control of the user.</li>
+<li>Skip <code>QuarksSecret</code> where <code>.status.generated</code> is set and <code>false</code></li>
 <li>Set <code>.status.generated</code> for each named <code>QuarksSecret</code> to <code>false</code>, to trigger re-creation of the corresponding secret.</li>
 </ul>
 <h2 id="relationship-with-the-bdpl-component">Relationship With the BDPL Component</h2>
-<p>All explicit variables of a BOSH manifest will be created as <code>QuarksSecret</code> instances, which will trigger the <strong>QuarksSecret</strong> Controller.
+<p>All explicit variables of a BOSH manifest will be created as <code>QuarksSecret</code> instances, which will trigger the <strong>Quarks Secret</strong> Controller.
 This will create corresponding secrets. If the user decides to change a secret, the <code>.status.generated</code> field in the corresponding <code>QuarksSecret</code> should be set to <code>false</code>, to protect against overwriting.</p>
-<h2 id="quarkssecret-examples"><code>QuarksSecret</code> Examples</h2>
+<h2 id="examples">Examples</h2>
 <p>See <a href="https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples">https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples</a></p>
 
         <div class="section-index">
@@ -1107,12 +1113,14 @@ This will create corresponding secrets. If the user decides to change a secret, 
         
             
         
+            
+        
     
 </div>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified September 3, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/80a29f2641d28ebeb43561b64915ef4d3433825b">fixup! Update v6 docs URL (80a29f2)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 4, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/03621c0ece421fb1ad4dbc2e2a2e74bc261ca424">Merge pull request #18 from cloudfoundry-incubator/update-quarks-secret-docs-174356415 (03621c0)</a>
 </div>
 </div>
 

@@ -41,8 +41,8 @@
 
 
 
-<link rel="preload" href="/scss/main.min.e7c735e1b34b8ec656d1f980a0c5c4af518f1e1b14181bfc5d09dab051e0be06.css" as="style">
-<link href="/scss/main.min.e7c735e1b34b8ec656d1f980a0c5c4af518f1e1b14181bfc5d09dab051e0be06.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.aab9c0f02d1cff541a17e871c779afa503ebc937d758c786f68e08feae9bd24d.css" as="style">
+<link href="/scss/main.min.aab9c0f02d1cff541a17e871c779afa503ebc937d758c786f68e08feae9bd24d.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.087d411f5839eb3a3a6ae9100327c2d5fd17644b1c5024494aa433990055d046326c5b53d167ed5c490b70b6c90fa4b5d0c5c194e7ad4cd2c45160a515460034.json"
+  data-offline-search-index-json-src="/offline-search-index.eff4b683c5756beb27285d9045a721b4852db9a1070455bd33982158f75608d45707bb323a0b500642b7bc7df996b3e59acbd8a84ea2c57eb29c37ae82a0f51e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.087d411f5839eb3a3a6ae9100327c2d5fd17644b1c5024494aa433990055d046326c5b53d167ed5c490b70b6c90fa4b5d0c5c194e7ad4cd2c45160a515460034.json"
+  data-offline-search-index-json-src="/offline-search-index.eff4b683c5756beb27285d9045a721b4852db9a1070455bd33982158f75608d45707bb323a0b500642b7bc7df996b3e59acbd8a84ea2c57eb29c37ae82a0f51e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -577,6 +577,12 @@
       
       
       
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsquarks-secrettasks" href="/docs/quarks-secret/tasks/">Tasks</a>
+      
+      
+      
+      
 
 
 
@@ -782,9 +788,6 @@
     <li><a href="#overview-of-quarks-secret">Overview of Quarks Secret</a>
       <ul>
         <li><a href="#generate-credentials">Generate credentials</a></li>
-        <li><a href="#rotate-credentials">Rotate credentials</a></li>
-        <li><a href="#approve-certificates">Approve Certificates</a></li>
-        <li><a href="#secret-copy">Secret copy</a></li>
       </ul>
     </li>
     <li><a href="#examples">Examples</a></li>
@@ -835,7 +838,7 @@
 <li><a href="https://github.com/cloudfoundry-incubator/quarks-secret">Github</a></li>
 </ul>
 <h2 id="description">Description</h2>
-<p>A QuarksSecret lets you automatically generate secrets such as passwords, certificates and ssh keys, to ease management of credentials in Kubernetes.</p>
+<p>Quarks Secret lets you automatically generate secrets such as passwords, certificates and ssh keys, to ease management of credentials in Kubernetes.</p>
 <h2 id="installation">Installation</h2>
 <p>Add the quarks repository to helm if you haven&rsquo;t already:</p>
 <div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
@@ -914,11 +917,12 @@ helm install qsecret quarks/quarks-secret --namespace quarks
 <li><code>basic-auth</code></li>
 <li><code>dockerconfigjson</code></li>
 <li><code>copy</code></li>
+<li><code>templatedconfig</code></li>
 </ul>
 <h3 id="generate-credentials">Generate credentials</h3>
-<p><code>QuarksSecret</code> can be used to generate passwords, certificates and keys. It uses the <a href="https://github.com/cloudflare/cfssl">cfssl package</a> to generate these. The generated values are stored in kubernetes secrets.</p>
+<p>Quarks Secret can be used to generate passwords, certificates and keys. It uses the <a href="https://github.com/cloudflare/cfssl">cfssl package</a> to generate these. The generated values are stored in kubernetes secrets.</p>
 <h4 id="certificates">Certificates</h4>
-<p>Example of a <code>QuarksSecret</code> which generates a Kubernetes secret containing a certificate:
+<p>Example of a <code>QuarksSecret</code> resource, which generates a Kubernetes secret containing a certificate:</p>
 
 
 
@@ -965,8 +969,9 @@ helm install qsecret quarks/quarks-secret --namespace quarks
 </div>
 
 <small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/examples/certificate.yaml">https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/examples/certificate.yaml</a> </small>
-<hr></p>
+<hr>
 <p>The example can be applied to the namespace where the operator is watching for resources ( <code>staging</code> by default )</p>
+<p>If a certificate is generated, the Quarks Secret operator ensures that a certificate signing request (CSR) is generated and is approved by the Kubernetes API server.</p>
 <h4 id="rsa-keys">RSA keys</h4>
 
 
@@ -1049,137 +1054,6 @@ helm install qsecret quarks/quarks-secret --namespace quarks
 
 <small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/examples/basic-auth.yml">https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/examples/basic-auth.yml</a> </small>
 <hr>
-<h3 id="rotate-credentials">Rotate credentials</h3>
-<p>The generated credentials can be rotated by specifying its quarkssecret&rsquo;s name in a configmap. The configmap must have the label<code>quarks.cloudfoundry.org/secret-rotation</code>, for example as you can see in <strong>Line 7</strong>:
-
-
-
-
-
-<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6
-</span><span style="display:block;width:100%;background-color:#363636"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7
-</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">9
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>ConfigMap<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>rotate<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">labels</span>:<span style="color:#666">
-</span><span style="display:block;width:100%;background-color:#363636"><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/secret-rotation</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;true&#34;</span><span style="color:#666">
-</span></span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">data</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">secrets</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;[&#34;generate-password&#34;]&#39;</span><span style="color:#666">
-</span></code></pre></td></tr></table>
-</div>
-</div>
-
-<small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/examples/rotate.yaml">https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/examples/rotate.yaml</a> </small>
-<hr></p>
-<h3 id="approve-certificates">Approve Certificates</h3>
-<p>In the case, where a certificate is generated, the QuarksSecret ensures that a certificate signing request is generated and is approved by the Kubernetes API server.</p>
-<h3 id="secret-copy">Secret copy</h3>
-<p>The Quarks Secret operator can generate also copies in multiple namespaces while generating secrets.</p>
-<p>For example, while generating passwords:</p>
-
-
-
-
-
-<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>QuarksSecret<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>copy-user<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>password<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">secretName</span>:<span style="color:#666"> </span>gen-secret<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">copies</span>:<span style="color:#666">
-</span><span style="color:#666">  </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>copied-secret<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">namespace</span>:<span style="color:#666"> </span>COPYNAMESPACE</code></pre></td></tr></table>
-</div>
-</div>
-
-<small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/examples/copy.yaml">https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/examples/copy.yaml</a> </small>
-<hr>
-<p>It can be specified a  list of copying target, with <code>copies</code>:</p>
-<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">copies</span>:<span style="color:#666">
-</span><span style="color:#666">  </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>copied-secret<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">namespace</span>:<span style="color:#666"> </span>namespace1<span style="color:#666">
-</span></code></pre></td></tr></table>
-</div>
-</div><p>And each destination which is indicated needs to have a <code>Quarks Secret</code> of <code>copy</code> in the following form:</p>
-
-
-
-
-
-<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>QuarksSecret<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">labels</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/secret-kind</span>:<span style="color:#666"> </span>generated<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">annotations</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/secret-copy-of</span>:<span style="color:#666"> </span>NAMESPACE/copy-user<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>copied-secret<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">namespace</span>:<span style="color:#666"> </span>COPYNAMESPACE<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>copy<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">secretName</span>:<span style="color:#666"> </span>copied-secret</code></pre></td></tr></table>
-</div>
-</div>
-
-<small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/examples/copy-qsecret-destination.yaml">https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/examples/copy-qsecret-destination.yaml</a> </small>
-<hr>
-<p>The examples copies the generated <code>gen-secret</code> secret content into <code>copied-secret</code>  inside the <code>COPYNAMESPACE</code> namespace.</p>
 <h2 id="examples">Examples</h2>
 <p>The <a href="https://github.com/cloudfoundry-incubator/quarks-secret/tree/master/docs/examples">examples directory</a> on Github.</p>
 
@@ -1193,7 +1067,7 @@ helm install qsecret quarks/quarks-secret --namespace quarks
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified September 3, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/80a29f2641d28ebeb43561b64915ef4d3433825b">fixup! Update v6 docs URL (80a29f2)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 4, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/03621c0ece421fb1ad4dbc2e2a2e74bc261ca424">Merge pull request #18 from cloudfoundry-incubator/update-quarks-secret-docs-174356415 (03621c0)</a>
 </div>
 </div>
 
