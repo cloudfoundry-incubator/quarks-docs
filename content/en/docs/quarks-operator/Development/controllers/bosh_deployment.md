@@ -128,10 +128,6 @@ Figure 5 is a diagram that explains the whole `BOSHDeployment` component control
 [edit](https://docs.google.com/drawings/d/126ExNqPxDg1LcB14pbtS5S-iJzLYPyXZ5Jr9vTfFqXA/edit?usp=sharing)
 *Fig. 5: The BOSHDeployment component controllers interactions*
 
-## BOSHDeployment resource examples
-
-See https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment
-
 ## BOSHDeployment status
 
 The `BOSHDeployment` status is resolved by a [separate controller](https://github.com/cloudfoundry-incubator/quarks-operator/blob/c6480811376faf81d6edadb62fcd0c7951e173c1/pkg/kube/controllers/boshdeployment/status_reconciler.go) which tracks the status of `QuarksJob` and `QuarksStatefulSet` associated with a deployment.
@@ -168,3 +164,8 @@ The Reconcile resolves to the Deployed state by looking at the overall counts of
 - `Converting`: All `QuarksJobs` belonging to a `BOSHDeployment` are completed, but `QuarksStatefulSet` aren't ready yet ( or either way around )
 - `Resolving`: `QuarksJobs` belonging to a `BOSHDeployment` aren't completed, `QuarksStatefulSet` aren't ready yet
 - `Deployed`: All `QuarksJobs` and `QuarksStatefulSet` are ready/completed.
+
+## Examples
+
+See https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/bosh-deployment
+

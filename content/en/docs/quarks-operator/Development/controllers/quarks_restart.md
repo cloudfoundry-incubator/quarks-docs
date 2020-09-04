@@ -3,12 +3,12 @@ title: "Quarks restart"
 linkTitle: "Quarks restart"
 weight: 4
 description: >
-  The QuarksRestart controller is responsible for restarting kubernetes resources such as `StatefulSet` and `Deployment`. 
+  The QuarksRestart controller is responsible for restarting kubernetes resources such as `StatefulSet` and `Deployment`.
 ---
 
 ## Description
 
-The QuarksRestart controller is responsible for restarting kubernetes resources such as `StatefulSet` and `Deployment`. They are restarted whenever a secret referenced by these resources gets updated. 
+The QuarksRestart controller is responsible for restarting kubernetes resources such as `StatefulSet` and `Deployment`. They are restarted whenever a secret referenced by these resources gets updated.
 
 This feature also enables updating entangled pods whenever the link secrets get updated.
 
@@ -21,6 +21,6 @@ This feature also enables updating entangled pods whenever the link secrets get 
 - adds restart annotation `quarks.cloudfoundry.org/restart` to `StatefulSet` or `Deployment` as appropriate.
 
 
-## `QuarksRestart` Examples
+## Examples
 
-See https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-restart
+See https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/quarks-restart

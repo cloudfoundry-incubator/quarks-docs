@@ -6,26 +6,6 @@ description: >
   The QuarksStatefulSet component can be understood as the set of controllers responsible for translating the BOSH manifest `instance_groups` into Kubernetes resources.
 ---
 
-1. [QuarksStatefulSet](#QuarksStatefulSet)
-   1. [Description](#Description)
-   2. [QuarksStatefulSet Component](#quarksstatefulset-component)
-      1. [QuarksStatefulSet Controller](#_quarksstatefulset-controller_)
-         1. [Watches](#watches-in-sts-controller)
-         2. [Reconciliation](#reconciliation-in-sts-controller)
-         3. [Scaling Restrictions (not implemented)](#scaling-restrictions-not-implemented)
-         4. [Automatic Restart of Containers](#automatic-restart-of-containers)
-         5. [Exposing QuarksStatefulSets Publicly](#exposing-quarksstatefulsets-publicly)
-         6. [Cluster IP](#cluster-ip)
-         7. [Load Balancer](#load-balancer)
-         8. [Ingress](#ingress)
-         9. [Extended Upgrade Support](#extended-upgrade-support)
-         10. [Detects if StatefulSet versions are running](#detects-if-statefulset-versions-are-running)
-         11. [AZ Support](#az-support)
-         12. [Tolerations](#tolerations)
-      2. [QuarksStatefulSet Active-Passive Controller](#quarksstatefulset-active-passive-controller)
-   3. [Relationship with the BPM component](#relationship-with-the-bdpl-component)
-   4. [`QuarksStatefulSet` Examples](#`quarks-statefulset`-examples)
-
 ## Description
 
 The QuarksStatefulSet component can be understood as the set of controllers responsible for translating the BOSH manifest `instance_groups` into Kubernetes resources.
@@ -254,6 +234,6 @@ The controller manages this active probing and provides pod designation label to
 
 Figure 4 illustrates the interaction of the **BPM** Controller with the **QuarksStatefulSet** Controller. Once the BPM controller consumes the data persisted in secrets from the `QuarksJob` Component, it will use that data to generate new `QuarksStatefulset` instances. When these resources are generated, the QuarksStatefulSet controller will be watching and trigger its reconciliation loop.
 
-## `QuarksStatefulSet` Examples
+## Examples
 
 See https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-statefulset

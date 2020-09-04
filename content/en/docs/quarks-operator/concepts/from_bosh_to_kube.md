@@ -489,7 +489,7 @@ These map explicit variable names to secret names.
 
 Each secret must contain the usual keys used in explicit variables (see [here](https://bosh.io/docs/variable-types/) for more details).
 
-You can find an example [here](https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/boshdeployment-with-user-variable.yaml).
+{{<githubembed repo="cloudfoundry-incubator/quarks-operator" file="docs/examples/bosh-deployment/boshdeployment-with-user-variable.yaml" lang="yaml">}}
 
 ### Instance Groups to Quarks StatefulSets and Jobs
 
