@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/quarks-operator/development/releasing/" />
-<meta property="article:modified_time" content="2020-09-04T10:54:06+02:00" /><meta property="og:site_name" content="Quarks Project" />
+<meta property="article:modified_time" content="2020-09-04T14:38:12+02:00" /><meta property="og:site_name" content="Quarks Project" />
 <meta itemprop="name" content="Releasing">
 <meta itemprop="description" content="How to create a new Quarks Operator release on Concourse
 ">
-<meta itemprop="dateModified" content="2020-09-04T10:54:06+02:00" />
-<meta itemprop="wordCount" content="367">
+<meta itemprop="dateModified" content="2020-09-04T14:38:12+02:00" />
+<meta itemprop="wordCount" content="427">
 
 
 
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.eff4b683c5756beb27285d9045a721b4852db9a1070455bd33982158f75608d45707bb323a0b500642b7bc7df996b3e59acbd8a84ea2c57eb29c37ae82a0f51e.json"
+  data-offline-search-index-json-src="/offline-search-index.a18b4977e9898baa7ad386fb3948845580c8321d7c17056ed395e7cc741a9b9fe29cc9ba9cb66c7bf79abb9b9e114645765a3092ba1c7835cdecbb94ba3eca96.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -158,7 +158,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.eff4b683c5756beb27285d9045a721b4852db9a1070455bd33982158f75608d45707bb323a0b500642b7bc7df996b3e59acbd8a84ea2c57eb29c37ae82a0f51e.json"
+  data-offline-search-index-json-src="/offline-search-index.a18b4977e9898baa7ad386fb3948845580c8321d7c17056ed395e7cc741a9b9fe29cc9ba9cb66c7bf79abb9b9e114645765a3092ba1c7835cdecbb94ba3eca96.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -791,6 +791,7 @@
         <li><a href="#minor-bump">Minor Bump</a></li>
       </ul>
     </li>
+    <li><a href="#docs">Docs</a></li>
   </ul>
 </nav>
 
@@ -906,10 +907,19 @@ The assets will be copied into a &lsquo;release&rsquo; folder on S3.</p>
 <li>Edit the draft release on Github and publish it</li>
 </ol>
 <p>Try not to push to the pipeline again, until step 4 is completed. The &lsquo;release&rsquo; job will always take the most recent artifacts from S3. Maybe pause the &lsquo;publish&rsquo; job manually to avoid accidental updates.</p>
+<h2 id="docs">Docs</h2>
+<p>Documentation for releases is kept in branches of the quarks-doc repo.
+Release docs are pushed to Cloudfoundry via Github Actions, as defined in the branch.</p>
+<p>On the release branch:</p>
+<ul>
+<li>Use a unique app name in <code>manifest.yaml</code>.</li>
+<li>Edit <code>.github/workflows/pages</code> branch to match the release branch.</li>
+</ul>
+<p>Be sure to adapt menus in all branches (<code>config.toml</code>) to match the new app URL.</p>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified September 4, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/03621c0ece421fb1ad4dbc2e2a2e74bc261ca424">Merge pull request #18 from cloudfoundry-incubator/update-quarks-secret-docs-174356415 (03621c0)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 4, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/dec7b34d3f81d8ef1331f459a362ca08b22a81e2">Merge pull request #17 from cloudfoundry-incubator/add-docs-to-release-docs (dec7b34)</a>
 </div>
 </div>
 

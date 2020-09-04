@@ -78,6 +78,15 @@ The assets will be copied into a &amp;lsquo;release&amp;rsquo; folder on S3.&lt;
 &lt;li&gt;Edit the draft release on Github and publish it&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Try not to push to the pipeline again, until step 4 is completed. The &amp;lsquo;release&amp;rsquo; job will always take the most recent artifacts from S3. Maybe pause the &amp;lsquo;publish&amp;rsquo; job manually to avoid accidental updates.&lt;/p&gt;
+&lt;h2 id=&#34;docs&#34;&gt;Docs&lt;/h2&gt;
+&lt;p&gt;Documentation for releases is kept in branches of the quarks-doc repo.
+Release docs are pushed to Cloudfoundry via Github Actions, as defined in the branch.&lt;/p&gt;
+&lt;p&gt;On the release branch:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use a unique app name in &lt;code&gt;manifest.yaml&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Edit &lt;code&gt;.github/workflows/pages&lt;/code&gt; branch to match the release branch.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Be sure to adapt menus in all branches (&lt;code&gt;config.toml&lt;/code&gt;) to match the new app URL.&lt;/p&gt;
 
       </description>
     </item>
