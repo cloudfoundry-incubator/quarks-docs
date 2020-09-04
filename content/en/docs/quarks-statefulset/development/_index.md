@@ -92,7 +92,7 @@ spec:
       targetPort: 4222
 ```
 
-Complete example can be found [here](https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment/boshdeployment-with-service.yaml).
+Complete example can be found [here](https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/bosh-deployment/boshdeployment-with-service.yaml).
 
 Though, by default, quarks creates three services of type **ClusterIP** as defined [here](../../quarks-operator/concepts/from_bosh_to_kube/#naming-conventions) for any instance group.
 
@@ -256,4 +256,4 @@ Figure 4 illustrates the interaction of the **BPM** Controller with the **Quarks
 
 ## `QuarksStatefulSet` Examples
 
-See https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-statefulset
+See https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/quarks-statefulset

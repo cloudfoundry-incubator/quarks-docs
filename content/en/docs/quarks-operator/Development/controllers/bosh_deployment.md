@@ -13,8 +13,8 @@ A BOSH deployment is created from a deployment manifest and optionally ops files
 The deployment manifest is based on a vanilla BOSH deployment manifest.
 The ops files modify the deployment manifest. For example, ops files can be used to replace release tarballs with [docker images](https://ci.flintstone.cf.cloud.ibm.com/teams/containerization/pipelines/release-images), thus enabling deployment on Kubernetes.
 
-A deployment is represented by the `boshdeployments.quarks.cloudfoundry.org` (`bdpl`) custom resource, defined in [`boshdeployment_crd.yaml`](https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/crds/quarks_v1alpha1_boshdeployment_crd.yaml).
-This [bdpl custom resource](https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment/boshdeployment.yaml) contains references to config maps or secrets containing the actual manifests content.
+A deployment is represented by the `boshdeployments.quarks.cloudfoundry.org` (`bdpl`) custom resource, defined in [`boshdeployment_crd.yaml`](https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds/quarks_v1alpha1_boshdeployment_crd.yaml).
+This [bdpl custom resource](https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/bosh-deployment/boshdeployment.yaml) contains references to config maps or secrets containing the actual manifests content.
 
 The name of the `bdpl` resource is the [deployment name](https://bosh.io/docs/manifest-v2/#deployment). The name in the BOSH manifest is ignored.
 
@@ -30,7 +30,7 @@ Figure 1 is a **BDPL** component diagram that covers the set of controllers it u
 ![bdpl-component-flow](../quarks_bdplcomponent_flow.png)
 *Fig. 1: The BOSHDeployment component*
 
-Figure 1 illustrates a couple of things. Firstly, at the very top, we have the `cf-operator` , which is a long running application with a namespaced scope. When the `cf-operator` pod is initialized it will automatically register all controllers with the [Kubernetes Controller Manager](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/).
+Figure 1 illustrates a couple of things. Firstly, at the very top, we have the `quarks-operator` , which is a long running application with a namespaced scope. When the `quarks-operator` pod is initialized it will automatically register all controllers with the [Kubernetes Controller Manager](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/).
 
 While at a first glance the above diagram looks complex, it can be explained easily by focusing on each controller´s main functions: `Reconciliation & Watch`.
 
@@ -64,8 +64,8 @@ Transform the concepts of BOSH into Kubernetes resources:
 
 All of the three created *QuarksJob* instances will eventually persist their STDOUT into new secrets under the same namespace.
 
-- The output of the [`variable interpolation`](https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/commands/cf-operator_util_variable-interpolation.md) **QuarksJob** ends up as the `.desired-manifest-v1` **secret**, which is a versioned secret. At the same time this secret serves as the input for the `data gathering` **QuarksJob**.
-- The output of the [`data gathering`](https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/commands/cf-operator_util_instance-group.md) **QuarksJob**, ends up
+- The output of the [`variable interpolation`](https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/commands/quarks-operator_util_variable-interpolation.md) **QuarksJob** ends up as the `.desired-manifest-v1` **secret**, which is a versioned secret. At the same time this secret serves as the input for the `data gathering` **QuarksJob**.
+- The output of the [`data gathering`](https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/commands/quarks-operator_util_instance-group.md) **QuarksJob**, ends up
 as the `.ig-resolved.<instance_group_name>-v1` versioned secret.
 - The output of the `BPM configuration` **QuarksJob**, ends up as the `bpm.<instance_group_name>-v1` versioned secret.
 

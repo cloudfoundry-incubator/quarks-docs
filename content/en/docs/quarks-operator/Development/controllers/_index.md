@@ -14,7 +14,7 @@ The `quarks-operator` watches four different types of custom resources:
 * [QuarksSecret](../../../quarks-secret/development)
 * [QuarksStatefulSet](../../../quarks-statefulset/development)
 
-The `cf-operator` requires the according CRDs to be installed in the cluster in order to work as expected. By default, the `cf-operator` applies CRDs in your cluster automatically.
+The `quarks-operator` requires the according CRDs to be installed in the cluster in order to work as expected. By default, the `quarks-operator` applies CRDs in your cluster automatically.
 
 To verify that the CRD´s are installed:
 
