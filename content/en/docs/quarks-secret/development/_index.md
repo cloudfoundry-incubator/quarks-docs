@@ -44,13 +44,13 @@ Depending on the `spec.type`, Quarks Secret supports generating the following:
 
 | Secret Type                     | spec.type     | certificate.signerType | certificate.isCA |
 | ------------------------------- | ------------- | ---------------------- | ---------------- |
-| `passwords`                     | `password`    | not set                | not set          |
-| `username-password pairs`       | `basic-auth`  | not set                | not set          |
-| `rsa keys`                      | `rsa`         | not set                | not set          |
-| `ssh keys`                      | `ssh`         | not set                | not set          |
-| `self-signed root certificates` | `certificate` | `local`                | `true`           |
-| `self-signed certificates`      | `certificate` | `local`                | `false`          |
-| `cluster-signed certificates`   | `certificate` | `cluster`              | `false`          |
+| passwords                       | `password`    | not set                | not set          |
+| username-password pairs         | `basic-auth`  | not set                | not set          |
+| rsa keys                        | `rsa`         | not set                | not set          |
+| ssh keys                        | `ssh`         | not set                | not set          |
+| self-signed root certificates   | `certificate` | `local`                | `true`           |
+| self-signed certificates        | `certificate` | `local`                | `false`          |
+| cluster-signed certificates     | `certificate` | `cluster`              | `false`          |
 
 > **Note:**
 >
