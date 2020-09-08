@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/quarks-operator/development/controllers/bosh_deployment/" />
-<meta property="article:modified_time" content="2020-09-04T14:38:12+02:00" /><meta property="og:site_name" content="Quarks Project" />
+<meta property="article:modified_time" content="2020-09-08T12:28:54+02:00" /><meta property="og:site_name" content="Quarks Project" />
 <meta itemprop="name" content="BOSH Deployment">
 <meta itemprop="description" content="Deploying a BOSH deployment on Kubernetes
 ">
-<meta itemprop="dateModified" content="2020-09-04T14:38:12+02:00" />
-<meta itemprop="wordCount" content="989">
+<meta itemprop="dateModified" content="2020-09-08T12:28:54+02:00" />
+<meta itemprop="wordCount" content="987">
 
 
 
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.a18b4977e9898baa7ad386fb3948845580c8321d7c17056ed395e7cc741a9b9fe29cc9ba9cb66c7bf79abb9b9e114645765a3092ba1c7835cdecbb94ba3eca96.json"
+  data-offline-search-index-json-src="/offline-search-index.ce5325b423525f96ceee3dd17dbae0d37402fc4ca68755809ecf075b0d15daf3122caab20e9f57c672da8533ebe12fccf226b4de94719657b47a8c39d47a191e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -158,7 +158,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.a18b4977e9898baa7ad386fb3948845580c8321d7c17056ed395e7cc741a9b9fe29cc9ba9cb66c7bf79abb9b9e114645765a3092ba1c7835cdecbb94ba3eca96.json"
+  data-offline-search-index-json-src="/offline-search-index.ce5325b423525f96ceee3dd17dbae0d37402fc4ca68755809ecf075b0d15daf3122caab20e9f57c672da8533ebe12fccf226b4de94719657b47a8c39d47a191e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -792,8 +792,8 @@
       </ul>
     </li>
     <li><a href="#bdpl-abstract-view">BDPL Abstract view</a></li>
-    <li><a href="#boshdeployment-resource-examples">BOSHDeployment resource examples</a></li>
     <li><a href="#boshdeployment-status">BOSHDeployment status</a></li>
+    <li><a href="#examples">Examples</a></li>
   </ul>
 </nav>
 
@@ -951,8 +951,6 @@ as the <code>.ig-resolved.&lt;instance_group_name&gt;-v1</code> versioned secret
 <p><img src="https://docs.google.com/drawings/d/e/2PACX-1vTsCO5USd8AJIk_uHMRKl0NABuW85uVGJNebNvgI0Hz_9jhle6fcynLTcHh8cxW6lMgaV_DWyPEvm2-/pub?w=3161&amp;h=2376" alt="deployment-state">
 <a href="https://docs.google.com/drawings/d/126ExNqPxDg1LcB14pbtS5S-iJzLYPyXZ5Jr9vTfFqXA/edit?usp=sharing">edit</a>
 <em>Fig. 5: The BOSHDeployment component controllers interactions</em></p>
-<h2 id="boshdeployment-resource-examples">BOSHDeployment resource examples</h2>
-<p>See <a href="https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment">https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment</a></p>
 <h2 id="boshdeployment-status">BOSHDeployment status</h2>
 <p>The <code>BOSHDeployment</code> status is resolved by a <a href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/c6480811376faf81d6edadb62fcd0c7951e173c1/pkg/kube/controllers/boshdeployment/status_reconciler.go">separate controller</a> which tracks the status of <code>QuarksJob</code> and <code>QuarksStatefulSet</code> associated with a deployment.
 The controller annotates the instance groups and the jobs counters and it resolves the BDPL State (<code>Deployed</code>, <code>Converting</code> , <code>Resolving</code>) by looking at the associated resources states and computing the overall state.</p>
@@ -1001,10 +999,12 @@ The controller annotates the instance groups and the jobs counters and it resolv
 <li><code>Resolving</code>: <code>QuarksJobs</code> belonging to a <code>BOSHDeployment</code> aren&rsquo;t completed, <code>QuarksStatefulSet</code> aren&rsquo;t ready yet</li>
 <li><code>Deployed</code>: All <code>QuarksJobs</code> and <code>QuarksStatefulSet</code> are ready/completed.</li>
 </ul>
+<h2 id="examples">Examples</h2>
+<p>See <a href="https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/bosh-deployment">https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/bosh-deployment</a></p>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified September 4, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/dec7b34d3f81d8ef1331f459a362ca08b22a81e2">Merge pull request #17 from cloudfoundry-incubator/add-docs-to-release-docs (dec7b34)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 8, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/94d046bb8ee34369a33ae8a67cc3ffcbf0a282ff">Merge pull request #19 from cloudfoundry-incubator/example-sections-174208112 (94d046b)</a>
 </div>
 </div>
 

@@ -98,7 +98,7 @@
 &lt;p&gt;&lt;img src=&#34;quarks_bdpl_and_ejob_flow.png&#34; alt=&#34;bdpl-qjob-relationship&#34;&gt;
 &lt;em&gt;Fig. 4: Relationship between the BDPL controller and the QuarksJob component&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Figure 4 illustrates the interaction of the &lt;strong&gt;BOSHDeployment&lt;/strong&gt; Controller with the &lt;strong&gt;Errand&lt;/strong&gt; Controller and how the output of this one serves as the trigger for the &lt;strong&gt;Job&lt;/strong&gt; Controller.&lt;/p&gt;
-&lt;h2 id=&#34;quarksjob-examples&#34;&gt;&lt;code&gt;QuarksJob&lt;/code&gt; Examples&lt;/h2&gt;
+&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
 &lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples&#34;&gt;https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples&lt;/a&gt;&lt;/p&gt;
 
       </description>

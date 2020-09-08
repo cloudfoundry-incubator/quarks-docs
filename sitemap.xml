@@ -4,272 +4,272 @@
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/cli/cf-operator/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/cli/cf-operator_util/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/cli/cf-operator_util_instance-group/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/cli/cf-operator_util_tail-logs/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/cli/cf-operator_util_template-render/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/cli/cf-operator_util_variable-interpolation/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/cli/cf-operator_util_wait/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/cli/cf-operator_version/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-job/cli/quarks-job/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-job/cli/quarks-job_persist-output/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-job/cli/quarks-job_version/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-secret/cli/quarks-secret/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-secret/cli/quarks-secret_version/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/development/building/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/development/testing/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/development/releasing/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/development/controllers/bosh_deployment/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/development/controllers/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-statefulset/development/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/development/labels/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/development/controllers/quarks_restart/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-statefulset/development/statefulsetrollout/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/concepts/from_bosh_to_kube/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/development/tooling/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/concepts/desired_manifests/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/overview/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/development/naming/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/concepts/variables/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-job/cli/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-secret/cli/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/install/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/concepts/rendering_templates/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/concepts/resources_limit/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/cli/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/concepts/entanglements/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/concepts/process_control/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-secret/tasks/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-job/development/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-secret/development/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/concepts/waiting_services/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/concepts/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-job/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-secret/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/troubleshooting/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-statefulset/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/development/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/quarks-operator/development/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/development/about_operators/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/contribution-guidelines/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/community/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/search/</loc>
-    <lastmod>2020-09-04T14:38:12+02:00</lastmod>
+    <lastmod>2020-09-08T12:28:54+02:00</lastmod>
   </url>
   
 </urlset>

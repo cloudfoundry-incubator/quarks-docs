@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/quarks-operator/concepts/variables/" />
-<meta property="article:modified_time" content="2020-09-04T14:38:12+02:00" /><meta property="og:site_name" content="Quarks Project" />
+<meta property="article:modified_time" content="2020-09-08T12:28:54+02:00" /><meta property="og:site_name" content="Quarks Project" />
 <meta itemprop="name" content="BOSH Variables">
 <meta itemprop="description" content="How Quarks Operator interpolates BOSH variables.
 ">
-<meta itemprop="dateModified" content="2020-09-04T14:38:12+02:00" />
-<meta itemprop="wordCount" content="117">
+<meta itemprop="dateModified" content="2020-09-08T12:28:54+02:00" />
+<meta itemprop="wordCount" content="190">
 
 
 
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.a18b4977e9898baa7ad386fb3948845580c8321d7c17056ed395e7cc741a9b9fe29cc9ba9cb66c7bf79abb9b9e114645765a3092ba1c7835cdecbb94ba3eca96.json"
+  data-offline-search-index-json-src="/offline-search-index.ce5325b423525f96ceee3dd17dbae0d37402fc4ca68755809ecf075b0d15daf3122caab20e9f57c672da8533ebe12fccf226b4de94719657b47a8c39d47a191e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -158,7 +158,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.a18b4977e9898baa7ad386fb3948845580c8321d7c17056ed395e7cc741a9b9fe29cc9ba9cb66c7bf79abb9b9e114645765a3092ba1c7835cdecbb94ba3eca96.json"
+  data-offline-search-index-json-src="/offline-search-index.ce5325b423525f96ceee3dd17dbae0d37402fc4ca68755809ecf075b0d15daf3122caab20e9f57c672da8533ebe12fccf226b4de94719657b47a8c39d47a191e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -851,7 +851,140 @@
 	<p>BOSH releases consume two types of variables, explicit and implicit ones.</p>
 <h3 id="implicit-variables">Implicit Variables</h3>
 <p>Implicit variables have to be created before creating a BOSH deployment resource.
-The <a href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml">example</a> creates a secret named <code>var-custom-password</code>. That value will be used to fill <code>((custom-password))</code> place holders in the BOSH manifest.</p>
+The example creates a secret named <code>var-custom-password</code>. That value will be used to fill <code>((custom-password))</code> place holders in the BOSH manifest.</p>
+
+
+
+
+
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">59
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>Secret<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>var-custom-password<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>Opaque<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">stringData</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">password</span>:<span style="color:#666"> </span>a-custom-password<span style="color:#666">
+</span><span style="color:#666"></span>---<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>ConfigMap<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats-manifest<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">data</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">manifest</span>:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">    ---</span><span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats-deployment<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">releases</span>:<span style="color:#666">
+</span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">version</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;33&#34;</span><span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">url</span>:<span style="color:#666"> </span>docker.io/cfcontainerization<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">stemcell</span>:<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">os</span>:<span style="color:#666"> </span>SLE_15_SP1<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">version</span>:<span style="color:#666"> </span><span style="color:#3677a9">26.1-7.0</span>.0_374.gb8e8e6af<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">instance_groups</span>:<span style="color:#666">
+</span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">instances</span>:<span style="color:#666"> </span><span style="color:#3677a9">1</span><span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">jobs</span>:<span style="color:#666">
+</span><span style="color:#666">      </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">release</span>:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">properties</span>:<span style="color:#666">
+</span><span style="color:#666">          </span><span style="color:#6ab825;font-weight:bold">nats</span>:<span style="color:#666">
+</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">user</span>:<span style="color:#666"> </span>admin<span style="color:#666">
+</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">password</span>:<span style="color:#666"> </span>((custom_password))<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">variables</span>:<span style="color:#666">
+</span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>custom_password<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>password<span style="color:#666">
+</span><span style="color:#666"></span>---<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>ConfigMap<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>ops-scale<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">data</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">ops</span>:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">    - type: replace</span><span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">path</span>:<span style="color:#666"> </span>/instance_groups/name=nats?/instances<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">value</span>:<span style="color:#666"> </span><span style="color:#3677a9">2</span><span style="color:#666">
+</span><span style="color:#666"></span>---<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>BOSHDeployment<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats-deployment<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">manifest</span>:<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>nats-manifest<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>configmap<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">ops</span>:<span style="color:#666">
+</span><span style="color:#666">  </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>ops-scale<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>configmap<span style="color:#666">
+</span></code></pre></td></tr></table>
+</div>
+</div>
+
+<small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml">https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml</a> </small>
+<hr>
 <p>The name of the secret has to follow this scheme: &lsquo;var-<variable-name>&rsquo;</p>
 <p>Missing implicit variables are treated as an error.</p>
 <h3 id="explicit-variables">Explicit Variables</h3>
@@ -861,7 +994,7 @@ The <a href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/mast
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified September 4, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/dec7b34d3f81d8ef1331f459a362ca08b22a81e2">Merge pull request #17 from cloudfoundry-incubator/add-docs-to-release-docs (dec7b34)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 8, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/94d046bb8ee34369a33ae8a67cc3ffcbf0a282ff">Merge pull request #19 from cloudfoundry-incubator/example-sections-174208112 (94d046b)</a>
 </div>
 </div>
 

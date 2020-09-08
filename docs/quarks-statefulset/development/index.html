@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.a18b4977e9898baa7ad386fb3948845580c8321d7c17056ed395e7cc741a9b9fe29cc9ba9cb66c7bf79abb9b9e114645765a3092ba1c7835cdecbb94ba3eca96.json"
+  data-offline-search-index-json-src="/offline-search-index.ce5325b423525f96ceee3dd17dbae0d37402fc4ca68755809ecf075b0d15daf3122caab20e9f57c672da8533ebe12fccf226b4de94719657b47a8c39d47a191e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.a18b4977e9898baa7ad386fb3948845580c8321d7c17056ed395e7cc741a9b9fe29cc9ba9cb66c7bf79abb9b9e114645765a3092ba1c7835cdecbb94ba3eca96.json"
+  data-offline-search-index-json-src="/offline-search-index.ce5325b423525f96ceee3dd17dbae0d37402fc4ca68755809ecf075b0d15daf3122caab20e9f57c672da8533ebe12fccf226b4de94719657b47a8c39d47a191e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -786,7 +786,7 @@
       </ul>
     </li>
     <li><a href="#relationship-with-the-bdpl-component">Relationship with the BDPL component</a></li>
-    <li><a href="#quarksstatefulset-examples"><code>QuarksStatefulSet</code> Examples</a></li>
+    <li><a href="#examples">Examples</a></li>
   </ul>
 </nav>
 
@@ -836,37 +836,7 @@
 	<h1>Development</h1>
         <div class="lead">The QuarksStatefulSet component can be understood as the set of controllers responsible for translating the BOSH manifest <code>instance_groups</code> into Kubernetes resources.</div>
 	
-	<ol>
-<li><a href="#QuarksStatefulSet">QuarksStatefulSet</a>
-<ol>
-<li><a href="#Description">Description</a></li>
-<li><a href="#quarksstatefulset-component">QuarksStatefulSet Component</a>
-<ol>
-<li><a href="#_quarksstatefulset-controller_">QuarksStatefulSet Controller</a>
-<ol>
-<li><a href="#watches-in-sts-controller">Watches</a></li>
-<li><a href="#reconciliation-in-sts-controller">Reconciliation</a></li>
-<li><a href="#scaling-restrictions-not-implemented">Scaling Restrictions (not implemented)</a></li>
-<li><a href="#automatic-restart-of-containers">Automatic Restart of Containers</a></li>
-<li><a href="#exposing-quarksstatefulsets-publicly">Exposing QuarksStatefulSets Publicly</a></li>
-<li><a href="#cluster-ip">Cluster IP</a></li>
-<li><a href="#load-balancer">Load Balancer</a></li>
-<li><a href="#ingress">Ingress</a></li>
-<li><a href="#extended-upgrade-support">Extended Upgrade Support</a></li>
-<li><a href="#detects-if-statefulset-versions-are-running">Detects if StatefulSet versions are running</a></li>
-<li><a href="#az-support">AZ Support</a></li>
-<li><a href="#tolerations">Tolerations</a></li>
-</ol>
-</li>
-<li><a href="#quarksstatefulset-active-passive-controller">QuarksStatefulSet Active-Passive Controller</a></li>
-</ol>
-</li>
-<li><a href="#relationship-with-the-bdpl-component">Relationship with the BPM component</a></li>
-<li><a href="#%60quarks-statefulset%60-examples"><code>QuarksStatefulSet</code> Examples</a></li>
-</ol>
-</li>
-</ol>
-<h2 id="description">Description</h2>
+	<h2 id="description">Description</h2>
 <p>The QuarksStatefulSet component can be understood as the set of controllers responsible for translating the BOSH manifest <code>instance_groups</code> into Kubernetes resources.</p>
 <h2 id="quarksstatefulset-component">QuarksStatefulset Component</h2>
 <p>The <strong>QuarksStatefulset</strong> component is a categorization of a set of controllers, under the same group. Inside the <strong>QuarksStatefulset</strong> component, we have a set of 2 controllers together with one separate reconciliation loop per controller.</p>
@@ -1138,7 +1108,7 @@ The default value for <code>zoneNodeLabel</code> is <code>failure-domain.beta.ku
 <p><img src="quarks_bpm_and_ests_flow.png" alt="bpm-qsts-relationship">
 <em>Fig. 4: Relationship with the BPM controller</em></p>
 <p>Figure 4 illustrates the interaction of the <strong>BPM</strong> Controller with the <strong>QuarksStatefulSet</strong> Controller. Once the BPM controller consumes the data persisted in secrets from the <code>QuarksJob</code> Component, it will use that data to generate new <code>QuarksStatefulset</code> instances. When these resources are generated, the QuarksStatefulSet controller will be watching and trigger its reconciliation loop.</p>
-<h2 id="quarksstatefulset-examples"><code>QuarksStatefulSet</code> Examples</h2>
+<h2 id="examples">Examples</h2>
 <p>See <a href="https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-statefulset">https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-statefulset</a></p>
 
         <div class="section-index">
@@ -1262,7 +1232,7 @@ The default value for <code>zoneNodeLabel</code> is <code>failure-domain.beta.ku
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified September 4, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/dec7b34d3f81d8ef1331f459a362ca08b22a81e2">Merge pull request #17 from cloudfoundry-incubator/add-docs-to-release-docs (dec7b34)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 8, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/94d046bb8ee34369a33ae8a67cc3ffcbf0a282ff">Merge pull request #19 from cloudfoundry-incubator/example-sections-174208112 (94d046b)</a>
 </div>
 </div>
 

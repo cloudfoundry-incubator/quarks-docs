@@ -22,37 +22,7 @@
       <description>
         
         
-        &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#QuarksStatefulSet&#34;&gt;QuarksStatefulSet&lt;/a&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#Description&#34;&gt;Description&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#quarksstatefulset-component&#34;&gt;QuarksStatefulSet Component&lt;/a&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#_quarksstatefulset-controller_&#34;&gt;QuarksStatefulSet Controller&lt;/a&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#watches-in-sts-controller&#34;&gt;Watches&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#reconciliation-in-sts-controller&#34;&gt;Reconciliation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#scaling-restrictions-not-implemented&#34;&gt;Scaling Restrictions (not implemented)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#automatic-restart-of-containers&#34;&gt;Automatic Restart of Containers&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#exposing-quarksstatefulsets-publicly&#34;&gt;Exposing QuarksStatefulSets Publicly&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#cluster-ip&#34;&gt;Cluster IP&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#load-balancer&#34;&gt;Load Balancer&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#ingress&#34;&gt;Ingress&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#extended-upgrade-support&#34;&gt;Extended Upgrade Support&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#detects-if-statefulset-versions-are-running&#34;&gt;Detects if StatefulSet versions are running&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#az-support&#34;&gt;AZ Support&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#tolerations&#34;&gt;Tolerations&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#quarksstatefulset-active-passive-controller&#34;&gt;QuarksStatefulSet Active-Passive Controller&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#relationship-with-the-bdpl-component&#34;&gt;Relationship with the BPM component&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#%60quarks-statefulset%60-examples&#34;&gt;&lt;code&gt;QuarksStatefulSet&lt;/code&gt; Examples&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
+        &lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
 &lt;p&gt;The QuarksStatefulSet component can be understood as the set of controllers responsible for translating the BOSH manifest &lt;code&gt;instance_groups&lt;/code&gt; into Kubernetes resources.&lt;/p&gt;
 &lt;h2 id=&#34;quarksstatefulset-component&#34;&gt;QuarksStatefulset Component&lt;/h2&gt;
 &lt;p&gt;The &lt;strong&gt;QuarksStatefulset&lt;/strong&gt; component is a categorization of a set of controllers, under the same group. Inside the &lt;strong&gt;QuarksStatefulset&lt;/strong&gt; component, we have a set of 2 controllers together with one separate reconciliation loop per controller.&lt;/p&gt;
@@ -324,7 +294,7 @@ The default value for &lt;code&gt;zoneNodeLabel&lt;/code&gt; is &lt;code&gt;fail
 &lt;p&gt;&lt;img src=&#34;quarks_bpm_and_ests_flow.png&#34; alt=&#34;bpm-qsts-relationship&#34;&gt;
 &lt;em&gt;Fig. 4: Relationship with the BPM controller&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Figure 4 illustrates the interaction of the &lt;strong&gt;BPM&lt;/strong&gt; Controller with the &lt;strong&gt;QuarksStatefulSet&lt;/strong&gt; Controller. Once the BPM controller consumes the data persisted in secrets from the &lt;code&gt;QuarksJob&lt;/code&gt; Component, it will use that data to generate new &lt;code&gt;QuarksStatefulset&lt;/code&gt; instances. When these resources are generated, the QuarksStatefulSet controller will be watching and trigger its reconciliation loop.&lt;/p&gt;
-&lt;h2 id=&#34;quarksstatefulset-examples&#34;&gt;&lt;code&gt;QuarksStatefulSet&lt;/code&gt; Examples&lt;/h2&gt;
+&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
 &lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-statefulset&#34;&gt;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-statefulset&lt;/a&gt;&lt;/p&gt;
 
       </description>

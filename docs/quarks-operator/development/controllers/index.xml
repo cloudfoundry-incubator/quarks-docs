@@ -110,8 +110,6 @@ as the &lt;code&gt;.ig-resolved.&amp;lt;instance_group_name&amp;gt;-v1&lt;/code&
 &lt;p&gt;&lt;img src=&#34;https://docs.google.com/drawings/d/e/2PACX-1vTsCO5USd8AJIk_uHMRKl0NABuW85uVGJNebNvgI0Hz_9jhle6fcynLTcHh8cxW6lMgaV_DWyPEvm2-/pub?w=3161&amp;amp;h=2376&#34; alt=&#34;deployment-state&#34;&gt;
 &lt;a href=&#34;https://docs.google.com/drawings/d/126ExNqPxDg1LcB14pbtS5S-iJzLYPyXZ5Jr9vTfFqXA/edit?usp=sharing&#34;&gt;edit&lt;/a&gt;
 &lt;em&gt;Fig. 5: The BOSHDeployment component controllers interactions&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id=&#34;boshdeployment-resource-examples&#34;&gt;BOSHDeployment resource examples&lt;/h2&gt;
-&lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment&#34;&gt;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;boshdeployment-status&#34;&gt;BOSHDeployment status&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;BOSHDeployment&lt;/code&gt; status is resolved by a &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/blob/c6480811376faf81d6edadb62fcd0c7951e173c1/pkg/kube/controllers/boshdeployment/status_reconciler.go&#34;&gt;separate controller&lt;/a&gt; which tracks the status of &lt;code&gt;QuarksJob&lt;/code&gt; and &lt;code&gt;QuarksStatefulSet&lt;/code&gt; associated with a deployment.
 The controller annotates the instance groups and the jobs counters and it resolves the BDPL State (&lt;code&gt;Deployed&lt;/code&gt;, &lt;code&gt;Converting&lt;/code&gt; , &lt;code&gt;Resolving&lt;/code&gt;) by looking at the associated resources states and computing the overall state.&lt;/p&gt;
@@ -160,6 +158,8 @@ The controller annotates the instance groups and the jobs counters and it resolv
 &lt;li&gt;&lt;code&gt;Resolving&lt;/code&gt;: &lt;code&gt;QuarksJobs&lt;/code&gt; belonging to a &lt;code&gt;BOSHDeployment&lt;/code&gt; aren&amp;rsquo;t completed, &lt;code&gt;QuarksStatefulSet&lt;/code&gt; aren&amp;rsquo;t ready yet&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Deployed&lt;/code&gt;: All &lt;code&gt;QuarksJobs&lt;/code&gt; and &lt;code&gt;QuarksStatefulSet&lt;/code&gt; are ready/completed.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
+&lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/bosh-deployment&#34;&gt;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/bosh-deployment&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -184,8 +184,8 @@ The controller annotates the instance groups and the jobs counters and it resolv
 &lt;ul&gt;
 &lt;li&gt;adds restart annotation &lt;code&gt;quarks.cloudfoundry.org/restart&lt;/code&gt; to &lt;code&gt;StatefulSet&lt;/code&gt; or &lt;code&gt;Deployment&lt;/code&gt; as appropriate.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;quarksrestart-examples&#34;&gt;&lt;code&gt;QuarksRestart&lt;/code&gt; Examples&lt;/h2&gt;
-&lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-restart&#34;&gt;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-restart&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
+&lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/quarks-restart&#34;&gt;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/quarks-restart&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>
