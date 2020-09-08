@@ -51,6 +51,7 @@ Depending on the `spec.type`, Quarks Secret supports generating the following:
 | self-signed root certificates   | `certificate` | `local`                | `true`           |
 | self-signed certificates        | `certificate` | `local`                | `false`          |
 | cluster-signed certificates     | `certificate` | `cluster`              | `false`          |
+| k8s TLS (`kubernetes.io/tls`)   | `tls`         | `local`                | `false`          |
 
 > **Note:**
 >
