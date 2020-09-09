@@ -72,29 +72,23 @@ spec:
   - key encipherment
 ```
 
-##### Copies
+#### Copy Controller
 
-The Quarks Secret controller can create copies of a generated secret or a user created secret across multiple namespaces, as long as the target secrets or target `QuarksSecret` with type `copy` (that live in a namespace other than the namespace of the `QuarksSecret`) already exist. If it is a generated secret in the source namespace, then the secret or `QuarksSecret` in target namespace shoud have the following annotaton
+#### Watches in CSR Controller
 
-```text
-quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/SOURCE_QUARKS_SECRET_NAME
-```
+- `User Defined Secret`: Updation
+- `QuarksSecret`: Updates if `.status.copied` is false
 
-as well as the usual label for generated secrets:
+#### Reconciliation in Copy Controller
 
-```text
-quarks.cloudfoundry.org/secret-kind: generated
-```
-
-This ensures that the creator of the `QuarksSecret` must have access to the copy target namespace.
-
-If it is the user generated secret in the source namespace, then the secret or `QuarksSecret` should have the following annotation
+- create/updates copies of generated `secret` or a user created `secret` across multiple namespaces, as long as there are a empty `secret` or `QuarksSecret` with type `copy` in the target namespaces.
+- validates `secret` or `QuarksSecret` in the target namespace by checking the following annotation
 
 ```text
 quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/SOURCE_QUARKS_SECRET_NAME
 ```
 
-Copied `Secrets` do not have an owner set, and are not cleaned up automatically when the `QuarksSecret` is deleted.
+- Copied `Secrets` do not have an owner set, and are not cleaned up automatically when the `QuarksSecret` is deleted.
 
 ### **_CertificateSigningRequest Controller_**
 
