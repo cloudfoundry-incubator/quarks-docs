@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.ce5325b423525f96ceee3dd17dbae0d37402fc4ca68755809ecf075b0d15daf3122caab20e9f57c672da8533ebe12fccf226b4de94719657b47a8c39d47a191e.json"
+  data-offline-search-index-json-src="/offline-search-index.3c6f59c5572a59ed953a3d04768f1efa16e8963ce7279323aad8bb28548a62c7dbfe89f31fa0d684ac988fe2621a1e7d6fcd0adc7b6a65ff112b54db1f54443f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.ce5325b423525f96ceee3dd17dbae0d37402fc4ca68755809ecf075b0d15daf3122caab20e9f57c672da8533ebe12fccf226b4de94719657b47a8c39d47a191e.json"
+  data-offline-search-index-json-src="/offline-search-index.3c6f59c5572a59ed953a3d04768f1efa16e8963ce7279323aad8bb28548a62c7dbfe89f31fa0d684ac988fe2621a1e7d6fcd0adc7b6a65ff112b54db1f54443f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -912,6 +912,7 @@ helm install qsecret quarks/quarks-secret --namespace quarks
 <ul>
 <li><code>password</code></li>
 <li><code>certificate</code></li>
+<li><code>tls</code></li>
 <li><code>ssh</code></li>
 <li><code>rsa</code></li>
 <li><code>basic-auth</code></li>
@@ -972,6 +973,64 @@ helm install qsecret quarks/quarks-secret --namespace quarks
 <hr>
 <p>The example can be applied to the namespace where the operator is watching for resources ( <code>staging</code> by default )</p>
 <p>If a certificate is generated, the Quarks Secret operator ensures that a certificate signing request (CSR) is generated and is approved by the Kubernetes API server.</p>
+<h4 id="k8s-tls">k8s TLS</h4>
+
+
+
+
+
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>QuarksSecret<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>example.quarks.tls<span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">request</span>:<span style="color:#666">
+</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">certificate</span>:<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">CAKeyRef</span>:<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">key</span>:<span style="color:#666"> </span>private_key<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>example.secret.ca<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">CARef</span>:<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">key</span>:<span style="color:#666"> </span>certificate<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>example.secret.ca<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">alternativeNames</span>:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">null</span><span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">commonName</span>:<span style="color:#666"> </span>kubeTlsTypeCert<span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">isCA</span>:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">false</span><span style="color:#666">
+</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">signerType</span>:<span style="color:#666"> </span>local<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">secretName</span>:<span style="color:#666"> </span>example.secret.tls<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>tls<span style="color:#666">
+</span></code></pre></td></tr></table>
+</div>
+</div>
+
+<small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/examples/tls.yaml">https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/examples/tls.yaml</a> </small>
+<hr>
+<p>This <code>QuarksSecret</code> resource example generates a Kubernetes Secret of <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#tls">kubernetes.io/tls</a> type,
+which contains keys named <code>tls.crt</code> and <code>tls.key</code> that contain the certificate and private key to use for TLS.
+It is primarily used with TLS termination of the k8s <code>Ingress</code> resource or <a href="https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/">Istio Secure Gateways</a>.
+Due to its use cases, only local <code>signerType</code> is supported.</p>
 <h4 id="rsa-keys">RSA keys</h4>
 
 
@@ -1067,7 +1126,7 @@ helm install qsecret quarks/quarks-secret --namespace quarks
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified September 8, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/94d046bb8ee34369a33ae8a67cc3ffcbf0a282ff">Merge pull request #19 from cloudfoundry-incubator/example-sections-174208112 (94d046b)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 17, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/938defe28f57b755a59a6516aa9657d713bfba60">Merge pull request #21 from peterhaochen47/patch-1 (938defe)</a>
 </div>
 </div>
 

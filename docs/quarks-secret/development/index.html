@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.ce5325b423525f96ceee3dd17dbae0d37402fc4ca68755809ecf075b0d15daf3122caab20e9f57c672da8533ebe12fccf226b4de94719657b47a8c39d47a191e.json"
+  data-offline-search-index-json-src="/offline-search-index.3c6f59c5572a59ed953a3d04768f1efa16e8963ce7279323aad8bb28548a62c7dbfe89f31fa0d684ac988fe2621a1e7d6fcd0adc7b6a65ff112b54db1f54443f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.ce5325b423525f96ceee3dd17dbae0d37402fc4ca68755809ecf075b0d15daf3122caab20e9f57c672da8533ebe12fccf226b4de94719657b47a8c39d47a191e.json"
+  data-offline-search-index-json-src="/offline-search-index.3c6f59c5572a59ed953a3d04768f1efa16e8963ce7279323aad8bb28548a62c7dbfe89f31fa0d684ac988fe2621a1e7d6fcd0adc7b6a65ff112b54db1f54443f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -872,45 +872,51 @@
 </thead>
 <tbody>
 <tr>
-<td><code>passwords</code></td>
+<td>passwords</td>
 <td><code>password</code></td>
 <td>not set</td>
 <td>not set</td>
 </tr>
 <tr>
-<td><code>username-password pairs</code></td>
+<td>username-password pairs</td>
 <td><code>basic-auth</code></td>
 <td>not set</td>
 <td>not set</td>
 </tr>
 <tr>
-<td><code>rsa keys</code></td>
+<td>rsa keys</td>
 <td><code>rsa</code></td>
 <td>not set</td>
 <td>not set</td>
 </tr>
 <tr>
-<td><code>ssh keys</code></td>
+<td>ssh keys</td>
 <td><code>ssh</code></td>
 <td>not set</td>
 <td>not set</td>
 </tr>
 <tr>
-<td><code>self-signed root certificates</code></td>
+<td>self-signed root certificates</td>
 <td><code>certificate</code></td>
 <td><code>local</code></td>
 <td><code>true</code></td>
 </tr>
 <tr>
-<td><code>self-signed certificates</code></td>
+<td>self-signed certificates</td>
 <td><code>certificate</code></td>
 <td><code>local</code></td>
 <td><code>false</code></td>
 </tr>
 <tr>
-<td><code>cluster-signed certificates</code></td>
+<td>cluster-signed certificates</td>
 <td><code>certificate</code></td>
 <td><code>cluster</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>k8s TLS (<code>kubernetes.io/tls</code>)</td>
+<td><code>tls</code></td>
+<td><code>local</code></td>
 <td><code>false</code></td>
 </tr>
 </tbody>
@@ -1120,7 +1126,7 @@ This will create corresponding secrets. If the user decides to change a secret, 
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified September 8, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/94d046bb8ee34369a33ae8a67cc3ffcbf0a282ff">Merge pull request #19 from cloudfoundry-incubator/example-sections-174208112 (94d046b)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 17, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/938defe28f57b755a59a6516aa9657d713bfba60">Merge pull request #21 from peterhaochen47/patch-1 (938defe)</a>
 </div>
 </div>
 
