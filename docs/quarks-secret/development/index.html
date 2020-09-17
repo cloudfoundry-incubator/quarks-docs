@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.3c6f59c5572a59ed953a3d04768f1efa16e8963ce7279323aad8bb28548a62c7dbfe89f31fa0d684ac988fe2621a1e7d6fcd0adc7b6a65ff112b54db1f54443f.json"
+  data-offline-search-index-json-src="/offline-search-index.344e6c1d40c4b93308843d0066e31728c481c7b85f3f945aee19ab9bfdea7220f3403905874d646e3b40dac2d791141e4370a96fc518838b0e4947f5a071b7f6.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.3c6f59c5572a59ed953a3d04768f1efa16e8963ce7279323aad8bb28548a62c7dbfe89f31fa0d684ac988fe2621a1e7d6fcd0adc7b6a65ff112b54db1f54443f.json"
+  data-offline-search-index-json-src="/offline-search-index.344e6c1d40c4b93308843d0066e31728c481c7b85f3f945aee19ab9bfdea7220f3403905874d646e3b40dac2d791141e4370a96fc518838b0e4947f5a071b7f6.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -951,8 +951,17 @@
 </span><span style="color:#666">  </span>- key<span style="color:#666"> </span>encipherment<span style="color:#666">
 </span></code></pre></td></tr></table>
 </div>
-</div><h5 id="copies">Copies</h5>
-<p>The Quarks Secret controller can create copies of a generated secret or a user created secret across multiple namespaces, as long as the target secrets or target <code>QuarksSecret</code> with type <code>copy</code> (that live in a namespace other than the namespace of the <code>QuarksSecret</code>) already exist. If it is a generated secret in the source namespace, then the secret or <code>QuarksSecret</code> in target namespace shoud have the following annotaton</p>
+</div><h4 id="copy-controller">Copy Controller</h4>
+<h4 id="watches-in-csr-controller">Watches in CSR Controller</h4>
+<ul>
+<li><code>User Defined Secret</code>: Updation</li>
+<li><code>QuarksSecret</code>: Updates if <code>.status.copied</code> is false</li>
+</ul>
+<h4 id="reconciliation-in-copy-controller">Reconciliation in Copy Controller</h4>
+<ul>
+<li>create/updates copies of generated <code>secret</code> or a user created <code>secret</code> across multiple namespaces, as long as there are a empty <code>secret</code> or <code>QuarksSecret</code> with type <code>copy</code> in the target namespaces.</li>
+<li>validates <code>secret</code> or <code>QuarksSecret</code> in the target namespace by checking the following annotation</li>
+</ul>
 <div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
@@ -961,30 +970,13 @@
 <pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/SOURCE_QUARKS_SECRET_NAME
 </code></pre></td></tr></table>
 </div>
-</div><p>as well as the usual label for generated secrets:</p>
-<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">quarks.cloudfoundry.org/secret-kind: generated
-</code></pre></td></tr></table>
-</div>
-</div><p>This ensures that the creator of the <code>QuarksSecret</code> must have access to the copy target namespace.</p>
-<p>If it is the user generated secret in the source namespace, then the secret or <code>QuarksSecret</code> should have the following annotation</p>
-<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">quarks.cloudfoundry.org/secret-copy-of: NAMESPACE/SOURCE_QUARKS_SECRET_NAME
-</code></pre></td></tr></table>
-</div>
-</div><p>Copied <code>Secrets</code> do not have an owner set, and are not cleaned up automatically when the <code>QuarksSecret</code> is deleted.</p>
+</div><ul>
+<li>Copied <code>Secrets</code> do not have an owner set, and are not cleaned up automatically when the <code>QuarksSecret</code> is deleted.</li>
+</ul>
 <h3 id="_certificatesigningrequest-controller_"><strong><em>CertificateSigningRequest Controller</em></strong></h3>
 <p><img src="quarks_certsrcontroller_flow.png" alt="certsr-controller-flow">
 <em>Fig. 3: The CertificateSigningRequest controller</em></p>
-<h4 id="watches-in-csr-controller">Watches in CSR Controller</h4>
+<h4 id="watches-in-csr-controller-1">Watches in CSR Controller</h4>
 <ul>
 <li><code>Certificate Signing Request</code>: Creation</li>
 </ul>
@@ -1126,7 +1118,7 @@ This will create corresponding secrets. If the user decides to change a secret, 
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified September 17, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/938defe28f57b755a59a6516aa9657d713bfba60">Merge pull request #21 from peterhaochen47/patch-1 (938defe)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 17, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/fec9b4c9b5ec5c40139c2fa145aae1219610a59f">Merge pull request #22 from cloudfoundry-incubator/rohit/docs (fec9b4c)</a>
 </div>
 </div>
 
