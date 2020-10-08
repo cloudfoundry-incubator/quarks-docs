@@ -99,7 +99,7 @@ update:
   # The maximum number of non-canary instances to update in parallel for an QuarksStatefulSet.
   # TODO: Support for this needs to be implemented in the controller.
   max_in_flight: 2
-  # This key is must in the manifest for the canary deployment to work.
+  # This key must be set in the manifest for the canary deployment to work.
   update_watch_time: 0
   # Not used in cf-operator.
   # All instance groups are deployed at the same time.
