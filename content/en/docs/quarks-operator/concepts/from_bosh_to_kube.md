@@ -93,14 +93,13 @@ stemcells: []
 update:
   # The number of pods to deploy in the new version of an QuarksStatefulSet
   # Once canaries are running, deployment can continue.
-  # TODO: Support for canaries needs implementation in QuarksStatefulSet.
   canaries: 2
   # Time to wait for canary pods to be ready in a new version of an QuarksStatefulSet
   canary_watch_time: 100
   # The maximum number of non-canary instances to update in parallel for an QuarksStatefulSet.
   # TODO: Support for this needs to be implemented in the controller.
   max_in_flight: 2
-  # TODO: is there a need for this in QuarksStatefulSet (in a readiness Probe?)
+  # This key must be set in the manifest for the canary deployment to work.
   update_watch_time: 0
   # Not used in cf-operator.
   # All instance groups are deployed at the same time.
