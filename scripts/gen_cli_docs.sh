@@ -22,8 +22,15 @@ pushd build/quarks-secret
     go run cmd/docs/gen-command-docs.go content/en/docs/quarks-secret/CLI/
 popd
 
+git clone https://github.com/cloudfoundry-incubator/quarks-statefulset build/quarks-statefulset
+pushd build/quarks-statefulset
+    mkdir -p content/en/docs/quarks-statefulset/CLI
+    go run cmd/docs/gen-command-docs.go content/en/docs/quarks-statefulset/CLI/
+popd
+
 cp -rf build/operator/content/* content/
 cp -rf build/quarks-job/content/* content/
 cp -rf build/quarks-secret/content/* content/
+cp -rf build/quarks-statefulset/content/* content/
 
 rm -rf build/ || true
