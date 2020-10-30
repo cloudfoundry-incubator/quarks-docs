@@ -51,3 +51,25 @@ As a safeguard against incidential updates, each indicated destination needs to 
 
 
 The example copies the generated `gen-secret` secret content into `copied-secret`  inside the `COPYNAMESPACE` namespace.
+
+## Templated Config Secret Generation
+
+This feature is particularly useful for projects which requires their configuration in a specific format and also which require their entire config to be specified in one secret.
+
+For example, 
+{{<githubembed repo="cloudfoundry-incubator/quarks-secret" file="docs/examples/templated-config.yaml" lang="yaml" >}}
+
+here we have a simple key value pair format of a configuration in the `templates` key. The `values` consists of the secret names from where the values needs to be fetched. 
+
+The above example when run, will create the following `templated-secret` configuration secret.
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: templated-secret
+type: Opaque
+Data:
+  foo: GSA7Kndi4BzUQjL3cSHv0CRVsNWGBXgibzpzxKvZAHR2sdMLIBJ6jONBcmSCDHp8
+```
+
