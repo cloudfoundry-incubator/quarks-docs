@@ -104,6 +104,14 @@
 &lt;li&gt;kubectl&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;h4 id=&#34;pre-requisites-for-rke&#34;&gt;Pre-Requisites for RKE&lt;/h4&gt;
+&lt;p&gt;Add the following configuration in &lt;code&gt;cluster.yaml&lt;/code&gt; while installing RKE.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;services:
+  kube-controller:
+    extra_args:
+      cluster-signing-cert-file: &amp;quot;/etc/kubernetes/ssl/kube-ca.pem&amp;quot;
+      cluster-signing-key-file: &amp;quot;/etc/kubernetes/ssl/kube-ca-key.pem&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;steps&#34;&gt;Steps&lt;/h3&gt;
 &lt;p&gt;Add the quarks repository to helm if you haven&amp;rsquo;t already:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
