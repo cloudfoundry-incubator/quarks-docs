@@ -18,8 +18,21 @@ For more information about the `quarks-operator` helm chart and how to configure
 - helm
 - kubectl
 
-
 ## Installation
+
+#### Pre-Requisites for RKE
+
+Add the following configuration in `cluster.yaml` while installing RKE.
+
+```
+services:
+  kube-controller:
+    extra_args:
+      cluster-signing-cert-file: "/etc/kubernetes/ssl/kube-ca.pem"
+      cluster-signing-key-file: "/etc/kubernetes/ssl/kube-ca-key.pem"
+```
+
+### Steps 
 
 Add the quarks repository to helm if you haven't already:
 
