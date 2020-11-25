@@ -143,14 +143,16 @@ The helm value setting &lt;code&gt;global.singleNamespace.name=&lt;/code&gt; all
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install relname1 quarks/cf-operator &lt;span style=&#34;color:#ed9d13&#34;&gt;\
 &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&lt;/span&gt;  --namespace namespace1
   --set &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;global.singleNamespace.name=staging1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;\
 &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;global.monitoredID=id1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;quarks-job.persistOutputClusterRole.name=clusterrole1&amp;#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;quarks-job.persistOutputClusterRole.name=clusterrole1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;corednsServiceAccount.name=clusterrole2&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;\
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;using-multiple-namespaces-with-one-operator&#34;&gt;Using multiple namespaces with one operator&lt;/h3&gt;
 &lt;p&gt;The cluster role can be reused between namespaces. The service account (and role binding) should be different for each namespace.&lt;/p&gt;
@@ -166,13 +168,15 @@ The helm value setting &lt;code&gt;global.singleNamespace.name=&lt;/code&gt; all
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Manually create before running helm install, for each namespace:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;a namespace &amp;ldquo;staging1&amp;rdquo; with the following labels (note: &amp;ldquo;cfo&amp;rdquo; and &amp;ldquo;qjob-persist-output&amp;rdquo; are the defaults from values.yaml):&lt;/li&gt;
+&lt;li&gt;a namespace &amp;ldquo;staging1&amp;rdquo; with the following labels (note: &amp;ldquo;cfo&amp;rdquo;, &amp;ldquo;qjob-persist-output&amp;rdquo; and &amp;ldquo;coredns-quarks-service-account&amp;rdquo; are defaults from &lt;code&gt;values.yaml&lt;/code&gt;):&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;        quarks.cloudfoundry.org/monitored: &amp;quot;cfo&amp;quot;
         quarks.cloudfoundry.org/qjob-service-account: qjob-persist-output
+        quarks.cloudfoundry.org/coredns-quarks-service-account: coredns-quarks
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;a service account named &amp;ldquo;qjob-persist-output&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;a service account named &amp;ldquo;qjob-persist-output&amp;rdquo; and &amp;ldquo;coredns-quarks&amp;rdquo;&lt;/li&gt;
 &lt;li&gt;a role binding from the existing cluster role &amp;ldquo;qjob-persist-output&amp;rdquo; to &amp;ldquo;qjob-persist-output&amp;rdquo; service account in namespace &amp;ldquo;staging1&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;another cluster binding from the existing cluster role &amp;ldquo;coredns-quarks&amp;rdquo; to &amp;ldquo;coredns-quarks&amp;rdquo; service account in namesapce &amp;ldquo;staging1&amp;rdquo;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;For more options look at the README for the chart&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
