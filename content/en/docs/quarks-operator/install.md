@@ -50,7 +50,7 @@ helm install relname1 quarks/cf-operator \
   --set "global.singleNamespace.name=staging1" \
   --set "global.monitoredID=id1" \
   --set "quarks-job.persistOutputClusterRole.name=clusterrole1" \
-  --set  "corednsServiceAccount.name=clusterrole2" \
+  --set "corednsServiceAccount.name=clusterrole2" \
 ```
 
 ### Using multiple namespaces with one operator
