@@ -58,7 +58,7 @@ The node index starts at 1 and is used as following to generate names:
 ```bash
 namespace: $TEST_NAMESPACE + <node_index>
 webhook port: $CF_OPERATOR_WEBHOOK_SERVICE_PORT + <node_index>
-log file: $CF_OPERATOR_TESTING_TMP/cf-operator-tests-<node_index>.log
+log file: $CF_OPERATOR_TESTING_TMP/quarks-operator-tests-<node_index>.log
 ```
 
 Integration tests use the `TEST_NAMESPACE` environment variable as a base to
@@ -81,11 +81,11 @@ is set to `true`.
 Quarks StatefulSet requires a k8s webhook to mutate the volumes of a pod.
 Kubernetes will call back to the operator for certain requests and use the
 modified pod manifest, which is returned.
-CF-Operator also uses a validating webhook to validate the BOSH deployment spec and the creation
+Quarks Operator also uses a validating webhook to validate the BOSH deployment spec and the creation
 of reference resources specified in the spec. Secret validation admission webhook restricts the
 user from updating a versioned secret.
 
-The cf-operator integration tests use `CF_OPERATOR_WEBHOOK_SERVICE_PORT` as a
+The quarks-operator integration tests use `CF_OPERATOR_WEBHOOK_SERVICE_PORT` as a
 base value to calculate the port number to listen to on `CF_OPERATOR_WEBHOOK_SERVICE_HOST`.
 
 The tests use a `mutatingwebhookconfiguration` and a `validatingwebhookconfiguration` to configure Kubernetes to
@@ -195,22 +195,22 @@ The following steps are necessary to have a proper environment setup, where all 
 
     _**Note**_: When you have a vendor folder (either from the submodule or manually created) settings this to `off` speeds up the `build-image` target.
 
-1. Build the `cf-operator` binary
+1. Build the `quarks-operator` binary
 
     ```bash
     bin/build
     ```
 
-1. Build the `cf-operator` docker image
+1. Build the `quarks-operator` docker image
 
     ```bash
     bin/build-image
     ```
 
-_**Note**_: Consider setting `DOCKER_IMAGE_TAG` to a fixed variable. This will avoid rebuilding the docker image everytime, when doing changes in files not related to the `cf-operator`
+_**Note**_: Consider setting `DOCKER_IMAGE_TAG` to a fixed variable. This will avoid rebuilding the docker image everytime, when doing changes in files not related to the `quarks-operator`
 binary.
 
-_**Note**_: When not running in CI, nothing ensures a proper cleanup of resources after the deletion of the `cf-operator` in the environment. You can make sure to manually verify that none
+_**Note**_: When not running in CI, nothing ensures a proper cleanup of resources after the deletion of the `quarks-operator` in the environment. You can make sure to manually verify that none
 old resources will interfere with a future installation, by:
 
 ```bash
@@ -249,7 +249,7 @@ _**Note**_: On Mac, use `export CF_OPERATOR_WEBHOOK_SERVICE_HOST=$(ip a s $(ip r
 
     _**Note**_: Required for the PVC tests.
 
-1. Build the `cf-operator` docker image
+1. Build the `quarks-operator` docker image
 
     First set the version to something static, not dependant on git:
 
@@ -267,7 +267,7 @@ _**Note**_: On Mac, use `export CF_OPERATOR_WEBHOOK_SERVICE_HOST=$(ip a s $(ip r
 1. Load image into KinD
 
     ```
-    kind load docker-image cfcontainerization/cf-operator:$DOCKER_IMAGE_TAG
+    kind load docker-image cfcontainerization/quarks-operator:$DOCKER_IMAGE_TAG
     ```
 
 1. Set QuarksJob dependency. Choose a tag from [docker.io](https://hub.docker.com/r/cfcontainerization/quarks-job/tags).
@@ -299,20 +299,20 @@ CI and automation should not use the make targets to avoid indirection and decla
 
 | Name            | Action                                                                               |
 | --------------- | ------------------------------------------------------------------------------------ |
-| `all`           | install dependencies, run tests and builds `cf-operator` binary.                     |
+| `all`           | install dependencies, run tests and builds `quarks-operator` binary.                     |
 | `up`            | starts the operator using the binary created by `build` make target.                 |
 | `vet`           | runs the code analyzing tool `vet` to identify problems in the source code.          |
 | `lint`          | runs `go lint`to identify style mistakes.                                            |
-| `tools`         | installs go dependencies required to `cf-operator`.                                  |
+| `tools`         | installs go dependencies required to `quarks-operator`.                                  |
 | `check-scripts` | runs `shellcheck` to identify syntax, semmantic and subtle caveats in shell scripts. |
 
 ### Build Targets
 
 | Name          | Action                                  |
 | ------------- | --------------------------------------- |
-| `build`       | builds the `cf-operator` binary.        |
-| `build-image` | builds the `cf-operator` docker image.  |
-| `build-helm`  | builds the `cf-operator` helm tar file. |
+| `build`       | builds the `quarks-operator` binary.        |
+| `build-image` | builds the `quarks-operator` docker image.  |
+| `build-helm`  | builds the `quarks-operator` helm tar file. |
 
 ### Test Targets
 
@@ -338,4 +338,4 @@ CI and automation should not use the make targets to avoid indirection and decla
 
 ## CI
 
-Our Concourse pipeline definitions are kept in the [cf-operator-ci](https://github.com/cloudfoundry-incubator/cf-operator-ci) repo.
+Our Concourse pipeline definitions are kept in the [quarks-ci](https://github.com/cloudfoundry-incubator/quarks-ci) repo.

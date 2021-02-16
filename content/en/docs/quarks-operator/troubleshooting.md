@@ -92,7 +92,7 @@ There might be various reasons why this could happen, here are few suggestions:
 
 ### Cluster CA
 
-The `cf-operator` assumes that the cluster root CA is also used for signing CSRs via the certificates.k8s.io API and will embed this CA in the generated certificate secrets. If your cluster is set up to use a different cluster-signing CA the generated certificates will have the wrong CA embedded. See https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/ for more information on cluster trust.
+The `quarks-operator` assumes that the cluster root CA is also used for signing CSRs via the certificates.k8s.io API and will embed this CA in the generated certificate secrets. If your cluster is set up to use a different cluster-signing CA the generated certificates will have the wrong CA embedded. See https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/ for more information on cluster trust.
 
 ### Recovering from a crash
 
@@ -100,10 +100,10 @@ If the operator pod crashes from unrecoverable errors, it cannot be restarted in
 The operator uses mutating webhooks to modify pods on the fly and Kubernetes fails to create pods if the webhook server is unreachable.
 The webhook configurations are installed cluster wide and don't belong to a single namespace, just like custom resources.
 
-To remove the webhook configurations for the cf-operator namespace run:
+To remove the webhook configurations for the quarks-operator namespace run:
 
 ```bash
-CF_OPERATOR_NAMESPACE=cf-operator
+CF_OPERATOR_NAMESPACE=quarks-operator
 kubectl delete mutatingwebhookconfiguration "cf-operator-hook-$CF_OPERATOR_NAMESPACE"
 kubectl delete validatingwebhookconfiguration "cf-operator-hook-$CF_OPERATOR_NAMESPACE"
 ```

@@ -15,11 +15,11 @@ and uses these overviews as the launching points to other documents
 which go deeper into the details of each aspect.
 {{% /pageinfo %}}
 
-# Contributing to CF-Operator
+# Contributing to Quarks Operator
 
 First, thanks for taking the time to contribute to the project!
 
-The following is a set of guidelines for contributing to CF-Operator.
+The following is a set of guidelines for contributing to Quarks Operator.
 Use your best judgment, and feel free to propose changes to this document in a pull
 request.
 
@@ -41,12 +41,12 @@ with the core team. We believe it's the right place to have an open conversation
 ### Pull Request
 
 Pull Requests are the most well-known way to contribute to any project and they are more than welcome
-in the CF-Operator project.
+in the Quarks Operator project.
 Commit messages must be clear and concise to help the reviewer understand what the PR is doing.
 
 ## Issues tracker
 
-The CF-Operator workload is tracked [here](https://www.pivotaltracker.com/n/projects/2192232).
+The Quarks Operator workload is tracked [here](https://www.pivotaltracker.com/n/projects/2192232).
 All Github issues are synced with this tracker, so all community issues (either bugs or features) should go to Github.
 
 We want short and accurate templates for different types of issues, to gather required information and to start a conversation.
@@ -60,7 +60,7 @@ template as accurately as possible.
 
 ### How to suggest a feature/enhancement
 
-If you find yourself wishing for a feature/enhancement that doesn'y exist yet in CF-Operator, start
+If you find yourself wishing for a feature/enhancement that doesn'y exist yet in Quarks Operator, start
 by running a quick [search][2] - you may not be alone! If you're out of luck, then go ahead and open a
 new issue by selecting the "Feature" issue type and answer some needed questions.
 
@@ -97,7 +97,7 @@ Please refer to [Code of Conduct](https://www.cloudfoundry.org/code-of-conduct/)
 
 ## Links
 
-- [Bugs](https://github.com/cloudfoundry-incubator/cf-operator/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
-- [Features](https://github.com/cloudfoundry-incubator/cf-operator/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement)
-- [Readme](https://github.com/cloudfoundry-incubator/cf-operator#cf-operator)
+- [Bugs](https://github.com/cloudfoundry-incubator/quarks-operator/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
+- [Features](https://github.com/cloudfoundry-incubator/quarks-operator/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement)
+- [Readme](https://github.com/cloudfoundry-incubator/quarks-operator)
 

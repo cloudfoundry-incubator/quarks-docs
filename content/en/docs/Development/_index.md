@@ -27,7 +27,7 @@ Kubernetes allows developers to extend the objects its APIs process and store us
 - QuarksSecret
 - QuarksStatefulSet
 
-The CRDs are also defined in code and applied automatically when cf-operator starts. If you are editing CRDs, you should update changes to this YAML files in sync.
+The CRDs are also defined in code and applied automatically when quarks-operator starts. If you are editing CRDs, you should update changes to this YAML files in sync.
 
 ## Creating a new Resource and Controller
 
@@ -236,12 +236,12 @@ Calling `WarningEvent` just creates a warning event, without logging.
 
 ## Standalone Components
 
-The cf-operator uses quarks-job as an external component.
+The quarks-operator uses quarks-job as an external component.
 The quarks-job operator is run in a separate process.
 
 When using jobs that capture output, quarks-job needs to know its docker image, to run the `persist-output` command in a container.
 
-### References in cf-operator
+### References in quarks-operator
 
 References to quarks job:
 
@@ -288,7 +288,7 @@ rm -fr vendor
 To use a local docker image export `QUARKS_JOB_IMAGE_TAG` and make sure the image is available to the cluster, e.g. for kind:
 
 ```
-kind load docker-image cfcontainerization/cf-operator:$DOCKER_IMAGE_TAG
+kind load docker-image cfcontainerization/quarks-operator:$DOCKER_IMAGE_TAG
 kind load docker-image cfcontainerization/quarks-job:$QUARKS_JOB_IMAGE_TAG
 ```
 
@@ -297,7 +297,7 @@ kind load docker-image cfcontainerization/quarks-job:$QUARKS_JOB_IMAGE_TAG
 To use a local docker image export `QUARKS_JOB_IMAGE_TAG` and make sure the image is available to the cluster, e.g. for kind:
 
 ```
-docker tag <cf-operator-tag> cfcontainerization/cf-operator:$DOCKER_IMAGE_TAG
+docker tag <quarks-operator-tag> cfcontainerization/quarks-operator:$DOCKER_IMAGE_TAG
 docker tag <quarks-job-tag> cfcontainerization/quarks-job:$QUARKS_JOB_IMAGE_TAG
 ```
 
@@ -305,9 +305,9 @@ docker tag <quarks-job-tag> cfcontainerization/quarks-job:$QUARKS_JOB_IMAGE_TAG
 
 * In PR reviews, make sure only reviewed branches of dependencies are used.
 * If several PRs across repos belong together, be careful to merge them together and in order, so that the master branches stay compatible if one of the merges fails.
-* Make sure that the cf-operator repo PR has updated value of quarks image tag or version at these places
-  * [Dependency File](https://github.com/cloudfoundry-incubator/cf-operator/blob/master/bin/include/dependencies#L3)
-  * [Go mod file](https://github.com/cloudfoundry-incubator/cf-operator/blob/master/go.mod)
+* Make sure that the quarks-operator repo PR has updated value of quarks image tag or version at these places
+  * [Dependency File](https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/bin/include/dependencies#L3)
+  * [Go mod file](https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/go.mod)
 
 ## Versioning
 
@@ -322,9 +322,9 @@ Copy the [grc](https://github.com/garabik/grc) (generic colouriser grcat) config
 cp docs/zap.grc.conf /usr/share/grc/conf.zap
 
 # running operator
-kubectl get pods -A -l name=cf-operator --no-headers=true | tail -1 | read namespace name _
+kubectl get pods -A -l name=quarks-operator --no-headers=true | tail -1 | read namespace name _
 kubectl logs -f -n "$namespace" "$name" | grcat conf.zap
 
 # integration tests example
-grcat conf.zap < /tmp/cf-operator-tests.log
+grcat conf.zap < /tmp/quarks-operator-tests.log
 ```

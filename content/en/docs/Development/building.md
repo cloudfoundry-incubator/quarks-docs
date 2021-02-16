@@ -28,7 +28,7 @@ Follow this steps to build a proper docker image and generate a deployable helm 
     bin/tools
     ```
 
-2. Build the cf-operator binary, this will be embedded later on the docker image
+2. Build the quarks-operator binary, this will be embedded later on the docker image
 
     ```bash
     bin/build
@@ -56,17 +56,7 @@ Follow this steps to build a proper docker image and generate a deployable helm 
 5. Install the helm chart(apply Kubernetes Custom Resources)
 
     ```bash
-    helm install cf-operator-test helm/cf-operator
+    helm install cf-operator-test helm/quarks-operator
     ```
 
-    _**Note**_: The cf-operator will be available under the namespace set in the context, usually `default`, running as a pod.
-
-## Notes
-
-### Local Development with Minikube and Havener
-
-Make sure you have [havener](https://github.com/homeport/havener) install.
-
-```bash
-havener deploy --config dev-env-havener.yaml
-```
+    _**Note**_: The quarks-operator will be available under the namespace set in the context, usually `default`, running as a pod.
