@@ -56,7 +56,7 @@ The Quarks Operator was previously known as &lt;code&gt;cf-operator&lt;/code&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Build the cf-operator binary, this will be embedded later on the docker image&lt;/p&gt;
+&lt;p&gt;Build the quarks-operator binary, this will be embedded later on the docker image&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
@@ -99,24 +99,13 @@ directly on minikube docker.&lt;/p&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install cf-operator-test helm/cf-operator
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install cf-operator-test helm/quarks-operator
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: The cf-operator will be available under the namespace set in the context, usually &lt;code&gt;default&lt;/code&gt;, running as a pod.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: The quarks-operator will be available under the namespace set in the context, usually &lt;code&gt;default&lt;/code&gt;, running as a pod.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
-&lt;h3 id=&#34;local-development-with-minikube-and-havener&#34;&gt;Local Development with Minikube and Havener&lt;/h3&gt;
-&lt;p&gt;Make sure you have &lt;a href=&#34;https://github.com/homeport/havener&#34;&gt;havener&lt;/a&gt; install.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;havener deploy --config dev-env-havener.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+
       </description>
     </item>
     
@@ -178,7 +167,7 @@ Each Ginkgo test node has a separate namespace, log file and webhook server port
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;namespace: &lt;span style=&#34;color:#40ffff&#34;&gt;$TEST_NAMESPACE&lt;/span&gt; + &amp;lt;node_index&amp;gt;
 webhook port: &lt;span style=&#34;color:#40ffff&#34;&gt;$CF_OPERATOR_WEBHOOK_SERVICE_PORT&lt;/span&gt; + &amp;lt;node_index&amp;gt;
-log file: &lt;span style=&#34;color:#40ffff&#34;&gt;$CF_OPERATOR_TESTING_TMP&lt;/span&gt;/cf-operator-tests-&amp;lt;node_index&amp;gt;.log
+log file: &lt;span style=&#34;color:#40ffff&#34;&gt;$CF_OPERATOR_TESTING_TMP&lt;/span&gt;/quarks-operator-tests-&amp;lt;node_index&amp;gt;.log
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Integration tests use the &lt;code&gt;TEST_NAMESPACE&lt;/code&gt; environment variable as a base to
@@ -196,10 +185,10 @@ is set to &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Quarks StatefulSet requires a k8s webhook to mutate the volumes of a pod.
 Kubernetes will call back to the operator for certain requests and use the
 modified pod manifest, which is returned.
-CF-Operator also uses a validating webhook to validate the BOSH deployment spec and the creation
+Quarks Operator also uses a validating webhook to validate the BOSH deployment spec and the creation
 of reference resources specified in the spec. Secret validation admission webhook restricts the
 user from updating a versioned secret.&lt;/p&gt;
-&lt;p&gt;The cf-operator integration tests use &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_PORT&lt;/code&gt; as a
+&lt;p&gt;The quarks-operator integration tests use &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_PORT&lt;/code&gt; as a
 base value to calculate the port number to listen to on &lt;code&gt;CF_OPERATOR_WEBHOOK_SERVICE_HOST&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;The tests use a &lt;code&gt;mutatingwebhookconfiguration&lt;/code&gt; and a &lt;code&gt;validatingwebhookconfiguration&lt;/code&gt; to configure Kubernetes to
 connect to this address. The address needs to be reachable from the cluster.&lt;/p&gt;
@@ -351,7 +340,7 @@ Kubernetes cluster.&lt;/p&gt;
 &lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: When you have a vendor folder (either from the submodule or manually created) settings this to &lt;code&gt;off&lt;/code&gt; speeds up the &lt;code&gt;build-image&lt;/code&gt; target.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Build the &lt;code&gt;cf-operator&lt;/code&gt; binary&lt;/p&gt;
+&lt;p&gt;Build the &lt;code&gt;quarks-operator&lt;/code&gt; binary&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
@@ -362,7 +351,7 @@ Kubernetes cluster.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Build the &lt;code&gt;cf-operator&lt;/code&gt; docker image&lt;/p&gt;
+&lt;p&gt;Build the &lt;code&gt;quarks-operator&lt;/code&gt; docker image&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
@@ -373,9 +362,9 @@ Kubernetes cluster.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Consider setting &lt;code&gt;DOCKER_IMAGE_TAG&lt;/code&gt; to a fixed variable. This will avoid rebuilding the docker image everytime, when doing changes in files not related to the &lt;code&gt;cf-operator&lt;/code&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Consider setting &lt;code&gt;DOCKER_IMAGE_TAG&lt;/code&gt; to a fixed variable. This will avoid rebuilding the docker image everytime, when doing changes in files not related to the &lt;code&gt;quarks-operator&lt;/code&gt;
 binary.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: When not running in CI, nothing ensures a proper cleanup of resources after the deletion of the &lt;code&gt;cf-operator&lt;/code&gt; in the environment. You can make sure to manually verify that none
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: When not running in CI, nothing ensures a proper cleanup of resources after the deletion of the &lt;code&gt;quarks-operator&lt;/code&gt; in the environment. You can make sure to manually verify that none
 old resources will interfere with a future installation, by:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
@@ -432,7 +421,7 @@ kubectl get mutatingwebhookconfiguration -oname | xargs -n &lt;span style=&#34;c
 &lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Required for the PVC tests.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Build the &lt;code&gt;cf-operator&lt;/code&gt; docker image&lt;/p&gt;
+&lt;p&gt;Build the &lt;code&gt;quarks-operator&lt;/code&gt; docker image&lt;/p&gt;
 &lt;p&gt;First set the version to something static, not dependant on git:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
@@ -455,7 +444,7 @@ follow the instructions from &lt;a href=&#34;../../development#standalone-compon
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Load image into KinD&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;kind load docker-image cfcontainerization/cf-operator:$DOCKER_IMAGE_TAG
+&lt;pre&gt;&lt;code&gt;kind load docker-image cfcontainerization/quarks-operator:$DOCKER_IMAGE_TAG
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Set QuarksJob dependency. Choose a tag from &lt;a href=&#34;https://hub.docker.com/r/cfcontainerization/quarks-job/tags&#34;&gt;docker.io&lt;/a&gt;.&lt;/p&gt;
@@ -483,7 +472,7 @@ CI and automation should not use the make targets to avoid indirection and decla
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;all&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;install dependencies, run tests and builds &lt;code&gt;cf-operator&lt;/code&gt; binary.&lt;/td&gt;
+&lt;td&gt;install dependencies, run tests and builds &lt;code&gt;quarks-operator&lt;/code&gt; binary.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;up&lt;/code&gt;&lt;/td&gt;
@@ -499,7 +488,7 @@ CI and automation should not use the make targets to avoid indirection and decla
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;tools&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;installs go dependencies required to &lt;code&gt;cf-operator&lt;/code&gt;.&lt;/td&gt;
+&lt;td&gt;installs go dependencies required to &lt;code&gt;quarks-operator&lt;/code&gt;.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;check-scripts&lt;/code&gt;&lt;/td&gt;
@@ -518,15 +507,15 @@ CI and automation should not use the make targets to avoid indirection and decla
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;build&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;builds the &lt;code&gt;cf-operator&lt;/code&gt; binary.&lt;/td&gt;
+&lt;td&gt;builds the &lt;code&gt;quarks-operator&lt;/code&gt; binary.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;build-image&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;builds the &lt;code&gt;cf-operator&lt;/code&gt; docker image.&lt;/td&gt;
+&lt;td&gt;builds the &lt;code&gt;quarks-operator&lt;/code&gt; docker image.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;build-helm&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;builds the &lt;code&gt;cf-operator&lt;/code&gt; helm tar file.&lt;/td&gt;
+&lt;td&gt;builds the &lt;code&gt;quarks-operator&lt;/code&gt; helm tar file.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -601,7 +590,7 @@ CI and automation should not use the make targets to avoid indirection and decla
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id=&#34;ci&#34;&gt;CI&lt;/h2&gt;
-&lt;p&gt;Our Concourse pipeline definitions are kept in the &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator-ci&#34;&gt;cf-operator-ci&lt;/a&gt; repo.&lt;/p&gt;
+&lt;p&gt;Our Concourse pipeline definitions are kept in the &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-ci&#34;&gt;quarks-ci&lt;/a&gt; repo.&lt;/p&gt;
 
       </description>
     </item>

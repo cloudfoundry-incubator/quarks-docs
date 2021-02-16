@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/development/building/" />
-<meta property="article:modified_time" content="2020-11-25T13:09:02+01:00" /><meta property="og:site_name" content="Quarks Project" />
+<meta property="article:modified_time" content="2021-02-16T17:15:24+01:00" /><meta property="og:site_name" content="Quarks Project" />
 <meta itemprop="name" content="Build">
 <meta itemprop="description" content="Build Quarks-operator from source
 ">
-<meta itemprop="dateModified" content="2020-11-25T13:09:02+01:00" />
-<meta itemprop="wordCount" content="227">
+<meta itemprop="dateModified" content="2021-02-16T17:15:24+01:00" />
+<meta itemprop="wordCount" content="209">
 
 
 
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d41adffe5881821fba4709355b48af3e6993fd24f3c6bc881ffd89b727c8450ad21b2d12addd2151f3094285a83e47efee77c04747fed293fe678b6fb6991b6a.json"
+  data-offline-search-index-json-src="/offline-search-index.1b8a6804192ea940ee00abef2634d4c1496793f760ab99a92da60bc01d9d46a1d727a3964ba2e468d7ee79d7319d3d5fe99c54192c4b4907f3080b600d8dc83e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -158,7 +158,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d41adffe5881821fba4709355b48af3e6993fd24f3c6bc881ffd89b727c8450ad21b2d12addd2151f3094285a83e47efee77c04747fed293fe678b6fb6991b6a.json"
+  data-offline-search-index-json-src="/offline-search-index.1b8a6804192ea940ee00abef2634d4c1496793f760ab99a92da60bc01d9d46a1d727a3964ba2e468d7ee79d7319d3d5fe99c54192c4b4907f3080b600d8dc83e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -829,17 +829,6 @@
 
 
 
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#build-it-from-source">Build it from source</a></li>
-    <li><a href="#notes">Notes</a>
-      <ul>
-        <li><a href="#local-development-with-minikube-and-havener">Local Development with Minikube and Havener</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-
 
 
           </div>
@@ -920,7 +909,7 @@ The Quarks Operator was previously known as <code>cf-operator</code>. We are ren
 </div>
 </div></li>
 <li>
-<p>Build the cf-operator binary, this will be embedded later on the docker image</p>
+<p>Build the quarks-operator binary, this will be embedded later on the docker image</p>
 <div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
@@ -963,27 +952,16 @@ directly on minikube docker.</p>
 <pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install cf-operator-test helm/cf-operator
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install cf-operator-test helm/quarks-operator
 </code></pre></td></tr></table>
 </div>
-</div><p><em><strong>Note</strong></em>: The cf-operator will be available under the namespace set in the context, usually <code>default</code>, running as a pod.</p>
+</div><p><em><strong>Note</strong></em>: The quarks-operator will be available under the namespace set in the context, usually <code>default</code>, running as a pod.</p>
 </li>
 </ol>
-<h2 id="notes">Notes</h2>
-<h3 id="local-development-with-minikube-and-havener">Local Development with Minikube and Havener</h3>
-<p>Make sure you have <a href="https://github.com/homeport/havener">havener</a> install.</p>
-<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">havener deploy --config dev-env-havener.yaml
-</code></pre></td></tr></table>
-</div>
-</div>
+
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified November 25, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/0a3d78a7e1cc6d1301ff2bda3c119bd55d0499ab">Merge pull request #28 from cloudfoundry-incubator/rohit/coredns-sa-175660052 (0a3d78a)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified February 16, 2021: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/c5a97ebd34219e97af237d3bcf00f862877ff367">Merge pull request #20 from cloudfoundry-incubator/rename-quarks-operator-174254515 (c5a97eb)</a>
 </div>
 </div>
 
@@ -1024,7 +1002,7 @@ directly on minikube docker.</p>
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2020 CloudFoundry.org Foundation, Inc. All Rights Reserved. All Rights Reserved</small>
+        <small class="text-white">&copy; 2021 CloudFoundry.org Foundation, Inc. All Rights Reserved. All Rights Reserved</small>
         
 	
       </div>

@@ -95,8 +95,8 @@
         
         
         &lt;p&gt;The &lt;code&gt;quarks-operator&lt;/code&gt; can be installed via &lt;code&gt;helm&lt;/code&gt;. You can use our &lt;a href=&#34;https://cloudfoundry-incubator.github.io/quarks-helm/&#34;&gt;helm repository&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;See the &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/releases&#34;&gt;releases page&lt;/a&gt; for up-to-date instructions on how to install the operator.&lt;/p&gt;
-&lt;p&gt;For more information about the &lt;code&gt;quarks-operator&lt;/code&gt; helm chart and how to configure it, please refer to the helm repository &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/deploy/helm/cf-operator&#34;&gt;README.md&lt;/a&gt;. A short summary of the installation steps is presented below.&lt;/p&gt;
+&lt;p&gt;See the &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/releases&#34;&gt;releases page&lt;/a&gt; for up-to-date instructions on how to install the operator.&lt;/p&gt;
+&lt;p&gt;For more information about the &lt;code&gt;quarks-operator&lt;/code&gt; helm chart and how to configure it, please refer to the helm repository &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/deploy/helm/quarks-operator&#34;&gt;README.md&lt;/a&gt;. A short summary of the installation steps is presented below.&lt;/p&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Kubernetes cluster&lt;/li&gt;
@@ -127,11 +127,11 @@
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install cf-operator quarks/cf-operator --namespace cf-operator
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install cf-operator quarks/quarks-operator --namespace cf-operator
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;The operator will watch for BOSH deployments in separate namespaces, not the one it has been deployed to. By default, it creates a namespace &lt;code&gt;staging&lt;/code&gt; and starts watching it.&lt;/p&gt;
-&lt;p&gt;A complete list of the chart settings is available &lt;a href=&#34;https://hub.helm.sh/charts/quarks/cf-operator&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A complete list of the chart settings is available &lt;a href=&#34;https://hub.helm.sh/charts/quarks/quarks-operator&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;multiple-namespaces&#34;&gt;Multiple namespaces&lt;/h3&gt;
 &lt;p&gt;The quarks-operator watches namespaces labeled with &lt;code&gt;quarks.cloudfoundry.org/monitored=ID&lt;/code&gt;. The &lt;code&gt;ID&lt;/code&gt; has to be specified with helm settings during install (&lt;code&gt;--set &amp;quot;global.monitoredID=ID&amp;quot;&lt;/code&gt;).
 The helm value setting &lt;code&gt;global.singleNamespace.name=&lt;/code&gt; allows to automatically create a namespace which is being watched by the quarks-operator.&lt;/p&gt;
@@ -146,7 +146,7 @@ The helm value setting &lt;code&gt;global.singleNamespace.name=&lt;/code&gt; all
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install relname1 quarks/cf-operator &lt;span style=&#34;color:#ed9d13&#34;&gt;\
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install relname1 quarks/quarks-operator &lt;span style=&#34;color:#ed9d13&#34;&gt;\
 &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&lt;/span&gt;  --namespace namespace1
   --set &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;global.singleNamespace.name=staging1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;\
 &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;global.monitoredID=id1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;\
@@ -162,7 +162,7 @@ The helm value setting &lt;code&gt;global.singleNamespace.name=&lt;/code&gt; all
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install relname1 quarks/cf-operator &lt;span style=&#34;color:#ed9d13&#34;&gt;\
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install relname1 quarks/quarks-operator &lt;span style=&#34;color:#ed9d13&#34;&gt;\
 &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;global.singleNamespace.create=false&amp;#34;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
@@ -184,7 +184,7 @@ The helm value setting &lt;code&gt;global.singleNamespace.name=&lt;/code&gt; all
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm show readme quarks/cf-operator
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm show readme quarks/quarks-operator
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;what-next&#34;&gt;What next?&lt;/h2&gt;
@@ -197,14 +197,14 @@ The helm value setting &lt;code&gt;global.singleNamespace.name=&lt;/code&gt; all
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl -n staging apply -f https://raw.githubusercontent.com/cloudfoundry-incubator/quarks-operator/master/docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;The above will spawn two pods in your &lt;code&gt;cf-operator&lt;/code&gt; namespace (which needs to be created upfront), running the BOSH nats release.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;The above will spawn two pods in your &lt;code&gt;quarks-operator&lt;/code&gt; namespace (which needs to be created upfront), running the BOSH nats release.&lt;/p&gt;
 &lt;p&gt;You can access the &lt;code&gt;quarks-operator&lt;/code&gt; logs by following the operator pod&amp;rsquo;s output:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl logs -f -n cf-operator cf-operator
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl logs -f -n cf-operator quarks-operator
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Or look at the k8s event log:&lt;/p&gt;
@@ -225,8 +225,8 @@ The helm value setting &lt;code&gt;global.singleNamespace.name=&lt;/code&gt; all
 &lt;p&gt;Besides that there are more things the user can change which will trigger an update of the deployment:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;ops files&lt;/code&gt; can be added or removed from the &lt;code&gt;BOSH deployment&lt;/code&gt;. Existing &lt;code&gt;ops file&lt;/code&gt; config maps and secrets can be modified&lt;/li&gt;
-&lt;li&gt;generated secrets for &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/blob/master/docs/from_bosh_to_kube.md#variables-to-quarks-secrets&#34;&gt;explicit variables&lt;/a&gt; can be modified&lt;/li&gt;
-&lt;li&gt;secrets for &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/blob/master/docs/from_bosh_to_kube.md#manual-implicit-variables&#34;&gt;implicit variables&lt;/a&gt; have to be created by the user beforehand anyway, but can also be changed after the initial deployment&lt;/li&gt;
+&lt;li&gt;generated secrets for &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/from_bosh_to_kube.md#variables-to-quarks-secrets&#34;&gt;explicit variables&lt;/a&gt; can be modified&lt;/li&gt;
+&lt;li&gt;secrets for &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/from_bosh_to_kube.md#manual-implicit-variables&#34;&gt;implicit variables&lt;/a&gt; have to be created by the user beforehand anyway, but can also be changed after the initial deployment&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>
@@ -377,12 +377,12 @@ To do so, you have to specify &lt;code&gt;quarks.debug=true&lt;/code&gt; to the 
 &lt;li&gt;Check if your pod is depending on a secret which isn&amp;rsquo;t being generated yet. If the secret is generated by a &lt;code&gt;QuarksSecret&lt;/code&gt;, check the events related to the &lt;code&gt;QuarksSecret&lt;/code&gt; which should generate it (with &lt;code&gt;kubectl describe ...&lt;/code&gt;, or &lt;code&gt;kubectl events&lt;/code&gt;).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;cluster-ca&#34;&gt;Cluster CA&lt;/h3&gt;
-&lt;p&gt;The &lt;code&gt;cf-operator&lt;/code&gt; assumes that the cluster root CA is also used for signing CSRs via the certificates.k8s.io API and will embed this CA in the generated certificate secrets. If your cluster is set up to use a different cluster-signing CA the generated certificates will have the wrong CA embedded. See &lt;a href=&#34;https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/&#34;&gt;https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/&lt;/a&gt; for more information on cluster trust.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;quarks-operator&lt;/code&gt; assumes that the cluster root CA is also used for signing CSRs via the certificates.k8s.io API and will embed this CA in the generated certificate secrets. If your cluster is set up to use a different cluster-signing CA the generated certificates will have the wrong CA embedded. See &lt;a href=&#34;https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/&#34;&gt;https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/&lt;/a&gt; for more information on cluster trust.&lt;/p&gt;
 &lt;h3 id=&#34;recovering-from-a-crash&#34;&gt;Recovering from a crash&lt;/h3&gt;
 &lt;p&gt;If the operator pod crashes from unrecoverable errors, it cannot be restarted in the same namespace before the existing mutating webhook configuration for that namespace is removed.
 The operator uses mutating webhooks to modify pods on the fly and Kubernetes fails to create pods if the webhook server is unreachable.
 The webhook configurations are installed cluster wide and don&amp;rsquo;t belong to a single namespace, just like custom resources.&lt;/p&gt;
-&lt;p&gt;To remove the webhook configurations for the cf-operator namespace run:&lt;/p&gt;
+&lt;p&gt;To remove the webhook configurations for the quarks-operator namespace run:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
@@ -390,7 +390,7 @@ The webhook configurations are installed cluster wide and don&amp;rsquo;t belong
 &lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;CF_OPERATOR_NAMESPACE&lt;/span&gt;=cf-operator
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;CF_OPERATOR_NAMESPACE&lt;/span&gt;=quarks-operator
 kubectl delete mutatingwebhookconfiguration &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;cf-operator-hook-&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;$CF_OPERATOR_NAMESPACE&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&lt;/span&gt;
 kubectl delete validatingwebhookconfiguration &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;cf-operator-hook-&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;$CF_OPERATOR_NAMESPACE&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;

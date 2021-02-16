@@ -86,7 +86,7 @@ The operator watches all the &lt;code&gt;ConfigMaps&lt;/code&gt; and &lt;code&gt
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;targetPort&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#3677a9&#34;&gt;4222&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Complete example can be found &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment/boshdeployment-with-service.yaml&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;Complete example can be found &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/bosh-deployment/boshdeployment-with-service.yaml&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Though, by default, quarks creates three services of type &lt;strong&gt;ClusterIP&lt;/strong&gt; as defined &lt;a href=&#34;../../quarks-operator/concepts/from_bosh_to_kube/#naming-conventions&#34;&gt;here&lt;/a&gt; for any instance group.&lt;/p&gt;
 &lt;h4 id=&#34;load-balancer&#34;&gt;Load Balancer&lt;/h4&gt;
 &lt;p&gt;For creating a service type &lt;strong&gt;LoadBalancer&lt;/strong&gt;, we just need to change the &lt;code&gt;.spec.type&lt;/code&gt; to &lt;code&gt;LoadBalancer&lt;/code&gt; in the above example. The LoadBalancer Ingress is your public IP specified in the output of this command &lt;code&gt;kubectl describe service nats-service&lt;/code&gt;.&lt;/p&gt;
@@ -295,7 +295,7 @@ The default value for &lt;code&gt;zoneNodeLabel&lt;/code&gt; is &lt;code&gt;fail
 &lt;em&gt;Fig. 4: Relationship with the BPM controller&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Figure 4 illustrates the interaction of the &lt;strong&gt;BPM&lt;/strong&gt; Controller with the &lt;strong&gt;QuarksStatefulSet&lt;/strong&gt; Controller. Once the BPM controller consumes the data persisted in secrets from the &lt;code&gt;QuarksJob&lt;/code&gt; Component, it will use that data to generate new &lt;code&gt;QuarksStatefulset&lt;/code&gt; instances. When these resources are generated, the QuarksStatefulSet controller will be watching and trigger its reconciliation loop.&lt;/p&gt;
 &lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
-&lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-statefulset&#34;&gt;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-statefulset&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/quarks-statefulset&#34;&gt;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/quarks-statefulset&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>

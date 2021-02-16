@@ -25,11 +25,11 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/quarks-operator/development/controllers/bosh_deployment/" />
-<meta property="article:modified_time" content="2020-11-25T13:09:02+01:00" /><meta property="og:site_name" content="Quarks Project" />
+<meta property="article:modified_time" content="2021-02-16T17:15:24+01:00" /><meta property="og:site_name" content="Quarks Project" />
 <meta itemprop="name" content="BOSH Deployment">
 <meta itemprop="description" content="Deploying a BOSH deployment on Kubernetes
 ">
-<meta itemprop="dateModified" content="2020-11-25T13:09:02+01:00" />
+<meta itemprop="dateModified" content="2021-02-16T17:15:24+01:00" />
 <meta itemprop="wordCount" content="987">
 
 
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d41adffe5881821fba4709355b48af3e6993fd24f3c6bc881ffd89b727c8450ad21b2d12addd2151f3094285a83e47efee77c04747fed293fe678b6fb6991b6a.json"
+  data-offline-search-index-json-src="/offline-search-index.1b8a6804192ea940ee00abef2634d4c1496793f760ab99a92da60bc01d9d46a1d727a3964ba2e468d7ee79d7319d3d5fe99c54192c4b4907f3080b600d8dc83e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -158,7 +158,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d41adffe5881821fba4709355b48af3e6993fd24f3c6bc881ffd89b727c8450ad21b2d12addd2151f3094285a83e47efee77c04747fed293fe678b6fb6991b6a.json"
+  data-offline-search-index-json-src="/offline-search-index.1b8a6804192ea940ee00abef2634d4c1496793f760ab99a92da60bc01d9d46a1d727a3964ba2e468d7ee79d7319d3d5fe99c54192c4b4907f3080b600d8dc83e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -915,8 +915,8 @@
 <p>A BOSH deployment is created from a deployment manifest and optionally ops files.</p>
 <p>The deployment manifest is based on a vanilla BOSH deployment manifest.
 The ops files modify the deployment manifest. For example, ops files can be used to replace release tarballs with <a href="https://ci.flintstone.cf.cloud.ibm.com/teams/containerization/pipelines/release-images">docker images</a>, thus enabling deployment on Kubernetes.</p>
-<p>A deployment is represented by the <code>boshdeployments.quarks.cloudfoundry.org</code> (<code>bdpl</code>) custom resource, defined in <a href="https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/crds/quarks_v1alpha1_boshdeployment_crd.yaml"><code>boshdeployment_crd.yaml</code></a>.
-This <a href="https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment/boshdeployment.yaml">bdpl custom resource</a> contains references to config maps or secrets containing the actual manifests content.</p>
+<p>A deployment is represented by the <code>boshdeployments.quarks.cloudfoundry.org</code> (<code>bdpl</code>) custom resource, defined in <a href="https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds/quarks_v1alpha1_boshdeployment_crd.yaml"><code>boshdeployment_crd.yaml</code></a>.
+This <a href="https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/bosh-deployment/boshdeployment.yaml">bdpl custom resource</a> contains references to config maps or secrets containing the actual manifests content.</p>
 <p>The name of the <code>bdpl</code> resource is the <a href="https://bosh.io/docs/manifest-v2/#deployment">deployment name</a>. The name in the BOSH manifest is ignored.</p>
 <p>After creating the <code>bdpl</code> resource on Kubernetes, i.e. via <code>kubectl apply</code>, the CF operator will start reconciliation, which will eventually result in the deployment
 of the BOSH release on Kubernetes.</p>
@@ -925,7 +925,7 @@ of the BOSH release on Kubernetes.</p>
 <p>Figure 1 is a <strong>BDPL</strong> component diagram that covers the set of controllers it uses and their relationship with other components(e.g. <code>QuarksJob</code>, <code>QuarksSecret</code> and <code>QuarksStatefulSet</code>)</p>
 <p><img src="../quarks_bdplcomponent_flow.png" alt="bdpl-component-flow">
 <em>Fig. 1: The BOSHDeployment component</em></p>
-<p>Figure 1 illustrates a couple of things. Firstly, at the very top, we have the <code>cf-operator</code> , which is a long running application with a namespaced scope. When the <code>cf-operator</code> pod is initialized it will automatically register all controllers with the <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/">Kubernetes Controller Manager</a>.</p>
+<p>Figure 1 illustrates a couple of things. Firstly, at the very top, we have the <code>quarks-operator</code> , which is a long running application with a namespaced scope. When the <code>quarks-operator</code> pod is initialized it will automatically register all controllers with the <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/">Kubernetes Controller Manager</a>.</p>
 <p>While at a first glance the above diagram looks complex, it can be explained easily by focusing on each controller´s main functions: <code>Reconciliation &amp; Watch</code>.</p>
 <h3 id="_boshdeployment-controller_"><strong><em>BOSHDeployment Controller</em></strong></h3>
 <p><img src="../quarks_bdplcontroller_flow.png" alt="bdpl-controller-flow">
@@ -953,8 +953,8 @@ of the BOSH release on Kubernetes.</p>
 </ul>
 <p>All of the three created <em>QuarksJob</em> instances will eventually persist their STDOUT into new secrets under the same namespace.</p>
 <ul>
-<li>The output of the <a href="https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/commands/cf-operator_util_variable-interpolation.md"><code>variable interpolation</code></a> <strong>QuarksJob</strong> ends up as the <code>.desired-manifest-v1</code> <strong>secret</strong>, which is a versioned secret. At the same time this secret serves as the input for the <code>data gathering</code> <strong>QuarksJob</strong>.</li>
-<li>The output of the <a href="https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/commands/cf-operator_util_instance-group.md"><code>data gathering</code></a> <strong>QuarksJob</strong>, ends up
+<li>The output of the <a href="https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/commands/quarks-operator_util_variable-interpolation.md"><code>variable interpolation</code></a> <strong>QuarksJob</strong> ends up as the <code>.desired-manifest-v1</code> <strong>secret</strong>, which is a versioned secret. At the same time this secret serves as the input for the <code>data gathering</code> <strong>QuarksJob</strong>.</li>
+<li>The output of the <a href="https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/commands/quarks-operator_util_instance-group.md"><code>data gathering</code></a> <strong>QuarksJob</strong>, ends up
 as the <code>.ig-resolved.&lt;instance_group_name&gt;-v1</code> versioned secret.</li>
 <li>The output of the <code>BPM configuration</code> <strong>QuarksJob</strong>, ends up as the <code>bpm.&lt;instance_group_name&gt;-v1</code> versioned secret.</li>
 </ul>
@@ -1052,7 +1052,7 @@ The controller annotates the instance groups and the jobs counters and it resolv
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified November 25, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/0a3d78a7e1cc6d1301ff2bda3c119bd55d0499ab">Merge pull request #28 from cloudfoundry-incubator/rohit/coredns-sa-175660052 (0a3d78a)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified February 16, 2021: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/c5a97ebd34219e97af237d3bcf00f862877ff367">Merge pull request #20 from cloudfoundry-incubator/rename-quarks-operator-174254515 (c5a97eb)</a>
 </div>
 </div>
 
@@ -1093,7 +1093,7 @@ The controller annotates the instance groups and the jobs counters and it resolv
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2020 CloudFoundry.org Foundation, Inc. All Rights Reserved. All Rights Reserved</small>
+        <small class="text-white">&copy; 2021 CloudFoundry.org Foundation, Inc. All Rights Reserved. All Rights Reserved</small>
         
 	
       </div>

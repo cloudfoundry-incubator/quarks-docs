@@ -48,7 +48,7 @@ Within those pipelines, releases can be built from minor versions.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;helm chart on S3&lt;/li&gt;
 &lt;li&gt;helm chart in our repo at &lt;a href=&#34;https://cloudfoundry-incubator.github.io/quarks-helm/&#34;&gt;https://cloudfoundry-incubator.github.io/quarks-helm/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;cf-operator binary on S3&lt;/li&gt;
+&lt;li&gt;quarks-operator binary on S3&lt;/li&gt;
 &lt;li&gt;docker image of the operator on dockerhub&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Running the &amp;lsquo;release&amp;rsquo; job will take the latest artificats, which passed through the pipeline and add them to the Github release:&lt;/p&gt;
@@ -107,7 +107,7 @@ Release docs are pushed to Cloudfoundry via Github Actions, as defined in the br
 &lt;li&gt;&lt;a href=&#34;../../../quarks-secret/development&#34;&gt;QuarksSecret&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;../../../quarks-statefulset/development&#34;&gt;QuarksStatefulSet&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The &lt;code&gt;cf-operator&lt;/code&gt; requires the according CRDs to be installed in the cluster in order to work as expected. By default, the &lt;code&gt;cf-operator&lt;/code&gt; applies CRDs in your cluster automatically.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;quarks-operator&lt;/code&gt; requires the according CRDs to be installed in the cluster in order to work as expected. By default, the &lt;code&gt;quarks-operator&lt;/code&gt; applies CRDs in your cluster automatically.&lt;/p&gt;
 &lt;p&gt;To verify that the CRD´s are installed:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;

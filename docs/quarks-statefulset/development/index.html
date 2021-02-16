@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d41adffe5881821fba4709355b48af3e6993fd24f3c6bc881ffd89b727c8450ad21b2d12addd2151f3094285a83e47efee77c04747fed293fe678b6fb6991b6a.json"
+  data-offline-search-index-json-src="/offline-search-index.1b8a6804192ea940ee00abef2634d4c1496793f760ab99a92da60bc01d9d46a1d727a3964ba2e468d7ee79d7319d3d5fe99c54192c4b4907f3080b600d8dc83e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.d41adffe5881821fba4709355b48af3e6993fd24f3c6bc881ffd89b727c8450ad21b2d12addd2151f3094285a83e47efee77c04747fed293fe678b6fb6991b6a.json"
+  data-offline-search-index-json-src="/offline-search-index.1b8a6804192ea940ee00abef2634d4c1496793f760ab99a92da60bc01d9d46a1d727a3964ba2e468d7ee79d7319d3d5fe99c54192c4b4907f3080b600d8dc83e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -948,7 +948,7 @@ The operator watches all the <code>ConfigMaps</code> and <code>Secrets</code> re
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">targetPort</span>:<span style="color:#666"> </span><span style="color:#3677a9">4222</span><span style="color:#666">
 </span></code></pre></td></tr></table>
 </div>
-</div><p>Complete example can be found <a href="https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment/boshdeployment-with-service.yaml">here</a>.</p>
+</div><p>Complete example can be found <a href="https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/bosh-deployment/boshdeployment-with-service.yaml">here</a>.</p>
 <p>Though, by default, quarks creates three services of type <strong>ClusterIP</strong> as defined <a href="../../quarks-operator/concepts/from_bosh_to_kube/#naming-conventions">here</a> for any instance group.</p>
 <h4 id="load-balancer">Load Balancer</h4>
 <p>For creating a service type <strong>LoadBalancer</strong>, we just need to change the <code>.spec.type</code> to <code>LoadBalancer</code> in the above example. The LoadBalancer Ingress is your public IP specified in the output of this command <code>kubectl describe service nats-service</code>.</p>
@@ -1157,7 +1157,7 @@ The default value for <code>zoneNodeLabel</code> is <code>failure-domain.beta.ku
 <em>Fig. 4: Relationship with the BPM controller</em></p>
 <p>Figure 4 illustrates the interaction of the <strong>BPM</strong> Controller with the <strong>QuarksStatefulSet</strong> Controller. Once the BPM controller consumes the data persisted in secrets from the <code>QuarksJob</code> Component, it will use that data to generate new <code>QuarksStatefulset</code> instances. When these resources are generated, the QuarksStatefulSet controller will be watching and trigger its reconciliation loop.</p>
 <h2 id="examples">Examples</h2>
-<p>See <a href="https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-statefulset">https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/quarks-statefulset</a></p>
+<p>See <a href="https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/quarks-statefulset">https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/examples/quarks-statefulset</a></p>
 
         <div class="section-index">
     
@@ -1296,7 +1296,7 @@ The default value for <code>zoneNodeLabel</code> is <code>failure-domain.beta.ku
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified November 25, 2020: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/0a3d78a7e1cc6d1301ff2bda3c119bd55d0499ab">Merge pull request #28 from cloudfoundry-incubator/rohit/coredns-sa-175660052 (0a3d78a)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified February 16, 2021: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/c5a97ebd34219e97af237d3bcf00f862877ff367">Merge pull request #20 from cloudfoundry-incubator/rename-quarks-operator-174254515 (c5a97eb)</a>
 </div>
 </div>
 
@@ -1336,7 +1336,7 @@ The default value for <code>zoneNodeLabel</code> is <code>failure-domain.beta.ku
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2020 CloudFoundry.org Foundation, Inc. All Rights Reserved. All Rights Reserved</small>
+        <small class="text-white">&copy; 2021 CloudFoundry.org Foundation, Inc. All Rights Reserved. All Rights Reserved</small>
         
 	
       </div>
