@@ -300,5 +300,18 @@ The default value for &lt;code&gt;zoneNodeLabel&lt;/code&gt; is &lt;code&gt;fail
       </description>
     </item>
     
+    <item>
+      <title>Docs: CLI</title>
+      <link>https://quarks.suse.dev/docs/quarks-statefulset/cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/quarks-statefulset/cli/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
   </channel>
 </rss>
