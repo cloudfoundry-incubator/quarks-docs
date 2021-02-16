@@ -71,6 +71,6 @@ This is an auxiliary controller that relies on the Errand Controller output. It 
 
 Figure 4 illustrates the interaction of the **BOSHDeployment** Controller with the **Errand** Controller and how the output of this one serves as the trigger for the **Job** Controller.
 
-## `QuarksJob` Examples
+## Examples
 
 See https://github.com/cloudfoundry-incubator/quarks-job/tree/master/docs/examples

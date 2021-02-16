@@ -65,6 +65,7 @@ the `type` field denotes the type of secret that should be generated, currently 
 
 - `password`
 - `certificate`
+- `tls`
 - `ssh`
 - `rsa`
 - `basic-auth`
@@ -85,6 +86,15 @@ Example of a `QuarksSecret` resource, which generates a Kubernetes secret contai
 The example can be applied to the namespace where the operator is watching for resources ( `staging` by default )
 
 If a certificate is generated, the Quarks Secret operator ensures that a certificate signing request (CSR) is generated and is approved by the Kubernetes API server.
+
+#### k8s TLS
+
+{{<githubembed repo="cloudfoundry-incubator/quarks-secret" file="docs/examples/tls.yaml" lang="yaml">}}
+
+This `QuarksSecret` resource example generates a Kubernetes Secret of [kubernetes.io/tls](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) type,
+which contains keys named `tls.crt` and `tls.key` that contain the certificate and private key to use for TLS.
+It is primarily used with TLS termination of the k8s `Ingress` resource or [Istio Secure Gateways](https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/).
+Due to its use cases, only local `signerType` is supported.
 
 #### RSA keys
 

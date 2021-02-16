@@ -93,14 +93,13 @@ stemcells: []
 update:
   # The number of pods to deploy in the new version of an QuarksStatefulSet
   # Once canaries are running, deployment can continue.
-  # TODO: Support for canaries needs implementation in QuarksStatefulSet.
   canaries: 2
   # Time to wait for canary pods to be ready in a new version of an QuarksStatefulSet
   canary_watch_time: 100
   # The maximum number of non-canary instances to update in parallel for an QuarksStatefulSet.
   # TODO: Support for this needs to be implemented in the controller.
   max_in_flight: 2
-  # TODO: is there a need for this in QuarksStatefulSet (in a readiness Probe?)
+  # This key must be set in the manifest for the canary deployment to work.
   update_watch_time: 0
   # Not used in quarks-operator.
   # All instance groups are deployed at the same time.
@@ -489,7 +488,7 @@ These map explicit variable names to secret names.
 
 Each secret must contain the usual keys used in explicit variables (see [here](https://bosh.io/docs/variable-types/) for more details).
 
-You can find an example [here](https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/boshdeployment-with-user-variable.yaml).
+{{<githubembed repo="cloudfoundry-incubator/quarks-operator" file="docs/examples/bosh-deployment/boshdeployment-with-user-variable.yaml" lang="yaml">}}
 
 ### Instance Groups to Quarks StatefulSets and Jobs
 
