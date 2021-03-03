@@ -1743,8 +1743,7 @@ Their entrypoints, env vars, capabilities, etc. are set based on &lt;a href=&#34
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&amp;lt;DEPLOYMENT_NAME&amp;gt;-&amp;lt;INSTANCE_GROUP_NAME&amp;gt;-&amp;lt;INDEX&amp;gt;.&amp;lt;KUBE_NAMESPACE&amp;gt;.&amp;lt;KUBE_SERVICE_DOMAIN&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;TODO this is no longer true?:&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;INDEX&lt;/code&gt; is calculated using the following formula:&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;The &lt;code&gt;INDEX&lt;/code&gt; is calculated using the following formula:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
@@ -2953,11 +2952,53 @@ First, create the certificate that will be used by the statefulset.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: High Availability</title>
-      <link>https://quarks.suse.dev/docs/quarks-operator/concepts/ha/</link>
+      <title>Docs: Upgrades</title>
+      <link>https://quarks.suse.dev/docs/quarks-operator/concepts/upgrades/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://quarks.suse.dev/docs/quarks-operator/concepts/ha/</guid>
+      <guid>https://quarks.suse.dev/docs/quarks-operator/concepts/upgrades/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;updates-to-quarks-operators&#34;&gt;Updates to Quarks Operators&lt;/h1&gt;
+&lt;p&gt;Expections for upgrading the operator&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;migration scripts (helm hooks) run in a job&lt;/li&gt;
+&lt;li&gt;create events for all watched resources are expected&lt;/li&gt;
+&lt;li&gt;new services might start up (e.g. dns)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;updates-to-the-workloads&#34;&gt;Updates to the Workloads&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;tries to update only what&amp;rsquo;s necessary&lt;/li&gt;
+&lt;li&gt;workloads that have watched resources changed&lt;/li&gt;
+&lt;li&gt;doesn&amp;rsquo;t update for image only without label workaround&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;how-to-add-a-migration&#34;&gt;How to add a Migration&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;add script to &lt;code&gt;deploy/helm/hooks&lt;/code&gt; folder&lt;/li&gt;
+&lt;li&gt;add RBAC permissions to &lt;code&gt;deploy/helm/quarks/templates/role-hooks.yml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;instance-group-updates&#34;&gt;Instance Group Updates&lt;/h1&gt;
+&lt;p&gt;IG are Quarks Statefulset. Quarks Statefulset (qsts) will create one statefulset per AZ.&lt;/p&gt;
+&lt;p&gt;In case of an upgrade to an instance group, the rolling update strategy of the statefulset will restart the last pod first.
+If that pod is ready, the remaining pods will be restarted, keeping their original volumes, in the new statefulset.&lt;/p&gt;
+&lt;p&gt;For the duration of the upgrade, multiple versions of the statefulset, distinguishable by the controller revision hash, exist.&lt;/p&gt;
+&lt;h2 id=&#34;immutable-fields&#34;&gt;Immutable Fields&lt;/h2&gt;
+&lt;p&gt;Several fields in a statefulset are immutable.&lt;/p&gt;
+&lt;p&gt;For example, when resizing disks, the qsts will be updated for manifest changes. The sts will not change.
+When changing the pods, the sts will not reflect those changes.&lt;/p&gt;
+&lt;p&gt;To update the sts, it has to be deleted and recreated with the same pod selector.&lt;/p&gt;
+&lt;p&gt;Quarks statefulset does not support updating, by deleting the sts and recreating it.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: High Availability</title>
+      <link>https://quarks.suse.dev/docs/quarks-operator/concepts/high-availability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/quarks-operator/concepts/high-availability/</guid>
       <description>
         
         
@@ -3093,48 +3134,6 @@ This works since spec.address matches the hostname entry in /etc/hosts and gives
 &lt;/ul&gt;
 &lt;h2 id=&#34;quarks-61&#34;&gt;Quarks 6.1&lt;/h2&gt;
 &lt;p&gt;Had a &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/commit/89a56300d40a0da74719c9d80c1e7e27616fc68a&#34;&gt;workaround for HA&lt;/a&gt;.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: </title>
-      <link>https://quarks.suse.dev/docs/quarks-operator/concepts/upgrades/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://quarks.suse.dev/docs/quarks-operator/concepts/upgrades/</guid>
-      <description>
-        
-        
-        &lt;h1 id=&#34;updates-to-quarks-operators&#34;&gt;Updates to Quarks Operators&lt;/h1&gt;
-&lt;p&gt;Expections for upgrading the operator&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;migration scripts (helm hooks) run in a job&lt;/li&gt;
-&lt;li&gt;create events for all watched resources are expected&lt;/li&gt;
-&lt;li&gt;new services might start up (e.g. dns)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;updates-to-the-workloads&#34;&gt;Updates to the Workloads&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;tries to update only what&amp;rsquo;s necessary&lt;/li&gt;
-&lt;li&gt;workloads that have watched resources changed&lt;/li&gt;
-&lt;li&gt;doesn&amp;rsquo;t update for image only without label workaround&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;how-to-add-a-migration&#34;&gt;How to add a Migration&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;add script to &lt;code&gt;deploy/helm/hooks&lt;/code&gt; folder&lt;/li&gt;
-&lt;li&gt;add RBAC permissions to &lt;code&gt;deploy/helm/quarks/templates/role-hooks.yml&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;instance-group-updates&#34;&gt;Instance Group Updates&lt;/h1&gt;
-&lt;p&gt;IG are Quarks Statefulset. Quarks Statefulset (qsts) will create one statefulset per AZ.&lt;/p&gt;
-&lt;p&gt;In case of an upgrade to an instance group, the rolling update strategy of the statefulset will restart the last pod first.
-If that pod is ready, the remaining pods will be restarted, keeping their original volumes, in the new statefulset.&lt;/p&gt;
-&lt;p&gt;For the duration of the upgrade, multiple versions of the statefulset, distinguishable by the controller revision hash, exist.&lt;/p&gt;
-&lt;h2 id=&#34;immutable-fields&#34;&gt;Immutable Fields&lt;/h2&gt;
-&lt;p&gt;Several fields in a statefulset are immutable.&lt;/p&gt;
-&lt;p&gt;For example, when resizing disks, the qsts will be updated for manifest changes. The sts will not change.
-When changing the pods, the sts will not reflect those changes.&lt;/p&gt;
-&lt;p&gt;To update the sts, it has to be deleted and recreated with the same pod selector.&lt;/p&gt;
-&lt;p&gt;Quarks statefulset does not support updating, by deleting the sts and recreating it.&lt;/p&gt;
 
       </description>
     </item>
