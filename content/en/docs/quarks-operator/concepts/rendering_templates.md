@@ -108,6 +108,8 @@ DNS Addresses for instance groups are calculated in the following manner:
 <DEPLOYMENT_NAME>-<INSTANCE_GROUP_NAME>-<INDEX>.<KUBE_NAMESPACE>.<KUBE_SERVICE_DOMAIN>
 ```
 
+TODO this is no longer true?:
+
 The `INDEX` is calculated using the following formula:
 
 ```text

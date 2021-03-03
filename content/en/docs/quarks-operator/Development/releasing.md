@@ -3,71 +3,62 @@ title: "Releasing"
 linkTitle: "Releasing"
 weight: 3
 description: >
-  How to create a new Quarks Operator release on Concourse
+  How to create a new Quarks Operator release on GHA
 ---
 
 We're releasing based on tags, which contain our version number. The format is 'v0.0.0'.
 The release title will be set to this version.
 
-The CI pipeline has a 'release' job, which will update the release on Github.
-That job triggers itself, when a draft release is created.
+Releases are done with Github Actions, a shell script extracts the version number from the Git state.
 
-## Create new release pipeline
+To trigger the Action, push a release tag to the repo. Release tags begin with 'v'.
 
-We release from release-branches. Each maintained release has a separate pipeline in Concourse.
-To create a new pipeline run this in the CI repository:
-
-```shell
-cd pipelines/cf-operator-release
-./configure.sh CFO v0.4.x v0.4
-```
-
-Where `CFO` is your concourse target and `v0.4.x` is the name of the branch.
-The last argument, `v0.4` is used to filter Github tags, which belong to the release.
-
-This allows a separate Github branch and Concourse pipeline for each major version.
-Within those pipelines, releases can be built from minor versions.
 
 ## Create a new release
 
-After completion, the pipeline will create several artifacts:
+Every major release should have it's own branch, i.e. `v7.x`.
 
-* helm chart on S3
-* helm chart in our repo at https://cloudfoundry-incubator.github.io/quarks-helm/
-* quarks-operator binary on S3
-* docker image of the operator on dockerhub
+Merge the current state into the release branch:
 
-Running the 'release' job will take the latest artificats, which passed through the pipeline and add them to the Github release:
+  git checkout v7.x
+  git merge master
+  # this will run CI
+  git push
 
-* to the body
-* as Github assets for downloading
+Create a tag on that branch and push it, to create a new release:
 
-The version numbers (`v0.0.0-<number-of-commits>.<commit-SHA>`) of these assets are taken from the info on S3.
-They have to match the Github tag, else the release job will fail.
-The assets will be copied into a 'release' folder on S3.
+   git tag v7.2.0
+   # this will run CI again, release-drafter, then publish
+   git push origin v7.2.0
 
-The docker image is only referenced from the helm chart and not mentioned in the release, though.
+## Release Artifacts
+
+The `release-drafter` will create a new draft release on Github.
+
+
+* Helm chart in our repo at https://cloudfoundry-incubator.github.io/quarks-helm/
+* Docker image of the operator on ghcr.io
+* quarks-operator binary attachment
+
+If the pipeline runs again for the same release version, it will fail, unless the binary attachment is removed from the release.
+After requesting to remove the binary, it takes up to twenty minutes for Github to really remove it.
+
 
 ## Checklist
 
 ### Major Release
 
 1. Create version branch
-1. Create a new release pipeline for that branch
-1. Unpause pipeline
-1. Continue with "Minor Bump"
 
 ### Minor Bump
 
-1. Tag commit with new version
+1. Tag commit with new release version
 1. Push commit
-1. Wait for commit to pass release pipeline, 'publish' needs to create the binary and helm chart, before the 'release' job can run
-1. Create a draft Github release for that tag, 'release' job triggers
-1. Wait for 'release' job to finish on Concourse
-1. Edit the draft release on Github and publish it
+1. Wait for pipeline to finish
+1. Publish the draft Github release for the release version tag
 
-Try not to push to the pipeline again, until step 4 is completed. The 'release' job will always take the most recent artifacts from S3. Maybe pause the 'publish' job manually to avoid accidental updates.
 
+Note: If trying to re-release: remove old binary attachment first.
 
 ## Docs
 
@@ -79,3 +70,24 @@ On the release branch:
 * Edit `.github/workflows/pages` branch to match the release branch.
 
 Be sure to adapt menus in all branches (`config.toml`) to match the new app URL.
+
+# Troubleshooting
+
+## Provoke tag push events
+
+Delete the tag and push it again:
+
+    git push -d origin v9.9.9
+    git push origin v9.9.9
+
+## Publishing the Github Release fails
+
+Delete the attached binary, wait and run retrigger job.
+
+## Publishing the Helm Chart fails
+
+The Helm charts are stored in a Github repository, concurrent access can lead to merge conflicts.
+
+## Release-Drafter does not trigger
+
+Probably needs a different token, to be triggered by another Github Action.
