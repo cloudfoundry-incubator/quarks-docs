@@ -24,60 +24,41 @@
         
         &lt;p&gt;We&amp;rsquo;re releasing based on tags, which contain our version number. The format is &amp;lsquo;v0.0.0&amp;rsquo;.
 The release title will be set to this version.&lt;/p&gt;
-&lt;p&gt;The CI pipeline has a &amp;lsquo;release&amp;rsquo; job, which will update the release on Github.
-That job triggers itself, when a draft release is created.&lt;/p&gt;
-&lt;h2 id=&#34;create-new-release-pipeline&#34;&gt;Create new release pipeline&lt;/h2&gt;
-&lt;p&gt;We release from release-branches. Each maintained release has a separate pipeline in Concourse.
-To create a new pipeline run this in the CI repository:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;cd&lt;/span&gt; pipelines/cf-operator-release
-./configure.sh CFO v0.4.x v0.4
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Where &lt;code&gt;CFO&lt;/code&gt; is your concourse target and &lt;code&gt;v0.4.x&lt;/code&gt; is the name of the branch.
-The last argument, &lt;code&gt;v0.4&lt;/code&gt; is used to filter Github tags, which belong to the release.&lt;/p&gt;
-&lt;p&gt;This allows a separate Github branch and Concourse pipeline for each major version.
-Within those pipelines, releases can be built from minor versions.&lt;/p&gt;
+&lt;p&gt;Releases are done with Github Actions, a shell script extracts the version number from the Git state.&lt;/p&gt;
+&lt;p&gt;To trigger the Action, push a release tag to the repo. Release tags begin with &amp;lsquo;v&amp;rsquo;.&lt;/p&gt;
 &lt;h2 id=&#34;create-a-new-release&#34;&gt;Create a new release&lt;/h2&gt;
-&lt;p&gt;After completion, the pipeline will create several artifacts:&lt;/p&gt;
+&lt;p&gt;Every major release should have it&amp;rsquo;s own branch, i.e. &lt;code&gt;v7.x&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Merge the current state into the release branch:&lt;/p&gt;
+&lt;p&gt;git checkout v7.x
+git merge master&lt;/p&gt;
+&lt;h1 id=&#34;this-will-run-ci&#34;&gt;this will run CI&lt;/h1&gt;
+&lt;p&gt;git push&lt;/p&gt;
+&lt;p&gt;Create a tag on that branch and push it, to create a new release:&lt;/p&gt;
+&lt;p&gt;git tag v7.2.0&lt;/p&gt;
+&lt;h1 id=&#34;this-will-run-ci-again-release-drafter-then-publish&#34;&gt;this will run CI again, release-drafter, then publish&lt;/h1&gt;
+&lt;p&gt;git push origin v7.2.0&lt;/p&gt;
+&lt;h2 id=&#34;release-artifacts&#34;&gt;Release Artifacts&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;release-drafter&lt;/code&gt; will create a new draft release on Github.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;helm chart on S3&lt;/li&gt;
-&lt;li&gt;helm chart in our repo at &lt;a href=&#34;https://cloudfoundry-incubator.github.io/quarks-helm/&#34;&gt;https://cloudfoundry-incubator.github.io/quarks-helm/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;quarks-operator binary on S3&lt;/li&gt;
-&lt;li&gt;docker image of the operator on dockerhub&lt;/li&gt;
+&lt;li&gt;Helm chart in our repo at &lt;a href=&#34;https://cloudfoundry-incubator.github.io/quarks-helm/&#34;&gt;https://cloudfoundry-incubator.github.io/quarks-helm/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Docker image of the operator on ghcr.io&lt;/li&gt;
+&lt;li&gt;quarks-operator binary attachment&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Running the &amp;lsquo;release&amp;rsquo; job will take the latest artificats, which passed through the pipeline and add them to the Github release:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;to the body&lt;/li&gt;
-&lt;li&gt;as Github assets for downloading&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The version numbers (&lt;code&gt;v0.0.0-&amp;lt;number-of-commits&amp;gt;.&amp;lt;commit-SHA&amp;gt;&lt;/code&gt;) of these assets are taken from the info on S3.
-They have to match the Github tag, else the release job will fail.
-The assets will be copied into a &amp;lsquo;release&amp;rsquo; folder on S3.&lt;/p&gt;
-&lt;p&gt;The docker image is only referenced from the helm chart and not mentioned in the release, though.&lt;/p&gt;
+&lt;p&gt;If the pipeline runs again for the same release version, it will fail, unless the binary attachment is removed from the release.
+After requesting to remove the binary, it takes up to twenty minutes for Github to really remove it.&lt;/p&gt;
 &lt;h2 id=&#34;checklist&#34;&gt;Checklist&lt;/h2&gt;
 &lt;h3 id=&#34;major-release&#34;&gt;Major Release&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;Create version branch&lt;/li&gt;
-&lt;li&gt;Create a new release pipeline for that branch&lt;/li&gt;
-&lt;li&gt;Unpause pipeline&lt;/li&gt;
-&lt;li&gt;Continue with &amp;ldquo;Minor Bump&amp;rdquo;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;minor-bump&#34;&gt;Minor Bump&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;Tag commit with new version&lt;/li&gt;
+&lt;li&gt;Tag commit with new release version&lt;/li&gt;
 &lt;li&gt;Push commit&lt;/li&gt;
-&lt;li&gt;Wait for commit to pass release pipeline, &amp;lsquo;publish&amp;rsquo; needs to create the binary and helm chart, before the &amp;lsquo;release&amp;rsquo; job can run&lt;/li&gt;
-&lt;li&gt;Create a draft Github release for that tag, &amp;lsquo;release&amp;rsquo; job triggers&lt;/li&gt;
-&lt;li&gt;Wait for &amp;lsquo;release&amp;rsquo; job to finish on Concourse&lt;/li&gt;
-&lt;li&gt;Edit the draft release on Github and publish it&lt;/li&gt;
+&lt;li&gt;Wait for pipeline to finish&lt;/li&gt;
+&lt;li&gt;Publish the draft Github release for the release version tag&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Try not to push to the pipeline again, until step 4 is completed. The &amp;lsquo;release&amp;rsquo; job will always take the most recent artifacts from S3. Maybe pause the &amp;lsquo;publish&amp;rsquo; job manually to avoid accidental updates.&lt;/p&gt;
+&lt;p&gt;Note: If trying to re-release: remove old binary attachment first.&lt;/p&gt;
 &lt;h2 id=&#34;docs&#34;&gt;Docs&lt;/h2&gt;
 &lt;p&gt;Documentation for releases is kept in branches of the quarks-doc repo.
 Release docs are pushed to Cloudfoundry via Github Actions, as defined in the branch.&lt;/p&gt;
@@ -87,6 +68,18 @@ Release docs are pushed to Cloudfoundry via Github Actions, as defined in the br
 &lt;li&gt;Edit &lt;code&gt;.github/workflows/pages&lt;/code&gt; branch to match the release branch.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Be sure to adapt menus in all branches (&lt;code&gt;config.toml&lt;/code&gt;) to match the new app URL.&lt;/p&gt;
+&lt;h1 id=&#34;troubleshooting&#34;&gt;Troubleshooting&lt;/h1&gt;
+&lt;h2 id=&#34;provoke-tag-push-events&#34;&gt;Provoke tag push events&lt;/h2&gt;
+&lt;p&gt;Delete the tag and push it again:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git push -d origin v9.9.9
+git push origin v9.9.9
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;publishing-the-github-release-fails&#34;&gt;Publishing the Github Release fails&lt;/h2&gt;
+&lt;p&gt;Delete the attached binary, wait and run retrigger job.&lt;/p&gt;
+&lt;h2 id=&#34;publishing-the-helm-chart-fails&#34;&gt;Publishing the Helm Chart fails&lt;/h2&gt;
+&lt;p&gt;The Helm charts are stored in a Github repository, concurrent access can lead to merge conflicts.&lt;/p&gt;
+&lt;h2 id=&#34;release-drafter-does-not-trigger&#34;&gt;Release-Drafter does not trigger&lt;/h2&gt;
+&lt;p&gt;Probably needs a different token, to be triggered by another Github Action.&lt;/p&gt;
 
       </description>
     </item>

@@ -20,24 +20,24 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>BOSH resource requests and limit | Quarks Project</title><meta property="og:title" content="BOSH resource requests and limit" />
-<meta property="og:description" content="Converting BOSH resource requests and limits to Kubernetes
+<title>High Availability | Quarks Project</title><meta property="og:title" content="High Availability" />
+<meta property="og:description" content="How High-Availability is implemented
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://quarks.suse.dev/docs/quarks-operator/concepts/resources_limit/" />
+<meta property="og:url" content="https://quarks.suse.dev/docs/quarks-operator/concepts/ha/" />
 <meta property="article:modified_time" content="2021-03-03T16:22:33+01:00" /><meta property="og:site_name" content="Quarks Project" />
-<meta itemprop="name" content="BOSH resource requests and limit">
-<meta itemprop="description" content="Converting BOSH resource requests and limits to Kubernetes
+<meta itemprop="name" content="High Availability">
+<meta itemprop="description" content="How High-Availability is implemented
 ">
 <meta itemprop="dateModified" content="2021-03-03T16:22:33+01:00" />
-<meta itemprop="wordCount" content="194">
+<meta itemprop="wordCount" content="782">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="BOSH resource requests and limit"/>
-<meta name="twitter:description" content="Converting BOSH resource requests and limits to Kubernetes
+<meta name="twitter:title" content="High Availability"/>
+<meta name="twitter:description" content="How High-Availability is implemented
 "/>
 
 
@@ -374,7 +374,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docsquarks-operatorconceptsresources_limit" href="/docs/quarks-operator/concepts/resources_limit/">BOSH resource requests and limits</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsquarks-operatorconceptsresources_limit" href="/docs/quarks-operator/concepts/resources_limit/">BOSH resource requests and limits</a>
       
       
       
@@ -404,7 +404,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsquarks-operatorconceptsha" href="/docs/quarks-operator/concepts/ha/">ha</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docsquarks-operatorconceptsha" href="/docs/quarks-operator/concepts/ha/">ha</a>
       
       
       
@@ -863,8 +863,8 @@
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/content/en/docs/quarks-operator/concepts/resources_limit.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/quarks-docs/issues/new?title=BOSH%20resource%20requests%20and%20limit" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/content/en/docs/quarks-operator/concepts/ha.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-docs/issues/new?title=High%20Availability" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -875,6 +875,26 @@
 
 
 
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#pod-ordinal">Pod Ordinal</a></li>
+    <li><a href="#zone-index-az-index">Zone Index (az-index)</a></li>
+    <li><a href="#replicas">Replicas</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#specbootstrap">spec.bootstrap</a></li>
+    <li><a href="#specindex">spec.index</a></li>
+    <li><a href="#specaddress">spec.address</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#quarks-72">Quarks 7.2</a></li>
+    <li><a href="#quarks-71">Quarks 7.1</a></li>
+    <li><a href="#quarks-61">Quarks 6.1</a></li>
+  </ul>
+</nav>
 
 
 
@@ -921,7 +941,7 @@
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://quarks.suse.dev/docs/quarks-operator/concepts/resources_limit/">BOSH resource requests and limits</a>
+	<a href="https://quarks.suse.dev/docs/quarks-operator/concepts/ha/">ha</a>
 </li>
 
 	</ol>
@@ -929,183 +949,141 @@
 
             
 <div class="td-content">
-	<h1>BOSH resource requests and limit</h1>
-    <div class="lead">Converting BOSH resource requests and limits to Kubernetes</div>
+	<h1>High Availability</h1>
+    <div class="lead">How High-Availability is implemented</div>
 	       
-	<p>It is possible to define resource requests and limits (CPU/Memory) for each container generated by the Quarks Operator.</p>
-<p>The Quarks Operator, while converting the BPM informations, translates the BPM processes <code>requests</code> and <code>limits</code> to Kubernetes containers and pods, which are generated from instance groups.</p>
-<p>It expands the BOSH specification <a href="https://cloud.google.com/blog/products/gcp/kubernetes-best-practices-resource-requests-and-limits">to cover the features offered by Kubernetes</a>, here is a complete example:</p>
-
-
-
-
-
+	<h1 id="instance-count">Instance Count</h1>
+<p>For BOSH instance groups, one can increase the instance count, which results in a k8s statefulset with that number set as replica count.
+There is no guarantee that pod replicas in a statefulset will be started on different Kubernetes nodes, but affinity can be used to control pod placement.</p>
+<h1 id="multi-az">Multi AZ</h1>
+<p>Even more redundancy can be achieved by using multiple availability zones, as described in the <a href="../../../quarks-statefulset/development#az-support">qsts controller docs</a>.
+In short, Multi AZ uses labeled nodes and spawns <code>replica count</code> pods in each AZ. Quarks creates a separate statefulset in each AZ.</p>
+<p>In order for things to work correctly across versions and AZs, we need <a href="https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#using-stable-network-identities">ClusterIP <code>Services</code></a> that select for Instance Group <code>Pods</code>.</p>
+<p>Services:</p>
 <div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">62
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>ConfigMap<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>ops-scale<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">data</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">ops</span>:<span style="color:#666"> </span><span style="color:#ed9d13">|
-</span><span style="color:#ed9d13">    - type: replace</span><span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">path</span>:<span style="color:#666"> </span>/instance_groups/name=quarks-gora?/instances<span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">value</span>:<span style="color:#666"> </span><span style="color:#3677a9">2</span><span style="color:#666">
-</span><span style="color:#666"></span>---<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>ConfigMap<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora-manifest<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">data</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">manifest</span>:<span style="color:#666"> </span><span style="color:#ed9d13">|
-</span><span style="color:#ed9d13">    ---</span><span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora-deployment<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">releases</span>:<span style="color:#666">
-</span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">version</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;0.0.15&#34;</span><span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">url</span>:<span style="color:#666"> </span>ghcr.io/cloudfoundry-incubator<span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">stemcell</span>:<span style="color:#666">
-</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">os</span>:<span style="color:#666"> </span>SLE_15_SP1<span style="color:#666">
-</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">version</span>:<span style="color:#666"> </span><span style="color:#3677a9">27.10-7.0</span>.0_374.gb8e8e6af<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">instance_groups</span>:<span style="color:#666">
-</span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">instances</span>:<span style="color:#666"> </span><span style="color:#3677a9">1</span><span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">jobs</span>:<span style="color:#666">
-</span><span style="color:#666">      </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
-</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">release</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
-</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">properties</span>:<span style="color:#666">
-</span><span style="color:#666">          </span><span style="color:#6ab825;font-weight:bold">quarks-gora</span>:<span style="color:#666">
-</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">port</span>:<span style="color:#666"> </span><span style="color:#3677a9">55556</span><span style="color:#666">
-</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">ssl</span>:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">false</span><span style="color:#666">
-</span><span style="color:#666">          </span><span style="color:#6ab825;font-weight:bold">quarks</span>:<span style="color:#666">
-</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">ports</span>:<span style="color:#666">
-</span><span style="color:#666">            </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;quarks-gora&#34;</span><span style="color:#666">
-</span><span style="color:#666">              </span><span style="color:#6ab825;font-weight:bold">protocol</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;TCP&#34;</span><span style="color:#666">
-</span><span style="color:#666">              </span><span style="color:#6ab825;font-weight:bold">internal</span>:<span style="color:#666"> </span><span style="color:#3677a9">55556</span><span style="color:#666">
-</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">bpm</span>:<span style="color:#666">
-</span><span style="color:#666">              </span><span style="color:#6ab825;font-weight:bold">processes</span>:<span style="color:#666">
-</span><span style="color:#666">              </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
-</span><span style="color:#666">                </span><span style="color:#6ab825;font-weight:bold">requests</span>:<span style="color:#666">
-</span><span style="color:#666">                  </span><span style="color:#6ab825;font-weight:bold">cpu</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;2m&#34;</span><span style="color:#666">
-</span><span style="color:#666">                  </span><span style="color:#6ab825;font-weight:bold">memory</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;128Mi&#34;</span><span style="color:#666">
-</span><span style="color:#666">                </span><span style="color:#6ab825;font-weight:bold">limits</span>:<span style="color:#666">
-</span><span style="color:#666">                  </span><span style="color:#6ab825;font-weight:bold">cpu</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;4&#34;</span><span style="color:#666">
-</span><span style="color:#666">                  </span><span style="color:#6ab825;font-weight:bold">memory</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;2Gi&#34;</span><span style="color:#666">
-</span><span style="color:#666"></span>---<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>BOSHDeployment<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora-deployment<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">manifest</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora-manifest<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>configmap<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">ops</span>:<span style="color:#666">
-</span><span style="color:#666">  </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>ops-scale<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>configmap<span style="color:#666">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">nats-z0-0
+  selects pod nats-z0-0
+nats-z0-1
+  selects pod nats-z0-1
+nats-z1-0
+  selects pod nats-z1-0
+nats-z1-1
+  selects pod nats-z1-1
+</code></pre></td></tr></table>
+</div>
+</div><p>(from <a href="rendering_templates.md#services-and-dns-addresses">Services And DNS Addresses</a> )</p>
+<p>The services select pods via the pod-ordinal label.</p>
+<p>Service selector example for &ldquo;nats-0&rdquo; service:</p>
+<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#6ab825;font-weight:bold">selector</span>:<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/az-index</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;0&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/deployment-name</span>:<span style="color:#666"> </span>kubecf<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/instance-group-name</span>:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">quarks.cloudfoundry.org/pod-ordinal</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;0&#34;</span><span style="color:#666">
 </span></code></pre></td></tr></table>
 </div>
-</div>
-
-<small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/quarks-gora-cpu-mem.yaml">https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/quarks-gora-cpu-mem.yaml</a> </small>
-<hr>
-<p>Here is a comprehensive table of the conversion which is done by the Quarks Operator and the respective Kubernetes equivalent:</p>
-<table>
-<thead>
-<tr>
-<th>Job spec in Manifest</th>
-<th>Kube Pod Container</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>properties.quarks.bpm.processes[n].requests.cpu</code></td>
-<td><code>container.Resources.Requests.cpu</code></td>
-<td><a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container">Guaranteed CPU</a></td>
-</tr>
-<tr>
-<td><code>properties.quarks.bpm.processes[n].requests.memory</code></td>
-<td><code>container.Resources.Requests.memory</code></td>
-<td><a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container">Guaranteed memory</a></td>
-</tr>
-<tr>
-<td><code>properties.quarks.bpm.processes[n].limits.cpu</code></td>
-<td><code>container.Resources.Limits.cpu</code></td>
-<td><a href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/#specify-a-cpu-request-and-a-cpu-limit">Specify a CPU request and a CPU limit</a></td>
-</tr>
-<tr>
-<td><code>properties.quarks.bpm.processes[n].limits.memory</code></td>
-<td><code>container.Resources.Limits.memory</code></td>
-<td><a href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/#specify-a-memory-request-and-a-memory-limit">Specify a memory request and a memory limit</a></td>
-</tr>
-</tbody>
-</table>
+</div><p>Quarks also generates an additional `nats&rsquo; service for all of them.</p>
+<h2 id="pod-ordinal">Pod Ordinal</h2>
+<p>When the pod is created, the Quarks statefulset pod mutator sets the <code>pod-ordinal</code> label to the <a href="https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#using-stable-network-identities">suffix from the pod name</a> from the pod&rsquo;s name.</p>
+<p>The pod ordinal is later passed to BOSH job template rendering.</p>
+<p>It&rsquo;s always 0 for errands.</p>
+<p>A new statefulset in another AZ, will start again with pod-ordinal 0.</p>
+<h2 id="zone-index-az-index">Zone Index (az-index)</h2>
+<p>Each statefulset belongs to one AZ.</p>
+<p>The Quarks statefulset (qsts) reconciler sets the <code>az-index</code> label, when creating the statefulsets.</p>
+<p>It&rsquo;s 0 if the instance group does not have any AZs. Otherwise it just starts at zero and increments by one.</p>
+<p><em>Example</em>: Given the zones &ldquo;z1&rdquo; and &ldquo;z2&rdquo;, Quarks will use the zone indexes &ldquo;z0&rdquo; and &ldquo;z1&rdquo; in resource names. The <code>az-index</code> labels will contain &ldquo;0&rdquo; and &ldquo;1&rdquo;.</p>
+<p>While the <code>az-index</code> pod label starts at 0, the <code>AZ_INDEX</code> env var on containers starts at 1.</p>
+<h2 id="replicas">Replicas</h2>
+<p>The replica count is initially set it the <code>Instances</code> number from the instance group manifest.</p>
+<p>QuarksStatefulSet reconciler might also overwrite the replica env count if <code>injectReplicaEnv</code> is true.</p>
+<p>The <code>template-render</code> sub-command, will increase the relplica count to match the given pod-ordinal, if necessary.</p>
+<h1 id="bosh-job-template-rendering">BOSH Job Template Rendering</h1>
+<p>This is how BOSH manifest variables are translated into job template rendering variables:</p>
+<ul>
+<li>Quarks operator builds ig manifests, using the <code>instance-group</code> sub-command</li>
+<li>Quarks operator create resources, like qsts from manifest</li>
+<li>Quarks statefulset manages statefulsets and adapts values when reconciling</li>
+<li>sts starts pods</li>
+<li>quarks sts pod mutator adapts values</li>
+<li>pod labels are mounted as env variables</li>
+<li>environment variables are used as args when calling the <code>template-render</code> sub-command in an init container</li>
+</ul>
+<p>Both, the <code>instance-group</code> and the <code>template-render</code> sub-command need to build an array of all possible <a href="https://bosh.io/docs/jobs/#properties">BOSH job <code>spec</code> properties</a> for every instance of the instance group.</p>
+<p>Template rendering computes a &lsquo;spec index&rsquo;, from az-index and pod-ordinal, to find the matching spec.</p>
+<h2 id="specbootstrap">spec.bootstrap</h2>
+<blockquote>
+<p>True if this instance is the first instance of its group.
+(<a href="https://bosh.io/docs/jobs/">BOSH jobs</a>)</p>
+</blockquote>
+<p>The pod that starts first in a statefulset must have the bootstrap flag. It&rsquo;s used to initialize databases and such.</p>
+<p>After the initial deployment, the last pod has the bootstrap flag. If the pod is restarted, the bootstrap flag stays the same, since the pod ordinal doesn&rsquo;t change in a statefulset.</p>
+<p>Bootstrap is only run once, regardless the number of AZs.</p>
+<h2 id="specindex">spec.index</h2>
+<blockquote>
+<p>Instance index. Use spec.bootstrap to determine the first instead of checking whether the index is 0. Additionally, there is no guarantee that instances will be numbered consecutively, so that there are no gaps between different indices.
+(<a href="https://bosh.io/docs/jobs/">BOSH jobs</a>)</p>
+</blockquote>
+<p>In the past using the replica count lead to unnecessary restarts, so a very large value is used instead:</p>
+<pre><code>// azindex podOrdinal  specIndex
+//    0       0          0
+//    0       1          1
+//    1       0          0
+//    1       1          1
+//    2       0          10000
+//    2       1          10001
+</code></pre>
+<h2 id="specaddress">spec.address</h2>
+<blockquote>
+<p>Default network address (IPv4, IPv6 or DNS record) for the instance
+(<a href="https://bosh.io/docs/jobs/">BOSH jobs</a>)</p>
+</blockquote>
+<p>In Quarks the spec.address should always be the advertisable address of the pod.</p>
+<p>The address is the name of the pod, which already includes the pod-ordinal and optionally the az-index.</p>
+<p>Some BOSH jobs use this to find their local interface, like the NATS release.
+This works since spec.address matches the hostname entry in /etc/hosts and gives the local ip address.</p>
+<h1 id="other-usage-of-pod-ordinal">Other Usage of Pod Ordinal</h1>
+<p>It&rsquo;s also available to</p>
+<ul>
+<li>bosh-pre-start Init Containers</li>
+<li>bpm-pre-start Init Containers</li>
+<li>bpm Process Container</li>
+</ul>
+<h1 id="history">History</h1>
+<h2 id="quarks-72">Quarks 7.2</h2>
+<p>Removes startup-ordinal and just uses pod-ordinal.</p>
+<h2 id="quarks-71">Quarks 7.1</h2>
+<p>Introduces startup-ordinal to fix bugs from 6.1. Keeps workaround.</p>
+<ul>
+<li><a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/1182">Bootstrap using new startup ordinal</a></li>
+<li><a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/1271">Keep startup ordinal when pods restart</a></li>
+</ul>
+<p>Open problems with updating kubecf</p>
+<ul>
+<li>nats release binding to spec.address</li>
+<li>diego-cell rep-rep, too?</li>
+</ul>
+<h2 id="quarks-61">Quarks 6.1</h2>
+<p>Had a <a href="https://github.com/cloudfoundry-incubator/quarks-operator/commit/89a56300d40a0da74719c9d80c1e7e27616fc68a">workaround for HA</a>.</p>
 
 	
 	

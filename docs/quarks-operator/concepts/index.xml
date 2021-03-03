@@ -1743,7 +1743,8 @@ Their entrypoints, env vars, capabilities, etc. are set based on &lt;a href=&#34
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&amp;lt;DEPLOYMENT_NAME&amp;gt;-&amp;lt;INSTANCE_GROUP_NAME&amp;gt;-&amp;lt;INDEX&amp;gt;.&amp;lt;KUBE_NAMESPACE&amp;gt;.&amp;lt;KUBE_SERVICE_DOMAIN&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;The &lt;code&gt;INDEX&lt;/code&gt; is calculated using the following formula:&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;TODO this is no longer true?:&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;INDEX&lt;/code&gt; is calculated using the following formula:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
@@ -2947,6 +2948,193 @@ First, create the certificate that will be used by the statefulset.&lt;/p&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;if the deployment cannot be modified directly.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: High Availability</title>
+      <link>https://quarks.suse.dev/docs/quarks-operator/concepts/ha/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/quarks-operator/concepts/ha/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;instance-count&#34;&gt;Instance Count&lt;/h1&gt;
+&lt;p&gt;For BOSH instance groups, one can increase the instance count, which results in a k8s statefulset with that number set as replica count.
+There is no guarantee that pod replicas in a statefulset will be started on different Kubernetes nodes, but affinity can be used to control pod placement.&lt;/p&gt;
+&lt;h1 id=&#34;multi-az&#34;&gt;Multi AZ&lt;/h1&gt;
+&lt;p&gt;Even more redundancy can be achieved by using multiple availability zones, as described in the &lt;a href=&#34;../../../quarks-statefulset/development#az-support&#34;&gt;qsts controller docs&lt;/a&gt;.
+In short, Multi AZ uses labeled nodes and spawns &lt;code&gt;replica count&lt;/code&gt; pods in each AZ. Quarks creates a separate statefulset in each AZ.&lt;/p&gt;
+&lt;p&gt;In order for things to work correctly across versions and AZs, we need &lt;a href=&#34;https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#using-stable-network-identities&#34;&gt;ClusterIP &lt;code&gt;Services&lt;/code&gt;&lt;/a&gt; that select for Instance Group &lt;code&gt;Pods&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Services:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;nats-z0-0
+  selects pod nats-z0-0
+nats-z0-1
+  selects pod nats-z0-1
+nats-z1-0
+  selects pod nats-z1-0
+nats-z1-1
+  selects pod nats-z1-1
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;(from &lt;a href=&#34;rendering_templates.md#services-and-dns-addresses&#34;&gt;Services And DNS Addresses&lt;/a&gt; )&lt;/p&gt;
+&lt;p&gt;The services select pods via the pod-ordinal label.&lt;/p&gt;
+&lt;p&gt;Service selector example for &amp;ldquo;nats-0&amp;rdquo; service:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;selector&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;quarks.cloudfoundry.org/az-index&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;quarks.cloudfoundry.org/deployment-name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;kubecf&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;quarks.cloudfoundry.org/instance-group-name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;nats&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;quarks.cloudfoundry.org/pod-ordinal&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Quarks also generates an additional `nats&amp;rsquo; service for all of them.&lt;/p&gt;
+&lt;h2 id=&#34;pod-ordinal&#34;&gt;Pod Ordinal&lt;/h2&gt;
+&lt;p&gt;When the pod is created, the Quarks statefulset pod mutator sets the &lt;code&gt;pod-ordinal&lt;/code&gt; label to the &lt;a href=&#34;https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#using-stable-network-identities&#34;&gt;suffix from the pod name&lt;/a&gt; from the pod&amp;rsquo;s name.&lt;/p&gt;
+&lt;p&gt;The pod ordinal is later passed to BOSH job template rendering.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s always 0 for errands.&lt;/p&gt;
+&lt;p&gt;A new statefulset in another AZ, will start again with pod-ordinal 0.&lt;/p&gt;
+&lt;h2 id=&#34;zone-index-az-index&#34;&gt;Zone Index (az-index)&lt;/h2&gt;
+&lt;p&gt;Each statefulset belongs to one AZ.&lt;/p&gt;
+&lt;p&gt;The Quarks statefulset (qsts) reconciler sets the &lt;code&gt;az-index&lt;/code&gt; label, when creating the statefulsets.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s 0 if the instance group does not have any AZs. Otherwise it just starts at zero and increments by one.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example&lt;/em&gt;: Given the zones &amp;ldquo;z1&amp;rdquo; and &amp;ldquo;z2&amp;rdquo;, Quarks will use the zone indexes &amp;ldquo;z0&amp;rdquo; and &amp;ldquo;z1&amp;rdquo; in resource names. The &lt;code&gt;az-index&lt;/code&gt; labels will contain &amp;ldquo;0&amp;rdquo; and &amp;ldquo;1&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;While the &lt;code&gt;az-index&lt;/code&gt; pod label starts at 0, the &lt;code&gt;AZ_INDEX&lt;/code&gt; env var on containers starts at 1.&lt;/p&gt;
+&lt;h2 id=&#34;replicas&#34;&gt;Replicas&lt;/h2&gt;
+&lt;p&gt;The replica count is initially set it the &lt;code&gt;Instances&lt;/code&gt; number from the instance group manifest.&lt;/p&gt;
+&lt;p&gt;QuarksStatefulSet reconciler might also overwrite the replica env count if &lt;code&gt;injectReplicaEnv&lt;/code&gt; is true.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;template-render&lt;/code&gt; sub-command, will increase the relplica count to match the given pod-ordinal, if necessary.&lt;/p&gt;
+&lt;h1 id=&#34;bosh-job-template-rendering&#34;&gt;BOSH Job Template Rendering&lt;/h1&gt;
+&lt;p&gt;This is how BOSH manifest variables are translated into job template rendering variables:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Quarks operator builds ig manifests, using the &lt;code&gt;instance-group&lt;/code&gt; sub-command&lt;/li&gt;
+&lt;li&gt;Quarks operator create resources, like qsts from manifest&lt;/li&gt;
+&lt;li&gt;Quarks statefulset manages statefulsets and adapts values when reconciling&lt;/li&gt;
+&lt;li&gt;sts starts pods&lt;/li&gt;
+&lt;li&gt;quarks sts pod mutator adapts values&lt;/li&gt;
+&lt;li&gt;pod labels are mounted as env variables&lt;/li&gt;
+&lt;li&gt;environment variables are used as args when calling the &lt;code&gt;template-render&lt;/code&gt; sub-command in an init container&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Both, the &lt;code&gt;instance-group&lt;/code&gt; and the &lt;code&gt;template-render&lt;/code&gt; sub-command need to build an array of all possible &lt;a href=&#34;https://bosh.io/docs/jobs/#properties&#34;&gt;BOSH job &lt;code&gt;spec&lt;/code&gt; properties&lt;/a&gt; for every instance of the instance group.&lt;/p&gt;
+&lt;p&gt;Template rendering computes a &amp;lsquo;spec index&amp;rsquo;, from az-index and pod-ordinal, to find the matching spec.&lt;/p&gt;
+&lt;h2 id=&#34;specbootstrap&#34;&gt;spec.bootstrap&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;True if this instance is the first instance of its group.
+(&lt;a href=&#34;https://bosh.io/docs/jobs/&#34;&gt;BOSH jobs&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The pod that starts first in a statefulset must have the bootstrap flag. It&amp;rsquo;s used to initialize databases and such.&lt;/p&gt;
+&lt;p&gt;After the initial deployment, the last pod has the bootstrap flag. If the pod is restarted, the bootstrap flag stays the same, since the pod ordinal doesn&amp;rsquo;t change in a statefulset.&lt;/p&gt;
+&lt;p&gt;Bootstrap is only run once, regardless the number of AZs.&lt;/p&gt;
+&lt;h2 id=&#34;specindex&#34;&gt;spec.index&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Instance index. Use spec.bootstrap to determine the first instead of checking whether the index is 0. Additionally, there is no guarantee that instances will be numbered consecutively, so that there are no gaps between different indices.
+(&lt;a href=&#34;https://bosh.io/docs/jobs/&#34;&gt;BOSH jobs&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In the past using the replica count lead to unnecessary restarts, so a very large value is used instead:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// azindex podOrdinal  specIndex
+//    0       0          0
+//    0       1          1
+//    1       0          0
+//    1       1          1
+//    2       0          10000
+//    2       1          10001
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;specaddress&#34;&gt;spec.address&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Default network address (IPv4, IPv6 or DNS record) for the instance
+(&lt;a href=&#34;https://bosh.io/docs/jobs/&#34;&gt;BOSH jobs&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In Quarks the spec.address should always be the advertisable address of the pod.&lt;/p&gt;
+&lt;p&gt;The address is the name of the pod, which already includes the pod-ordinal and optionally the az-index.&lt;/p&gt;
+&lt;p&gt;Some BOSH jobs use this to find their local interface, like the NATS release.
+This works since spec.address matches the hostname entry in /etc/hosts and gives the local ip address.&lt;/p&gt;
+&lt;h1 id=&#34;other-usage-of-pod-ordinal&#34;&gt;Other Usage of Pod Ordinal&lt;/h1&gt;
+&lt;p&gt;It&amp;rsquo;s also available to&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;bosh-pre-start Init Containers&lt;/li&gt;
+&lt;li&gt;bpm-pre-start Init Containers&lt;/li&gt;
+&lt;li&gt;bpm Process Container&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;history&#34;&gt;History&lt;/h1&gt;
+&lt;h2 id=&#34;quarks-72&#34;&gt;Quarks 7.2&lt;/h2&gt;
+&lt;p&gt;Removes startup-ordinal and just uses pod-ordinal.&lt;/p&gt;
+&lt;h2 id=&#34;quarks-71&#34;&gt;Quarks 7.1&lt;/h2&gt;
+&lt;p&gt;Introduces startup-ordinal to fix bugs from 6.1. Keeps workaround.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/issues/1182&#34;&gt;Bootstrap using new startup ordinal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/issues/1271&#34;&gt;Keep startup ordinal when pods restart&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Open problems with updating kubecf&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;nats release binding to spec.address&lt;/li&gt;
+&lt;li&gt;diego-cell rep-rep, too?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;quarks-61&#34;&gt;Quarks 6.1&lt;/h2&gt;
+&lt;p&gt;Had a &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/commit/89a56300d40a0da74719c9d80c1e7e27616fc68a&#34;&gt;workaround for HA&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: </title>
+      <link>https://quarks.suse.dev/docs/quarks-operator/concepts/upgrades/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/quarks-operator/concepts/upgrades/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;updates-to-quarks-operators&#34;&gt;Updates to Quarks Operators&lt;/h1&gt;
+&lt;p&gt;Expections for upgrading the operator&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;migration scripts (helm hooks) run in a job&lt;/li&gt;
+&lt;li&gt;create events for all watched resources are expected&lt;/li&gt;
+&lt;li&gt;new services might start up (e.g. dns)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;updates-to-the-workloads&#34;&gt;Updates to the Workloads&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;tries to update only what&amp;rsquo;s necessary&lt;/li&gt;
+&lt;li&gt;workloads that have watched resources changed&lt;/li&gt;
+&lt;li&gt;doesn&amp;rsquo;t update for image only without label workaround&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;how-to-add-a-migration&#34;&gt;How to add a Migration&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;add script to &lt;code&gt;deploy/helm/hooks&lt;/code&gt; folder&lt;/li&gt;
+&lt;li&gt;add RBAC permissions to &lt;code&gt;deploy/helm/quarks/templates/role-hooks.yml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;instance-group-updates&#34;&gt;Instance Group Updates&lt;/h1&gt;
+&lt;p&gt;IG are Quarks Statefulset. Quarks Statefulset (qsts) will create one statefulset per AZ.&lt;/p&gt;
+&lt;p&gt;In case of an upgrade to an instance group, the rolling update strategy of the statefulset will restart the last pod first.
+If that pod is ready, the remaining pods will be restarted, keeping their original volumes, in the new statefulset.&lt;/p&gt;
+&lt;p&gt;For the duration of the upgrade, multiple versions of the statefulset, distinguishable by the controller revision hash, exist.&lt;/p&gt;
+&lt;h2 id=&#34;immutable-fields&#34;&gt;Immutable Fields&lt;/h2&gt;
+&lt;p&gt;Several fields in a statefulset are immutable.&lt;/p&gt;
+&lt;p&gt;For example, when resizing disks, the qsts will be updated for manifest changes. The sts will not change.
+When changing the pods, the sts will not reflect those changes.&lt;/p&gt;
+&lt;p&gt;To update the sts, it has to be deleted and recreated with the same pod selector.&lt;/p&gt;
+&lt;p&gt;Quarks statefulset does not support updating, by deleting the sts and recreating it.&lt;/p&gt;
 
       </description>
     </item>

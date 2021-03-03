@@ -20,25 +20,25 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>BOSH resource requests and limit | Quarks Project</title><meta property="og:title" content="BOSH resource requests and limit" />
-<meta property="og:description" content="Converting BOSH resource requests and limits to Kubernetes
-" />
+<title>Quarks Project</title><meta property="og:title" content="" />
+<meta property="og:description" content="Updates to Quarks Operators Expections for upgrading the operator
+ migration scripts (helm hooks) run in a job create events for all watched resources are expected new services might start up (e.g. dns)  Updates to the Workloads  tries to update only what&rsquo;s necessary workloads that have watched resources changed doesn&rsquo;t update for image only without label workaround  How to add a Migration  add script to deploy/helm/hooks folder add RBAC permissions to deploy/helm/quarks/templates/role-hooks." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://quarks.suse.dev/docs/quarks-operator/concepts/resources_limit/" />
+<meta property="og:url" content="https://quarks.suse.dev/docs/quarks-operator/concepts/upgrades/" />
 <meta property="article:modified_time" content="2021-03-03T16:22:33+01:00" /><meta property="og:site_name" content="Quarks Project" />
-<meta itemprop="name" content="BOSH resource requests and limit">
-<meta itemprop="description" content="Converting BOSH resource requests and limits to Kubernetes
-">
+<meta itemprop="name" content="">
+<meta itemprop="description" content="Updates to Quarks Operators Expections for upgrading the operator
+ migration scripts (helm hooks) run in a job create events for all watched resources are expected new services might start up (e.g. dns)  Updates to the Workloads  tries to update only what&rsquo;s necessary workloads that have watched resources changed doesn&rsquo;t update for image only without label workaround  How to add a Migration  add script to deploy/helm/hooks folder add RBAC permissions to deploy/helm/quarks/templates/role-hooks.">
 <meta itemprop="dateModified" content="2021-03-03T16:22:33+01:00" />
-<meta itemprop="wordCount" content="194">
+<meta itemprop="wordCount" content="213">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="BOSH resource requests and limit"/>
-<meta name="twitter:description" content="Converting BOSH resource requests and limits to Kubernetes
-"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Updates to Quarks Operators Expections for upgrading the operator
+ migration scripts (helm hooks) run in a job create events for all watched resources are expected new services might start up (e.g. dns)  Updates to the Workloads  tries to update only what&rsquo;s necessary workloads that have watched resources changed doesn&rsquo;t update for image only without label workaround  How to add a Migration  add script to deploy/helm/hooks folder add RBAC permissions to deploy/helm/quarks/templates/role-hooks."/>
 
 
 
@@ -374,7 +374,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docsquarks-operatorconceptsresources_limit" href="/docs/quarks-operator/concepts/resources_limit/">BOSH resource requests and limits</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsquarks-operatorconceptsresources_limit" href="/docs/quarks-operator/concepts/resources_limit/">BOSH resource requests and limits</a>
       
       
       
@@ -410,7 +410,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsquarks-operatorconceptsupgrades" href="/docs/quarks-operator/concepts/upgrades/"></a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docsquarks-operatorconceptsupgrades" href="/docs/quarks-operator/concepts/upgrades/"></a>
       
       
     </li>
@@ -863,8 +863,8 @@
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/content/en/docs/quarks-operator/concepts/resources_limit.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/quarks-docs/issues/new?title=BOSH%20resource%20requests%20and%20limit" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-docs/edit/master/content/en/docs/quarks-operator/concepts/upgrades.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-docs/issues/new?title=" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -875,6 +875,16 @@
 
 
 
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#how-to-add-a-migration">How to add a Migration</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#immutable-fields">Immutable Fields</a></li>
+  </ul>
+</nav>
 
 
 
@@ -921,7 +931,7 @@
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://quarks.suse.dev/docs/quarks-operator/concepts/resources_limit/">BOSH resource requests and limits</a>
+	<a href="https://quarks.suse.dev/docs/quarks-operator/concepts/upgrades/"></a>
 </li>
 
 	</ol>
@@ -929,183 +939,38 @@
 
             
 <div class="td-content">
-	<h1>BOSH resource requests and limit</h1>
-    <div class="lead">Converting BOSH resource requests and limits to Kubernetes</div>
+	<h1></h1>
+    
 	       
-	<p>It is possible to define resource requests and limits (CPU/Memory) for each container generated by the Quarks Operator.</p>
-<p>The Quarks Operator, while converting the BPM informations, translates the BPM processes <code>requests</code> and <code>limits</code> to Kubernetes containers and pods, which are generated from instance groups.</p>
-<p>It expands the BOSH specification <a href="https://cloud.google.com/blog/products/gcp/kubernetes-best-practices-resource-requests-and-limits">to cover the features offered by Kubernetes</a>, here is a complete example:</p>
-
-
-
-
-
-<div class="highlight"><div style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">62
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>ConfigMap<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>ops-scale<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">data</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">ops</span>:<span style="color:#666"> </span><span style="color:#ed9d13">|
-</span><span style="color:#ed9d13">    - type: replace</span><span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">path</span>:<span style="color:#666"> </span>/instance_groups/name=quarks-gora?/instances<span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">value</span>:<span style="color:#666"> </span><span style="color:#3677a9">2</span><span style="color:#666">
-</span><span style="color:#666"></span>---<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>v1<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>ConfigMap<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora-manifest<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">data</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">manifest</span>:<span style="color:#666"> </span><span style="color:#ed9d13">|
-</span><span style="color:#ed9d13">    ---</span><span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora-deployment<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">releases</span>:<span style="color:#666">
-</span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">version</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;0.0.15&#34;</span><span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">url</span>:<span style="color:#666"> </span>ghcr.io/cloudfoundry-incubator<span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">stemcell</span>:<span style="color:#666">
-</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">os</span>:<span style="color:#666"> </span>SLE_15_SP1<span style="color:#666">
-</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">version</span>:<span style="color:#666"> </span><span style="color:#3677a9">27.10-7.0</span>.0_374.gb8e8e6af<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">instance_groups</span>:<span style="color:#666">
-</span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">instances</span>:<span style="color:#666"> </span><span style="color:#3677a9">1</span><span style="color:#666">
-</span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">jobs</span>:<span style="color:#666">
-</span><span style="color:#666">      </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
-</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">release</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
-</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">properties</span>:<span style="color:#666">
-</span><span style="color:#666">          </span><span style="color:#6ab825;font-weight:bold">quarks-gora</span>:<span style="color:#666">
-</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">port</span>:<span style="color:#666"> </span><span style="color:#3677a9">55556</span><span style="color:#666">
-</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">ssl</span>:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">false</span><span style="color:#666">
-</span><span style="color:#666">          </span><span style="color:#6ab825;font-weight:bold">quarks</span>:<span style="color:#666">
-</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">ports</span>:<span style="color:#666">
-</span><span style="color:#666">            </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;quarks-gora&#34;</span><span style="color:#666">
-</span><span style="color:#666">              </span><span style="color:#6ab825;font-weight:bold">protocol</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;TCP&#34;</span><span style="color:#666">
-</span><span style="color:#666">              </span><span style="color:#6ab825;font-weight:bold">internal</span>:<span style="color:#666"> </span><span style="color:#3677a9">55556</span><span style="color:#666">
-</span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">bpm</span>:<span style="color:#666">
-</span><span style="color:#666">              </span><span style="color:#6ab825;font-weight:bold">processes</span>:<span style="color:#666">
-</span><span style="color:#666">              </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora<span style="color:#666">
-</span><span style="color:#666">                </span><span style="color:#6ab825;font-weight:bold">requests</span>:<span style="color:#666">
-</span><span style="color:#666">                  </span><span style="color:#6ab825;font-weight:bold">cpu</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;2m&#34;</span><span style="color:#666">
-</span><span style="color:#666">                  </span><span style="color:#6ab825;font-weight:bold">memory</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;128Mi&#34;</span><span style="color:#666">
-</span><span style="color:#666">                </span><span style="color:#6ab825;font-weight:bold">limits</span>:<span style="color:#666">
-</span><span style="color:#666">                  </span><span style="color:#6ab825;font-weight:bold">cpu</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;4&#34;</span><span style="color:#666">
-</span><span style="color:#666">                  </span><span style="color:#6ab825;font-weight:bold">memory</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;2Gi&#34;</span><span style="color:#666">
-</span><span style="color:#666"></span>---<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">apiVersion</span>:<span style="color:#666"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">kind</span>:<span style="color:#666"> </span>BOSHDeployment<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">metadata</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora-deployment<span style="color:#666">
-</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">spec</span>:<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">manifest</span>:<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>quarks-gora-manifest<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>configmap<span style="color:#666">
-</span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">ops</span>:<span style="color:#666">
-</span><span style="color:#666">  </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>ops-scale<span style="color:#666">
-</span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">type</span>:<span style="color:#666"> </span>configmap<span style="color:#666">
-</span></code></pre></td></tr></table>
-</div>
-</div>
-
-<small> Complete source code:  <a target=_blank href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/quarks-gora-cpu-mem.yaml">https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/quarks-gora-cpu-mem.yaml</a> </small>
-<hr>
-<p>Here is a comprehensive table of the conversion which is done by the Quarks Operator and the respective Kubernetes equivalent:</p>
-<table>
-<thead>
-<tr>
-<th>Job spec in Manifest</th>
-<th>Kube Pod Container</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>properties.quarks.bpm.processes[n].requests.cpu</code></td>
-<td><code>container.Resources.Requests.cpu</code></td>
-<td><a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container">Guaranteed CPU</a></td>
-</tr>
-<tr>
-<td><code>properties.quarks.bpm.processes[n].requests.memory</code></td>
-<td><code>container.Resources.Requests.memory</code></td>
-<td><a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container">Guaranteed memory</a></td>
-</tr>
-<tr>
-<td><code>properties.quarks.bpm.processes[n].limits.cpu</code></td>
-<td><code>container.Resources.Limits.cpu</code></td>
-<td><a href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/#specify-a-cpu-request-and-a-cpu-limit">Specify a CPU request and a CPU limit</a></td>
-</tr>
-<tr>
-<td><code>properties.quarks.bpm.processes[n].limits.memory</code></td>
-<td><code>container.Resources.Limits.memory</code></td>
-<td><a href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/#specify-a-memory-request-and-a-memory-limit">Specify a memory request and a memory limit</a></td>
-</tr>
-</tbody>
-</table>
+	<h1 id="updates-to-quarks-operators">Updates to Quarks Operators</h1>
+<p>Expections for upgrading the operator</p>
+<ul>
+<li>migration scripts (helm hooks) run in a job</li>
+<li>create events for all watched resources are expected</li>
+<li>new services might start up (e.g. dns)</li>
+</ul>
+<h1 id="updates-to-the-workloads">Updates to the Workloads</h1>
+<ul>
+<li>tries to update only what&rsquo;s necessary</li>
+<li>workloads that have watched resources changed</li>
+<li>doesn&rsquo;t update for image only without label workaround</li>
+</ul>
+<h2 id="how-to-add-a-migration">How to add a Migration</h2>
+<ul>
+<li>add script to <code>deploy/helm/hooks</code> folder</li>
+<li>add RBAC permissions to <code>deploy/helm/quarks/templates/role-hooks.yml</code></li>
+</ul>
+<h1 id="instance-group-updates">Instance Group Updates</h1>
+<p>IG are Quarks Statefulset. Quarks Statefulset (qsts) will create one statefulset per AZ.</p>
+<p>In case of an upgrade to an instance group, the rolling update strategy of the statefulset will restart the last pod first.
+If that pod is ready, the remaining pods will be restarted, keeping their original volumes, in the new statefulset.</p>
+<p>For the duration of the upgrade, multiple versions of the statefulset, distinguishable by the controller revision hash, exist.</p>
+<h2 id="immutable-fields">Immutable Fields</h2>
+<p>Several fields in a statefulset are immutable.</p>
+<p>For example, when resizing disks, the qsts will be updated for manifest changes. The sts will not change.
+When changing the pods, the sts will not reflect those changes.</p>
+<p>To update the sts, it has to be deleted and recreated with the same pod selector.</p>
+<p>Quarks statefulset does not support updating, by deleting the sts and recreating it.</p>
 
 	
 	
