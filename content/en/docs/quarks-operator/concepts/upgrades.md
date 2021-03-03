@@ -1,3 +1,11 @@
+---
+title: "Upgrades"
+linkTitle: "Upgrades"
+weight: 80
+description: >
+  Upgrades to the Operators and to Workloads
+---
+
 # Updates to Quarks Operators
 
 Expections for upgrading the operator

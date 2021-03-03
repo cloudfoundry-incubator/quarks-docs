@@ -1,6 +1,6 @@
 ---
 title: "High Availability"
-linkTitle: "ha"
+linkTitle: "High Availability"
 weight: 90
 description: >
   How High-Availability is implemented
