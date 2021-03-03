@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/quarks-operator/development/releasing/" />
-<meta property="article:modified_time" content="2021-03-03T16:50:06+01:00" /><meta property="og:site_name" content="Quarks Project" />
+<meta property="article:modified_time" content="2021-03-03T19:03:48+01:00" /><meta property="og:site_name" content="Quarks Project" />
 <meta itemprop="name" content="Releasing">
 <meta itemprop="description" content="How to create a new Quarks Operator release on GHA
 ">
-<meta itemprop="dateModified" content="2021-03-03T16:50:06+01:00" />
-<meta itemprop="wordCount" content="361">
+<meta itemprop="dateModified" content="2021-03-03T19:03:48+01:00" />
+<meta itemprop="wordCount" content="394">
 
 
 
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.4e3168566b7d5b9a844558e13978ba84d4774eaa02db81bb1d41e3a5719bdd20c949815d13eaa7e3701626e4eb10960950e4b05b8c6195fd10920d6d2d12595c.json"
+  data-offline-search-index-json-src="/offline-search-index.0477efd33959b2ea739d539f9ace64b1dd50b7f4f6d2556e231dd699226a9adccafd6555d428f02569ca1e346887273f44e0d5c95d4569f95af089c50e42b88e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -158,7 +158,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.4e3168566b7d5b9a844558e13978ba84d4774eaa02db81bb1d41e3a5719bdd20c949815d13eaa7e3701626e4eb10960950e4b05b8c6195fd10920d6d2d12595c.json"
+  data-offline-search-index-json-src="/offline-search-index.0477efd33959b2ea739d539f9ace64b1dd50b7f4f6d2556e231dd699226a9adccafd6555d428f02569ca1e346887273f44e0d5c95d4569f95af089c50e42b88e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -965,12 +965,14 @@ The release title will be set to this version.</p>
 <p>Merge the current state into the release branch:</p>
 <p>git checkout v7.x
 git merge master</p>
-<h1 id="this-will-run-ci">this will run CI</h1>
+<h1 id="this-will-run-ci-can-be-canceled">this will run CI, can be canceled</h1>
 <p>git push</p>
 <p>Create a tag on that branch and push it, to create a new release:</p>
 <p>git tag v7.2.0</p>
 <h1 id="this-will-run-ci-again-release-drafter-then-publish">this will run CI again, release-drafter, then publish</h1>
 <p>git push origin v7.2.0</p>
+<h1 id="runs-ci-release-drafter-publish">runs ci, release drafter, publish</h1>
+<p><em>Note</em>: Do not edit/create a  release on Github before the publish step has finished, as it will overwrite the draft or create an additional draft.</p>
 <h2 id="release-artifacts">Release Artifacts</h2>
 <p>The <code>release-drafter</code> will create a new draft release on Github.</p>
 <ul>
@@ -1017,7 +1019,7 @@ git push origin v9.9.9
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified March 3, 2021: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/e1db16e71480662d9f154eba2597ea7b5f929d2e">Fix concept links and titles (e1db16e)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified March 3, 2021: <a  href="https://github.com/cloudfoundry-incubator/quarks-docs/commit/c8aab70c030417d046187ebc9003685662164795">Add comment about release drafter (c8aab70)</a>
 </div>
 </div>
 

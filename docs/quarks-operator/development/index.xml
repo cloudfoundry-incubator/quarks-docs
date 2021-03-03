@@ -31,12 +31,14 @@ The release title will be set to this version.&lt;/p&gt;
 &lt;p&gt;Merge the current state into the release branch:&lt;/p&gt;
 &lt;p&gt;git checkout v7.x
 git merge master&lt;/p&gt;
-&lt;h1 id=&#34;this-will-run-ci&#34;&gt;this will run CI&lt;/h1&gt;
+&lt;h1 id=&#34;this-will-run-ci-can-be-canceled&#34;&gt;this will run CI, can be canceled&lt;/h1&gt;
 &lt;p&gt;git push&lt;/p&gt;
 &lt;p&gt;Create a tag on that branch and push it, to create a new release:&lt;/p&gt;
 &lt;p&gt;git tag v7.2.0&lt;/p&gt;
 &lt;h1 id=&#34;this-will-run-ci-again-release-drafter-then-publish&#34;&gt;this will run CI again, release-drafter, then publish&lt;/h1&gt;
 &lt;p&gt;git push origin v7.2.0&lt;/p&gt;
+&lt;h1 id=&#34;runs-ci-release-drafter-publish&#34;&gt;runs ci, release drafter, publish&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;Note&lt;/em&gt;: Do not edit/create a  release on Github before the publish step has finished, as it will overwrite the draft or create an additional draft.&lt;/p&gt;
 &lt;h2 id=&#34;release-artifacts&#34;&gt;Release Artifacts&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;release-drafter&lt;/code&gt; will create a new draft release on Github.&lt;/p&gt;
 &lt;ul&gt;
