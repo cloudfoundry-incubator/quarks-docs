@@ -22,7 +22,7 @@ Merge the current state into the release branch:
 
   git checkout v7.x
   git merge master
-  # this will run CI
+  # this will run CI, can be canceled
   git push
 
 Create a tag on that branch and push it, to create a new release:
@@ -30,6 +30,9 @@ Create a tag on that branch and push it, to create a new release:
    git tag v7.2.0
    # this will run CI again, release-drafter, then publish
    git push origin v7.2.0
+   # runs ci, release drafter, publish
+
+*Note*: Do not edit/create a  release on Github before the publish step has finished, as it will overwrite the draft or create an additional draft.
 
 ## Release Artifacts
 
