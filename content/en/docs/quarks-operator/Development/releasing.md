@@ -55,8 +55,10 @@ After requesting to remove the binary, it takes up to twenty minutes for Github 
 
 ### Minor Bump
 
-1. Tag commit with new release version
-1. Push commit
+1. Merge on release branch
+1. Push commit (CI can be canceled)
+1. Tag commit
+1. Push tag (CI runs again)
 1. Wait for pipeline to finish
 1. Publish the draft Github release for the release version tag
 
