@@ -55,8 +55,10 @@ After requesting to remove the binary, it takes up to twenty minutes for Github 
 &lt;/ol&gt;
 &lt;h3 id=&#34;minor-bump&#34;&gt;Minor Bump&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;Tag commit with new release version&lt;/li&gt;
-&lt;li&gt;Push commit&lt;/li&gt;
+&lt;li&gt;Merge on release branch&lt;/li&gt;
+&lt;li&gt;Push commit (CI can be canceled)&lt;/li&gt;
+&lt;li&gt;Tag commit&lt;/li&gt;
+&lt;li&gt;Push tag (CI runs again)&lt;/li&gt;
 &lt;li&gt;Wait for pipeline to finish&lt;/li&gt;
 &lt;li&gt;Publish the draft Github release for the release version tag&lt;/li&gt;
 &lt;/ol&gt;
