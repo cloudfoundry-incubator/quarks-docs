@@ -20,17 +20,21 @@ Every major release should have it's own branch, i.e. `v7.x`.
 
 Merge the current state into the release branch:
 
-  git checkout v7.x
-  git merge master
-  # this will run CI, can be canceled
-  git push
+```bash
+git checkout v7.x
+git merge master
+# this will run CI, can be canceled
+git push
+```
 
 Create a tag on that branch and push it, to create a new release:
 
-   git tag v7.2.0
-   # this will run CI again, release-drafter, then publish
-   git push origin v7.2.0
-   # runs ci, release drafter, publish
+```bash
+git tag v7.2.0
+# this will run CI again, release-drafter, then publish
+git push origin v7.2.0
+# runs ci, release drafter, publish
+```
 
 *Note*: Do not edit/create a  release on Github before the publish step has finished, as it will overwrite the draft or create an additional draft.
 
@@ -82,8 +86,10 @@ Be sure to adapt menus in all branches (`config.toml`) to match the new app URL.
 
 Delete the tag and push it again:
 
-    git push -d origin v9.9.9
-    git push origin v9.9.9
+```bash
+git push -d origin v9.9.9
+git push origin v9.9.9
+```
 
 ## Publishing the Github Release fails
 
