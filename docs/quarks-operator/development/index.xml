@@ -29,22 +29,36 @@ The release title will be set to this version.&lt;/p&gt;
 &lt;h2 id=&#34;create-a-new-release&#34;&gt;Create a new release&lt;/h2&gt;
 &lt;p&gt;Every major release should have it&amp;rsquo;s own branch, i.e. &lt;code&gt;v7.x&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Merge the current state into the release branch:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;```bash
-git checkout v7.x
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git checkout v7.x
 git merge master
-# this will run CI, can be canceled
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# this will run CI, can be canceled&lt;/span&gt;
 git push
-```
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Create a tag on that branch and push it, to create a new release:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;```bash
-git tag v7.2.0
-# this will run CI again, release-drafter, then publish
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Create a tag on that branch and push it, to create a new release:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git tag v7.2.0
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# this will run CI again, release-drafter, then publish&lt;/span&gt;
 git push origin v7.2.0
-# runs ci, release drafter, publish
-```
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;em&gt;Note&lt;/em&gt;: Do not edit/create a  release on Github before the publish step has finished, as it will overwrite the draft or create an additional draft.&lt;/p&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# runs ci, release drafter, publish&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;Note&lt;/em&gt;: Do not edit/create a  release on Github before the publish step has finished, as it will overwrite the draft or create an additional draft.&lt;/p&gt;
 &lt;h2 id=&#34;release-artifacts&#34;&gt;Release Artifacts&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;release-drafter&lt;/code&gt; will create a new draft release on Github.&lt;/p&gt;
 &lt;ul&gt;
@@ -81,12 +95,17 @@ Release docs are pushed to Cloudfoundry via Github Actions, as defined in the br
 &lt;h1 id=&#34;troubleshooting&#34;&gt;Troubleshooting&lt;/h1&gt;
 &lt;h2 id=&#34;provoke-tag-push-events&#34;&gt;Provoke tag push events&lt;/h2&gt;
 &lt;p&gt;Delete the tag and push it again:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;```bash
-git push -d origin v9.9.9
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git push -d origin v9.9.9
 git push origin v9.9.9
-```
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;publishing-the-github-release-fails&#34;&gt;Publishing the Github Release fails&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;publishing-the-github-release-fails&#34;&gt;Publishing the Github Release fails&lt;/h2&gt;
 &lt;p&gt;Delete the attached binary, wait and run retrigger job.&lt;/p&gt;
 &lt;h2 id=&#34;publishing-the-helm-chart-fails&#34;&gt;Publishing the Helm Chart fails&lt;/h2&gt;
 &lt;p&gt;The Helm charts are stored in a Github repository, concurrent access can lead to merge conflicts.&lt;/p&gt;
